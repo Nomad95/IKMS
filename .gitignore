@@ -14,3 +14,7 @@ target/
 *.iws
 *.iml
 *.ipr
+
+
+### Frontend ###
+./src/main/resources/ngapp/node_modules
