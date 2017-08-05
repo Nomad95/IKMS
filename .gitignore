@@ -16,7 +16,7 @@ target/
 *.ipr
 
 
-### Frontend ###
+### Frontend  ###
 ./IKMS-client/ngapp/node/*
 ./IKMS-client/ngapp/node_modules/*
 ./IKMS-server/src/main/webapp/*
