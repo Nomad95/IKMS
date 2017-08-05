@@ -1,2 +1,2 @@
 # IKMS
-IKMS - Integrated Kindergarden Management System
+IKMS - Integrated Kindergarten Management System

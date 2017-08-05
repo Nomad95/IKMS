@@ -17,4 +17,6 @@ target/
 
 
 ### Frontend ###
-./src/main/resources/ngapp/node_modules
+./IKMS-client/ngapp/node/*
+./IKMS-client/ngapp/node_modules/*
+./IKMS-server/src/main/webapp/*
