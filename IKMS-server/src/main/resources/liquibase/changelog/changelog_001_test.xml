@@ -1,0 +1,19 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Kopec" id="changelog_001_test">
+        <createTable tableName="test_table">
+            <column name="id" type="bigint" />
+            <column name="address" type="varchar(255)" />
+        </createTable>
+        <addPrimaryKey
+                       columnNames="id"
+                       constraintName="pk_test"
+                       tableName="test_table"/>
+    </changeSet>
+
+</databaseChangeLog>
