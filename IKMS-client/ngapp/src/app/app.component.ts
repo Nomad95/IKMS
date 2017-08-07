@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {InputTextModule} from 'primeng/primeng';
 
 @Component({
   selector: 'app-root',
