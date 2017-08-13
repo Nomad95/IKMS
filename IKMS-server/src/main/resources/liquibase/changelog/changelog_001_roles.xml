@@ -5,15 +5,29 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet author="Kopec" id="changelog_001_test">
-        <createTable tableName="test_table">
+    <changeSet author="Kopec" id="changelog_001_roles">
+        <createTable tableName="roles">
             <column name="id" type="bigint" />
-            <column name="address" type="varchar(255)" />
+            <column name="name" type="varchar(50)" >
+                <constraints nullable="false"/>
+            </column>
         </createTable>
+
         <addPrimaryKey
-                       columnNames="id"
-                       constraintName="pk_test"
-                       tableName="test_table"/>
+                columnNames="id"
+                constraintName="pk_roles"
+                tableName="roles"/>
+
+        <createSequence
+                sequenceName="roles_seq"
+                startValue="1"
+                incrementBy="1"/>
+
+        <loadData
+                tableName="roles"
+                file="liquibase/data/roles.csv"
+                />
+
     </changeSet>
 
 </databaseChangeLog>
