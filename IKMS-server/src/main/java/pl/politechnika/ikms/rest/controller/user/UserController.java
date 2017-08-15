@@ -1,4 +1,4 @@
-package pl.politechnika.ikms.rest.controller;
+package pl.politechnika.ikms.rest.controller.user;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -11,13 +11,13 @@ import pl.politechnika.ikms.service.UserService;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(value = "/api/user")
 public class UserController {
 
     private final @NonNull UserService userService;
 
-    //TODO: change this after tests
-    @RequestMapping(value = "/test/{userId}")
+    @RequestMapping(value = "/{userId}")
     public @ResponseBody User getUser(@PathVariable Long userId){
-        return userService.getUser(userId);
+        return userService.findOne(userId);
     }
 }

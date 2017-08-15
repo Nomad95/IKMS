@@ -1,21 +1,24 @@
 package pl.politechnika.ikms.service.impl;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.politechnika.ikms.commons.abstracts.AbstractService;
 import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 import pl.politechnika.ikms.repository.user.UserRepository;
 import pl.politechnika.ikms.service.UserService;
 
-@Service
-@RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+import java.util.Optional;
 
-    private final @NonNull UserRepository userRepository;
+@Service
+public class UserServiceImpl extends AbstractService<User,UserRepository> implements UserService {
+
+    public UserServiceImpl(UserRepository repository) {
+        super(repository, User.class);
+    }
 
     @Override
-    public User getUser(Long id) {
-        return userRepository.findOne(id);
+    public User getUserByUsername(String username) {
+        Optional<User> user = Optional.ofNullable(getRepository().findByUsername(username));
+        return user.orElseThrow(()-> new EntityNotFoundException("Nie znaleziono użytkownika o loginie: "+username));
     }
 }

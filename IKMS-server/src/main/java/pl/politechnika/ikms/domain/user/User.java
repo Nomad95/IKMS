@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 import pl.politechnika.ikms.commons.util.CommonConstants;
 
 import javax.persistence.*;
@@ -19,10 +20,10 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Data
 @Entity
 @Table(name = "users")
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @ToString(exclude = "password")
 @SequenceGenerator(name="users_seq_name",sequenceName="users_seq", allocationSize=1)
-public class User {
+public class User extends AbstractEntity{
 
     @Id
     @GeneratedValue(strategy = SEQUENCE,generator = "users_seq_name")
@@ -50,10 +51,10 @@ public class User {
 
     @NotNull
     @Column(name = "created_date")
-    private Date created_date;
+    private Date createdDate;
 
     @Column(name = "last_logged")
-    private Date last_logged;
+    private Date lastLogged;
 
     @ManyToOne
     @NotNull

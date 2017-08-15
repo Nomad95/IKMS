@@ -15,6 +15,7 @@ import pl.politechnika.ikms.security.JwtAuthenticationRequest;
 import pl.politechnika.ikms.security.JwtTokenUtil;
 import pl.politechnika.ikms.security.JwtUser;
 import pl.politechnika.ikms.security.service.JwtAuthenticationResponse;
+import pl.politechnika.ikms.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,6 +33,9 @@ public class AuthenticationRestController {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {

@@ -22,8 +22,8 @@ public final class JwtUserFactory {
         jwtUser.setEnabled(user.isEnabled());
         List<GrantedAuthority> grantedAuthorities = getGrantedAuthorities(user);
         jwtUser.setAuthorities(grantedAuthorities);
-        jwtUser.setCreatedDate(user.getCreated_date());
-        jwtUser.setLastLogged(user.getLast_logged());
+        jwtUser.setCreatedDate(user.getCreatedDate());
+        jwtUser.setLastLogged(user.getLastLogged());
         jwtUser.setEmail(user.getEmail());
         return jwtUser;
     }
