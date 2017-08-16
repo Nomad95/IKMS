@@ -20,7 +20,7 @@
 
         <createSequence
                 sequenceName="roles_seq"
-                startValue="1"
+                startValue="5"
                 incrementBy="1"/>
 
         <loadData

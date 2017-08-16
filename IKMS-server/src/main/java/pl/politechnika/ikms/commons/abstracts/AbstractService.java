@@ -7,6 +7,11 @@ import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 
 import java.util.List;
 
+/**
+ * Extend all service impl classes with this abstract - provides standard crud operations
+ * @param <T> Entity
+ * @param <R> Repository
+ */
 @RequiredArgsConstructor
 @AllArgsConstructor
 public abstract class AbstractService<T extends AbstractEntity, R extends JpaRepository<T,Long>> implements GenericService<T> {

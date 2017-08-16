@@ -1,6 +1,7 @@
 package pl.politechnika.ikms.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.politechnika.ikms.commons.abstracts.AbstractService;
 import pl.politechnika.ikms.domain.user.User;
 import pl.politechnika.ikms.exceptions.EntityNotFoundException;
@@ -10,6 +11,7 @@ import pl.politechnika.ikms.service.UserService;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl extends AbstractService<User,UserRepository> implements UserService {
 
     public UserServiceImpl(UserRepository repository) {

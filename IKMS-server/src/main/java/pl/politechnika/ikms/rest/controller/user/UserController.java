@@ -2,12 +2,17 @@ package pl.politechnika.ikms.rest.controller.user;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.rest.dto.user.UserDto;
+import pl.politechnika.ikms.rest.dto.user.UserRegistrationDto;
+import pl.politechnika.ikms.rest.mapper.user.UserEntityToDtoMapper;
+import pl.politechnika.ikms.rest.mapper.user.UserEntityToRegDtoMapper;
 import pl.politechnika.ikms.service.UserService;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,9 +20,35 @@ import pl.politechnika.ikms.service.UserService;
 public class UserController {
 
     private final @NonNull UserService userService;
+    private final @NonNull UserEntityToRegDtoMapper userEntityToRegDtoMapper;
+    private final @NonNull UserEntityToDtoMapper userEntityToDtoMapper;
 
-    @RequestMapping(value = "/{userId}")
-    public @ResponseBody User getUser(@PathVariable Long userId){
-        return userService.findOne(userId);
+    @GetMapping(value = "/{userId}")
+    @ResponseBody
+    public UserDto getUser(@PathVariable Long userId){
+        return userEntityToDtoMapper.convertToDto(userService.findOne(userId));
+    }
+
+    @PostMapping
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)//TODO: creation depends on provided role
+    public UserDto createUser(@Valid @RequestBody UserRegistrationDto userRegistrationDto){
+        User user = userEntityToRegDtoMapper.convertToEntity(userRegistrationDto);
+        User createdUser = userService.create(user);
+        return userEntityToDtoMapper.convertToDto(createdUser);
+    }
+
+    @PutMapping
+    @ResponseBody
+    public UserDto updateUser(@Valid @RequestBody UserDto userDto){
+        User user = userEntityToDtoMapper.convertToEntity(userDto);
+        User updatedUser = userService.update(user);
+        return userEntityToDtoMapper.convertToDto(updatedUser);
+    }
+
+    @DeleteMapping(value = "/{userId}")
+    @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
+    public void deleteUser(@PathVariable Long userId){
+        userService.deleteById(userId);
     }
 }

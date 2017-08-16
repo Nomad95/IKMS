@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "roles")
 @EqualsAndHashCode
-@SequenceGenerator(name="roles_seq_name",sequenceName="roles_seq", allocationSize=1)
+@SequenceGenerator(name="roles_seq_name",sequenceName="roles_seq", allocationSize=1,initialValue = 5)
 public class Role {
 
     @Id

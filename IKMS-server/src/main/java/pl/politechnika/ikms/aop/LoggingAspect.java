@@ -5,6 +5,9 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
+/**
+ * This class logs around every method in specified locations
+ */
 @Aspect
 @Slf4j
 @Component

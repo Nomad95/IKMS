@@ -22,12 +22,11 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "users")
 @EqualsAndHashCode(callSuper = false)
 @ToString(exclude = "password")
-@SequenceGenerator(name="users_seq_name",sequenceName="users_seq", allocationSize=1)
+@SequenceGenerator(name="users_seq_name",sequenceName="users_seq", allocationSize=1, initialValue = 5)
 public class User extends AbstractEntity{
 
     @Id
     @GeneratedValue(strategy = SEQUENCE,generator = "users_seq_name")
-    @NotNull
     @Column(name = "id")
     private Long id;
 
@@ -45,7 +44,6 @@ public class User extends AbstractEntity{
     @Column(name = "email")
     private String email;
 
-    @NotNull
     @Column(name = "enabled")
     private boolean enabled;
 
