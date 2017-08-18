@@ -2,10 +2,14 @@ package pl.politechnika.ikms.commons.abstracts;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Extend all service impl classes with this abstract - provides standard crud operations
@@ -27,6 +31,12 @@ public abstract class AbstractService<T extends AbstractEntity, R extends JpaRep
     @Override
     public List<T> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public Page<T> findAllPaginated(int page, int size, Optional<Sort> sort) {
+        return sort.map(srt -> repository.findAll(new PageRequest(page, size, srt)))
+                .orElseGet(() -> repository.findAll(new PageRequest(page, size)));
     }
 
     @Override

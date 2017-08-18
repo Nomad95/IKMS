@@ -2,6 +2,7 @@ package pl.politechnika.ikms.rest.controller.user;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,9 @@ import pl.politechnika.ikms.rest.mapper.user.UserEntityToRegDtoMapper;
 import pl.politechnika.ikms.service.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,6 +31,13 @@ public class UserController {
     @ResponseBody
     public UserDto getUser(@PathVariable Long userId){
         return userEntityToDtoMapper.convertToDto(userService.findOne(userId));
+    }
+
+    @GetMapping(params = { "page", "size" })
+    @ResponseBody
+    public List<UserDto> getUsers(@RequestParam("page") int page, @RequestParam("size") int size){
+        List<User> paginatedUsers = userService.findAllPaginated(page, size, Optional.empty()).getContent();//TODO: null here
+        return paginatedUsers.stream().map(userEntityToDtoMapper::convertToDto).collect(Collectors.toList());
     }
 
     @PostMapping
