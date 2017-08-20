@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
+import pl.politechnika.ikms.domain.user.User;
 import pl.politechnika.ikms.security.JwtAuthenticationRequest;
 import pl.politechnika.ikms.security.JwtTokenUtil;
 import pl.politechnika.ikms.security.JwtUser;
@@ -19,6 +20,7 @@ import pl.politechnika.ikms.security.service.JwtAuthenticationResponse;
 import pl.politechnika.ikms.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @RestController
 @Slf4j
@@ -56,6 +58,11 @@ public class AuthenticationRestController {
         log.info("generating new token for user: {}",authenticationRequest.getUsername());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
+
+        //TODO: check isEnabled
+        User user = userService.getUserByUsername(authenticationRequest.getUsername());
+        user.setLastLogged(new Date());
+        userService.update(user);
 
         // Return the token
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
