@@ -59,7 +59,7 @@ public class AuthenticationRestController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        //TODO: check isEnabled
+        log.info("validating user account");
         User user = userService.getUserByUsername(authenticationRequest.getUsername());
         user.setLastLogged(new Date());
         userService.update(user);
