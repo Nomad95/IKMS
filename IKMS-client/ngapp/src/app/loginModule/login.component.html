@@ -12,31 +12,43 @@
           </div>
 
           <div class="ui-g-12">
-            <div class="ui-inputgroup">
+            <div class="ui-inputgroup ng-invalid">
               <input type="text" pInputText
                      placeholder="Login"
-                     required min="3"
-                     max="30"
+                     required minlength="5"
+                     maxlength="30"
                      #usernameInput="ngModel"
                      [(ngModel)]="credentials.username"
                      name="username">
             </div>
           </div>
+          <div class="ui-g-12 validation-err" *ngIf="usernameInput.touched && usernameInput.errors?.minlength">
+            Conajmniej 5 znaków.
+          </div>
 
           <div class="ui-g-12">
-            <div class="ui-inputgroup">
+            <div class="ui-inputgroup ng-invalid">
               <input type="text" pInputText
-                     placeholder="Hasło" min="3"
-                     max="100"
+                     placeholder="Hasło" minlength="5"
+                     maxlength="100"
                      required
                      #passwordInput="ngModel"
                      [(ngModel)]="credentials.password"
                      name="password">
             </div>
           </div>
+          <div class="ui-g-12 validation-err" *ngIf="(passwordInput.touched || passwordInput.dirty) && passwordInput.errors?.minlength">
+            Conajmniej 5 znaków.
+          </div>
 
+          <div class="ui-g-12" >
+            <p-messages [(value)]="messages" [closable]="false"></p-messages>
+          </div>
           <div class="ui-g-4">
-            <button pButton type="submit" label="Zaloguj"></button>
+            <button pButton type="submit" label="Zaloguj" [disabled]="loginForm.invalid"></button>
+          </div>
+          <div align="right" class="ui-g-8">
+            <a>Zarejestruj się</a>
           </div>
         </div>
       </form>

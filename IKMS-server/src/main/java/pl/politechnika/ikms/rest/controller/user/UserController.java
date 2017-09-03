@@ -33,7 +33,7 @@ public class UserController {
         return userEntityToDtoMapper.convertToDto(userService.findOne(userId));
     }
 
-    @GetMapping(params = { "page", "size" })
+    @GetMapping(params = { "page", "size" })//TODO: uzyj Page<>
     @ResponseBody
     public List<UserDto> getUsers(@RequestParam("page") int page, @RequestParam("size") int size){
         List<User> paginatedUsers = userService.findAllPaginated(page, size, Optional.empty()).getContent();//TODO: null here

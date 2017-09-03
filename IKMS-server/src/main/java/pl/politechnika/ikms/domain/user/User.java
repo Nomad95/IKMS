@@ -10,6 +10,7 @@ import pl.politechnika.ikms.commons.util.CommonConstants;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import java.util.Collection;
 import java.util.Date;
@@ -32,16 +33,19 @@ public class User extends AbstractEntity{
 
     @NotNull
     @Column(name = "username")
+    @Size(min = 5, max = 30)
     private String username;
 
     @NotNull
     @JsonIgnore
     @Column(name = "password")
+    @Size(min = 5, max = 100)
     private String password;
 
     @NotNull
     @Pattern(regexp = CommonConstants.EMAIL_REGEXP)
     @Column(name = "email")
+    @Size(min = 5, max = 70)
     private String email;
 
     @Column(name = "enabled")

@@ -6,9 +6,11 @@ import {HttpModule} from "@angular/http";
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 
-import {InputTextModule} from '../../../node_modules/primeng/components/inputtext/inputtext';
-import {ButtonModule} from '../../../node_modules/primeng/components/button/button';
-import {CodeHighlighterModule} from '../../../node_modules/primeng/components/codehighlighter/codehighlighter';
+import { InputTextModule } from '../../../node_modules/primeng/components/inputtext/inputtext';
+import { ButtonModule } from '../../../node_modules/primeng/components/button/button';
+import { CodeHighlighterModule } from '../../../node_modules/primeng/components/codehighlighter/codehighlighter';
+import { MessagesModule } from '../../../node_modules/primeng/components/messages/messages';
+
 
 @NgModule({
   imports: [
@@ -18,7 +20,8 @@ import {CodeHighlighterModule} from '../../../node_modules/primeng/components/co
     CodeHighlighterModule,
     LoginRoutingModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MessagesModule
   ],
   declarations: [LoginComponent]
 })

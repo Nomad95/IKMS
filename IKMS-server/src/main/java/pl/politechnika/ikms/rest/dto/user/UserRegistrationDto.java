@@ -14,11 +14,11 @@ import javax.validation.constraints.Size;
 public class UserRegistrationDto extends AbstractDto{
 
     @NotNull
-    @Size(max = 30, min = 3)
+    @Size(max = 30, min = 5)
     private String username;
 
     @NotNull
-    @Size(max = 100, min = 3)
+    @Size(max = 100, min = 5)
     private String password;
 
     @NotNull
