@@ -24,8 +24,6 @@ export class LoginComponent  {
     }, err =>{
       this.messages = [{severity:'error', summary:'Błąd', detail: err._body}];
     });
-
-    console.log("save: " + JSON.stringify(this.credentials));
     //TODO: przekieruj na stronke
   }
 

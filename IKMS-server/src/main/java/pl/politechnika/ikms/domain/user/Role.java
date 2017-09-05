@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "roles")
 @EqualsAndHashCode
 @SequenceGenerator(name="roles_seq_name",sequenceName="roles_seq", allocationSize=1,initialValue = 5)
-public class Role {
+public class Role extends AbstractEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "roles_seq_name")
