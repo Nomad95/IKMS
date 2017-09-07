@@ -14,9 +14,7 @@ import pl.politechnika.ikms.rest.mapper.user.UserEntityToRegDtoMapper;
 import pl.politechnika.ikms.service.UserService;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,11 +31,11 @@ public class UserController {
         return userEntityToDtoMapper.convertToDto(userService.findOne(userId));
     }
 
-    @GetMapping(params = { "page", "size" })//TODO: uzyj Page<>
+    @GetMapping(params = { "page", "size" })
     @ResponseBody
-    public List<UserDto> getUsers(@RequestParam("page") int page, @RequestParam("size") int size){
-        List<User> paginatedUsers = userService.findAllPaginated(page, size, Optional.empty()).getContent();//TODO: null here
-        return paginatedUsers.stream().map(userEntityToDtoMapper::convertToDto).collect(Collectors.toList());
+    public Page<UserDto> getUsers(@RequestParam("page") int page, @RequestParam("size") int size){
+        Page<User> allPaginated = userService.findAllPaginated(page, size, Optional.empty());
+        return allPaginated.map(userEntityToDtoMapper::convertToDto);
     }
 
     @PostMapping

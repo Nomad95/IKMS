@@ -1,5 +1,5 @@
 id,username,password,email,enabled,role,created_date,last_logged
 1,admin,$2a$06$Md6G6fhMiR5NrTegLTTrOuiCUsv3OkEssEAIAPP2Haos1WcHOejK2,admin@localhost,true,1,2017-09-13,2017-09-13
 2,employee,$2a$06$90EU96T.hkND.Kkf54DuVO9S6L7nGrwHH3osMbh.9KFgDaHeOPxXi,employee@localhost,true,2,2017-09-13,2017-09-13
-3,user,$2a$06$hWk/g8O8rTZSFpwJu7JZcO4hXtpUCMjTyMVKkIC0YQXNnB4xYF6Ci,user@localhost,true,3,2017-09-13,2017-09-13
+3,user1,$2a$06$kKAXosMEpKtKZXkPO5IKIOk2UktMgCpAQvBCoQ./dzrgCVU8bupx2,user@localhost,true,3,2017-09-13,2017-09-13
 4,anonymous,$2a$06$cczBQ7V5AVNNEWXN84.PF.Ljn5SkarPxOKnVQHD6mJ0c5.Wec.9CO,anonymous@localhost,true,4,2017-09-13,2017-09-13

@@ -25,8 +25,8 @@ public class AuthProvider {
 
     public User createNewSimpleUser(){
         simpleUser = new User();
-        simpleUser.setUsername("user");
-        simpleUser.setPassword("user");
+        simpleUser.setUsername("user1");
+        simpleUser.setPassword("user1");
         simpleUser.setEmail("user@localhost");
         simpleUser.setId(3L);
         simpleUser.setRole(roleRepository.getByName("ROLE_USER"));
@@ -35,6 +35,22 @@ public class AuthProvider {
         simpleUser.setLastLogged(new Date());
 
         return simpleUser;
+    }
+
+    /**
+     * Creates user beyond database
+     */
+    public User createNewUserEntity(){
+        User exampleUser = new User();
+        exampleUser.setUsername("username");
+        exampleUser.setPassword("password");
+        exampleUser.setEmail("email@localhost");
+        exampleUser.setRole(roleRepository.getByName("ROLE_USER"));
+        exampleUser.setCreatedDate(new Date());
+        exampleUser.setEnabled(true);
+        exampleUser.setLastLogged(new Date());
+
+        return exampleUser;
     }
 
     public User createNewAdminUser(){

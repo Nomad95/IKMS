@@ -2,8 +2,6 @@ package pl.politechnika.ikms.domain.user;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 
 import javax.persistence.*;
@@ -12,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @Table(name = "roles")
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @SequenceGenerator(name="roles_seq_name",sequenceName="roles_seq", allocationSize=1,initialValue = 5)
 public class Role extends AbstractEntity{
 
