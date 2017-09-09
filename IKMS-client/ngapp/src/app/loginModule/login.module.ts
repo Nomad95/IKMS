@@ -10,6 +10,7 @@ import { InputTextModule } from '../../../node_modules/primeng/components/inputt
 import { ButtonModule } from '../../../node_modules/primeng/components/button/button';
 import { CodeHighlighterModule } from '../../../node_modules/primeng/components/codehighlighter/codehighlighter';
 import { MessagesModule } from '../../../node_modules/primeng/components/messages/messages';
+import { CheckboxModule } from "../../../node_modules/primeng/components/checkbox/checkbox";
 
 
 @NgModule({
@@ -21,9 +22,10 @@ import { MessagesModule } from '../../../node_modules/primeng/components/message
     LoginRoutingModule,
     FormsModule,
     HttpModule,
-    MessagesModule
+    MessagesModule,
+    CheckboxModule
   ],
   declarations: [LoginComponent]
 })
-export class LoginModule {//TODO: add image to assets
+export class LoginModule {
 }

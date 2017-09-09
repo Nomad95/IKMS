@@ -42,6 +42,10 @@
           </div>
 
           <div class="ui-g-12" >
+            <p-checkbox name="rememberMe" binary="true" label="Zapamiętaj mnie" [(ngModel)]="credentials.rememberMe" inputId="re"></p-checkbox>
+          </div>
+
+          <div class="ui-g-12" >
             <p-messages [(value)]="messages" [closable]="false"></p-messages>
           </div>
           <div class="ui-g-4">

@@ -29,8 +29,8 @@ export class LoginService{
           this.username = credentials.username;
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          TokenUtils.storeToken(true,JSON.stringify({ username: credentials.username, token: token }));
-          //TODO: remember me
+          TokenUtils.removeStoredTokens();
+          TokenUtils.storeToken(credentials.rememberMe,JSON.stringify({ username: credentials.username, token: token }));
 
           // return true to indicate successful login
           return true;
