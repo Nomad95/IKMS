@@ -6,11 +6,10 @@ import {HttpModule} from "@angular/http";
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 
-import { InputTextModule } from '../../../node_modules/primeng/components/inputtext/inputtext';
-import { ButtonModule } from '../../../node_modules/primeng/components/button/button';
-import { CodeHighlighterModule } from '../../../node_modules/primeng/components/codehighlighter/codehighlighter';
-import { MessagesModule } from '../../../node_modules/primeng/components/messages/messages';
-import { CheckboxModule } from "../../../node_modules/primeng/components/checkbox/checkbox";
+import {
+  InputTextModule, ButtonModule,
+  CodeHighlighterModule, MessagesModule,
+  CheckboxModule, PasswordModule } from './index';
 
 
 @NgModule({
@@ -23,7 +22,8 @@ import { CheckboxModule } from "../../../node_modules/primeng/components/checkbo
     FormsModule,
     HttpModule,
     MessagesModule,
-    CheckboxModule
+    CheckboxModule,
+    PasswordModule
   ],
   declarations: [LoginComponent]
 })

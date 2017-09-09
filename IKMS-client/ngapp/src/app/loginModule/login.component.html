@@ -28,8 +28,9 @@
 
           <div class="ui-g-12">
             <div class="ui-inputgroup ng-invalid">
-              <input type="text" pInputText
+              <input type="password" pPassword
                      placeholder="Hasło" minlength="5"
+                     [feedback]="false"
                      maxlength="100"
                      required
                      #passwordInput="ngModel"
