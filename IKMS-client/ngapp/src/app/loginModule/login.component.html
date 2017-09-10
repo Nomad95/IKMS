@@ -50,7 +50,7 @@
             <p-messages [(value)]="messages" [closable]="false"></p-messages>
           </div>
           <div class="ui-g-4">
-            <button pButton type="submit" label="Zaloguj" [disabled]="loginForm.invalid"></button>
+            <button pButton type="submit" label="Zaloguj" [disabled]="loginForm.invalid || isLoading"></button>
           </div>
           <div align="right" class="ui-g-8">
             <a>Zarejestruj się</a>

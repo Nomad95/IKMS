@@ -47,4 +47,10 @@ export class LoginService{
     TokenUtils.removeStoredTokens();
   }
 
+  getRole(): Observable<any>{
+      let headers: Headers = TokenUtils.createHeaderWithToken();
+      return this.http.get('auth/role', {headers: headers})
+        .map( res => res.json());
+  }
+
 }

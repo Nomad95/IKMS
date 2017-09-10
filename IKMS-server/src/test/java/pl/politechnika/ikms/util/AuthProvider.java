@@ -29,7 +29,7 @@ public class AuthProvider {
         simpleUser.setPassword("user1");
         simpleUser.setEmail("user@localhost");
         simpleUser.setId(3L);
-        simpleUser.setRole(roleRepository.getByName("ROLE_USER"));
+        simpleUser.setRole(roleRepository.getByName("ROLE_PARENT"));
         simpleUser.setCreatedDate(new Date());
         simpleUser.setEnabled(true);
         simpleUser.setLastLogged(new Date());
@@ -45,7 +45,7 @@ public class AuthProvider {
         exampleUser.setUsername("username");
         exampleUser.setPassword("password");
         exampleUser.setEmail("email@localhost");
-        exampleUser.setRole(roleRepository.getByName("ROLE_USER"));
+        exampleUser.setRole(roleRepository.getByName("ROLE_PARENT"));
         exampleUser.setCreatedDate(new Date());
         exampleUser.setEnabled(true);
         exampleUser.setLastLogged(new Date());

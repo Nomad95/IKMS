@@ -1,3 +1,7 @@
+/**
+ * Util class for easy error handling.
+ * General purpose
+ */
 export class ErrorHandler {
 
   public static handleLoginError(error: any){

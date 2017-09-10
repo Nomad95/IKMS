@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: 'login', loadChildren: './loginModule/login.module#LoginModule' },
-  { path: 'site', loadChildren: './userSiteModule/usersite.module#UserSiteModule' },
+  { path: 'parent', loadChildren: './parentSiteModule/parentsite.module#ParentSiteModule' },
+  { path: 'admin', loadChildren: './adminSiteModule/adminsite.module#AdminSiteModule' },
   { path: '**', redirectTo: 'login' }
 ];
 

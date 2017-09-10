@@ -49,7 +49,7 @@ public class JwtUtilsTest {
         defaultUser.setCreatedDate(DEFAULT_DATE);
         defaultUser.setEnabled(true);
         Role role = new Role();
-        role.setName("ROLE_USER");
+        role.setName("ROLE_PARENT");
         defaultUser.setRole(role);
         defaultUser.setEmail("dsd@localost");
 

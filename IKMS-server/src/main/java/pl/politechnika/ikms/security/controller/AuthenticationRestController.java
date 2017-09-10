@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.rest.dto.role.RoleDto;
 import pl.politechnika.ikms.security.JwtAuthenticationRequest;
 import pl.politechnika.ikms.security.JwtTokenUtil;
 import pl.politechnika.ikms.security.JwtUser;
@@ -83,5 +84,12 @@ public class AuthenticationRestController {
         }
     }
 
+    @GetMapping(value = "/auth/role")
+    @ResponseBody
+    public RoleDto getRoleFromToken(HttpServletRequest request){
+        String token = request.getHeader(tokenHeader);
+        User foundUser = userService.getUserByUsername(jwtTokenUtil.getUsernameFromToken(token));
+        return new RoleDto(foundUser.getRole().getName());
+    }
 
 }

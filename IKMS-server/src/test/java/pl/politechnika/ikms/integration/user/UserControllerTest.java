@@ -131,7 +131,7 @@ public class UserControllerTest {
         userRegistrationDto.setEmail("email@email");
         userRegistrationDto.setPassword("password");
         userRegistrationDto.setUsername("username");
-        userRegistrationDto.setRole(Roles.ROLE_USER);
+        userRegistrationDto.setRole(Roles.ROLE_PARENT);
 
         Number userId =
         given()
@@ -160,7 +160,7 @@ public class UserControllerTest {
         userRegistrationDto.setEmail("ema");
         userRegistrationDto.setPassword("pas");
         userRegistrationDto.setUsername("use");
-        userRegistrationDto.setRole(Roles.ROLE_USER);
+        userRegistrationDto.setRole(Roles.ROLE_PARENT);
 
         given()
                 .contentType(ContentType.JSON)
@@ -178,7 +178,7 @@ public class UserControllerTest {
         userRegistrationDto.setEmail("admin");
         userRegistrationDto.setPassword("admin");
         userRegistrationDto.setUsername("admin@localhost");
-        userRegistrationDto.setRole(Roles.ROLE_USER);
+        userRegistrationDto.setRole(Roles.ROLE_PARENT);
 
         given()
                 .contentType(ContentType.JSON)
