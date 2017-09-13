@@ -8,3 +8,172 @@
   color: red;
   font-size: 10px;
 }
+
+html {
+  height: 100%;
+}
+
+body{
+  height: 100%;
+}
+
+/* obrazek na stronie logowania */
+.background{
+  background: url('./assets/img/background2.png') no-repeat   center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  }
+
+/*lewy pasek*/
+.side-navbar{
+  overflow: auto;
+  position: fixed;
+  width: 180px;
+  z-index: 99;
+  top: 65px;
+  height: 100% !important;
+  box-shadow: 3px 0 6px -2px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+}
+
+/*lewy pasek na cala wysokosc ekranu*/
+.ui-panelmenu{
+  height: 100%;
+}
+
+.navbar{
+  height: 65px;
+  border-bottom: none;
+  background-color: #3f51b5;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  margin-top: 5px;
+}
+
+.navbar-brand{
+  margin-top: 5px;
+}
+
+.navbar-dropdown{
+  padding-right: 25px;
+}
+
+.navbar-nav>li>a {
+  padding-top: 15px;
+  padding-bottom: 0px;
+  font-size: 100%;
+}
+
+/*content nie chowajacy sie pod navbary*/
+.ikms-body{
+  padding-left: 180px;
+  top: 75px;
+}
+
+
+/** usuwa brzydkie strzaleczki z menu **/
+.ui-panelmenu-icon{
+  display: none;
+}
+
+.brand-text{
+  color: #FFFFFF !important;
+  text-shadow: 0px 2px 3px #555;
+  font-size: 150%;
+}
+
+.ui-menuitem {
+  border: none;
+}
+
+.ui-panelmenu-header:hover{
+  background: #5c6bc0 !important;
+}
+
+.ui-menuitem-text{
+  font-size: 125%;
+  font-weight: 300;
+  color: #4d4b50;
+}
+
+.ui-panelmenu-headerlink-hasicon:hover{
+  background: #D5D5D5;
+}
+
+/* przycisk przy malym ekranie */
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #FFFFFF;
+}
+
+.navbar-toggle {
+  margin-top: 15px;
+}
+
+/* usuwa niepotrzebne i przydkie podkreslenie tekstu */
+a:-webkit-any-link{
+  text-decoration: none;
+}
+
+/* elementy menu */
+.ui-state-default {
+  border: none;
+  background: #ffffff;
+  padding-bottom: 2px;
+  color: #555555;
+  padding-top: 2px;
+  border-radius: 0px;
+}
+
+.ui-panelmenu .ui-panelmenu-header ,.ui-state-active .ui-menuitem-text, .ui-panelmenu .ui-panelmenu-header.ui-state-active a{
+  background: #ffffff !important;
+  border-color: #ffffff;
+  color: #3f51b5;
+}
+
+/** responsywnosc lewego paska**/
+@media only screen and (max-width: 768px) {
+
+  .ui-menuitem-text{
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s, visibility 1s;
+    -webkit-transition: opacity 1s, visibility 1s;
+  }
+
+  .ui-panelmenu{
+    width: 15px;
+    transition: width 0.25s;
+    -webkit-transition: width 0.25s;
+    opacity: 0;
+  }
+
+  .side-navbar{
+    width: 15px;
+    transition: width 0.25s;
+    -webkit-transition: width 0.25s;
+  }
+
+  .side-navbar:hover{
+    display: block;
+    width: 180px;
+    opacity: 1;
+  }
+
+  .ui-panelmenu:hover{
+    width: 180px;
+    opacity: 1;
+  }
+
+  .ui-panelmenu:hover .ui-menuitem-text{
+    display: inline;
+    opacity: 1;
+    visibility: visible;
+  }
+
+}

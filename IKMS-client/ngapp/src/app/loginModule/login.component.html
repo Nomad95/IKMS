@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container-fluid background">
   <div class="row">
     <div class="col-md-4 col-md-offset-4">
       <form novalidate
             #loginForm="ngForm"
             (ngSubmit)="login(credentials)">
 
-        <div class="ui-g-12 ui-fluid">
+        <div class="ui-g-12 ui-fluid" style="padding-top: 15%">
 
           <div class="col-md-8 col-md-offset-2 hidden-xs hidden-sm">
             <img src="assets/img/IKMS.png" width="100%">
@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="ui-g-12 validation-err" *ngIf="usernameInput.touched && usernameInput.errors?.minlength">
-            Conajmniej 5 znaków.
+            Co najmniej 5 znaków.
           </div>
 
           <div class="ui-g-12">
@@ -38,8 +38,8 @@
                      name="password">
             </div>
           </div>
-          <div class="ui-g-12 validation-err" *ngIf="(passwordInput.touched || passwordInput.dirty) && passwordInput.errors?.minlength">
-            Conajmniej 5 znaków.
+          <div class="ui-g-12 validation-err" *ngIf="passwordInput.touched && passwordInput.errors?.minlength">
+            Co najmniej 5 znaków.
           </div>
 
           <div class="ui-g-12" >

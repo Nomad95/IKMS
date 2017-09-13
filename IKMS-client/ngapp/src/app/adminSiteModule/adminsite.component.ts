@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './adminsite.component.html'
 })
 export class AdminSiteComponent {
-
 }
