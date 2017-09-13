@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminSiteComponent } from "./adminsite.component";
-import { AdminSiteRoutingModule } from "./adminsite-routing.module";
-import { AdminSidebar } from "./menu/sidebar/admin-sidebar";
+import { EmployeeSiteComponent } from "./employeesite.component";
+import { EmployeeSiteRoutingModule } from "./employeesite-routing.module";
+import { EmployeeSidebar } from "./menu/sidebar/employee-sidebar";
 
 import { PanelMenuModule } from "../../../node_modules/primeng/components/panelmenu/panelmenu";
 import { ButtonModule } from "../../../node_modules/primeng/components/button/button";
@@ -13,7 +13,7 @@ import { MegaMenuModule } from '../../../node_modules/primeng/components/megamen
 @NgModule({
   imports: [
     CommonModule,
-    AdminSiteRoutingModule,
+    EmployeeSiteRoutingModule,
     PanelMenuModule,
     ButtonModule,
     TabViewModule,
@@ -21,8 +21,8 @@ import { MegaMenuModule } from '../../../node_modules/primeng/components/megamen
     MegaMenuModule
   ],
   declarations: [
-    AdminSiteComponent,
-    AdminSidebar
+    EmployeeSiteComponent,
+    EmployeeSidebar
   ]
 })
-export class AdminSiteModule { }
+export class EmployeeSiteModule { }

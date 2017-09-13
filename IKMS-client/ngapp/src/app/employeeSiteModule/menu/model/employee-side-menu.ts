@@ -1,4 +1,4 @@
-export class SideMenu {
+export class EmployeeSideMenu {
     static items = [
         {
             label: 'File',
