@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AdminSiteComponent } from "./adminsite.component";
 import { AdminSiteRoutingModule } from "./adminsite-routing.module";
 import { AdminSidebar } from "./menu/sidebar/sidebar";
-import { AdminNavbar } from "./menu/navbar/navbar";
 
 import { PanelMenuModule } from "../../../node_modules/primeng/components/panelmenu/panelmenu";
 import { ButtonModule } from "../../../node_modules/primeng/components/button/button";
@@ -23,8 +22,7 @@ import { MegaMenuModule } from '../../../node_modules/primeng/components/megamen
   ],
   declarations: [
     AdminSiteComponent,
-    AdminSidebar,
-    AdminNavbar
+    AdminSidebar
   ]
 })
 export class AdminSiteModule { }
