@@ -68,7 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/favicon.ico",
                         "/**/*.html",
                         "/**/*.css",
-                        "/**/*.js"
+                        "/**/*.js",
+                        "/**/assets/**"
                 ).permitAll()
                 //allow swagger usage
                 .antMatchers(

@@ -3,18 +3,18 @@ package pl.politechnika.ikms.rest.controller.user;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.rest.dto.user.UserDto;
 import pl.politechnika.ikms.rest.dto.user.UserRegistrationDto;
-import pl.politechnika.ikms.rest.mapper.user.UserEntityToDtoMapper;
-import pl.politechnika.ikms.rest.mapper.user.UserEntityToRegDtoMapper;
-import pl.politechnika.ikms.service.UserService;
+import pl.politechnika.ikms.rest.mapper.user.UserEntityMapper;
+import pl.politechnika.ikms.rest.mapper.user.UserEntityRegistrationMapper;
+import pl.politechnika.ikms.service.user.UserService;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,37 +22,37 @@ import java.util.Optional;
 public class UserController {
 
     private final @NonNull UserService userService;
-    private final @NonNull UserEntityToRegDtoMapper userEntityToRegDtoMapper;
-    private final @NonNull UserEntityToDtoMapper userEntityToDtoMapper;
+    private final @NonNull UserEntityRegistrationMapper userEntityRegistrationMapper;
+    private final @NonNull UserEntityMapper userEntityMapper;
 
     @GetMapping(value = "/{userId}")
     @ResponseBody
     public UserDto getUser(@PathVariable Long userId){
-        return userEntityToDtoMapper.convertToDto(userService.findOne(userId));
+        return userEntityMapper.convertToDto(userService.findOne(userId));
     }
 
-    @GetMapping(params = { "page", "size" })
+    @GetMapping
     @ResponseBody
-    public Page<UserDto> getUsers(@RequestParam("page") int page, @RequestParam("size") int size){
-        Page<User> allPaginated = userService.findAllPaginated(page, size, Optional.empty());
-        return allPaginated.map(userEntityToDtoMapper::convertToDto);
+    public Page<UserDto> getUsers(Pageable pageable){
+        Page<UserEntity> allPaginated = userService.findAllPaginated(pageable);
+        return allPaginated.map(userEntityMapper::convertToDto);
     }
 
     @PostMapping
     @ResponseBody
-    @ResponseStatus(HttpStatus.CREATED)//TODO: creation depends on provided role
+    @ResponseStatus(HttpStatus.CREATED)//TODO: creation depends on provided role?
     public UserDto createUser(@Valid @RequestBody UserRegistrationDto userRegistrationDto){
-        User user = userEntityToRegDtoMapper.convertToEntity(userRegistrationDto);
-        User createdUser = userService.create(user);
-        return userEntityToDtoMapper.convertToDto(createdUser);
+        UserEntity user = userEntityRegistrationMapper.convertToEntity(userRegistrationDto);
+        UserEntity createdUser = userService.create(user);
+        return userEntityMapper.convertToDto(createdUser);
     }
 
     @PutMapping
     @ResponseBody
     public UserDto updateUser(@Valid @RequestBody UserDto userDto){
-        User user = userEntityToDtoMapper.convertToEntity(userDto);
-        User updatedUser = userService.update(user);
-        return userEntityToDtoMapper.convertToDto(updatedUser);
+        UserEntity user = userEntityMapper.convertToEntity(userDto);
+        UserEntity updatedUser = userService.update(user);
+        return userEntityMapper.convertToDto(updatedUser);
     }
 
     @DeleteMapping(value = "/{userId}")

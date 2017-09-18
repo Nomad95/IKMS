@@ -1,0 +1,67 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Kopec" id="changelog_005_addresses">
+        <createTable tableName="addresses">
+            <column name="id" type="bigint" >
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="address_type" type="varchar(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="user_id" type="bigint" >
+                <constraints nullable="false" />
+            </column>
+            <column name="street" type="varchar(35)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="street_number" type="integer" >
+                <constraints nullable="true" />
+            </column>
+            <column name="house_number" type="varchar(10)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="post_code" type="varchar(6)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="city" type="varchar(35)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="community" type="varchar(35)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="county" type="varchar(35)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="voivodeship" type="varchar(35)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="country" type="varchar(35)" >
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="id"
+                constraintName="pk_address"
+                tableName="addresses"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="user_id"
+                baseTableName="addresses"
+                constraintName="fk_address_user"
+                referencedColumnNames="id"
+                referencedTableName="users"/>
+
+        <createSequence
+                sequenceName="addresses_seq"
+                startValue="1"
+                incrementBy="1"/>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -9,18 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.politechnika.ikms.domain.user.Role;
-import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 import pl.politechnika.ikms.repository.user.UserRepository;
-import pl.politechnika.ikms.service.impl.UserServiceImpl;
+import pl.politechnika.ikms.service.user.impl.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertEquals;
@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceUnitTest {
+public class UserEntityServiceUnitTest {
 
     private static final Date DEFAULT_DATE = new Date(0L);
 
@@ -42,11 +42,11 @@ public class UserServiceUnitTest {
     @Autowired
     private UserServiceImpl userService;
 
-    private User defaultUser;
+    private UserEntity defaultUser;
 
     @Before
     public void createUser(){
-        defaultUser = new User();
+        defaultUser = new UserEntity();
         defaultUser.setId(1L);
         defaultUser.setUsername("user");
         defaultUser.setPassword("user");
@@ -58,12 +58,12 @@ public class UserServiceUnitTest {
     }
 
     //Wiem ze nie powinienem jednostkowo testować CRUDa ale powiedzmy że to będzie test
-    //dzialania abstractow, taka podstawa, ewentualnie sie cos dopisze :)
+    //dzialania abstractow, taka podstawa (userEntity to chyba najwazniejszy jest), ewentualnie sie cos dopisze :)
     @Test
     public void getUser(){
         when(userRepository.findOne(1L)).thenReturn(defaultUser);
 
-        User user = userService.findOne(1L);
+        UserEntity user = userService.findOne(1L);
 
         assertEquals(user,defaultUser);
         verify(userRepository).findOne(anyLong());
@@ -73,7 +73,7 @@ public class UserServiceUnitTest {
     public void getAllUsers(){
         when(userRepository.findAll()).thenReturn(Lists.newArrayList(defaultUser));
 
-        List<User> all = userService.findAll();
+        List<UserEntity> all = userService.findAll();
 
         assertThat(all, hasItem(defaultUser));
         verify(userRepository).findAll();
@@ -81,13 +81,13 @@ public class UserServiceUnitTest {
 
     @Test
     public void getAllUsersPaginated(){
-        ArrayList<User> users = Lists.newArrayList(defaultUser);
-        Page<User> pagesMock = Mockito.mock(Page.class);
+        ArrayList<UserEntity> users = Lists.newArrayList(defaultUser);
+        Page<UserEntity> pagesMock = Mockito.mock(Page.class);
         when(pagesMock.getContent()).thenReturn(users);
         when(pagesMock.getTotalElements()).thenReturn(1L);
         when(userRepository.findAll(any(Pageable.class))).thenReturn(pagesMock);
 
-        Page<User> pages = userService.findAllPaginated(1, 20, Optional.empty());
+        Page<UserEntity> pages = userService.findAllPaginated(new PageRequest(0,20));
 
         assertThat(pages.getContent(), hasItem(defaultUser));
         assertEquals(pages.getTotalElements(),1L);
@@ -100,7 +100,7 @@ public class UserServiceUnitTest {
     public void updateNotExistingEntity(){
         when(userRepository.findOne(anyLong())).thenReturn(null);
 
-        User update = userService.update(defaultUser);
+        UserEntity update = userService.update(defaultUser);
     }
 
 }

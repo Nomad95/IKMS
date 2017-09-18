@@ -3,7 +3,7 @@ package pl.politechnika.ikms.security;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.domain.user.UserEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public final class JwtUserFactory {
     private JwtUserFactory() {
     }
 
-    public static JwtUser create(User user) {
+    public static JwtUser create(UserEntity user) {
         JwtUser jwtUser = new JwtUser();
         jwtUser.setId(user.getId());
         jwtUser.setUsername(user.getUsername());
@@ -28,7 +28,7 @@ public final class JwtUserFactory {
         return jwtUser;
     }
 
-    private static List<GrantedAuthority> getGrantedAuthorities(User user) {
+    private static List<GrantedAuthority> getGrantedAuthorities(UserEntity user) {
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(user.getRole().getName());
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(simpleGrantedAuthority);

@@ -12,13 +12,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
-import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.rest.dto.role.RoleDto;
 import pl.politechnika.ikms.security.JwtAuthenticationRequest;
 import pl.politechnika.ikms.security.JwtTokenUtil;
 import pl.politechnika.ikms.security.JwtUser;
 import pl.politechnika.ikms.security.service.JwtAuthenticationResponse;
-import pl.politechnika.ikms.service.UserService;
+import pl.politechnika.ikms.service.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -61,7 +61,7 @@ public class AuthenticationRestController {
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         log.info("validating user account");
-        User user = userService.getUserByUsername(authenticationRequest.getUsername());
+        UserEntity user = userService.getUserByUsername(authenticationRequest.getUsername());
         user.setLastLogged(new Date());
         userService.update(user);
 
@@ -88,7 +88,7 @@ public class AuthenticationRestController {
     @ResponseBody
     public RoleDto getRoleFromToken(HttpServletRequest request){
         String token = request.getHeader(tokenHeader);
-        User foundUser = userService.getUserByUsername(jwtTokenUtil.getUsernameFromToken(token));
+        UserEntity foundUser = userService.getUserByUsername(jwtTokenUtil.getUsernameFromToken(token));
         return new RoleDto(foundUser.getRole().getName());
     }
 

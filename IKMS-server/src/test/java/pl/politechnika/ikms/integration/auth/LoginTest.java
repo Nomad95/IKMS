@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.security.JwtAuthenticationRequest;
 import pl.politechnika.ikms.security.JwtTokenUtil;
 import pl.politechnika.ikms.security.JwtUserFactory;
@@ -34,7 +34,7 @@ public class LoginTest {
 
     @Test
     public void loginAndGetToken(){
-        User newSimpleUser = authProvider.createNewSimpleUser();
+        UserEntity newSimpleUser = authProvider.createNewSimpleUser();
         JwtAuthenticationRequest jwtAuthenticationRequest = new JwtAuthenticationRequest(newSimpleUser.getUsername(), newSimpleUser.getPassword());
 
         String token =

@@ -7,20 +7,20 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.politechnika.ikms.commons.abstracts.AbstractModelMapper;
-import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.rest.dto.user.UserDto;
-import pl.politechnika.ikms.service.UserService;
+import pl.politechnika.ikms.service.user.UserService;
 
 
 @Data
 @Component
 @Slf4j
-public class UserEntityToDtoMapper extends AbstractModelMapper<User,UserDto> {
+public class UserEntityMapper extends AbstractModelMapper<UserEntity,UserDto> {
 
     private final @NonNull UserService userService;
 
     @Autowired
-    public UserEntityToDtoMapper(
+    public UserEntityMapper(
             ModelMapper modelMapper,
             UserService userService) {
         super(modelMapper);
@@ -28,16 +28,16 @@ public class UserEntityToDtoMapper extends AbstractModelMapper<User,UserDto> {
     }
 
     @Override
-    public UserDto convertToDto(User user) {
+    public UserDto convertToDto(UserEntity user) {
         return modelMapper.map(user,UserDto.class);
     }
 
     @Override
-    public User convertToEntity(UserDto userDto) {
-        User entity = modelMapper.map(userDto, User.class);
+    public UserEntity convertToEntity(UserDto userDto) {
+        UserEntity entity = modelMapper.map(userDto, UserEntity.class);
         //find existing user and find his role and password
         log.info("Fetching user role and password");
-        User user = userService.getUserByUsername(entity.getUsername());
+        UserEntity user = userService.getUserByUsername(entity.getUsername());
         entity.setRole(user.getRole());
         entity.setPassword(user.getPassword());
         return entity;

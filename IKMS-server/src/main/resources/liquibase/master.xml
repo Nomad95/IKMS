@@ -6,5 +6,8 @@
 
     <include file="liquibase/changelog/changelog_001_roles.xml"/>
     <include file="liquibase/changelog/changelog_002_users.xml"/>
+    <include file="liquibase/changelog/changelog_003_parents.xml"/>
+    <include file="liquibase/changelog/changelog_004_employees.xml"/>
+    <include file="liquibase/changelog/changelog_005_addresses.xml"/>
 
 </databaseChangeLog>

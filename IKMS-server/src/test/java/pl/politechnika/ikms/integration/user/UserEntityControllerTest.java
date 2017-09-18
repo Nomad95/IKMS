@@ -16,13 +16,13 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.domain.user.enums.Roles;
 import pl.politechnika.ikms.repository.user.RoleRepository;
 import pl.politechnika.ikms.repository.user.UserRepository;
 import pl.politechnika.ikms.rest.dto.user.UserDto;
 import pl.politechnika.ikms.rest.dto.user.UserRegistrationDto;
-import pl.politechnika.ikms.rest.mapper.user.UserEntityToDtoMapper;
+import pl.politechnika.ikms.rest.mapper.user.UserEntityMapper;
 import pl.politechnika.ikms.util.AuthProvider;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
-public class UserControllerTest {
+public class UserEntityControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -61,11 +61,11 @@ public class UserControllerTest {
     private RoleRepository roleRepository;
 
     @Autowired
-    private UserEntityToDtoMapper userMapper;
+    private UserEntityMapper userMapper;
 
     private String token;
 
-    private User defaultUser;
+    private UserEntity defaultUser;
 
     private List<Long> createdIds;
 
@@ -89,7 +89,7 @@ public class UserControllerTest {
     @Test
     public void getCreatedUser(){
         //create user
-        User savedUser = userRepository.saveAndFlush(authProvider.createNewUserEntity());
+        UserEntity savedUser = userRepository.saveAndFlush(authProvider.createNewUserEntity());
         createdIds.add(savedUser.getId());
 
         given()
@@ -195,7 +195,7 @@ public class UserControllerTest {
     @Transactional
     public void updateUser() throws Exception {
         //create user
-        User savedUser = userRepository.saveAndFlush(authProvider.createNewUserEntity());
+        UserEntity savedUser = userRepository.saveAndFlush(authProvider.createNewUserEntity());
         createdIds.add(savedUser.getId());
         //convert to DTO
         UserDto userDto = userMapper.convertToDto(savedUser);
@@ -223,7 +223,7 @@ public class UserControllerTest {
         //create ADMIN token
         token = authProvider.generateTokenForUser(authProvider.createNewAdminUser());
         //create user
-        User savedUser = userRepository.saveAndFlush(authProvider.createNewUserEntity());
+        UserEntity savedUser = userRepository.saveAndFlush(authProvider.createNewUserEntity());
         //createdIds.add(savedUser.getId());
 
         int sizeBeforeDelete = userRepository.findAll().size();
@@ -242,7 +242,7 @@ public class UserControllerTest {
     @Transactional
     public void deleteUserNotByAdmin() throws Exception {
         //create user
-        User savedUser = userRepository.saveAndFlush(authProvider.createNewUserEntity());
+        UserEntity savedUser = userRepository.saveAndFlush(authProvider.createNewUserEntity());
         createdIds.add(savedUser.getId());
 
         mockMvc.perform(

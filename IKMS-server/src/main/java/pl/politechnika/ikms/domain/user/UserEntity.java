@@ -4,24 +4,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Email;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
-import pl.politechnika.ikms.commons.util.CommonConstants;
+import pl.politechnika.ikms.domain.person.AddressEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
 @Entity
 @Table(name = "users")
-@EqualsAndHashCode(callSuper = false)
-@ToString(exclude = "password")
+@EqualsAndHashCode(callSuper = false, exclude = "addresses")
+@ToString(exclude = {"password","addresses"})
 @SequenceGenerator(name="users_seq_name",sequenceName="users_seq", allocationSize=1, initialValue = 5)
-public class User extends AbstractEntity{
+public class UserEntity extends AbstractEntity{
 
     @Id
     @GeneratedValue(strategy = SEQUENCE,generator = "users_seq_name")
@@ -40,7 +41,7 @@ public class User extends AbstractEntity{
     private String password;
 
     @NotNull
-    @Pattern(regexp = CommonConstants.EMAIL_REGEXP)
+    @Email
     @Column(name = "email")
     @Size(min = 5, max = 70)
     private String email;
@@ -59,4 +60,7 @@ public class User extends AbstractEntity{
     @NotNull
     @JoinColumn(name = "role")
     private Role role;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+    private List<AddressEntity> addresses;
 }
