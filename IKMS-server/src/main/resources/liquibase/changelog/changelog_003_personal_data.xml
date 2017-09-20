@@ -5,8 +5,8 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet author="Kopec" id="changelog_003_parents">
-        <createTable tableName="parents">
+    <changeSet author="Kopec" id="changelog_003_personal_data">
+        <createTable tableName="personal_data">
             <column name="id" type="bigint" >
                 <constraints nullable="false" unique="true"/>
             </column>
@@ -22,7 +22,7 @@
             <column name="pesel" type="bigint" >
                 <constraints nullable="false" />
             </column>
-            <column name="date_of_birth" type="timestamp" >
+            <column name="date_of_birth" type="date" >
                 <constraints nullable="false" />
             </column>
             <column name="place_of_birth" type="varchar(30)" >
@@ -52,9 +52,6 @@
             <column name="fax_number" type="bigint" >
                 <constraints nullable="true" />
             </column>
-            <column name="nip" type="varchar(13)" >
-                <constraints nullable="true" />
-            </column>
             <column name="user_id" type="bigint" >
                 <constraints nullable="false" />
             </column>
@@ -62,11 +59,18 @@
 
         <addPrimaryKey
                 columnNames="id"
-                constraintName="pk_parent"
-                tableName="parents"/>
+                constraintName="pk_personal_data"
+                tableName="personal_data"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="user_id"
+                baseTableName="personal_data"
+                constraintName="fk_per_data_user"
+                referencedColumnNames="id"
+                referencedTableName="users"/>
 
         <createSequence
-                sequenceName="parents_seq"
+                sequenceName="personal_data_seq"
                 startValue="1"
                 incrementBy="1"/>
 

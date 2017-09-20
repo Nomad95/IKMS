@@ -1,0 +1,43 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Kopec" id="changelog_005_employees">
+        <createTable tableName="employees">
+            <column name="id" type="bigint" >
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="employee_role" type="varchar(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="personal_data_id" type="bigint" >
+                <constraints nullable="false" />
+            </column>
+            <column name="nip" type="varchar(13)" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="id"
+                constraintName="pk_employee"
+                tableName="employees"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="personal_data_id"
+                baseTableName="employees"
+                constraintName="fk_empl_per_data"
+                referencedColumnNames="id"
+                referencedTableName="personal_data"/>
+
+        <createSequence
+                sequenceName="employees_seq"
+                startValue="1"
+                incrementBy="1"/>
+
+    </changeSet>
+
+</databaseChangeLog>

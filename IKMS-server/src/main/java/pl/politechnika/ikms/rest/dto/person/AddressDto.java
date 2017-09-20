@@ -17,7 +17,7 @@ public class AddressDto extends AbstractDto {
     @NotNull
     private AddressType addressType;
 
-    private MinimalDto<Long,String> user;
+    private MinimalDto<Long,String> personalData;
 
     @Size(max = 35)
     private String street;

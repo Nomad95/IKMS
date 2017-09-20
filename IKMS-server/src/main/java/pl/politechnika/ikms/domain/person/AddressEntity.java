@@ -4,8 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
-import pl.politechnika.ikms.domain.person.enums.AddressType;
-import pl.politechnika.ikms.domain.user.UserEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -26,13 +24,9 @@ public class AddressEntity extends AbstractEntity {
     private Long id;
 
     @NotNull
-    @Column(name = "address_type")
-    @Enumerated(EnumType.STRING)
-    private AddressType addressType;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "personal_data_id")
+    private PersonalDataEntity personalData;
 
     @Size(max = 35)
     @Column(name = "street")

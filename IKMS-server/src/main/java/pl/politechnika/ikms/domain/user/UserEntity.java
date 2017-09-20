@@ -6,13 +6,11 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Email;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
-import pl.politechnika.ikms.domain.person.AddressEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -61,6 +59,4 @@ public class UserEntity extends AbstractEntity{
     @JoinColumn(name = "role")
     private Role role;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
-    private List<AddressEntity> addresses;
 }

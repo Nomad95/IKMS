@@ -30,8 +30,8 @@ public class AddressController {
     @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public AddressDto createAddress(@Valid @RequestBody AddressDto employeeDto){
-        AddressEntity addressEntity = addressService.create(addressEntityMapper.convertToEntity(employeeDto));
+    public AddressDto createAddress(@Valid @RequestBody AddressDto addressDto){
+        AddressEntity addressEntity = addressService.create(addressEntityMapper.convertToEntity(addressDto));
         return addressEntityMapper.convertToDto(addressEntity);
     }
 
@@ -43,8 +43,8 @@ public class AddressController {
 
     @PutMapping
     @ResponseBody
-    public AddressDto updateAddress(@Valid @RequestBody AddressDto employeeDto){
-        AddressEntity addressEntity = addressService.update(addressEntityMapper.convertToEntity(employeeDto));
+    public AddressDto updateAddress(@Valid @RequestBody AddressDto addressDto){
+        AddressEntity addressEntity = addressService.update(addressEntityMapper.convertToEntity(addressDto));
         return addressEntityMapper.convertToDto(addressEntity);
     }
 

@@ -30,8 +30,8 @@ public class ParentController {
     @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public ParentDto createParent(@Valid @RequestBody ParentDto employeeDto){
-        ParentEntity parentEntity = parentService.create(parentEntityMapper.convertToEntity(employeeDto));
+    public ParentDto createParent(@Valid @RequestBody ParentDto parentDto){
+        ParentEntity parentEntity = parentService.create(parentEntityMapper.convertToEntity(parentDto));
         return parentEntityMapper.convertToDto(parentEntity);
     }
 

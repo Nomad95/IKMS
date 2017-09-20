@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet author="Kopec" id="changelog_005_addresses">
+    <changeSet author="Kopec" id="changelog_006_addresses">
         <createTable tableName="addresses">
             <column name="id" type="bigint" >
                 <constraints nullable="false" unique="true"/>
@@ -13,7 +13,7 @@
             <column name="address_type" type="varchar(255)" >
                 <constraints nullable="false" />
             </column>
-            <column name="user_id" type="bigint" >
+            <column name="personal_data_id" type="bigint" >
                 <constraints nullable="false" />
             </column>
             <column name="street" type="varchar(35)" >
@@ -51,11 +51,11 @@
                 tableName="addresses"/>
 
         <addForeignKeyConstraint
-                baseColumnNames="user_id"
+                baseColumnNames="personal_data_id"
                 baseTableName="addresses"
-                constraintName="fk_address_user"
+                constraintName="fk_address_per_data"
                 referencedColumnNames="id"
-                referencedTableName="users"/>
+                referencedTableName="personal_data"/>
 
         <createSequence
                 sequenceName="addresses_seq"
