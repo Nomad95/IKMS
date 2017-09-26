@@ -19,7 +19,7 @@
             <column name="surname" type="varchar(35)" >
                 <constraints nullable="false" />
             </column>
-            <column name="pesel" type="bigint" >
+            <column name="pesel" type="varchar(11)" >
                 <constraints nullable="false" />
             </column>
             <column name="date_of_birth" type="date" >
@@ -46,10 +46,10 @@
             <column name="nationality" type="varchar(45)" >
                 <constraints nullable="false" />
             </column>
-            <column name="contact_number" type="bigint" >
+            <column name="contact_number" type="varchar(12)" >
                 <constraints nullable="true" />
             </column>
-            <column name="fax_number" type="bigint" >
+            <column name="fax_number" type="varchar(12)" >
                 <constraints nullable="true" />
             </column>
             <column name="user_id" type="bigint" >

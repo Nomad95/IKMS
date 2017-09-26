@@ -25,7 +25,6 @@ public class AddressDto extends AbstractDto {
     @Min(1)
     private Integer streetNumber;
 
-    @Min(1)
     private String houseNumber;
 
     @Size(max = 6)

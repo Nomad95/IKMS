@@ -7,10 +7,8 @@ import pl.politechnika.ikms.domain.person.enums.Gender;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 
 import javax.persistence.Id;
-import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Data
@@ -34,8 +32,8 @@ public class PersonalDataDto extends AbstractDto {
     private String surname;
 
     @NotNull
-    @DecimalMax(value = "99999999999")
-    private BigInteger pesel;
+    @Size(min = 11, max = 11)
+    private String pesel;
 
     @NotNull
     private LocalDate dateOfBirth;
@@ -63,9 +61,9 @@ public class PersonalDataDto extends AbstractDto {
     @Size(max = 45)
     private String nationality;
 
-    @DecimalMax(value = "999999999")
-    private BigInteger contactNumber;
+    @Size(max = 12)
+    private String contactNumber;
 
-    @DecimalMax(value = "999999999")
-    private BigInteger faxNumber;
+    @Size(max = 12)
+    private String faxNumber;
 }

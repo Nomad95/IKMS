@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
+import pl.politechnika.ikms.domain.person.enums.AddressType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -12,9 +13,9 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = "personalData")
 @Table(name = "addresses")
-@ToString(exclude = "user")
+@ToString(exclude = "personalData")
 @SequenceGenerator(name="addresses_seq_name",sequenceName="addresses_seq", allocationSize = 1)
 public class AddressEntity extends AbstractEntity {
 
@@ -24,9 +25,14 @@ public class AddressEntity extends AbstractEntity {
     private Long id;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personal_data_id")
     private PersonalDataEntity personalData;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "address_type")
+    private AddressType addressType;
 
     @Size(max = 35)
     @Column(name = "street")

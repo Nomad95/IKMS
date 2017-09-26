@@ -57,6 +57,11 @@
                 referencedColumnNames="id"
                 referencedTableName="personal_data"/>
 
+
+        <createIndex tableName="addresses" indexName="fk_address_per_data">
+            <column name="personal_data_id"></column>
+        </createIndex>
+
         <createSequence
                 sequenceName="addresses_seq"
                 startValue="1"

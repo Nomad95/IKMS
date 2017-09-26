@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.lang.Collections;
 import io.restassured.http.ContentType;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,12 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import pl.politechnika.ikms.domain.person.PersonalDataEntity;
 import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.domain.user.enums.Roles;
+import pl.politechnika.ikms.integration.person.PersonalDataControllerTest;
+import pl.politechnika.ikms.repository.person.PersonalDataRepository;
 import pl.politechnika.ikms.repository.user.RoleRepository;
 import pl.politechnika.ikms.repository.user.UserRepository;
 import pl.politechnika.ikms.rest.dto.user.UserDto;
@@ -34,6 +37,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.number.OrderingComparison.greaterThan;
 import static org.hamcrest.number.OrderingComparison.lessThan;
+import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -53,6 +57,9 @@ public class UserEntityControllerTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PersonalDataRepository personalDataRepository;
 
     @Autowired
     private AuthProvider authProvider;
@@ -155,7 +162,7 @@ public class UserEntityControllerTest {
 
 
     @Test
-    public void creatingNewUserWithInvaliatedFrontendData(){
+    public void creatingNewUserWithInvalidatedFrontendData(){
         UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
         userRegistrationDto.setEmail("ema");
         userRegistrationDto.setPassword("pas");
@@ -193,10 +200,10 @@ public class UserEntityControllerTest {
     //TODO: create a method for password change and test it
     @Test
     @Transactional
+    @Rollback
     public void updateUser() throws Exception {
         //create user
         UserEntity savedUser = userRepository.saveAndFlush(authProvider.createNewUserEntity());
-        createdIds.add(savedUser.getId());
         //convert to DTO
         UserDto userDto = userMapper.convertToDto(savedUser);
 
@@ -214,11 +221,11 @@ public class UserEntityControllerTest {
                 .andExpect(jsonPath("$.email",is(userDto.getEmail())))
                 .andExpect(jsonPath("$.lastLogged",is(notNullValue())))
                 .andReturn();
-
     }
 
     @Test
     @Transactional
+    @Rollback
     public void deleteUser() throws Exception {
         //create ADMIN token
         token = authProvider.generateTokenForUser(authProvider.createNewAdminUser());
@@ -235,15 +242,15 @@ public class UserEntityControllerTest {
                 .andExpect(status().isOk());
 
         int sizeAfterDelete = userRepository.findAll().size();
-        Assert.assertThat("user was not deleted",sizeAfterDelete,is(equalTo(sizeBeforeDelete-1)));
+        assertThat("user was not deleted",sizeAfterDelete,is(equalTo(sizeBeforeDelete-1)));
     }
 
     @Test
     @Transactional
+    @Rollback
     public void deleteUserNotByAdmin() throws Exception {
         //create user
         UserEntity savedUser = userRepository.saveAndFlush(authProvider.createNewUserEntity());
-        createdIds.add(savedUser.getId());
 
         mockMvc.perform(
                 delete("/api/user/"+savedUser.getId())
@@ -251,5 +258,30 @@ public class UserEntityControllerTest {
                         .header("Auth-token",token))
                 .andExpect(status().is(403));
 
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void deletingUserEntityDoesntDeletePersonalData() throws Exception {
+        //create ADMIN token
+        token = authProvider.generateTokenForUser(authProvider.createNewAdminUser());
+        //create user
+        UserEntity savedUser = userRepository.saveAndFlush(authProvider.createNewUserEntity());
+        PersonalDataEntity personalDataEntity = PersonalDataControllerTest.createPersonalDataEntity(savedUser, personalDataRepository);
+
+        int sizeBefore = personalDataRepository.findAll().size();
+
+        mockMvc.perform(
+                delete("/api/user/"+savedUser.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Auth-token",token))
+                .andExpect(status().isOk());
+
+        int sizeAfter = personalDataRepository.findAll().size();
+        //should not delete personal data
+        PersonalDataEntity foundPersonalData = personalDataRepository.getOne(personalDataEntity.getId());
+        assertThat(sizeAfter, is(sizeBefore));
+        assertThat(foundPersonalData,is(notNullValue()));
     }
 }

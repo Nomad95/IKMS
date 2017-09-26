@@ -2,23 +2,24 @@ package pl.politechnika.ikms.domain.person;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.validator.constraints.NotEmpty;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 import pl.politechnika.ikms.domain.person.enums.Gender;
 import pl.politechnika.ikms.domain.user.UserEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = {"user","addresses"})
 @Table(name = "personal_data")
+@ToString(exclude = {"user","addresses"})
 @SequenceGenerator(name="personal_data_seq_name",sequenceName="personal_data_seq", allocationSize = 1)
 public class PersonalDataEntity extends AbstractEntity {
 
@@ -47,9 +48,9 @@ public class PersonalDataEntity extends AbstractEntity {
     private String surname;
 
     @NotNull
-    @DecimalMax(value = "99999999999")
+    @Size(min = 11, max = 11)
     @Column(name = "pesel")
-    private BigInteger pesel;
+    private String pesel;
 
     @NotNull
     @Column(name = "date_of_birth")
@@ -86,14 +87,14 @@ public class PersonalDataEntity extends AbstractEntity {
     @Column(name = "nationality")
     private String nationality;
 
-    @DecimalMax(value = "999999999")
+    @Size(max = 12)
     @Column(name = "contact_number")
-    private BigInteger contactNumber;
+    private String contactNumber;
 
-    @DecimalMax(value = "999999999")
+    @Size(max = 12)
     @Column(name = "fax_number")
-    private BigInteger faxNumber;
+    private String faxNumber;
 
-    @OneToMany(mappedBy = "personalData",cascade = CascadeType.REMOVE)
-    private List<AddressEntity> addresses;
+    @OneToMany(mappedBy = "personalData",cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<AddressEntity> addresses = new ArrayList<>();
 }
