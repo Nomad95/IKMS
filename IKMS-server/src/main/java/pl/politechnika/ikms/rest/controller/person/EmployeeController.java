@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.politechnika.ikms.domain.person.EmployeeEntity;
 import pl.politechnika.ikms.rest.dto.person.EmployeeDto;
+import pl.politechnika.ikms.rest.dto.person.EmployeeGeneralDetailDto;
 import pl.politechnika.ikms.rest.mapper.person.EmployeeEntityMapper;
 import pl.politechnika.ikms.service.person.EmployeeService;
 
@@ -51,6 +52,12 @@ public class EmployeeController {
     @DeleteMapping(value = "/{employeeId}")
     public void deleteEmployee(@PathVariable Long employeeId){
         employeeService.deleteById(employeeId);
+    }
+
+    @GetMapping(value = "/general")
+    @ResponseBody
+    public Page<EmployeeGeneralDetailDto> getEmployeeGeneralDetails(Pageable pageable){
+        return employeeService.getEmployeesGeneralDetails(pageable);
     }
 
 }

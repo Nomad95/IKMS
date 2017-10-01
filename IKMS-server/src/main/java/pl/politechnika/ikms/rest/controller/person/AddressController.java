@@ -12,6 +12,8 @@ import pl.politechnika.ikms.rest.mapper.person.AddressEntityMapper;
 import pl.politechnika.ikms.service.person.AddressService;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/address")
@@ -51,6 +53,14 @@ public class AddressController {
     @DeleteMapping(value = "/{addressId}")
     public void deleteAddress(@PathVariable Long addressId){
         addressService.deleteById(addressId);
+    }
+
+    @GetMapping(value = "/personalData/{personalDataId}")
+    @ResponseBody
+    public List<AddressDto> getAddressesByPersonalDataId(@PathVariable Long personalDataId){
+        return addressService.findByPersonalDataId(personalDataId).stream()
+                .map(addressEntityMapper::convertToDto)
+                .collect(Collectors.toList());
     }
 
 }

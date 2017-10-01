@@ -24,7 +24,7 @@ public class ParentEntityMapper extends AbstractModelMapper<ParentEntity,ParentD
         ParentDto parentDto = modelMapper.map(parentEntity, ParentDto.class);
         parentDto.setPersonalData(new MinimalDto<>(
                 parentEntity.getPersonalData().getId(),
-                parentEntity.getPersonalData().getSurname()));
+                parentEntity.getPersonalData().getPesel()));
         return parentDto;
     }
 

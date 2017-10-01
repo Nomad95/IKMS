@@ -194,7 +194,7 @@ public class EmployeeControllerTest {
 
     private EmployeeDto createEmployeeDto(PersonalDataEntity personalDataEntity) {
         EmployeeDto employeeDto = new EmployeeDto();
-        employeeDto.setPersonalData(new MinimalDto<>(personalDataEntity.getId(),personalDataEntity.getName()));
+        employeeDto.setPersonalData(new MinimalDto<>(personalDataEntity.getId(),personalDataEntity.getPesel()));
         employeeDto.setEmployeeRole(DEFAULT_ROLE);
         employeeDto.setNip(DEFAULT_NIP);
         return employeeDto;

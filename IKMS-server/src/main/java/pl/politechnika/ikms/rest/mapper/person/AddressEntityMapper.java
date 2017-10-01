@@ -24,7 +24,7 @@ public class AddressEntityMapper extends AbstractModelMapper<AddressEntity,Addre
         AddressDto addressDto = modelMapper.map(addressEntity, AddressDto.class);
         addressDto.setPersonalData(new MinimalDto<>(
                 addressEntity.getPersonalData().getId(),
-                addressEntity.getPersonalData().getSurname()));
+                addressEntity.getPersonalData().getPesel()));
         return addressDto;
     }
 

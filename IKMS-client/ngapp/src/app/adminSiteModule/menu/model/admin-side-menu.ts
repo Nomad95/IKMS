@@ -1,15 +1,11 @@
 export class AdminSideMenu {
     static items = [
         {
-            label: 'File',
-            icon: 'fa-file-o',
+            label: 'Pracownicy',
+            icon: 'fa-address-card',
             items: [{
-                label: 'New',
-                icon: 'fa-plus',
-                items: [
-                    {label: 'Project'},
-                    {label: 'Other'},
-                ]
+                label: 'Lista pracowników',
+                routerLink: ['/admin/employee']
                 },
                     {label: 'Open'},
                     {label: 'Quit'}

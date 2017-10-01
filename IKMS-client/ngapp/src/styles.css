@@ -3,6 +3,7 @@
 @import './../node_modules/primeng/resources/primeng.min.css';
 @import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
+/* TODO: zastosowac odzielny plik do ponizszych */
 /*custom application styles*/
 .validation-err{
   color: red;
@@ -71,8 +72,8 @@ body{
 
 /*content nie chowajacy sie pod navbary*/
 .ikms-body{
-  padding-left: 180px;
-  top: 75px;
+  padding-left: 200px;
+  padding-top: 85px;
 }
 
 
@@ -174,6 +175,11 @@ a:-webkit-any-link{
     display: inline;
     opacity: 1;
     visibility: visible;
+  }
+
+  .table-button {
+    width: 40px;
+    text-align: center;
   }
 
 }

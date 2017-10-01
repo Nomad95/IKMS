@@ -1,0 +1,37 @@
+<div class="ikms-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="content-section implementation">
+                <p-dataTable [value]="employees" [rows]="20"
+                             [responsive]="true">
+                    <p-header>Pracownicy</p-header>
+                    <p-column [sortable]="true" field="id" header="Id" [style]="{'width':'50px'}"></p-column>
+                    <p-column [sortable]="true" field="employeeRole" header="Rola"></p-column>
+                    <p-column [sortable]="true" field="name" header="Imię"></p-column>
+                    <p-column [sortable]="true" field="surname" header="Nazwisko"></p-column>
+                    <p-column [sortable]="true" field="nip" header="NIP"></p-column>
+                    <p-column styleClass="col-button" [style]="{'width':'160px', 'text-align':'center'}">
+                        <ng-template pTemplate="header" >
+                        </ng-template>
+                        <ng-template let-empl="rowData" pTemplate="body">
+                            <button type="button" pButton (click)="selectCar(car)" icon="fa-user"></button>
+                            <button type="button" pButton
+                                    (click)="navigateToEmployeeDetails(empl.id, empl.personalData.id)"
+                                    icon="fa-search"></button>
+                            <button type="button" pButton (click)="selectCar(car)" icon="fa-pencil"></button>
+                            <button type="button" pButton (click)="selectCar(car)" icon="fa-trash"></button>
+                        </ng-template>
+                    </p-column>
+                    <ng-template pTemplate="emptymessage">
+                        Brak wyników do wyświetlenia.
+                    </ng-template>
+                </p-dataTable>
+              <p-paginator rows="20" [totalRecords]="currentPageData?.totalElements"
+                           (onPageChange)="loadNewPage($event)" [pageLinkSize]="currentPageData?.totalPages">
+              </p-paginator>
+
+            </div>
+        </div>
+    </div>
+
+</div>
