@@ -24,28 +24,83 @@ export class EmployeeDetailComponent implements OnInit{
     private employee: Employee;
     private personalData: PersonalData;
     private addresses: Address[];
+    private editAddressId = -1;
+    
+    private displayEmployeeEditModal = false;
+    private displayPersonalDataEditModal = false;
+    private displayAddressEditModal = false;
+    private displayAddressCreateModal = false;
     
     ngOnInit(){
         this.employeeId = this.route.snapshot.params['id'];
         this.personalDataId = this.route.snapshot.queryParams['personalDataId'] || -1;
         
-        this.employeeAdminService.getEmployee(this.employeeId)
-              .subscribe( data => {
-                  this.employee = data;
-                  console.log(data);
-              }, err => console.log(err));
-        
-        this.personalDataAdminService.getPersonalData(this.personalDataId)
-              .subscribe( data => {
-                  this.personalData = data;
-                  console.log(data);
-              }, err => console.log(err));
-        
-        this.addressAdminService.getAddressesByPersonalDataId(this.personalDataId)
-              .subscribe( data => {
-                  this.addresses = data;
-                  console.log(data);
-              }, err => console.log(err));
+        this.getEmployee();
+        this.getPersonalData();
+        this.getAddresses();
     }
-  
+    
+    getEmployee(){
+        this.employeeAdminService.getEmployee(this.employeeId)
+            .subscribe( data => {
+                this.employee = data;
+                console.log(data);
+            }, err => console.log(err));
+    }
+    
+    getPersonalData(){
+        this.personalDataAdminService.getPersonalData(this.personalDataId)
+            .subscribe( data => {
+                this.personalData = data;
+                console.log(data);
+            }, err => console.log(err));
+    }
+    
+    getAddresses(){
+        this.addressAdminService.getAddressesByPersonalDataId(this.personalDataId)
+            .subscribe( data => {
+                this.addresses = data;
+                console.log(data);
+            }, err => console.log(err));
+    }
+    
+    showEmployeeEditModal(): void{
+        this.displayEmployeeEditModal = true;
+    }
+    
+    showPersonalDataEditModal(): void{
+        this.displayPersonalDataEditModal = true;
+    }
+    
+    showAddressEditModal(addressId): void{
+        this.editAddressId = addressId;
+        this.displayAddressEditModal = true;
+    }
+    
+    showAddressCreateModal(){
+        this.displayAddressCreateModal = true;
+    }
+    
+    handleModalClose(value): void{
+        this.displayEmployeeEditModal = value;
+        this.displayPersonalDataEditModal = value;
+        this.displayAddressEditModal = value;
+        this.displayAddressCreateModal = value;
+    }
+    
+    handleEmployeeUpdate(value): void{
+        this.employee = value;
+        this.displayEmployeeEditModal = false;
+    }
+    
+    handlePersonalDataUpdate(value): void{
+        this.personalData = value;
+        this.displayPersonalDataEditModal = false;
+    }
+    
+    handleAddressUpdate(): void{
+        this.getAddresses();
+        this.displayPersonalDataEditModal = false;
+        this.displayAddressCreateModal = false;
+    }
 }

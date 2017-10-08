@@ -6,15 +6,14 @@ import pl.politechnika.ikms.commons.abstracts.AbstractDto;
 import pl.politechnika.ikms.domain.person.enums.Gender;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Data
 public class PersonalDataDto extends AbstractDto {
 
-    @Id
     private Long id;
 
     @NotNull
@@ -32,7 +31,7 @@ public class PersonalDataDto extends AbstractDto {
     private String surname;
 
     @NotNull
-    @Size(min = 11, max = 11)
+    @Pattern(regexp="[\\d]{11}")
     private String pesel;
 
     @NotNull

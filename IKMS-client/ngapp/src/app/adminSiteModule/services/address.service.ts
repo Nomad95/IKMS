@@ -14,17 +14,26 @@ export class AddressAdminService{
     constructor(private http: Http) {
         let currentUser = JSON.parse(TokenUtils.getToken());
         this.token = currentUser && currentUser.token;
+        this.headers = TokenUtils.createHeaderWithToken();
     }
     
     getAddress(addressId): Observable<Address>{
-        let headers: Headers = TokenUtils.createHeaderWithToken();
-        return this.http.get('api/address/' + addressId, {headers: headers})
-        .map( res => res.json());
+        return this.http.get('api/address/' + addressId, {headers: this.headers})
+            .map( res => res.json());
     }
   
     getAddressesByPersonalDataId(personalDataId): Observable<Address[]>{
-        let headers: Headers = TokenUtils.createHeaderWithToken();
-        return this.http.get('api/address/personalData/' + personalDataId, {headers: headers})
-        .map( res => res.json());
+        return this.http.get('api/address/personalData/' + personalDataId, {headers: this.headers})
+            .map( res => res.json());
+    }
+    
+    updateAddress(address): Observable<Address>{
+        return this.http.put('api/address', JSON.stringify(address) ,{headers: this.headers})
+            .map( res => res.json());
+    }
+    
+    createAddress(address): Observable<Address>{
+        return this.http.post('api/address', JSON.stringify(address) ,{headers: this.headers})
+            .map( res => res.json());
     }
 }

@@ -14,12 +14,18 @@ export class PersonalDataAdminService{
     constructor(private http: Http) {
         let currentUser = JSON.parse(TokenUtils.getToken());
         this.token = currentUser && currentUser.token;
+        this.headers = TokenUtils.createHeaderWithToken();
+    
     }
     
     getPersonalData(personalDataId): Observable<PersonalData>{
-        let headers: Headers = TokenUtils.createHeaderWithToken();
-        return this.http.get('api/personalData/' + personalDataId, {headers: headers})
-        .map( res => res.json());
+        return this.http.get('api/personalData/' + personalDataId, {headers: this.headers})
+            .map( res => res.json());
+    }
+    
+    updatePersonalData(personalData): Observable<PersonalData>{
+        return this.http.put('api/personalData', JSON.stringify(personalData), {headers: this.headers})
+            .map( res => res.json());
     }
   
 }

@@ -15,18 +15,22 @@ export class EmployeeAdminService{
     constructor(private http: Http) {
         let currentUser = JSON.parse(TokenUtils.getToken());
         this.token = currentUser && currentUser.token;
+        this.headers= TokenUtils.createHeaderWithToken();
     }
     
     getEmployeeGeneralDetails(size, page): Observable<Page>{
-        let headers: Headers = TokenUtils.createHeaderWithToken();
-        return this.http.get('api/employee/general?page=' + page + '&size=' + size, {headers: headers})
-        .map( res => res.json());
+        return this.http.get('api/employee/general?page=' + page + '&size=' + size, {headers: this.headers})
+            .map( res => res.json());
     }
     
     getEmployee(employeeId): Observable<Employee>{
-        let headers: Headers = TokenUtils.createHeaderWithToken();
-        return this.http.get('api/employee/' + employeeId, {headers: headers})
-        .map( res => res.json());
+        return this.http.get('api/employee/' + employeeId, {headers: this.headers})
+            .map( res => res.json());
+    }
+    
+    updateEmployee(employee): Observable<Employee>{
+        return this.http.put('api/employee', JSON.stringify(employee), {headers: this.headers})
+            .map( res => res.json());
     }
   
 }

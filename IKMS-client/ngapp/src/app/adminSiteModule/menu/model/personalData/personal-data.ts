@@ -3,11 +3,10 @@ export class PersonalData {
    id: number;
    user: any;
    employeeRole: string;
-   nip: string;
    name: string;
    secondaryName: string;
    pesel: string;
-   dateOfBirth: any;
+   dateOfBirth: Date;
    placeOfBirth: string;
    familyName: string;
    mothersMaidenName: string;
@@ -23,13 +22,12 @@ export class PersonalData {
   constructor(){
       this.id = -1;
       this.employeeRole = '';
-      this.nip = '';
       this.name = '';
       this.surname = '';
       this.user = {};
       this.secondaryName = '';
       this.pesel = '';
-      this.dateOfBirth = {};
+      this.dateOfBirth = null;
       this.placeOfBirth = '';
       this.familyName = '';
       this.mothersMaidenName = '';

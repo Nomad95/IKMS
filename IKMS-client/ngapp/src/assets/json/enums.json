@@ -1,0 +1,11 @@
+{
+  "BABYSITTER": "Opiekun",
+  "SPEECH_TERAPIST": "Logopeda",
+
+  "MAN": "Mężczyzna",
+  "WOMAN": "Kobieta",
+
+  "CORRESPONDENCE_ADDRESS": "Adres do korespondencji",
+  "ADDRESS": "Adres zamieszkania",
+  "REGISTERED_ADDRESS": "Adres zameldowania"
+}

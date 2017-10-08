@@ -14,11 +14,11 @@ export class Address{
   
   
   constructor() {
-    this.id = -1;
+    this.id = null;
     this.addressType = '';
     this.personalData = {};
     this.street = '';
-    this.streetNumber = -1;
+    this.streetNumber = null;
     this.houseNumber = '';
     this.postCode = '';
     this.city = '';

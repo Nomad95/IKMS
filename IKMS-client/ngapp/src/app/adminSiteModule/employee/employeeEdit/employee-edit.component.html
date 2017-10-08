@@ -1,0 +1,41 @@
+<p-dialog header="Edytuj dane pracownika" [(visible)]="isVisible" modal="modal"
+		  [draggable]="false" [resizable]="false" [width]="350" [closable]="false">
+	<div class="row">
+		<div class="col-md-12">
+			<form novalidate
+				  #editForm="ngForm">
+
+				<div class="ui-g-12">
+
+					<div class="ui-g-12">
+						<div class="ui-g-4">Rola</div>
+						<div class="ui-inputgroup ng-invalid ui-g-8">
+							<p-dropdown
+									[options]="roles" [autoWidth]="false"
+									required
+									[(ngModel)]="employee.employeeRole" name="employeeRole"
+									#employeeRole></p-dropdown>
+						</div>
+					</div>
+
+					<div class="ui-g-12">
+						<div class="ui-g-4">NIP</div>
+						<div class="ui-inputgroup ng-invalid ui-g-8 ">
+							<p-inputMask type="text" pInputText
+								   maxlength="13" mask="999-999-99-99"
+								   class="detail-view-input"
+								   #passwordInput="ngModel"
+								   [(ngModel)]="employee.nip"
+										 name="nip"></p-inputMask>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<p-footer>
+		<button type="button" pButton icon="fa-check"[disabled]="editForm.invalid"
+				(click)="saveData(employee)" label="Zapisz"></button>
+		<button type="button" pButton icon="fa-close" (click)="closeModal()" label="Anuluj"></button>
+	</p-footer>
+</p-dialog>
