@@ -32,5 +32,8 @@ export class EmployeeAdminService{
         return this.http.put('api/employee', JSON.stringify(employee), {headers: this.headers})
             .map( res => res.json());
     }
-  
+    
+    deleteEmployee(employeeId): Observable<any>{
+        return this.http.delete('api/employee/'+employeeId, {headers: this.headers});
+    }
 }

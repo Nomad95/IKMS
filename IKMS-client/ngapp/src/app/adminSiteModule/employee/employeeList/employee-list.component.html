@@ -1,3 +1,4 @@
+<p-confirmDialog  width="425"></p-confirmDialog>
 <div class="ikms-body">
     <div class="row">
         <div class="col-md-12">
@@ -10,7 +11,7 @@
                     <p-column [sortable]="true" field="name" header="Imię"></p-column>
                     <p-column [sortable]="true" field="surname" header="Nazwisko"></p-column>
                     <p-column [sortable]="true" field="nip" header="NIP"></p-column>
-                    <p-column styleClass="col-button" [style]="{'width':'160px', 'text-align':'center'}">
+                    <p-column styleClass="col-button" [style]="{'width':'120px', 'text-align':'center'}">
                         <ng-template pTemplate="header" >
                         </ng-template>
                         <ng-template let-empl="rowData" pTemplate="body">
@@ -18,8 +19,7 @@
                             <button type="button" pButton
                                     (click)="navigateToEmployeeDetails(empl.id, empl.personalData.id)"
                                     icon="fa-search"></button>
-                            <button type="button" pButton (click)="selectCar(car)" icon="fa-pencil"></button>
-                            <button type="button" pButton (click)="selectCar(car)" icon="fa-trash"></button>
+                            <button type="button" pButton (click)="delete(empl.id)" icon="fa-trash"></button>
                         </ng-template>
                     </p-column>
                     <ng-template pTemplate="emptymessage">

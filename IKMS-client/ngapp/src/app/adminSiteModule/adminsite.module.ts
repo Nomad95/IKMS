@@ -28,6 +28,7 @@ import { MessagesModule } from "../../../node_modules/primeng/components/message
 import { DropdownModule } from "../../../node_modules/primeng/components/dropdown/dropdown";
 import { InputMaskModule } from "../../../node_modules/primeng/components/inputmask/inputmask";
 import { CalendarModule } from "../../../node_modules/primeng/components/calendar/calendar";
+import { ConfirmDialogModule } from "../../../node_modules/primeng/components/confirmdialog/confirmdialog";
 
 @NgModule({
     imports: [
@@ -48,7 +49,8 @@ import { CalendarModule } from "../../../node_modules/primeng/components/calenda
         InputMaskModule,
         DialogModule,
         PanelModule,
-        CalendarModule
+        CalendarModule,
+        ConfirmDialogModule
     ],
     declarations: [
         AdminSiteComponent,
