@@ -1,3 +1,4 @@
+<p-growl [(value)]="msgs"></p-growl>
 <p-dialog header="Dodaj adres pracownika" [(visible)]="isVisible" modal="modal"
 		  [draggable]="false" [resizable]="false" [width]="750" [closable]="false"
 		  [responsive]="false" >
@@ -105,11 +106,11 @@
 							<div class="ui-g-8 ">
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
-									   pattern="[0-9]*"
+									   pattern="[0-9a-zA-Z]*"
 									   [(ngModel)]="address.houseNumber"
 									   name="houseNumber" #houseNumber = "ngModel" >
 								<div class="ui-g-12 validation-err" *ngIf="houseNumber.errors?.pattern">
-									Pole może zawierać tylko cyfry
+									Pole nie może zawierać znaków specjalnych
 								</div>
 							</div>
 						</div>

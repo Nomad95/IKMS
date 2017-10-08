@@ -6,6 +6,8 @@ import { ActivatedRoute } from "@angular/router";
 import { Employee } from "../../menu/model/employee/employee";
 import {PersonalData} from "../../menu/model/personalData/personal-data";
 import {Address} from "../../menu/model/address/address";
+import {Message} from "primeng/primeng";
+import {ErrorHandler} from "../../../commons/util/error-handler";
 
 @Component({
   selector: 'employee-detail',
@@ -25,6 +27,7 @@ export class EmployeeDetailComponent implements OnInit{
     private personalData: PersonalData;
     private addresses: Address[];
     private editAddressId = -1;
+    private msgs: Message[] = [];
     
     private displayEmployeeEditModal = false;
     private displayPersonalDataEditModal = false;
@@ -45,7 +48,8 @@ export class EmployeeDetailComponent implements OnInit{
             .subscribe( data => {
                 this.employee = data;
                 console.log(data);
-            }, err => console.log(err));
+                this.msgs = [];
+            }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
     
     getPersonalData(){
@@ -53,7 +57,8 @@ export class EmployeeDetailComponent implements OnInit{
             .subscribe( data => {
                 this.personalData = data;
                 console.log(data);
-            }, err => console.log(err));
+                this.msgs = [];
+            }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
     
     getAddresses(){
@@ -61,7 +66,8 @@ export class EmployeeDetailComponent implements OnInit{
             .subscribe( data => {
                 this.addresses = data;
                 console.log(data);
-            }, err => console.log(err));
+                this.msgs = [];
+            }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
     
     showEmployeeEditModal(): void{

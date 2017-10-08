@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { AddressAdminService } from "../../services/address.service";
 import { Address } from "../../menu/model/address/address";
 import {EnumProvider} from "../../../commons/util/enum-provider";
+import {ErrorHandler} from "../../../commons/util/error-handler";
+import {Message} from "primeng/primeng";
 
 @Component({
   selector: 'address-create',
@@ -21,6 +23,7 @@ export class AddressCreateComponent implements OnInit{
     
     private address: Address = new Address();
     private addressTypes = EnumProvider.ADDRESS_TYPES;
+    private msgs: Message[] = [];
     
     ngOnInit(){
         this.addressTypes = this.enumProvider.translateToDropdown(this.addressTypes);
@@ -38,7 +41,8 @@ export class AddressCreateComponent implements OnInit{
             this.eventSave.emit(data);
             this.isVisible = false;
             this.address = new Address();
-        });
+            this.msgs = [];
+        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
     
 }

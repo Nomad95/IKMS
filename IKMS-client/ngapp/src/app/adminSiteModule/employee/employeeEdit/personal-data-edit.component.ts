@@ -3,6 +3,8 @@ import { EnumProvider } from "../../../commons/util/enum-provider";
 import { PersonalData } from "../../menu/model/personalData/personal-data";
 import { PersonalDataAdminService } from "../../services/personal-data.service";
 import {DateUtils} from "../../../commons/util/date-utils";
+import {Message} from "primeng/primeng";
+import {ErrorHandler} from "../../../commons/util/error-handler";
 
 @Component({
   selector: 'personal-data-edit',
@@ -23,13 +25,15 @@ export class PersonalDataEditComponent implements OnInit{
     private personalData: PersonalData = new PersonalData();
     private genders = EnumProvider.GENDERS;
     private maxDate = new Date();
+    private msgs: Message[] = [];
     
     ngOnInit(){
         this.personalDataAdminService.getPersonalData(this.personalDataId)
             .subscribe( data => {
                 console.log(data);
                 this.personalData = data;
-            });
+                this.msgs = [];
+            }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
         this.genders = this.enumProvider.translateToDropdown(this.genders);
     }
     
@@ -43,7 +47,8 @@ export class PersonalDataEditComponent implements OnInit{
         .subscribe( data => {
             this.eventSave.emit(data);
             this.isVisible = false;
-        });
+            this.msgs = [];
+        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
     
     onDateSelected(event){

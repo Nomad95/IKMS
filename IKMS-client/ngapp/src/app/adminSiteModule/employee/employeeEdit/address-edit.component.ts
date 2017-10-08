@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import { AddressAdminService } from "../../services/address.service";
 import { Address } from "../../menu/model/address/address";
+import {Message} from "primeng/primeng";
+import {ErrorHandler} from "../../../commons/util/error-handler";
 
 @Component({
   selector: 'address-edit',
@@ -18,6 +20,7 @@ export class AddressEditComponent implements OnInit, OnChanges{
     @Output() eventSave = new EventEmitter();
     
     private address: Address = new Address();
+    private msgs: Message[] = [];
     
     ngOnInit(){
         this.getAddress();
@@ -33,7 +36,8 @@ export class AddressEditComponent implements OnInit, OnChanges{
             .subscribe(data => {
                 console.log(data);
                 this.address = data;
-            });
+                this.msgs = [];
+            }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
         }
     }
     
@@ -47,7 +51,8 @@ export class AddressEditComponent implements OnInit, OnChanges{
         .subscribe( data => {
             this.eventSave.emit(data);
             this.isVisible = false;
-        });
+            this.msgs = [];
+        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
     
 }

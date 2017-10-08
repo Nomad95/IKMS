@@ -3,7 +3,9 @@ import { EmployeeAdminService } from "../../services/employee-admin.service";
 import { EmployeeGeneral } from "../../menu/model/employee/employee-general";
 import { Page } from "../../../commons/model/page";
 import { Router } from "@angular/router";
-import { ConfirmationService } from "primeng/primeng";
+import {ConfirmationService, Message} from "primeng/primeng";
+import {CommonMessages} from "../../../commons/util/common-messages";
+import {ErrorHandler} from "../../../commons/util/error-handler";
 
 @Component({
   selector: 'employee-list',
@@ -20,6 +22,7 @@ export class EmployeeListComponent implements OnInit{
     private size: number = 20;
     private employees: EmployeeGeneral[];
     private currentPageData: Page;
+    private msgs: Message[] = [];
     
     ngOnInit(){
         this.loadEmployees(this.size,this.page);
@@ -35,12 +38,11 @@ export class EmployeeListComponent implements OnInit{
             this.currentPageData = data;
             this.employees = data.content;
             this.page = data.number;
-        }, err => console.log(err));
+        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
   
     navigateToEmployeeDetails(employeeId, personalDataId){
       this.router.navigate(['/admin/employee', employeeId], { queryParams: {personalDataId: personalDataId}});
-        console.log(employeeId, personalDataId);
     }
     
     delete(employeeId){
@@ -51,10 +53,10 @@ export class EmployeeListComponent implements OnInit{
                 this.employeeAdminService.deleteEmployee(employeeId)
                     .subscribe( data =>{
                         this.loadEmployees(this.size,this.page);
-                    }, err => console.log(err));
+                        this.msgs = [];
+                    }, err => this.msgs = CommonMessages.employeeDeletingError());
             },
-            reject: () => {
-            }
+            reject: () => {}
         });
     }
 }
