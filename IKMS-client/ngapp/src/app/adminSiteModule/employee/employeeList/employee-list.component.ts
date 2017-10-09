@@ -3,7 +3,7 @@ import { EmployeeAdminService } from "../../services/employee-admin.service";
 import { EmployeeGeneral } from "../../menu/model/employee/employee-general";
 import { Page } from "../../../commons/model/page";
 import { Router } from "@angular/router";
-import {ConfirmationService, Message} from "primeng/primeng";
+import {ConfirmationService, Message } from "primeng/primeng";
 import {CommonMessages} from "../../../commons/util/common-messages";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 

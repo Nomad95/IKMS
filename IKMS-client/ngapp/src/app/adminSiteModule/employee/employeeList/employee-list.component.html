@@ -1,14 +1,30 @@
 <p-confirmDialog  width="425"></p-confirmDialog>
 <p-growl [(value)]="msgs"></p-growl>
 <div class="ikms-body">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="ui-g-12">
+				<button type="button" pButton  icon="fa-plus" label="Dodaj pracownika"></button>
+			</div>
+		</div>
+	</div>
+	<br/>
     <div class="row">
         <div class="col-md-12">
             <div class="content-section implementation">
                 <p-dataTable [value]="employees" [rows]="20"
                              [responsive]="true">
-                    <p-header>Pracownicy</p-header>
+                    <p-header>
+						<div class="bold">
+							Pracownicy
+						</div>
+					</p-header>
                     <p-column [sortable]="true" field="id" header="Id" [style]="{'width':'50px'}"></p-column>
-                    <p-column [sortable]="true" field="employeeRole" header="Rola"></p-column>
+                    <p-column [sortable]="true" field="employeeRole" header="Rola">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<span>{{role[col.field] | translateEnum}}</span>
+						</ng-template>
+					</p-column>
                     <p-column [sortable]="true" field="name" header="Imię"></p-column>
                     <p-column [sortable]="true" field="surname" header="Nazwisko"></p-column>
                     <p-column [sortable]="true" field="nip" header="NIP"></p-column>
