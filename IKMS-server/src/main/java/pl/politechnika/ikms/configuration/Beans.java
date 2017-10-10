@@ -10,13 +10,9 @@ import pl.politechnika.ikms.commons.serializers.LocalDateDeserializer;
 import pl.politechnika.ikms.commons.serializers.LocalDateSerializer;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import static java.time.format.DateTimeFormatter.ofPattern;
 
 @Configuration
 public class Beans {
-    public static final DateTimeFormatter FORMATTER = ofPattern("yyy-MM-dd");
 
     @Bean
     public ModelMapper modelMapper() {

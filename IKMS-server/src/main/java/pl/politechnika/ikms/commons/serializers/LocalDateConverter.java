@@ -10,7 +10,7 @@ public class LocalDateConverter implements AttributeConverter<LocalDate, Date> {
 
     @Override
     public Date convertToDatabaseColumn(LocalDate attribute) {
-        return attribute == null ? null : java.sql.Date.valueOf(attribute);
+        return attribute == null ? null : Date.valueOf(attribute);
     }
 
     @Override

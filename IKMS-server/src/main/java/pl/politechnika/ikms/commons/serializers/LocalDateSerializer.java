@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import static pl.politechnika.ikms.configuration.Beans.FORMATTER;
+import static pl.politechnika.ikms.configuration.ApplicationConstants.FORMATTER;
 
 public class LocalDateSerializer extends JsonSerializer<LocalDate> {
 

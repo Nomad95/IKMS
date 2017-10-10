@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import static pl.politechnika.ikms.configuration.Beans.FORMATTER;
+import static pl.politechnika.ikms.configuration.ApplicationConstants.FORMATTER;
 
 public class LocalDateDeserializer extends JsonDeserializer<LocalDate> {
 
