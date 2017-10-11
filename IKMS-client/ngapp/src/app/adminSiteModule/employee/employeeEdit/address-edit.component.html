@@ -20,7 +20,7 @@
 									   [(ngModel)]="address.street"
 									   name="street" #street = "ngModel" >
 								<div class="ui-g-12 validation-err" *ngIf="street.errors?.pattern">
-									Pole nie może zawierać znaków specjalnych
+									Pole nie może zawierać znaków specjalnych.
 								</div>
 							</div>
 						</div>
@@ -64,7 +64,7 @@
 									   [(ngModel)]="address.county"
 									   name="county" #county = "ngModel" >
 								<div class="ui-g-12 validation-err" *ngIf="county.errors?.pattern">
-									Pole nie może zawierać cyfr
+									Pole nie może zawierać cyfr i znaków białych.
 								</div>
 							</div>
 						</div>
@@ -79,7 +79,7 @@
 									   [(ngModel)]="address.country"
 									   name="country" #country = "ngModel" >
 								<div class="ui-g-12 validation-err" *ngIf="country.errors?.pattern">
-									Pole nie może zawierać cyfr
+									Pole nie może zawierać cyfr i znaków białych.
 								</div>
 							</div>
 						</div>
@@ -93,10 +93,10 @@
 									   placeholder="-" class="detail-view-input"
 									   [(ngModel)]="address.city"
 									   maxlength="35"
-									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ\ ]*"
 									   name="city" #city = "ngModel">
 								<div class="ui-g-12 validation-err" *ngIf="city.errors?.pattern">
-									Pole nie może zawierać cyfr
+									Pole nie może zawierać znaków specjalnych.
 								</div>
 							</div>
 						</div>
@@ -138,7 +138,7 @@
 									   [(ngModel)]="address.voivodeship"
 									   name="voivodeship" #voivodeship = "ngModel" >
 								<div class="ui-g-12 validation-err" *ngIf="voivodeship.errors?.pattern">
-									Pole nie może zawierać cyfr
+									Pole nie może zawierać cyfr i znaków białych.
 								</div>
 							</div>
 						</div>

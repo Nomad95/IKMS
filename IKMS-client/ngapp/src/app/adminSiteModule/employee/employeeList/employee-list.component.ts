@@ -23,6 +23,7 @@ export class EmployeeListComponent implements OnInit{
     private employees: EmployeeGeneral[];
     private currentPageData: Page;
     private msgs: Message[] = [];
+    private isLoading: boolean = true;
     
     ngOnInit(){
         this.loadEmployees(this.size,this.page);
@@ -33,12 +34,17 @@ export class EmployeeListComponent implements OnInit{
     }
     
     loadEmployees(size, page){
+        this.isLoading = true;
         this.employeeAdminService.getEmployeeGeneralDetails(size, page)
         .subscribe( data => {
             this.currentPageData = data;
             this.employees = data.content;
             this.page = data.number;
-        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+            this.isLoading = false;
+        }, err => {
+            this.msgs = ErrorHandler.handleGenericServerError(err);
+            this.isLoading = false;
+        });
     }
   
     navigateToEmployeeDetails(employeeId, personalDataId){

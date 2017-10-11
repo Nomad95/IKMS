@@ -34,6 +34,8 @@ export class EmployeeDetailComponent implements OnInit{
     private displayAddressEditModal = false;
     private displayAddressCreateModal = false;
     
+    private isLoading: boolean = true;
+    
     ngOnInit(){
         this.employeeId = this.route.snapshot.params['id'];
         this.personalDataId = this.route.snapshot.queryParams['personalDataId'] || -1;
@@ -44,6 +46,7 @@ export class EmployeeDetailComponent implements OnInit{
     }
     
     getEmployee(){
+        this.isLoading = true;
         this.employeeAdminService.getEmployee(this.employeeId)
             .subscribe( data => {
                 this.employee = data;
@@ -67,7 +70,11 @@ export class EmployeeDetailComponent implements OnInit{
                 this.addresses = data;
                 console.log(data);
                 this.msgs = [];
-            }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+                this.isLoading = false;
+            }, err => {
+                this.msgs = ErrorHandler.handleGenericServerError(err);
+                this.isLoading = false;
+            });
     }
     
     showEmployeeEditModal(): void{
@@ -105,6 +112,7 @@ export class EmployeeDetailComponent implements OnInit{
     }
     
     handleAddressUpdate(): void{
+        this.isLoading = true;
         this.getAddresses();
         this.displayPersonalDataEditModal = false;
         this.displayAddressCreateModal = false;

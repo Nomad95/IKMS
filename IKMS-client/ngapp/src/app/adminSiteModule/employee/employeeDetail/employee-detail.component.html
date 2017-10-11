@@ -2,7 +2,12 @@
 <div class="ikms-body">
 	<div class="row">
 		<div class="col-md-12">
-			<p-tabView>
+			<p-tabView *ngIf="isLoading" class="text-center">
+				<p-tabPanel>
+					<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+				</p-tabPanel>
+			</p-tabView>
+			<p-tabView *ngIf="!isLoading">
 				<p-tabPanel header="Dane pracownika">
 					<p-panel>
 						<p-header>

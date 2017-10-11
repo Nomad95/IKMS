@@ -23,7 +23,7 @@
 									Pole nie może być puste
 								</div>
 								<div class="ui-g-12 validation-err" *ngIf="firstName.errors?.pattern">
-									Pole nie może zawierać cyfr.
+									Pole nie może zawierać cyfr i znaków białych.
 								</div>
 							</div>
 						</div>
@@ -37,7 +37,7 @@
 									   [(ngModel)]="personalData.secondaryName"
 									   name="secondaryName" #secondaryName = "ngModel">
 								<div class="ui-g-12 validation-err" *ngIf="secondaryName.errors?.pattern">
-									Pole nie może zawierać cyfr.
+									Pole nie może zawierać cyfr i znaków białych.
 								</div>
 							</div>
 
@@ -57,8 +57,6 @@
 								<div class="ui-g-12 validation-err" *ngIf="dateOfBirth.errors?.minlength">
 									To pole jest wymagane.
 								</div>
-								{{dateOfBirth.value}}
-								{{personalData.dateOfBirth}}
 							</div>
 						</div>
 
@@ -96,7 +94,7 @@
 									   maxlength="25" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
 									   name="fathersName" #fathersName = "ngModel">
 								<div class="ui-g-12 validation-err" *ngIf="fathersName.errors?.pattern">
-									Pole nie może zawierać cyfr.
+									Pole nie może zawierać cyfr i znaków białych.
 								</div>
 							</div>
 						</div>
@@ -110,7 +108,7 @@
 									   maxlength="35" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
 									   name="familyName" #familyName = "ngModel">
 								<div class="ui-g-12 validation-err" *ngIf="familyName.errors?.pattern">
-									Pole nie może zawierać cyfr.
+									Pole nie może zawierać cyfr i znaków białych.
 								</div>
 							</div>
 						</div>
@@ -129,7 +127,7 @@
 									Pole nie może być puste
 								</div>
 								<div class="ui-g-12 validation-err" *ngIf="surname.errors?.pattern">
-									Pole nie może zawierać cyfr.
+									Pole nie może zawierać cyfr i znaków białych.
 								</div>
 							</div>
 						</div>
@@ -140,6 +138,7 @@
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
 									   maxlength="11" required
+									   minlength="11"
 									   pattern="[0-9]*"
 									   [(ngModel)]="personalData.pesel"
 									   name="pesel" #pesel = "ngModel">
@@ -158,7 +157,7 @@
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
 									   required maxlength="30"
-									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ\ ]*"
 									   [(ngModel)]="personalData.placeOfBirth"
 									   name="placeOfBirth" #placeOfBirth = "ngModel">
 								<div class="ui-g-12 validation-err" *ngIf="placeOfBirth.touched && placeOfBirth.errors?.required">
@@ -183,7 +182,7 @@
 									Pole nie może być puste
 								</div>
 								<div class="ui-g-12 validation-err" *ngIf="nationality.errors?.pattern">
-									Pole nie może zawierać cyfr.
+									Pole nie może zawierać cyfr i znaków białych.
 								</div>
 							</div>
 						</div>
@@ -211,7 +210,7 @@
 									   maxlength="25" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
 									   name="mothersName" #mothersName = "ngModel">
 								<div class="ui-g-12 validation-err" *ngIf="mothersName.errors?.pattern">
-									Pole nie może zawierać cyfr.
+									Pole nie może zawierać cyfr i znaków białych.
 								</div>
 							</div>
 						</div>
@@ -225,7 +224,7 @@
 									   maxlength="25" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
 									   name="mothersMaidenName" #mothersMaidenName = "ngModel">
 								<div class="ui-g-12 validation-err" *ngIf="mothersMaidenName.errors?.pattern">
-									Pole nie może zawierać cyfr.
+									Pole nie może zawierać cyfr i znaków białych.
 								</div>
 							</div>
 						</div>
