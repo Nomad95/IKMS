@@ -3,14 +3,11 @@ package pl.politechnika.ikms.domain.person;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.hibernate.validator.constraints.NotEmpty;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 import pl.politechnika.ikms.domain.person.enums.Gender;
 import pl.politechnika.ikms.domain.user.UserEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,71 +25,51 @@ public class PersonalDataEntity extends AbstractEntity {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
-    @NotEmpty
-    @Size(max = 25)
-    @Column(name = "name")
+    @Column(name = "name", length = 25, nullable = false)
     private String name;
 
-    @Size(max = 25)
-    @Column(name = "secondary_name")
+    @Column(name = "secondary_name", length = 25)
     private String secondaryName;
 
-    @NotEmpty
-    @Size(max = 35)
-    @Column(name = "surname")
+    @Column(name = "surname", length = 35, nullable = false)
     private String surname;
 
-    @NotNull
-    @Size(min = 11, max = 11)
-    @Column(name = "pesel")
+    @Column(name = "pesel", length = 11, nullable = false)
     private String pesel;
 
-    @NotNull
-    @Column(name = "date_of_birth")
+    @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;
 
-    @NotEmpty
-    @Size(max = 30)
-    @Column(name = "place_of_birth")
+    @Column(name = "place_of_birth", length = 30, nullable = false)
     private String placeOfBirth;
 
-    @Size(max = 35)
-    @Column(name = "family_name")
+    @Column(name = "family_name", length = 35)
     private String familyName;
 
-    @Size(max = 25)
-    @Column(name = "mothers_maiden_name")
+    @Column(name = "mothers_maiden_name", length = 35)
     private String mothersMaidenName;
 
-    @Size(max = 25)
-    @Column(name = "fathers_name")
+    @Column(name = "fathers_name", length = 25)
     private String fathersName;
 
-    @Size(max = 25)
-    @Column(name = "mothers_name")
+    @Column(name = "mothers_name", length = 25)
     private String mothersName;
 
-    @NotNull
-    @Column(name = "gender")
+    @Column(name = "gender", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
-    @NotEmpty
-    @Size(max = 45)
-    @Column(name = "nationality")
+    @Column(name = "nationality", length = 45, nullable = false)
     private String nationality;
 
-    @Size(max = 12)
-    @Column(name = "contact_number")
+    @Column(name = "contact_number", length = 12)
     private String contactNumber;
 
-    @Size(max = 12)
-    @Column(name = "fax_number")
+    @Column(name = "fax_number", length = 12)
     private String faxNumber;
 
     @OneToMany(mappedBy = "personalData",cascade = CascadeType.REMOVE, orphanRemoval = true)

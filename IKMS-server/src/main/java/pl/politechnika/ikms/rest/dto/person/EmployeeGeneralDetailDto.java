@@ -1,11 +1,13 @@
 package pl.politechnika.ikms.rest.dto.person;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import pl.politechnika.ikms.commons.abstracts.AbstractDto;
 import pl.politechnika.ikms.domain.person.enums.EmployeeRole;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class EmployeeGeneralDetailDto extends AbstractDto {
 
     private Long id;

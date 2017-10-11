@@ -7,8 +7,6 @@ import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 import pl.politechnika.ikms.domain.person.enums.EmployeeRole;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -23,16 +21,14 @@ public class EmployeeEntity extends AbstractEntity {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personal_data_id")
+    @JoinColumn(name = "personal_data_id", nullable = false)
     private PersonalDataEntity personalData;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(name = "employee_role", nullable = false)
     private EmployeeRole employeeRole;
 
-    @Size(max = 13)
-    @Column(name = "nip")
+    @Column(name = "nip", length = 13)
     private String nip;
 }
