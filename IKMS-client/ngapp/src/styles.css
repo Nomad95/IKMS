@@ -39,7 +39,7 @@ body {
     position: fixed;
     width: 180px;
     z-index: 99;
-    top: 65px;
+    top: 50px;
     height: 100% !important;
     box-shadow: 3px 0 6px -2px rgba(0, 0, 0, 0.3);
     background-color: #ffffff;
@@ -51,7 +51,7 @@ body {
 }
 
 .navbar {
-    height: 65px;
+    height: 50px;
     border-bottom: none;
     background-color: #3f51b5;
     box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.3);
@@ -62,16 +62,12 @@ body {
     margin-top: 5px;
 }
 
-.navbar-brand {
-    margin-top: 5px;
-}
-
 .navbar-dropdown {
     padding-right: 25px;
 }
 
 .navbar-nav > li > a {
-    padding-top: 15px;
+    padding-top: 8px;
     padding-bottom: 0px;
     font-size: 100%;
 }
@@ -82,8 +78,8 @@ body {
 
 /*content nie chowajacy sie pod navbary*/
 .ikms-body {
-    padding-left: 200px;
-    padding-top: 85px;
+    padding-left: 180px;
+    padding-top: 65px;
 }
 
 /** usuwa brzydkie strzaleczki z menu **/
@@ -111,6 +107,8 @@ body {
     color: #4d4b50;
 }
 
+
+
 .ui-panelmenu-headerlink-hasicon:hover {
     background: #D5D5D5;
 }
@@ -121,7 +119,7 @@ body {
 }
 
 .navbar-toggle {
-    margin-top: 15px;
+    margin-top: 8px;
 }
 
 /* usuwa niepotrzebne i przydkie podkreslenie tekstu */
@@ -140,9 +138,17 @@ a:-webkit-any-link {
 }
 
 .ui-panelmenu .ui-panelmenu-header, .ui-state-active .ui-menuitem-text, .ui-panelmenu .ui-panelmenu-header.ui-state-active a {
-    background: #ffffff !important;
+    background: rgba(0,0,0,0) !important;
     border-color: #ffffff;
     color: #3f51b5;
+}
+
+.ui-state-active{
+    background: #ffffff;
+}
+
+.ui-menuitem-link:hover{
+    background: #ffffff;
 }
 
 .table-button {
@@ -170,6 +176,10 @@ a:-webkit-any-link {
         visibility: hidden;
         transition: opacity 1s, visibility 1s;
         -webkit-transition: opacity 1s, visibility 1s;
+    }
+
+    .ikms-body{
+        padding-left: 15px;
     }
 
     .ui-panelmenu {
