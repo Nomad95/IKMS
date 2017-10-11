@@ -1,3 +1,10 @@
+export { CommonModule } from '@angular/common';
+export { NgModule } from '@angular/core';
+export { FormsModule }   from '@angular/forms';
+export { HttpModule } from "@angular/http";
+export { LoginRoutingModule } from './login-routing.module';
+export { LoginComponent } from './login.component';
+
 export { InputTextModule } from '../../../node_modules/primeng/components/inputtext/inputtext';
 export { ButtonModule } from '../../../node_modules/primeng/components/button/button';
 export { CodeHighlighterModule } from '../../../node_modules/primeng/components/codehighlighter/codehighlighter';
