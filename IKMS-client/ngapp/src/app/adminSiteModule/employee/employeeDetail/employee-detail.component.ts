@@ -6,8 +6,9 @@ import { ActivatedRoute } from "@angular/router";
 import { Employee } from "../../menu/model/employee/employee";
 import {PersonalData} from "../../menu/model/personalData/personal-data";
 import {Address} from "../../menu/model/address/address";
-import {Message} from "primeng/primeng";
+import {MenuItem, Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
+import {BreadMaker} from "../../../commons/util/bread-maker";
 
 @Component({
   selector: 'employee-detail',
@@ -28,17 +29,19 @@ export class EmployeeDetailComponent implements OnInit{
     private addresses: Address[];
     private editAddressId = -1;
     private msgs: Message[] = [];
+    private isLoading: boolean = true;
+    private items: MenuItem[];
     
     private displayEmployeeEditModal = false;
     private displayPersonalDataEditModal = false;
     private displayAddressEditModal = false;
-    private displayAddressCreateModal = false;
     
-    private isLoading: boolean = true;
+    private displayAddressCreateModal = false;
     
     ngOnInit(){
         this.employeeId = this.route.snapshot.params['id'];
         this.personalDataId = this.route.snapshot.queryParams['personalDataId'] || -1;
+        this.items = BreadMaker.makeBreadcrumbs("Pracownicy","Lista pracowników","Podgląd");
         
         this.getEmployee();
         this.getPersonalData();

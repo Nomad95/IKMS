@@ -1,5 +1,7 @@
 <p-growl [(value)]="msgs"></p-growl>
 <div class="ikms-body">
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
 	<div class="row">
 		<div class="col-md-12">
 			<p-tabView *ngIf="isLoading" class="text-center">

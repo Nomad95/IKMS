@@ -30,3 +30,4 @@ export { InputMaskModule } from "../../../node_modules/primeng/components/inputm
 export { CalendarModule } from "../../../node_modules/primeng/components/calendar/calendar";
 export { ConfirmDialogModule } from "../../../node_modules/primeng/components/confirmdialog/confirmdialog";
 export { GrowlModule } from "../../../node_modules/primeng/components/growl/growl";
+export { BreadcrumbModule } from "../../../node_modules/primeng/components/breadcrumb/breadcrumb";

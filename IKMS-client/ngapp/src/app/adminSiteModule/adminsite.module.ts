@@ -12,7 +12,8 @@ import {
     MegaMenuModule, DataTableModule, PaginatorModule,
     PanelModule, InputTextModule, DialogModule,
     MessagesModule, DropdownModule, InputMaskModule,
-    CalendarModule, ConfirmDialogModule, GrowlModule } from './index';
+    CalendarModule, ConfirmDialogModule, GrowlModule,
+    BreadcrumbModule } from './index';
 
 @NgModule({
     imports: [
@@ -35,7 +36,8 @@ import {
         PanelModule,
         CalendarModule,
         ConfirmDialogModule,
-        GrowlModule
+        GrowlModule,
+        BreadcrumbModule
     ],
     declarations: [
         AdminSiteComponent,

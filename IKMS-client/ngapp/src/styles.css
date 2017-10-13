@@ -79,7 +79,14 @@ body {
 /*content nie chowajacy sie pod navbary*/
 .ikms-body {
     padding-left: 180px;
-    padding-top: 65px;
+    padding-top: 60px;
+}
+
+.small-hr{
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border: 0;
+    border-top: 1px solid #eee;
 }
 
 /** usuwa brzydkie strzaleczki z menu **/
@@ -154,6 +161,12 @@ a:-webkit-any-link {
 .table-button {
     width: 40px;
     text-align: center;
+}
+
+.ui-breadcrumb{
+    background: rgba(0,0,0,0);
+    border: none;
+    font-size: 9px;
 }
 
 /* ładne i równe wyswietlanie wartosci w inpucie*/
