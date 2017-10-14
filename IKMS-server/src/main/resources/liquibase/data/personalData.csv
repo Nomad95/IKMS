@@ -1,0 +1,8 @@
+id,name,secondary_name,surname,pesel,date_of_birth,place_of_birth,family_name,mothers_maiden_name,fathers_name,mothers_name,gender,nationality,contact_number,fax_number,user_id
+1,Adam,Mariusz,Sarnacki,70030311086,1970-03-03,Lublin,Sarnacki,Kumin,Andrzej,Dorota,MAN,Polska,123123123,123123123,2
+2,Janina,,Nadrzeczka,70030311086,1970-03-03,Lublin,Kopeć,Kopeć,Zbyszek,Lucyna,WOMAN,Polska,123123123,123123123,3
+3,Joanna,,Zawadzka,70030311086,1970-03-03,Lublin,Zawadzka,Grzegrzółka,Mirosław,Elżbieta,WOMAN,Polska,123123123,123123123,5
+4,Maria,Anna,Pliszka,70030311086,1970-03-03,Lublin,Pliszka,Pliszka,Anna,Mariusz,WOMAN,Polska,123123123,123123123,6
+5,Grzegorz,,Nowak,70030311086,1970-03-03,Lublin,Nowak,Nowak,Andrzej,Dorota,MAN,Polska,123123123,123123123,7
+6,Artur,,Kolanko,70030311086,1970-03-03,Lublin,Kolanka,Kolanko,Andrzej,Dorota,MAN,Polska,123123123,123123123,8
+7,Janusz,,Nosacz,70030311086,1970-03-03,Jędrychowice,Nosacz,Nosacz,Andrzej,Dorota,MAN,Polska,123123123,123123123,4

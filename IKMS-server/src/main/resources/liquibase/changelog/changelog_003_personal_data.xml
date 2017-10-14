@@ -71,8 +71,13 @@
 
         <createSequence
                 sequenceName="personal_data_seq"
-                startValue="1"
+                startValue="8"
                 incrementBy="1"/>
+
+        <loadData
+                tableName="personal_data"
+                file="liquibase/data/personalData.csv"
+        />
 
     </changeSet>
 
