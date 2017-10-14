@@ -12,6 +12,9 @@ export { AddressCreateComponent } from "./employee/employeeEdit/address-create.c
 
 export { EnumTranslatePipe } from "../commons/pipes/enum-translate";
 
+export { AuthGuard } from "../commons/guards/auth-guard";
+export {LoginService} from "../loginModule/service/login.service";
+
 export { HttpModule } from "@angular/http";
 export { FormsModule } from "@angular/forms";
 export { PanelMenuModule } from "../../../node_modules/primeng/components/panelmenu/panelmenu";

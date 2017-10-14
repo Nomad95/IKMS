@@ -53,7 +53,6 @@ export class EmployeeDetailComponent implements OnInit{
         this.employeeAdminService.getEmployee(this.employeeId)
             .subscribe( data => {
                 this.employee = data;
-                console.log(data);
                 this.msgs = [];
             }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
@@ -62,7 +61,6 @@ export class EmployeeDetailComponent implements OnInit{
         this.personalDataAdminService.getPersonalData(this.personalDataId)
             .subscribe( data => {
                 this.personalData = data;
-                console.log(data);
                 this.msgs = [];
             }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
@@ -71,7 +69,6 @@ export class EmployeeDetailComponent implements OnInit{
         this.addressAdminService.getAddressesByPersonalDataId(this.personalDataId)
             .subscribe( data => {
                 this.addresses = data;
-                console.log(data);
                 this.msgs = [];
                 this.isLoading = false;
             }, err => {

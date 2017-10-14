@@ -6,6 +6,8 @@ import {
 
 import {EnumTranslatePipe} from './index';
 
+import {AuthGuard, LoginService} from './index';
+
 import {
     HttpModule, FormsModule, PanelMenuModule,
     ButtonModule, TabViewModule, CodeHighlighterModule,
@@ -14,6 +16,7 @@ import {
     MessagesModule, DropdownModule, InputMaskModule,
     CalendarModule, ConfirmDialogModule, GrowlModule,
     BreadcrumbModule } from './index';
+
 
 @NgModule({
     imports: [
@@ -49,6 +52,10 @@ import {
         PersonalDataEditComponent,
         AddressCreateComponent,
         EnumTranslatePipe
-  ]
+  ],
+    providers: [
+            AuthGuard,
+            LoginService
+    ]
 })
 export class AdminSiteModule { }
