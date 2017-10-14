@@ -3,9 +3,10 @@ import { EmployeeAdminService } from "../../services/employee-admin.service";
 import { EmployeeGeneral } from "../../menu/model/employee/employee-general";
 import { Page } from "../../../commons/model/page";
 import { Router } from "@angular/router";
-import {ConfirmationService, Message } from "primeng/primeng";
+import {ConfirmationService, MenuItem, Message} from "primeng/primeng";
 import {CommonMessages} from "../../../commons/util/common-messages";
 import {ErrorHandler} from "../../../commons/util/error-handler";
+import {BreadMaker} from "../../../commons/util/bread-maker";
 
 @Component({
   selector: 'employee-list',
@@ -23,9 +24,12 @@ export class EmployeeListComponent implements OnInit{
     private employees: EmployeeGeneral[];
     private currentPageData: Page;
     private msgs: Message[] = [];
+    private isLoading: boolean = true;
+    private items: MenuItem[];
     
     ngOnInit(){
         this.loadEmployees(this.size,this.page);
+        this.items = BreadMaker.makeBreadcrumbs("Pracownicy","Lista pracowników");
     }
     
     loadNewPage(event){
@@ -33,12 +37,17 @@ export class EmployeeListComponent implements OnInit{
     }
     
     loadEmployees(size, page){
+        this.isLoading = true;
         this.employeeAdminService.getEmployeeGeneralDetails(size, page)
         .subscribe( data => {
             this.currentPageData = data;
             this.employees = data.content;
             this.page = data.number;
-        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+            this.isLoading = false;
+        }, err => {
+            this.msgs = ErrorHandler.handleGenericServerError(err);
+            this.isLoading = false;
+        });
     }
   
     navigateToEmployeeDetails(employeeId, personalDataId){

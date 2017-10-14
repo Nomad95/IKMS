@@ -30,7 +30,6 @@ export class PersonalDataEditComponent implements OnInit{
     ngOnInit(){
         this.personalDataAdminService.getPersonalData(this.personalDataId)
             .subscribe( data => {
-                console.log(data);
                 this.personalData = data;
                 this.msgs = [];
             }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
