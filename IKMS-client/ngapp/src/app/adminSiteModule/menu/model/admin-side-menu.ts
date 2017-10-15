@@ -12,11 +12,12 @@ export class AdminSideMenu {
             ]
         },
         {
-            label: 'Item1',
-            icon: 'fa-file-o',
+            label: 'Rodzice',
+            icon: 'fa-id-card-o',
             items: [
                 {
-                    label: 'siemka1'
+                    label: 'Lista rodziców',
+                    routerLink: ['/admin/parent']
                 },
                 {
                     label: 'siemka2'
