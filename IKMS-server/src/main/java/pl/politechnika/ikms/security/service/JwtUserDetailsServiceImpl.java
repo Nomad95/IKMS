@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.repository.user.UserRepository;
 import pl.politechnika.ikms.security.JwtUserFactory;
 
@@ -19,7 +19,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        UserEntity user = userRepository.findByUsername(username);
 
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));

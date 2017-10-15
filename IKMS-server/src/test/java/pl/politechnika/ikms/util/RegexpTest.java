@@ -3,11 +3,11 @@ package pl.politechnika.ikms.util;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import pl.politechnika.ikms.commons.util.CommonConstants;
-import pl.politechnika.ikms.domain.user.enums.Roles;
 
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class RegexpTest {
 
@@ -22,6 +22,13 @@ public class RegexpTest {
 
         assertThat(matchesValid, Matchers.is(true));
         assertThat(matchesInvalid, Matchers.is(false));
+    }
+
+    @Test
+    public void localDateTest(){
+        LocalDate date = LocalDate.of(2017,11,11);
+        System.out.println(date);
+
     }
 
 }

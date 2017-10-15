@@ -1,0 +1,84 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Kopec" id="changelog_003_personal_data">
+        <createTable tableName="personal_data">
+            <column name="id" type="bigint" >
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(25)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="secondary_name" type="varchar(25)" >
+                <constraints nullable="true"/>
+            </column>
+            <column name="surname" type="varchar(35)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="pesel" type="varchar(11)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="date_of_birth" type="date" >
+                <constraints nullable="false" />
+            </column>
+            <column name="place_of_birth" type="varchar(30)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="family_name" type="varchar(35)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="mothers_maiden_name" type="varchar(25)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="fathers_name" type="varchar(25)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="mothers_name" type="varchar(25)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="gender" type="varchar(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="nationality" type="varchar(45)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="contact_number" type="varchar(12)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="fax_number" type="varchar(12)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="user_id" type="bigint" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="id"
+                constraintName="pk_personal_data"
+                tableName="personal_data"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="user_id"
+                baseTableName="personal_data"
+                constraintName="fk_per_data_user"
+                referencedColumnNames="id"
+                referencedTableName="users"/>
+
+        <createSequence
+                sequenceName="personal_data_seq"
+                startValue="8"
+                incrementBy="1"/>
+
+        <loadData
+                tableName="personal_data"
+                file="liquibase/data/personalData.csv"
+        />
+
+    </changeSet>
+
+</databaseChangeLog>

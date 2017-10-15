@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.politechnika.ikms.domain.user.Role;
-import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.security.JwtTokenUtil;
 import pl.politechnika.ikms.security.JwtUser;
 import pl.politechnika.ikms.security.JwtUserFactory;
@@ -37,11 +37,11 @@ public class JwtUtilsTest {
 
     private String token;
 
-    private User defaultUser;
+    private UserEntity defaultUser;
 
     @Before
     public void createToken(){
-        defaultUser = new User();
+        defaultUser = new UserEntity();
         defaultUser.setId(1L);
         defaultUser.setUsername("user");
         defaultUser.setPassword("user");
@@ -49,7 +49,7 @@ public class JwtUtilsTest {
         defaultUser.setCreatedDate(DEFAULT_DATE);
         defaultUser.setEnabled(true);
         Role role = new Role();
-        role.setName("ROLE_USER");
+        role.setName("ROLE_PARENT");
         defaultUser.setRole(role);
         defaultUser.setEmail("dsd@localost");
 

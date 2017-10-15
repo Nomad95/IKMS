@@ -1,0 +1,166 @@
+<p-growl [(value)]="msgs"></p-growl>
+<p-dialog header="Dodaj adres pracownika" [(visible)]="isVisible" modal="modal"
+		  [draggable]="false" [resizable]="false" [width]="750" [closable]="false"
+		  [responsive]="false" >
+	<div class="row">
+		<div class="col-md-12">
+			<form novalidate
+				  #editForm="ngForm">
+
+				<div class="ui-g-12">
+
+					<div class="ui-g-6 ui-sm-12">
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Ulica:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   maxlength="35"
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ0-9\-\ ]*"
+									   [(ngModel)]="address.street"
+									   name="street" #street = "ngModel" >
+								<div class="ui-g-12 validation-err" *ngIf="street.errors?.pattern">
+									Pole nie może zawierać znaków specjalnych
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Numer domu:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   pattern="[0-9]*"
+									   [(ngModel)]="address.streetNumber"
+									   name="streetNumber" #streetNumber = "ngModel" >
+								<div class="ui-g-12 validation-err" *ngIf="streetNumber.errors?.pattern">
+									Pole może zawierać tylko cyfry
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Kod pocztowy:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   pattern="[0-9]{2}-[0-9]{3}"
+									   maxlength="6"
+									   [(ngModel)]="address.postCode"
+									   name="postCode" #postCode = "ngModel" >
+								<div class="ui-g-12 validation-err" *ngIf="postCode.touched && postCode.errors?.pattern">
+									Wymagany format: 99-999
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Powiat:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ\-]*"
+									   maxlength="35"
+									   [(ngModel)]="address.county"
+									   name="county" #county = "ngModel" >
+								<div class="ui-g-12 validation-err" *ngIf="county.errors?.pattern">
+									Pole nie może zawierać cyfr
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Państwo:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
+									   maxlength="35"
+									   [(ngModel)]="address.country"
+									   name="country" #country = "ngModel" >
+								<div class="ui-g-12 validation-err" *ngIf="country.errors?.pattern">
+									Pole nie może zawierać cyfr
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="ui-g-6 ui-sm-12">
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Miejscowość:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   [(ngModel)]="address.city"
+									   maxlength="35"
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
+									   name="city" #city = "ngModel">
+								<div class="ui-g-12 validation-err" *ngIf="city.errors?.pattern">
+									Pole nie może zawierać cyfr
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Numer lokalu:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   pattern="[0-9a-zA-Z]*"
+									   [(ngModel)]="address.houseNumber"
+									   name="houseNumber" #houseNumber = "ngModel" >
+								<div class="ui-g-12 validation-err" *ngIf="houseNumber.errors?.pattern">
+									Pole nie może zawierać znaków specjalnych
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Gmina:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*" maxlength="35"
+									   [(ngModel)]="address.community"
+									   name="community" #community = "ngModel" >
+								<div class="ui-g-12 validation-err" *ngIf="community.errors?.pattern">
+									Pole nie może zawierać cyfr
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Województwo:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*" maxlength="35"
+									   [(ngModel)]="address.voivodeship"
+									   name="voivodeship" #voivodeship = "ngModel" >
+								<div class="ui-g-12 validation-err" *ngIf="voivodeship.errors?.pattern">
+									Pole nie może zawierać cyfr
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Rodzaj adresu:</div>
+							<div class="ui-g-8 ">
+								<p-dropdown
+										[options]="addressTypes" [autoWidth]="false"
+										required
+										[(ngModel)]="address.addressType" name="addressType"
+										#addressType></p-dropdown>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<p-footer>
+		<button type="button" pButton icon="fa-check"[disabled]="editForm.invalid"
+				(click)="saveData(address)" label="Zapisz"></button>
+		<button type="button" pButton icon="fa-close" (click)="closeModal()" label="Anuluj"></button>
+	</p-footer>
+</p-dialog>

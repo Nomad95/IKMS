@@ -1,6 +1,7 @@
 export class Credentials {
     constructor(
       public username = '',
-      public password = ''
+      public password = '',
+      public rememberMe = false
     ){};
 }

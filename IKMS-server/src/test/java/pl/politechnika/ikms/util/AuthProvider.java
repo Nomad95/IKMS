@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.politechnika.ikms.domain.user.User;
+import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.repository.user.RoleRepository;
 import pl.politechnika.ikms.security.JwtTokenUtil;
 import pl.politechnika.ikms.security.JwtUserFactory;
@@ -19,17 +19,17 @@ public class AuthProvider {
     private final @NonNull JwtTokenUtil jwtTokenUtil;
     private final @NonNull RoleRepository roleRepository;
 
-    private User simpleUser;
-    private User adminUser;
-    private User employeeUser;
+    private UserEntity simpleUser;
+    private UserEntity adminUser;
+    private UserEntity employeeUser;
 
-    public User createNewSimpleUser(){
-        simpleUser = new User();
+    public UserEntity createNewSimpleUser(){
+        simpleUser = new UserEntity();
         simpleUser.setUsername("user1");
         simpleUser.setPassword("user1");
         simpleUser.setEmail("user@localhost");
         simpleUser.setId(3L);
-        simpleUser.setRole(roleRepository.getByName("ROLE_USER"));
+        simpleUser.setRole(roleRepository.getByName("ROLE_PARENT"));
         simpleUser.setCreatedDate(new Date());
         simpleUser.setEnabled(true);
         simpleUser.setLastLogged(new Date());
@@ -40,12 +40,12 @@ public class AuthProvider {
     /**
      * Creates user beyond database
      */
-    public User createNewUserEntity(){
-        User exampleUser = new User();
+    public UserEntity createNewUserEntity(){
+        UserEntity exampleUser = new UserEntity();
         exampleUser.setUsername("username");
         exampleUser.setPassword("password");
         exampleUser.setEmail("email@localhost");
-        exampleUser.setRole(roleRepository.getByName("ROLE_USER"));
+        exampleUser.setRole(roleRepository.getByName("ROLE_PARENT"));
         exampleUser.setCreatedDate(new Date());
         exampleUser.setEnabled(true);
         exampleUser.setLastLogged(new Date());
@@ -53,8 +53,8 @@ public class AuthProvider {
         return exampleUser;
     }
 
-    public User createNewAdminUser(){
-        adminUser = new User();
+    public UserEntity createNewAdminUser(){
+        adminUser = new UserEntity();
         adminUser.setUsername("admin");
         adminUser.setPassword("admin");
         adminUser.setEmail("admin@localhost");
@@ -67,8 +67,8 @@ public class AuthProvider {
         return adminUser;
     }
 
-    public User createNewEmployeeUser(){
-        employeeUser = new User();
+    public UserEntity createNewEmployeeUser(){
+        employeeUser = new UserEntity();
         employeeUser.setUsername("employee");
         employeeUser.setPassword("employee");
         employeeUser.setEmail("employee@localhost");
@@ -81,7 +81,7 @@ public class AuthProvider {
         return employeeUser;
     }
 
-    public String generateTokenForUser(User user){
+    public String generateTokenForUser(UserEntity user){
         return jwtTokenUtil.generateToken(JwtUserFactory.create(user));
     }
 

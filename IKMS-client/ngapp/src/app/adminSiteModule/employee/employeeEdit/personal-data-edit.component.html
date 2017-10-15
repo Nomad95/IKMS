@@ -1,0 +1,242 @@
+<p-growl [(value)]="msgs"></p-growl>
+<p-dialog header="Edytuj dane personalne pracownika" [(visible)]="isVisible" modal="modal"
+		  [draggable]="false" [resizable]="false" [width]="700"
+		  [closable]="false" [responsive]="false" >
+	<div class="row">
+		<div class="col-md-12">
+			<form novalidate
+				  #editForm="ngForm">
+
+				<div class="ui-g-12">
+
+					<div class="ui-g-6 ui-sm-12">
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Imię:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   required maxlength="25"
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
+									   [(ngModel)]="personalData.name"
+									   name="name" #firstName = "ngModel" >
+								<div class="ui-g-12 validation-err" *ngIf="firstName.touched && firstName.errors?.required">
+									Pole nie może być puste
+								</div>
+								<div class="ui-g-12 validation-err" *ngIf="firstName.errors?.pattern">
+									Pole nie może zawierać cyfr i znaków białych.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Drugie imię:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   maxlength="25" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
+									   [(ngModel)]="personalData.secondaryName"
+									   name="secondaryName" #secondaryName = "ngModel">
+								<div class="ui-g-12 validation-err" *ngIf="secondaryName.errors?.pattern">
+									Pole nie może zawierać cyfr i znaków białych.
+								</div>
+							</div>
+
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Data urodzenia:</div>
+							<div class="ui-g-8 ">
+								<p-calendar [dataType]="string"
+										[monthNavigator]="true" [yearNavigator]="true"
+										yearRange="1900:2020" (onSelect)="onDateSelected($event)"
+										required inputStyleClass="detail-view-input"
+										[(ngModel)]="personalData.dateOfBirth"
+										[maxDate]="maxDate"
+										name="dateOfBirth" #dateOfBirth = "ngModel"
+										dateFormat="yy-mm-dd"></p-calendar>
+								<div class="ui-g-12 validation-err" *ngIf="dateOfBirth.errors?.minlength">
+									To pole jest wymagane.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Płeć:</div>
+							<div class="ui-g-8 ">
+								<p-dropdown
+									   [options]="genders" [autoWidth]="false"
+									   placeholder="-" class="detail-view-input"
+									   [(ngModel)]="personalData.gender"
+									   name="gender" #gender = "ngModel"></p-dropdown>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Numer Kontaktowy:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   maxlength="12" pattern="[0-9\+\-]*"
+									   [(ngModel)]="personalData.contactNumber"
+									   name="contactNumber" #contactNumber = "ngModel">
+								<div class="ui-g-12 validation-err" *ngIf="contactNumber.errors?.pattern">
+									Pole może zawierać tylko cyfry.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Imię ojca:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   [(ngModel)]="personalData.fathersName"
+									   maxlength="25" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
+									   name="fathersName" #fathersName = "ngModel">
+								<div class="ui-g-12 validation-err" *ngIf="fathersName.errors?.pattern">
+									Pole nie może zawierać cyfr i znaków białych.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Nazwisko rodowe:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   [(ngModel)]="personalData.familyName"
+									   maxlength="35" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
+									   name="familyName" #familyName = "ngModel">
+								<div class="ui-g-12 validation-err" *ngIf="familyName.errors?.pattern">
+									Pole nie może zawierać cyfr i znaków białych.
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-g-6 ui-sm-12">
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Nazwisko:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   [(ngModel)]="personalData.surname"
+									   maxlength="35" required
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
+									   name="surname" #surname = "ngModel">
+								<div class="ui-g-12 validation-err" *ngIf="surname.touched && surname.errors?.required">
+									Pole nie może być puste
+								</div>
+								<div class="ui-g-12 validation-err" *ngIf="surname.errors?.pattern">
+									Pole nie może zawierać cyfr i znaków białych.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">PESEL:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   maxlength="11" required
+									   minlength="11"
+									   pattern="[0-9]*"
+									   [(ngModel)]="personalData.pesel"
+									   name="pesel" #pesel = "ngModel">
+								<div class="ui-g-12 validation-err" *ngIf="pesel.touched && pesel.errors?.required">
+									Pole nie może być puste
+								</div>
+								<div class="ui-g-12 validation-err" *ngIf="pesel.errors?.pattern">
+									Pole może zawierać tylko cyfry.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Miejsce urodzenia:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   required maxlength="30"
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ\ ]*"
+									   [(ngModel)]="personalData.placeOfBirth"
+									   name="placeOfBirth" #placeOfBirth = "ngModel">
+								<div class="ui-g-12 validation-err" *ngIf="placeOfBirth.touched && placeOfBirth.errors?.required">
+									Pole nie może być puste
+								</div>
+								<div class="ui-g-12 validation-err" *ngIf="placeOfBirth.errors?.pattern">
+									Pole nie może zawierać cyfr.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Narodowość:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   [(ngModel)]="personalData.nationality"
+									   required maxlength="45"
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
+									   name="nationality" #nationality = "ngModel">
+								<div class="ui-g-12 validation-err" *ngIf="nationality.touched && nationality.errors?.required">
+									Pole nie może być puste
+								</div>
+								<div class="ui-g-12 validation-err" *ngIf="nationality.errors?.pattern">
+									Pole nie może zawierać cyfr i znaków białych.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Fax:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   maxlength="12" pattern="[0-9\+\-]*"
+									   [(ngModel)]="personalData.faxNumber"
+									   name="faxNumber" #faxNumber = "ngModel">
+								<div class="ui-g-12 validation-err" *ngIf="faxNumber.errors?.pattern">
+									Pole może zawierać tylko cyfry.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Imię matki:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   [(ngModel)]="personalData.mothersName"
+									   maxlength="25" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
+									   name="mothersName" #mothersName = "ngModel">
+								<div class="ui-g-12 validation-err" *ngIf="mothersName.errors?.pattern">
+									Pole nie może zawierać cyfr i znaków białych.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Nazwisko rodowe matki:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   [(ngModel)]="personalData.mothersMaidenName"
+									   maxlength="25" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
+									   name="mothersMaidenName" #mothersMaidenName = "ngModel">
+								<div class="ui-g-12 validation-err" *ngIf="mothersMaidenName.errors?.pattern">
+									Pole nie może zawierać cyfr i znaków białych.
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+	<p-footer>
+		<button type="button" pButton icon="fa-check" [disabled]="editForm.invalid"
+				(click)="saveData(personalData)" label="Zapisz"></button>
+		<button type="button" pButton icon="fa-close" (click)="closeModal()" label="Anuluj"></button>
+	</p-footer>
+</p-dialog>

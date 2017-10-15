@@ -1,15 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
-import {HttpModule} from "@angular/http";
+import {
+    CommonModule, NgModule, FormsModule,
+    HttpModule, LoginRoutingModule, LoginComponent } from './index';
 
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent } from './login.component';
-
-import { InputTextModule } from '../../../node_modules/primeng/components/inputtext/inputtext';
-import { ButtonModule } from '../../../node_modules/primeng/components/button/button';
-import { CodeHighlighterModule } from '../../../node_modules/primeng/components/codehighlighter/codehighlighter';
-import { MessagesModule } from '../../../node_modules/primeng/components/messages/messages';
+import {
+    InputTextModule, ButtonModule,
+    CodeHighlighterModule, MessagesModule,
+    CheckboxModule, PasswordModule } from './index';
 
 
 @NgModule({
@@ -21,9 +17,11 @@ import { MessagesModule } from '../../../node_modules/primeng/components/message
     LoginRoutingModule,
     FormsModule,
     HttpModule,
-    MessagesModule
+    MessagesModule,
+    CheckboxModule,
+    PasswordModule
   ],
   declarations: [LoginComponent]
 })
-export class LoginModule {//TODO: add image to assets
+export class LoginModule {
 }

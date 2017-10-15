@@ -1,0 +1,23 @@
+<p-growl [(value)]="msgs"></p-growl>
+<p-dialog header="Edytuj dane rodzica" [(visible)]="isVisible" modal="modal"
+          [draggable]="false" [resizable]="false" [width]="350" [closable]="false">
+  <div class="row">
+    <div class="col-md-12">
+      <form novalidate
+            #editForm="ngForm">
+
+        <div class="ui-g-12">
+
+
+
+        </div>
+      </form>
+    </div>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="fa-check"[disabled]="editForm.invalid"
+            (click)="saveData(employee)" label="Zapisz"></button>
+    <button type="button" pButton icon="fa-close" (click)="closeModal()" label="Anuluj"></button>
+  </p-footer>
+</p-dialog>
+
