@@ -1,0 +1,360 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
+	<div class="row">
+		<div class="col-md-12">
+			<p-tabView *ngIf="isLoading" class="text-center">
+				<p-tabPanel>
+					<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+				</p-tabPanel>
+			</p-tabView>
+			<p-tabView *ngIf="!isLoading">
+				<p-tabPanel header="Dane dziecka">
+					<p-panel>
+						<p-header>
+							<div class="ui-helper-clearfix" >
+								<button pButton label="Edytuj" icon="fa-pencil" (click)="showChildrenEditModal()" class="ikms-float-right"></button>
+							</div>
+						</p-header>
+						<div class="ui-g bold">
+							<div class="ui-g-6 ui-sm-12">
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Id Dziecka:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="child?.id"
+											   name="id" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Choroby:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText [value]="child?.diseases"
+											   placeholder="-" class="detail-view-input"
+											   name="diseases" readonly >
+									</div>
+								</div>
+
+							</div>
+							<div class="ui-g-6 ui-sm-12">
+								<div class="ui-g-12">
+
+									<div class="ui-g-12">
+										<div class="ui-g-4 ">Stopień niepełnosprawności:</div>
+										<div class="ui-g-8 ">
+											<input type="text" pInputText value=""
+												   placeholder="-" class="detail-view-input"
+												   [value]="child?.disabilityLevel | translateEnum"
+												   name="disabilityLevel" readonly>
+										</div>
+									</div>
+
+									<div class="ui-g-12">
+										<div class="ui-g-4 ">Alergie:</div>
+										<div class="ui-g-8 ">
+											<input type="text" pInputText value=""
+												   placeholder="-" class="detail-view-input"
+												   [value]="child?.allergies"
+												   name="allergies" readonly>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</p-panel>
+				</p-tabPanel>
+				<p-tabPanel header="Dane osobowe">
+					<p-panel>
+						<p-header>
+							<div class="ui-helper-clearfix" >
+								<button pButton label="Edytuj" (click)="showPersonalDataEditModal()" icon="fa-pencil" class="ikms-float-right"></button>
+							</div>
+						</p-header>
+						<div class="ui-g bold">
+							<div class="ui-g-6 ui-sm-12">
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Imię:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="personalData?.name"
+											   name="name" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Drugie imię:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="personalData?.secondaryName"
+											   name="secondaryName" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Data urodzenia:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="personalData?.dateOfBirth"
+											   name="dateOfBirth" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Płeć:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="personalData?.gender | translateEnum"
+											   name="gender" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Imię ojca:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="personalData?.fathersName"
+											   name="fathersName" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Nazwisko rodowe:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="personalData?.familyName"
+											   name="familyName" readonly>
+									</div>
+								</div>
+							</div>
+							<div class="ui-g-6 ui-sm-12">
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Nazwisko:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="personalData?.surname"
+											   name="surname" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">PESEL:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="personalData?.pesel"
+											   name="pesel" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Miejsce urodzenia:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="personalData?.placeOfBirth"
+											   name="placeOfBirth" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Narodowość:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="personalData?.nationality"
+											   name="nationality" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Imię matki:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="personalData?.mothersName"
+											   name="mothersName" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Nazwisko rodowe matki:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="personalData?.mothersMaidenName"
+											   name="mothersMaidenName" readonly>
+									</div>
+								</div>
+							</div>
+						</div>
+					</p-panel>
+				</p-tabPanel>
+				<p-tabPanel *ngIf="addresses?.length == 0" header="Adres" rightIcon="fa fa-plus">
+					<p-panel>
+						<p-header>
+							<div class="ui-helper-clearfix" >
+								<button pButton label="Dodaj" (click)="showAddressCreateModal()" icon="fa-plus" class="ikms-float-right"></button>
+							</div>
+						</p-header>
+						<div class="ui-g bold">
+							<div class="ui-g-12">
+								Użytkownik nie posiada przypisanych adresów
+							</div>
+						</div>
+					</p-panel>
+				</p-tabPanel>
+				<ng-template let-address ngFor [ngForOf]="addresses">
+					<p-tabPanel header="{{address.addressType | translateEnum}}">
+						<p-panel>
+							<p-header>
+								<div class="ui-helper-clearfix" >
+									<button pButton label="Edytuj" (click)="showAddressEditModal(address.id)" icon="fa-pencil" class="ikms-float-right"></button>
+
+									<button pButton label="Dodaj" (click)="showAddressCreateModal()" icon="fa-plus" class="ikms-float-right"></button>
+								</div>
+							</p-header>
+							<div class="ui-g bold">
+								<div class="ui-g-6">
+									<div class="ui-g-12">
+
+										<div class="ui-g-4 ">Ulica:</div>
+										<div class="ui-g-8 ">
+											<input type="text" pInputText
+												   placeholder="-" class="detail-view-input"
+												   [value]="address?.street"
+												   name="street" readonly></div>
+									</div>
+
+									<div class="ui-g-12">
+
+										<div class="ui-g-4 ">Numer domu:</div>
+										<div class="ui-g-8 ">
+											<input type="text" pInputText
+												   placeholder="-" class="detail-view-input"
+												   [value]="address?.streetNumber"
+												   name="streetNumber" readonly>
+										</div>
+									</div>
+
+									<div class="ui-g-12">
+
+										<div class="ui-g-4 ">Kod pocztowy:</div>
+										<div class="ui-g-8 ">
+											<input type="text" pInputText
+												   placeholder="-" class="detail-view-input"
+												   [value]="address?.postCode"
+												   name="postCode" readonly>
+										</div>
+									</div>
+
+									<div class="ui-g-12">
+
+										<div class="ui-g-4 ">Powiat:</div>
+										<div class="ui-g-8 ">
+											<input type="text" pInputText
+												   placeholder="-" class="detail-view-input"
+												   [value]="address?.county"
+												   name="county" readonly>
+										</div>
+									</div>
+
+									<div class="ui-g-12">
+
+										<div class="ui-g-4 ">Państwo:</div>
+										<div class="ui-g-8 ">
+											<input type="text" pInputText
+												   placeholder="-" class="detail-view-input"
+												   [value]="address?.country"
+												   name="country" readonly>
+										</div>
+									</div>
+
+								</div>
+								<div class="ui-g-6">
+									<div class="ui-g-12 ">
+
+										<div class="ui-g-4 ">Miejscowość:</div>
+										<div class="ui-g-8 ">
+											<input type="text" pInputText
+												   placeholder="-" class="detail-view-input"
+												   [value]="address?.city"
+												   name="city" readonly>
+										</div>
+									</div>
+
+									<div class="ui-g-12">
+
+										<div class="ui-g-4 ">Numer lokalu:</div>
+										<div class="ui-g-8 ">
+											<input type="text" pInputText
+												   placeholder="-" class="detail-view-input"
+												   [value]="address?.houseNumber"
+												   name="houseNumber" readonly>
+										</div>
+									</div>
+
+									<div class="ui-g-12">
+
+										<div class="ui-g-4 ">Gmina:</div>
+										<div class="ui-g-8 ">
+											<input type="text" pInputText
+												   placeholder="-" class="detail-view-input"
+												   [value]="address?.community"
+												   name="community" readonly>
+										</div>
+									</div>
+
+									<div class="ui-g-12">
+
+										<div class="ui-g-4 ">Województwo:</div>
+										<div class="ui-g-8 ">
+											<input type="text" pInputText
+												   placeholder="-" class="detail-view-input"
+												   [value]="address?.voivodeship"
+												   name="voivodeship" readonly>
+										</div>
+									</div>
+								</div>
+							</div>
+						</p-panel>
+					</p-tabPanel>
+				</ng-template>
+			</p-tabView>
+		</div>
+	</div>
+	<child-edit *ngIf="child"
+				   [childId]="child.id"
+				   (eventSave)="handleChildUpdate($event)"
+				   [isVisible]="displayChildrenEditModal"
+				   (eventClose)="handleModalClose($event)"></child-edit>
+
+	<personal-data-edit *ngIf="personalData"
+				   [personalDataId]="personalData.id"
+				   (eventSave)="handlePersonalDataUpdate($event)"
+				   [isVisible]="displayPersonalDataEditModal"
+				   (eventClose)="handleModalClose($event)"></personal-data-edit>
+
+	<address-edit *ngIf="editAddressId"
+				   [addressId]="editAddressId"
+				   (eventSave)="handleAddressUpdate($event)"
+				   [isVisible]="displayAddressEditModal"
+				   (eventClose)="handleModalClose($event)"></address-edit>
+
+	<address-create *ngIf="personalData"
+				  [personalDataId]="personalData.id"
+				  (eventSave)="handleAddressUpdate($event)"
+				  [isVisible]="displayAddressCreateModal"
+				  (eventClose)="handleModalClose($event)"></address-create>
+</div>
+
+

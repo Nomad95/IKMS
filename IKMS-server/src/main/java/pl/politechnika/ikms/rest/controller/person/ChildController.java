@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.politechnika.ikms.domain.person.ChildEntity;
 import pl.politechnika.ikms.rest.dto.person.ChildDto;
+import pl.politechnika.ikms.rest.dto.person.ChildGeneralDetailDto;
 import pl.politechnika.ikms.rest.mapper.person.ChildEntityMapper;
 import pl.politechnika.ikms.service.person.ChildService;
 
@@ -51,5 +52,11 @@ public class ChildController {
     @DeleteMapping(value = "/{childId}")
     public void deleteChild(@PathVariable Long childId){
         childService.deleteById(childId);
+    }
+
+    @GetMapping(value = "/general")
+    @ResponseBody
+    public Page<ChildGeneralDetailDto> getChildrenGeneralDetails(Pageable pageable){
+        return childService.getChildGeneralDetail(pageable);
     }
 }

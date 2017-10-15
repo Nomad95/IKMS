@@ -9,6 +9,9 @@ export { EmployeeEditComponent } from "./employee/employeeEdit/employee-edit.com
 export { PersonalDataEditComponent } from "./employee/employeeEdit/personal-data-edit.component";
 export { AddressEditComponent } from "./employee/employeeEdit/address-edit.component";
 export { AddressCreateComponent } from "./employee/employeeEdit/address-create.component";
+export { ChildrenListComponent} from "./children/childrenList/children-list.component";
+export { ChildrenDetailComponent} from "./children/childrenDetail/children-detail.component";
+export { ChildrenEditComponent } from "./children/childrenEdit/children-edit.component";
 
 export { EnumTranslatePipe } from "../commons/pipes/enum-translate";
 

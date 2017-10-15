@@ -18,6 +18,9 @@ public class ChildDto extends AbstractDto {
     @NotNull
     private MinimalDto<Long, String> personalData;
 
+    @NotNull
+    private MinimalDto<Long, String> parent;
+
     @Size(max = 300)
     private String diseases;
 
