@@ -24,11 +24,12 @@ export class AdminSideMenu {
             ]
         },
         {
-            label: 'Item2',
-            icon: 'fa-file-o',
+            label: 'Dzieci',
+            icon: 'fa-child',
             items: [
                 {
-                    label: 'siemka1'
+                    label: 'Lista dzieci',
+                    routerLink: ['/admin/child']
                 },
                 {
                     label: 'siemka2'

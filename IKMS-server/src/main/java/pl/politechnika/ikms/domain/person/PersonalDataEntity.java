@@ -26,7 +26,7 @@ public class PersonalDataEntity extends AbstractEntity {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
     @Column(name = "name", length = 25, nullable = false)

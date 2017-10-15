@@ -3,7 +3,8 @@ import {
     AdminSiteComponent, AdminSiteRoutingModule, AdminSidebar,
     EmployeeListComponent, EmployeeDetailComponent, EmployeeEditComponent,
     PersonalDataEditComponent, AddressEditComponent, AddressCreateComponent,
-    ParentListComponent, ParentDetailComponent, ParentEditComponent} from './index';
+    ParentListComponent, ParentDetailComponent, ParentEditComponent,
+    ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent} from './index';
 
 import {EnumTranslatePipe} from './index';
 
@@ -55,7 +56,14 @@ import {
         EnumTranslatePipe,
         ParentListComponent,
         ParentDetailComponent,
-        ParentEditComponent
+        ParentEditComponent,
+        ChildrenListComponent,
+        ChildrenDetailComponent,
+        ChildrenEditComponent,
+        ParentListComponent,
+        ParentDetailComponent,
+        ParentEditComponent,
+        EnumTranslatePipe
   ],
     providers: [
             AuthGuard,

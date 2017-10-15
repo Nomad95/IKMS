@@ -13,8 +13,9 @@ export class EnumProvider{
     static EMPLOYEE_ROLES = ['BABYSITTER','SPEECH_TERAPIST'];
     static GENDERS = ['MAN','WOMAN'];
     static ADDRESS_TYPES = ['CORRESPONDENCE_ADDRESS','ADDRESS','REGISTERED_ADDRESS'];
+    static DISABILITY_LEVELS = ['NONE','MILD','MODERATE','CONSIDERABLE'];
     
-     translateToDropdown(values): any[]{
+    translateToDropdown(values): any[]{
         let result = [];
     
          for (let item of values){
