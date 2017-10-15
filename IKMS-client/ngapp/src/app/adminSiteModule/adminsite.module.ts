@@ -2,7 +2,8 @@ import {
     NgModule, CommonModule,
     AdminSiteComponent, AdminSiteRoutingModule, AdminSidebar,
     EmployeeListComponent, EmployeeDetailComponent, EmployeeEditComponent,
-    PersonalDataEditComponent, AddressEditComponent, AddressCreateComponent } from './index';
+    PersonalDataEditComponent, AddressEditComponent, AddressCreateComponent,
+    ParentListComponent, ParentDetailComponent, ParentEditComponent} from './index';
 
 import {EnumTranslatePipe} from './index';
 
@@ -51,7 +52,10 @@ import {
         AddressEditComponent,
         PersonalDataEditComponent,
         AddressCreateComponent,
-        EnumTranslatePipe
+        EnumTranslatePipe,
+        ParentListComponent,
+        ParentDetailComponent,
+        ParentEditComponent
   ],
     providers: [
             AuthGuard,
