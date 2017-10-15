@@ -12,6 +12,9 @@ export { AddressCreateComponent } from "./employee/employeeEdit/address-create.c
 export { ChildrenListComponent} from "./children/childrenList/children-list.component";
 export { ChildrenDetailComponent} from "./children/childrenDetail/children-detail.component";
 export { ChildrenEditComponent } from "./children/childrenEdit/children-edit.component";
+export { ParentListComponent } from "./parent/parentList/parent-list.component";
+export { ParentDetailComponent } from "./parent/parentDetails/parent-detail.component";
+export { ParentEditComponent } from "./parent/parentEdit/parent-edit.component";
 
 export { EnumTranslatePipe } from "../commons/pipes/enum-translate";
 

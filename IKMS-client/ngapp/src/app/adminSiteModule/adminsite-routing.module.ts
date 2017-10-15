@@ -6,6 +6,8 @@ import {EmployeeDetailComponent} from "./employee/employeeDetail/employee-detail
 import {AuthGuard} from "../commons/guards/auth-guard";
 import {ChildrenListComponent} from "./children/childrenList/children-list.component";
 import {ChildrenDetailComponent} from "./children/childrenDetail/children-detail.component";
+import {ParentListComponent} from "./parent/parentList/parent-list.component";
+import {ParentDetailComponent} from "./parent/parentDetails/parent-detail.component";
 
 const routes: Routes = [
     {
@@ -31,10 +33,16 @@ const routes: Routes = [
                     },
                     {
                         path: 'child/:id', component: ChildrenDetailComponent
+                    },
+                    {
+                        path: 'parent', component: ParentListComponent
+                    },
+                    {
+                        path: 'parent/:id', component: ParentDetailComponent
                     }
                 ]
             }
-            
+
         ]
     }
 ];
