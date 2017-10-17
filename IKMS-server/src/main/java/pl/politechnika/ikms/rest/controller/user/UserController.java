@@ -26,20 +26,17 @@ public class UserController {
     private final @NonNull UserEntityMapper userEntityMapper;
 
     @GetMapping(value = "/{userId}")
-    @ResponseBody
     public UserDto getUser(@PathVariable Long userId){
         return userEntityMapper.convertToDto(userService.findOne(userId));
     }
 
     @GetMapping
-    @ResponseBody
     public Page<UserDto> getUsers(Pageable pageable){
         Page<UserEntity> allPaginated = userService.findAllPaginated(pageable);
         return allPaginated.map(userEntityMapper::convertToDto);
     }
 
     @PostMapping
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)//TODO: creation depends on provided role?
     public UserDto createUser(@Valid @RequestBody UserRegistrationDto userRegistrationDto){
         UserEntity user = userEntityRegistrationMapper.convertToEntity(userRegistrationDto);
@@ -48,7 +45,6 @@ public class UserController {
     }
 
     @PutMapping
-    @ResponseBody
     public UserDto updateUser(@Valid @RequestBody UserDto userDto){
         UserEntity user = userEntityMapper.convertToEntity(userDto);
         UserEntity updatedUser = userService.update(user);

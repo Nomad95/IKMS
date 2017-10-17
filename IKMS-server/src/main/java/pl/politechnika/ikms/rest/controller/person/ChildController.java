@@ -23,13 +23,11 @@ public class ChildController {
     private final @NonNull ChildEntityMapper childEntityMapper;
 
     @GetMapping(value = "/{childId}")
-    @ResponseBody
     public ChildDto getOneChild(@PathVariable Long childId){
         return childEntityMapper.convertToDto(childService.findOne(childId));
     }
 
     @PostMapping
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public ChildDto createChild(@Valid @RequestBody ChildDto ChildDto){
         ChildEntity ChildEntity = childService.create(childEntityMapper.convertToEntity(ChildDto));
@@ -37,13 +35,11 @@ public class ChildController {
     }
 
     @GetMapping
-    @ResponseBody
     public Page<ChildDto> getAllChildes(Pageable pageable){
         return childService.findAllPaginated(pageable).map(childEntityMapper::convertToDto);
     }
 
     @PutMapping
-    @ResponseBody
     public ChildDto updateChild(@Valid @RequestBody ChildDto ChildDto){
         ChildEntity ChildEntity = childService.update(childEntityMapper.convertToEntity(ChildDto));
         return childEntityMapper.convertToDto(ChildEntity);
@@ -55,7 +51,6 @@ public class ChildController {
     }
 
     @GetMapping(value = "/general")
-    @ResponseBody
     public Page<ChildGeneralDetailDto> getChildrenGeneralDetails(Pageable pageable){
         return childService.getChildGeneralDetail(pageable);
     }
