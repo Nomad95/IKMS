@@ -29,7 +29,6 @@ public class EmployeeController {
     }
 
     @PostMapping
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public EmployeeDto createEmployee(@Valid @RequestBody EmployeeDto employeeDto){
         EmployeeEntity employeeEntity = employeeService.create(employeeEntityMapper.convertToEntity(employeeDto));
@@ -37,13 +36,11 @@ public class EmployeeController {
     }
 
     @GetMapping
-    @ResponseBody
     public Page<EmployeeDto> getAllEmployees(Pageable pageable){
        return employeeService.findAllPaginated(pageable).map(employeeEntityMapper::convertToDto);
     }
 
     @PutMapping
-    @ResponseBody
     public EmployeeDto updateEmployee(@Valid @RequestBody EmployeeDto employeeDto){
         EmployeeEntity updatedEntity = employeeService.update(employeeEntityMapper.convertToEntity(employeeDto));
         return employeeEntityMapper.convertToDto(updatedEntity);
@@ -55,7 +52,6 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/general")
-    @ResponseBody
     public Page<EmployeeGeneralDetailDto> getEmployeeGeneralDetails(Pageable pageable){
         return employeeService.getEmployeesGeneralDetails(pageable);
     }

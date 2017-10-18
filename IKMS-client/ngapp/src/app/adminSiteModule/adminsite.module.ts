@@ -3,7 +3,8 @@ import {
     AdminSiteComponent, AdminSiteRoutingModule, AdminSidebar,
     EmployeeListComponent, EmployeeDetailComponent, EmployeeEditComponent,
     PersonalDataEditComponent, AddressEditComponent, AddressCreateComponent,
-    ParentListComponent, ParentDetailComponent, ParentEditComponent} from './index';
+    ParentListComponent, ParentDetailComponent, ParentEditComponent,
+    ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent} from './index';
 
 import {EnumTranslatePipe} from './index';
 
@@ -16,7 +17,7 @@ import {
     PanelModule, InputTextModule, DialogModule,
     MessagesModule, DropdownModule, InputMaskModule,
     CalendarModule, ConfirmDialogModule, GrowlModule,
-    BreadcrumbModule } from './index';
+    BreadcrumbModule, TooltipModule } from './index';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {
         CalendarModule,
         ConfirmDialogModule,
         GrowlModule,
-        BreadcrumbModule
+        BreadcrumbModule,
+        TooltipModule
     ],
     declarations: [
         AdminSiteComponent,
@@ -55,7 +57,14 @@ import {
         EnumTranslatePipe,
         ParentListComponent,
         ParentDetailComponent,
-        ParentEditComponent
+        ParentEditComponent,
+        ChildrenListComponent,
+        ChildrenDetailComponent,
+        ChildrenEditComponent,
+        ParentListComponent,
+        ParentDetailComponent,
+        ParentEditComponent,
+        EnumTranslatePipe
   ],
     providers: [
             AuthGuard,

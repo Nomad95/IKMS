@@ -19,4 +19,9 @@ public class AddressServiceImpl extends AbstractService<AddressEntity,AddressRep
     public List<AddressEntity> findByPersonalDataId(Long id) {
         return getRepository().findByPersonalDataId(id);
     }
+
+    @Override
+    public List<AddressEntity> findByParentId(Long id) {
+        return getRepository().findByParentId(id);
+    }
 }

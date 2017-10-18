@@ -10,23 +10,56 @@
 				</p-tabPanel>
 			</p-tabView>
 			<p-tabView *ngIf="!isLoading">
-				<p-tabPanel header="Dane rodzica">
+				<p-tabPanel header="Dane dziecka">
 					<p-panel>
 						<p-header>
-							<div class="ui-helper-clearfix">
-								<button pButton label="Edytuj" icon="fa-pencil" (click)="showParentEditModal()"
-										class="ikms-float-right"></button>
+							<div class="ui-helper-clearfix" >
+								<button pButton label="Edytuj" icon="fa-pencil" (click)="showChildrenEditModal()" class="ikms-float-right"></button>
 							</div>
 						</p-header>
 						<div class="ui-g bold">
 							<div class="ui-g-6 ui-sm-12">
 								<div class="ui-g-12">
-									<div class="ui-g-4 ">Id Rodzica:</div>
+									<div class="ui-g-4 ">Id Dziecka:</div>
 									<div class="ui-g-8 ">
 										<input type="text" pInputText
 											   placeholder="-" class="detail-view-input"
-											   [value]="parent?.id"
+											   [value]="child?.id"
 											   name="id" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Choroby:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText [value]="child?.diseases"
+											   [pTooltip]="child?.diseases" tooltipPosition="top"
+											   placeholder="-" class="detail-view-input long-text"
+											   name="diseases" readonly >
+									</div>
+								</div>
+
+							</div>
+							<div class="ui-g-6 ui-sm-12">
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Stopień niepełnosprawności:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText value=""
+											   placeholder="-" class="detail-view-input"
+											   [value]="child?.disabilityLevel | translateEnum"
+											   name="disabilityLevel" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Alergie:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText value=""
+											   placeholder="-" class="detail-view-input long-text"
+											   [pTooltip]="child?.allergies" tooltipPosition="top"
+											   [value]="child?.allergies"
+											   name="allergies" readonly>
 									</div>
 								</div>
 							</div>
@@ -36,9 +69,8 @@
 				<p-tabPanel header="Dane osobowe">
 					<p-panel>
 						<p-header>
-							<div class="ui-helper-clearfix">
-								<button pButton label="Edytuj" (click)="showPersonalDataEditModal()" icon="fa-pencil"
-										class="ikms-float-right"></button>
+							<div class="ui-helper-clearfix" >
+								<button pButton label="Edytuj" (click)="showPersonalDataEditModal()" icon="fa-pencil" class="ikms-float-right"></button>
 							</div>
 						</p-header>
 						<div class="ui-g bold">
@@ -80,16 +112,6 @@
 											   placeholder="-" class="detail-view-input"
 											   [value]="personalData?.gender | translateEnum"
 											   name="gender" readonly>
-									</div>
-								</div>
-
-								<div class="ui-g-12">
-									<div class="ui-g-4 ">Numer Kontaktowy:</div>
-									<div class="ui-g-8 ">
-										<input type="text" pInputText
-											   placeholder="-" class="detail-view-input"
-											   [value]="personalData?.contactNumber"
-											   name="contactNumber" readonly>
 									</div>
 								</div>
 
@@ -155,16 +177,6 @@
 								</div>
 
 								<div class="ui-g-12">
-									<div class="ui-g-4 ">Fax:</div>
-									<div class="ui-g-8 ">
-										<input type="text" pInputText
-											   placeholder="-" class="detail-view-input"
-											   [value]="personalData?.faxNumber"
-											   name="faxNumber" readonly>
-									</div>
-								</div>
-
-								<div class="ui-g-12">
 									<div class="ui-g-4 ">Imię matki:</div>
 									<div class="ui-g-8 ">
 										<input type="text" pInputText
@@ -187,17 +199,17 @@
 						</div>
 					</p-panel>
 				</p-tabPanel>
-				<p-tabPanel *ngIf="addresses?.length == 0" header="Adres">
+				<p-tabPanel *ngIf="addresses?.length == 0" header="Adres" >
 					<p-panel>
 						<p-header>
-							<div class="ui-helper-clearfix">
-								<button pButton label="Dodaj" (click)="showAddressCreateModal()" icon="fa-plus"
-										class="ikms-float-right"></button>
+							<div class="ui-helper-clearfix" >
 							</div>
 						</p-header>
 						<div class="ui-g bold">
 							<div class="ui-g-12">
-								Rodzic nie posiada przypisanych adresów
+								<a (click)="showParentAddress()" >Zobacz adres rodzica
+									<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+								</a>
 							</div>
 						</div>
 					</p-panel>
@@ -206,12 +218,8 @@
 					<p-tabPanel header="{{address.addressType | translateEnum}}">
 						<p-panel>
 							<p-header>
-								<div class="ui-helper-clearfix">
-									<button pButton label="Edytuj" (click)="showAddressEditModal(address.id)"
-											icon="fa-pencil" class="ikms-float-right"></button>
-
-									<button pButton label="Dodaj" (click)="showAddressCreateModal()" icon="fa-plus"
-											class="ikms-float-right"></button>
+								<div class="ui-helper-clearfix bold" >
+									(Adres rodzica)
 								</div>
 							</p-header>
 							<div class="ui-g bold">
@@ -323,28 +331,29 @@
 			</p-tabView>
 		</div>
 	</div>
-	<parent-edit *ngIf="parent"
-				 [parentId]="parent.id"
-				 (eventSave)="handleParentUpdate($event)"
-				 [isVisible]="displayParentEditModal"
-				 (eventClose)="handleModalClose($event)"></parent-edit>
+	<child-edit *ngIf="child"
+				   [childId]="child.id"
+				   (eventSave)="handleChildUpdate($event)"
+				   [isVisible]="displayChildrenEditModal"
+				   (eventClose)="handleModalClose($event)"></child-edit>
+
 	<personal-data-edit *ngIf="personalData"
-						[personalDataId]="personalData.id"
-						(eventSave)="handlePersonalDataUpdate($event)"
-						[isVisible]="displayPersonalDataEditModal"
-						(eventClose)="handleModalClose($event)"></personal-data-edit>
+				   [personalDataId]="personalData.id"
+				   (eventSave)="handlePersonalDataUpdate($event)"
+				   [isVisible]="displayPersonalDataEditModal"
+				   (eventClose)="handleModalClose($event)"></personal-data-edit>
 
 	<address-edit *ngIf="editAddressId"
-				  [addressId]="editAddressId"
-				  (eventSave)="handleAddressUpdate($event)"
-				  [isVisible]="displayAddressEditModal"
-				  (eventClose)="handleModalClose($event)"></address-edit>
+				   [addressId]="editAddressId"
+				   (eventSave)="handleAddressUpdate($event)"
+				   [isVisible]="displayAddressEditModal"
+				   (eventClose)="handleModalClose($event)"></address-edit>
 
 	<address-create *ngIf="personalData"
-					[personalDataId]="personalData.id"
-					(eventSave)="handleAddressUpdate($event)"
-					[isVisible]="displayAddressCreateModal"
-					(eventClose)="handleModalClose($event)"></address-create>
+				  [personalDataId]="personalData.id"
+				  (eventSave)="handleAddressUpdate($event)"
+				  [isVisible]="displayAddressCreateModal"
+				  (eventClose)="handleModalClose($event)"></address-create>
 </div>
 
 

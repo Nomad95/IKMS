@@ -7,5 +7,10 @@
 
   "CORRESPONDENCE_ADDRESS": "Adres do korespondencji",
   "ADDRESS": "Adres zamieszkania",
-  "REGISTERED_ADDRESS": "Adres zameldowania"
+  "REGISTERED_ADDRESS": "Adres zameldowania",
+
+  "NONE":"Brak",
+  "MILD":"Łagodny",
+  "MODERATE":"Umirakowany",
+  "CONSIDERABLE":"Znaczny"
 }

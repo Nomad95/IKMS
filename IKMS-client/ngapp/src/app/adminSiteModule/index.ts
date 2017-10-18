@@ -9,6 +9,9 @@ export { EmployeeEditComponent } from "./employee/employeeEdit/employee-edit.com
 export { PersonalDataEditComponent } from "./employee/employeeEdit/personal-data-edit.component";
 export { AddressEditComponent } from "./employee/employeeEdit/address-edit.component";
 export { AddressCreateComponent } from "./employee/employeeEdit/address-create.component";
+export { ChildrenListComponent} from "./children/childrenList/children-list.component";
+export { ChildrenDetailComponent} from "./children/childrenDetail/children-detail.component";
+export { ChildrenEditComponent } from "./children/childrenEdit/children-edit.component";
 export { ParentListComponent } from "./parent/parentList/parent-list.component";
 export { ParentDetailComponent } from "./parent/parentDetails/parent-detail.component";
 export { ParentEditComponent } from "./parent/parentEdit/parent-edit.component";
@@ -37,3 +40,4 @@ export { CalendarModule } from "../../../node_modules/primeng/components/calenda
 export { ConfirmDialogModule } from "../../../node_modules/primeng/components/confirmdialog/confirmdialog";
 export { GrowlModule } from "../../../node_modules/primeng/components/growl/growl";
 export { BreadcrumbModule } from "../../../node_modules/primeng/components/breadcrumb/breadcrumb";
+export { TooltipModule } from "../../../node_modules/primeng/components/tooltip/tooltip";

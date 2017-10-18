@@ -18,7 +18,6 @@ public class PersonalDataDto extends AbstractDto {
 
     private Long id;
 
-    @NotNull
     private MinimalDto<Long, String> user;
 
     @NotEmpty
