@@ -33,33 +33,33 @@
 									<div class="ui-g-4 ">Choroby:</div>
 									<div class="ui-g-8 ">
 										<input type="text" pInputText [value]="child?.diseases"
-											   placeholder="-" class="detail-view-input"
+											   [pTooltip]="child?.diseases" tooltipPosition="top"
+											   placeholder="-" class="detail-view-input long-text"
 											   name="diseases" readonly >
 									</div>
 								</div>
 
 							</div>
 							<div class="ui-g-6 ui-sm-12">
+
 								<div class="ui-g-12">
-
-									<div class="ui-g-12">
-										<div class="ui-g-4 ">Stopień niepełnosprawności:</div>
-										<div class="ui-g-8 ">
-											<input type="text" pInputText value=""
-												   placeholder="-" class="detail-view-input"
-												   [value]="child?.disabilityLevel | translateEnum"
-												   name="disabilityLevel" readonly>
-										</div>
+									<div class="ui-g-4 ">Stopień niepełnosprawności:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText value=""
+											   placeholder="-" class="detail-view-input"
+											   [value]="child?.disabilityLevel | translateEnum"
+											   name="disabilityLevel" readonly>
 									</div>
+								</div>
 
-									<div class="ui-g-12">
-										<div class="ui-g-4 ">Alergie:</div>
-										<div class="ui-g-8 ">
-											<input type="text" pInputText value=""
-												   placeholder="-" class="detail-view-input"
-												   [value]="child?.allergies"
-												   name="allergies" readonly>
-										</div>
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Alergie:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText value=""
+											   placeholder="-" class="detail-view-input long-text"
+											   [pTooltip]="child?.allergies" tooltipPosition="top"
+											   [value]="child?.allergies"
+											   name="allergies" readonly>
 									</div>
 								</div>
 							</div>
@@ -199,16 +199,17 @@
 						</div>
 					</p-panel>
 				</p-tabPanel>
-				<p-tabPanel *ngIf="addresses?.length == 0" header="Adres" rightIcon="fa fa-plus">
+				<p-tabPanel *ngIf="addresses?.length == 0" header="Adres" >
 					<p-panel>
 						<p-header>
 							<div class="ui-helper-clearfix" >
-								<button pButton label="Dodaj" (click)="showAddressCreateModal()" icon="fa-plus" class="ikms-float-right"></button>
 							</div>
 						</p-header>
 						<div class="ui-g bold">
 							<div class="ui-g-12">
-								Użytkownik nie posiada przypisanych adresów
+								<a (click)="showParentAddress()" >Zobacz adres rodzica
+									<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+								</a>
 							</div>
 						</div>
 					</p-panel>
@@ -217,10 +218,8 @@
 					<p-tabPanel header="{{address.addressType | translateEnum}}">
 						<p-panel>
 							<p-header>
-								<div class="ui-helper-clearfix" >
-									<button pButton label="Edytuj" (click)="showAddressEditModal(address.id)" icon="fa-pencil" class="ikms-float-right"></button>
-
-									<button pButton label="Dodaj" (click)="showAddressCreateModal()" icon="fa-plus" class="ikms-float-right"></button>
+								<div class="ui-helper-clearfix bold" >
+									(Adres rodzica)
 								</div>
 							</p-header>
 							<div class="ui-g bold">

@@ -40,3 +40,4 @@ export { CalendarModule } from "../../../node_modules/primeng/components/calenda
 export { ConfirmDialogModule } from "../../../node_modules/primeng/components/confirmdialog/confirmdialog";
 export { GrowlModule } from "../../../node_modules/primeng/components/growl/growl";
 export { BreadcrumbModule } from "../../../node_modules/primeng/components/breadcrumb/breadcrumb";
+export { TooltipModule } from "../../../node_modules/primeng/components/tooltip/tooltip";

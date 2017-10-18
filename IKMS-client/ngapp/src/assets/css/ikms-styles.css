@@ -16,6 +16,10 @@ body {
     float: right;
 }
 
+.long-text{
+    text-overflow: ellipsis !important;
+}
+
 /* obrazek na stronie logowania */
 .background {
     background: url('../img/background2.png') no-repeat center center fixed;

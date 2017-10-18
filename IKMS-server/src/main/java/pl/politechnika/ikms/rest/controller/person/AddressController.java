@@ -58,4 +58,11 @@ public class AddressController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping(value = "/parent/{parentId}")
+    public List<AddressDto> getAddressesByParentId(@PathVariable Long parentId){
+        return addressService.findByParentId(parentId).stream()
+                .map(addressEntityMapper::convertToDto)
+                .collect(Collectors.toList());
+    }
+
 }

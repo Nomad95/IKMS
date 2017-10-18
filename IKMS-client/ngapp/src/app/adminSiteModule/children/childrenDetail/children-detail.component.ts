@@ -23,7 +23,7 @@ export class ChildrenDetailComponent implements OnInit{
         private personalDataAdminService: PersonalDataAdminService,
         private route: ActivatedRoute){}
   
-    private childId: number;//todo: adres rodzica
+    private childId: number;
     private personalDataId: number;
     private child: Child;
     private personalData: PersonalData;
@@ -118,4 +118,16 @@ export class ChildrenDetailComponent implements OnInit{
         this.displayPersonalDataEditModal = false;
         this.displayAddressCreateModal = false;
     }
+    
+    showParentAddress(): void{
+        this.addressAdminService.getAddressesByParentId(this.child.parent.id)
+            .subscribe( data => {
+                console.log(data);
+                this.addresses = data;
+                this.msgs = [];
+            }, err =>{
+                this.msgs = ErrorHandler.handleGenericServerError(err);
+            } );
+    }
+    
 }

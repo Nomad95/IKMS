@@ -17,7 +17,7 @@ import {
     PanelModule, InputTextModule, DialogModule,
     MessagesModule, DropdownModule, InputMaskModule,
     CalendarModule, ConfirmDialogModule, GrowlModule,
-    BreadcrumbModule } from './index';
+    BreadcrumbModule, TooltipModule } from './index';
 
 
 @NgModule({
@@ -42,7 +42,8 @@ import {
         CalendarModule,
         ConfirmDialogModule,
         GrowlModule,
-        BreadcrumbModule
+        BreadcrumbModule,
+        TooltipModule
     ],
     declarations: [
         AdminSiteComponent,

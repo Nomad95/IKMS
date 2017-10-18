@@ -8,4 +8,6 @@ import java.util.List;
 public interface AddressService extends GenericService<AddressEntity>{
 
     List<AddressEntity> findByPersonalDataId(Long id);
+
+    List<AddressEntity> findByParentId(Long id);
 }
