@@ -1,1 +1,1 @@
-web: mvn package
+web: mvn install
