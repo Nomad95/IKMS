@@ -149,7 +149,7 @@
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <appName>YOUR APP NAME COMES HERE</appName>
+                    <appName>ikmsdeploy</appName>
                     <includeTarget>false</includeTarget>
                     <includes>
                         <include>${full-artifact-name}</include>
