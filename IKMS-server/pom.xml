@@ -163,7 +163,7 @@
                     <execution>
                         <phase>verify</phase>
                         <goals>
-                            <goal>deploy-war</goal>
+                            <goal>deploy</goal>
                         </goals>
                     </execution>
                 </executions>
