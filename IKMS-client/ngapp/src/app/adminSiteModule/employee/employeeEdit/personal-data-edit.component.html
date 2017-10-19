@@ -143,7 +143,10 @@
 									   [(ngModel)]="personalData.pesel"
 									   name="pesel" #pesel = "ngModel">
 								<div class="ui-g-12 validation-err" *ngIf="pesel.touched && pesel.errors?.required">
-									Pole nie może być puste
+									Pole nie może być puste.
+								</div>
+								<div class="ui-g-12 validation-err" *ngIf="pesel.touched && pesel.errors?.minlength">
+									Pesel jest niepoprawny.
 								</div>
 								<div class="ui-g-12 validation-err" *ngIf="pesel.errors?.pattern">
 									Pole może zawierać tylko cyfry.

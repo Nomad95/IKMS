@@ -7,16 +7,18 @@ import {ErrorHandler} from "../../../commons/util/error-handler";
 import {BreadMaker} from "../../../commons/util/bread-maker";
 import {ChildrenAdminService} from "../../services/children-admin.service";
 import {ChildGeneral} from "../../menu/model/children/child-general";
+import {ParentAdminService} from "../../services/parent-admin.service";
 
 @Component({
   selector: 'children-list',
   templateUrl: './children-list.component.html',
-  providers: [ChildrenAdminService, ConfirmationService]
+  providers: [ChildrenAdminService, ConfirmationService, ParentAdminService]
 })
 export class ChildrenListComponent implements OnInit{
     constructor(
         private childrenAdminService: ChildrenAdminService,
         private confirmationService: ConfirmationService,
+        private parentService: ParentAdminService,
         private router: Router){}
     
     private page: number = 0;
@@ -25,6 +27,7 @@ export class ChildrenListComponent implements OnInit{
     private currentPageData: Page;
     private msgs: Message[] = [];
     private isLoading: boolean = true;
+    private isNavigating = false;
     private items: MenuItem[];
     
     ngOnInit(){
@@ -52,6 +55,17 @@ export class ChildrenListComponent implements OnInit{
     
     navigateToChildDetails(childId, personalDataId){
       this.router.navigate(['/admin/child', childId], { queryParams: {personalDataId: personalDataId}});
+    }
+    
+    navigateToParentDetails(parentId){
+        this.isNavigating = true;
+        this.parentService.getParent(parentId).subscribe( data => {
+            this.router.navigate(['/admin/parent', parentId], { queryParams: {personalDataId: data.personalData.id}});
+            this.isNavigating = false;
+        }, err => {
+            this.msgs = ErrorHandler.handleGenericServerError(err);
+            this.isNavigating = false;
+        });
     }
     
     delete(childId){
