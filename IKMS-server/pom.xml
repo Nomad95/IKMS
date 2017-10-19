@@ -156,7 +156,7 @@
                     </includes>
                     <jdkVersion>1.8</jdkVersion>
                     <processTypes>
-                        <web>java $JAVA_OPTS -jar ${full-artifact-name} --spring.profiles.active=heroku</web>
+                        <web>java $JAVA_OPTS -war ${full-artifact-name} --spring.profiles.active=heroku</web>
                     </processTypes>
                 </configuration>
                 <executions>
