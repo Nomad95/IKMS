@@ -1,28 +1,68 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { EmployeeSiteComponent } from "./employeesite.component";
-import { EmployeeSiteRoutingModule } from "./employeesite-routing.module";
-import { EmployeeSidebar } from "./menu/sidebar/employee-sidebar";
+import {
+    NgModule, CommonModule, EmployeeSiteComponent,
+    EmployeeSiteRoutingModule, EmployeeSidebar,
+    FormsModule, HttpModule
+} from './index';
 
-import { PanelMenuModule } from "../../../node_modules/primeng/components/panelmenu/panelmenu";
-import { ButtonModule } from "../../../node_modules/primeng/components/button/button";
-import { TabViewModule } from "../../../node_modules/primeng/components/tabview/tabview";
-import { CodeHighlighterModule } from '../../../node_modules/primeng/components/codehighlighter/codehighlighter';
-import { MegaMenuModule } from '../../../node_modules/primeng/components/megamenu/megamenu';
+import {AuthGuard} from "./index";
+
+import {LoginService} from "./index";
+
+import {
+    PanelMenuModule, ButtonModule, TabViewModule,
+    CodeHighlighterModule, MegaMenuModule, DataTableModule,
+    PaginatorModule, PanelModule, InputTextModule,
+    DialogModule, MessagesModule, DropdownModule,
+    InputMaskModule, CalendarModule, ConfirmDialogModule,
+    GrowlModule, BreadcrumbModule, TooltipModule
+} from './index';
+
+import {
+    AddressEditComponent,
+    PersonalDataEditComponent, EnumTranslatePipe, AddressCreateComponent,
+    ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent
+} from './index';
+import {SharedModule} from "../adminSiteModule/sharedModule/shared-module.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    EmployeeSiteRoutingModule,
-    PanelMenuModule,
-    ButtonModule,
-    TabViewModule,
-    CodeHighlighterModule,
-    MegaMenuModule
-  ],
-  declarations: [
-    EmployeeSiteComponent,
-    EmployeeSidebar
-  ]
+    imports: [
+        CommonModule,
+        HttpModule,
+        SharedModule,
+        EmployeeSiteRoutingModule,
+        PanelMenuModule,
+        ButtonModule,
+        TabViewModule,
+        CodeHighlighterModule,
+        MegaMenuModule,
+        DataTableModule,
+        MessagesModule,
+        InputTextModule,
+        DropdownModule,
+        PaginatorModule,
+        InputMaskModule,
+        PanelModule,
+        DialogModule,
+        CalendarModule,
+        ConfirmDialogModule,
+        GrowlModule,
+        BreadcrumbModule,
+        TooltipModule,
+        FormsModule
+    ],
+    declarations: [
+        EmployeeSiteComponent,
+        EmployeeSidebar,
+        AddressEditComponent,
+        PersonalDataEditComponent,
+        AddressCreateComponent,
+        ChildrenListComponent,
+        ChildrenDetailComponent,
+        ChildrenEditComponent
+    ],
+    providers: [
+        AuthGuard,
+        LoginService
+    ]
 })
 export class EmployeeSiteModule { }

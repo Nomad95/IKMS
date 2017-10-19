@@ -18,11 +18,13 @@ import {
     MessagesModule, DropdownModule, InputMaskModule,
     CalendarModule, ConfirmDialogModule, GrowlModule,
     BreadcrumbModule, TooltipModule } from './index';
+import {SharedModule} from "./sharedModule/shared-module.module";
 
 
 @NgModule({
     imports: [
         CommonModule,
+        SharedModule,
         FormsModule,
         AdminSiteRoutingModule,
         HttpModule,
@@ -54,7 +56,6 @@ import {
         AddressEditComponent,
         PersonalDataEditComponent,
         AddressCreateComponent,
-        EnumTranslatePipe,
         ParentListComponent,
         ParentDetailComponent,
         ParentEditComponent,
@@ -63,8 +64,7 @@ import {
         ChildrenEditComponent,
         ParentListComponent,
         ParentDetailComponent,
-        ParentEditComponent,
-        EnumTranslatePipe
+        ParentEditComponent
   ],
     providers: [
             AuthGuard,
