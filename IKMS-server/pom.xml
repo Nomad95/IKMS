@@ -151,7 +151,7 @@
                     <execution>
                         <phase>verify</phase>
                         <goals>
-                            <goal>run-war</goal>
+                            <goal>deploy-war</goal>
                         </goals>
                     </execution>
                 </executions>
