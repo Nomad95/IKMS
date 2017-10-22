@@ -148,7 +148,7 @@
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>1.2.1</version>
-                <configuration>
+                <!--<configuration>
                     <appName>ikmsdeploy</appName>
                     <includeTarget>false</includeTarget>
                     <includes>
@@ -156,17 +156,17 @@
                     </includes>
                     <jdkVersion>1.8</jdkVersion>
                     <processTypes>
-                        <web>java $JAVA_OPTS -war ${full-artifact-name} --spring.profiles.active=heroku</web>
+                        <web>java $JAVA_OPTS -war ${full-artifact-name} &#45;&#45;spring.profiles.active=heroku</web>
                     </processTypes>
                 </configuration>
                 <executions>
                     <execution>
                         <phase>verify</phase>
                         <goals>
-                            <goal>deploy</goal>
+                            <goal>deploy</goal>//todo: jar?
                         </goals>
                     </execution>
-                </executions>
+                </executions>-->
             </plugin>
 		</plugins>
 	</build>
