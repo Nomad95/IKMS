@@ -8,6 +8,7 @@ import {ChildrenListComponent} from "./children/childrenList/children-list.compo
 import {ChildrenDetailComponent} from "./children/childrenDetail/children-detail.component";
 import {ParentListComponent} from "./parent/parentList/parent-list.component";
 import {ParentDetailComponent} from "./parent/parentDetails/parent-detail.component";
+import {ChildrenCreateComponent} from "./children/childrenCreate/children-create.component";
 
 const routes: Routes = [
     {
@@ -26,19 +27,22 @@ const routes: Routes = [
                         path: 'employee', component: EmployeeListComponent
                     },
                     {
-                        path: 'employee/:id', component: EmployeeDetailComponent
+                        path: 'employee/detail/:id', component: EmployeeDetailComponent
                     },
                     {
                         path: 'child', component: ChildrenListComponent
                     },
                     {
-                        path: 'child/:id', component: ChildrenDetailComponent
+                        path: 'child/detail/:id', component: ChildrenDetailComponent
+                    },
+                    {
+                        path: 'child/new', component: ChildrenCreateComponent
                     },
                     {
                         path: 'parent', component: ParentListComponent
                     },
                     {
-                        path: 'parent/:id', component: ParentDetailComponent
+                        path: 'parent/detail/:id', component: ParentDetailComponent
                     }
                 ]
             }

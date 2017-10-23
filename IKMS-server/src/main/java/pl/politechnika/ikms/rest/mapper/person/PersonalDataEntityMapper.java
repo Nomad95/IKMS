@@ -36,7 +36,8 @@ public class PersonalDataEntityMapper extends AbstractModelMapper<PersonalDataEn
     @Override
     public PersonalDataEntity convertToEntity(PersonalDataDto personalDataDto) {
         PersonalDataEntity personalDataEntity = modelMapper.map(personalDataDto, PersonalDataEntity.class);
-        personalDataEntity.setUser(userRepository.findOne(personalDataDto.getUser().getId()));
+        if(Objects.nonNull(personalDataDto.getUser()))
+            personalDataEntity.setUser(userRepository.findOne(personalDataDto.getUser().getId()));
         return personalDataEntity;
     }
 }

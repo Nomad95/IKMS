@@ -33,7 +33,8 @@ export class AdminSideMenu {
                     routerLink: ['/admin/child']
                 },
                 {
-                    label: 'siemka2'
+                    label: 'Dodaj dziecko',
+                    routerLink: ['/admin/child/new']
                 }
             ]
         }

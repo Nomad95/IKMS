@@ -51,7 +51,7 @@ export class EmployeeListComponent implements OnInit{
     }
   
     navigateToEmployeeDetails(employeeId, personalDataId){
-      this.router.navigate(['/admin/employee', employeeId], { queryParams: {personalDataId: personalDataId}});
+      this.router.navigate(['/admin/employee/detail', employeeId], { queryParams: {personalDataId: personalDataId}});
     }
     
     delete(employeeId){

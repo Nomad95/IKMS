@@ -8,7 +8,7 @@ export class Child{
     disabilityLevel: string;
     
     constructor() {
-        this.id = -1;
+        this.id = null;
         this.personalData = {};
         this.parent = {};
         this.diseases = '';

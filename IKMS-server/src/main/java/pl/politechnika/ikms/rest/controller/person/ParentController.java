@@ -7,12 +7,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.politechnika.ikms.domain.person.ParentEntity;
+import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.person.ParentDto;
 import pl.politechnika.ikms.rest.dto.person.ParentGeneralDetailDto;
 import pl.politechnika.ikms.rest.mapper.person.ParentEntityMapper;
 import pl.politechnika.ikms.service.person.ParentService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/parent")
@@ -53,5 +55,10 @@ public class ParentController {
     @GetMapping(value = "/general")
     public Page<ParentGeneralDetailDto> getParentGeneralDetails(Pageable pageable){
         return parentService.getParentGeneralDetails(pageable);
+    }
+
+    @GetMapping(value = "/minimal/all")
+    public List<MinimalDto<Long, String>> getAllParentsMinimal(){
+        return parentService.getAllMinimal();
     }
 }

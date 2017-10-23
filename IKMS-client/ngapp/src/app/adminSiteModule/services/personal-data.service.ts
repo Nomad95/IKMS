@@ -27,5 +27,10 @@ export class PersonalDataAdminService{
         return this.http.put('api/personalData', JSON.stringify(personalData), {headers: this.headers})
             .map( res => res.json());
     }
+    
+    createPersonalData(personalData): Observable<PersonalData>{
+        return this.http.post('api/personalData', JSON.stringify(personalData), {headers: this.headers})
+        .map( res => res.json());
+    }
   
 }

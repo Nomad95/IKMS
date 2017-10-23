@@ -1,12 +1,10 @@
 import {
-    NgModule, CommonModule,
+    NgModule, CommonModule, ChildrenCreateComponent,
     AdminSiteComponent, AdminSiteRoutingModule, AdminSidebar,
     EmployeeListComponent, EmployeeDetailComponent, EmployeeEditComponent,
     PersonalDataEditComponent, AddressEditComponent, AddressCreateComponent,
     ParentListComponent, ParentDetailComponent, ParentEditComponent,
     ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent} from './index';
-
-import {EnumTranslatePipe} from './index';
 
 import {AuthGuard, LoginService} from './index';
 
@@ -17,9 +15,9 @@ import {
     PanelModule, InputTextModule, DialogModule,
     MessagesModule, DropdownModule, InputMaskModule,
     CalendarModule, ConfirmDialogModule, GrowlModule,
-    BreadcrumbModule, TooltipModule } from './index';
-import {SharedModule} from "./sharedModule/shared-module.module";
+    BreadcrumbModule, TooltipModule, InputTextareaModule } from './index';
 
+import {SharedModule} from "./sharedModule/shared-module.module";
 
 @NgModule({
     imports: [
@@ -45,7 +43,8 @@ import {SharedModule} from "./sharedModule/shared-module.module";
         ConfirmDialogModule,
         GrowlModule,
         BreadcrumbModule,
-        TooltipModule
+        TooltipModule,
+        InputTextareaModule
     ],
     declarations: [
         AdminSiteComponent,
@@ -62,9 +61,10 @@ import {SharedModule} from "./sharedModule/shared-module.module";
         ChildrenListComponent,
         ChildrenDetailComponent,
         ChildrenEditComponent,
+        ChildrenCreateComponent,
         ParentListComponent,
         ParentDetailComponent,
-        ParentEditComponent
+        ParentEditComponent,
   ],
     providers: [
             AuthGuard,

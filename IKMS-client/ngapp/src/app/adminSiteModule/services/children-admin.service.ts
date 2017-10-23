@@ -36,4 +36,9 @@ export class ChildrenAdminService{
     deleteChild(childId): Observable<any>{
         return this.http.delete('api/child/'+childId, {headers: this.headers});
     }
+    
+    createChild(child): Observable<Child>{
+        return this.http.post('api/child', JSON.stringify(child), {headers: this.headers})
+        .map( res => res.json());
+    }
 }

@@ -51,7 +51,7 @@ export class ParentListComponent implements OnInit{
   }
 
   navigateToParentDetails(parentId, personalDataId){
-    this.router.navigate(['/admin/parent', parentId], { queryParams: {personalDataId: personalDataId}});
+    this.router.navigate(['/admin/parent/detail', parentId], { queryParams: {personalDataId: personalDataId}});
   }
 
   delete(parentId){

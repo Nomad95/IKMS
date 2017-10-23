@@ -20,6 +20,14 @@ body {
     text-overflow: ellipsis !important;
 }
 
+span.red{
+    color:red !important;
+}
+
+textarea {
+    resize : none;
+}
+
 /* obrazek na stronie logowania */
 .background {
     background: url('../img/background2.png') no-repeat center center fixed;

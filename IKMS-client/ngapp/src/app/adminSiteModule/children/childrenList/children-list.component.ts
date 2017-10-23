@@ -54,13 +54,13 @@ export class ChildrenListComponent implements OnInit{
     }
     
     navigateToChildDetails(childId, personalDataId){
-      this.router.navigate(['/admin/child', childId], { queryParams: {personalDataId: personalDataId}});
+      this.router.navigate(['/admin/child/detail', childId], { queryParams: {personalDataId: personalDataId}});
     }
     
     navigateToParentDetails(parentId){
         this.isNavigating = true;
         this.parentService.getParent(parentId).subscribe( data => {
-            this.router.navigate(['/admin/parent', parentId], { queryParams: {personalDataId: data.personalData.id}});
+            this.router.navigate(['/admin/parent/detail', parentId], { queryParams: {personalDataId: data.personalData.id}});
             this.isNavigating = false;
         }, err => {
             this.msgs = ErrorHandler.handleGenericServerError(err);

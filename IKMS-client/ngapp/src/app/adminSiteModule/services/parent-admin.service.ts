@@ -34,5 +34,10 @@ export class ParentAdminService {
   deleteParent(parentId): Observable<any>{
     return this.http.delete('api/parent/'+parentId, {headers: this.headers});
   }
+  
+  getAllMinimal(): Observable<any>{
+      return this.http.get('api/parent/minimal/all', {headers: this.headers})
+        .map(res => res.json());
+  }
 
 }

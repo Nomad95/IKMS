@@ -15,6 +15,8 @@ export { ChildrenEditComponent } from "./children/childrenEdit/children-edit.com
 export { ParentListComponent } from "./parent/parentList/parent-list.component";
 export { ParentDetailComponent } from "./parent/parentDetails/parent-detail.component";
 export { ParentEditComponent } from "./parent/parentEdit/parent-edit.component";
+export { ChildrenCreateComponent } from "./children/childrenCreate/children-create.component";
+
 
 export { EnumTranslatePipe } from "../commons/pipes/enum-translate";
 
@@ -41,3 +43,4 @@ export { ConfirmDialogModule } from "../../../node_modules/primeng/components/co
 export { GrowlModule } from "../../../node_modules/primeng/components/growl/growl";
 export { BreadcrumbModule } from "../../../node_modules/primeng/components/breadcrumb/breadcrumb";
 export { TooltipModule } from "../../../node_modules/primeng/components/tooltip/tooltip";
+export { InputTextareaModule } from "../../../node_modules/primeng/components/inputtextarea/inputtextarea";
