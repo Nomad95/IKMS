@@ -29,8 +29,13 @@
 
         <createSequence
                 sequenceName="parents_seq"
-                startValue="1"
+                startValue="4"
                 incrementBy="1"/>
+
+        <loadData
+                tableName="parents"
+                file="liquibase/data/parents.csv"
+        />
 
     </changeSet>
 

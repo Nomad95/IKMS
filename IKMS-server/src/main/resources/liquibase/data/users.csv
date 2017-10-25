@@ -3,3 +3,7 @@ id,username,password,email,enabled,role,created_date,last_logged
 2,employee,$2a$06$90EU96T.hkND.Kkf54DuVO9S6L7nGrwHH3osMbh.9KFgDaHeOPxXi,employee@localhost,true,2,2017-09-13,2017-09-13
 3,user1,$2a$06$kKAXosMEpKtKZXkPO5IKIOk2UktMgCpAQvBCoQ./dzrgCVU8bupx2,user@localhost,true,3,2017-09-13,2017-09-13
 4,anonymous,$2a$06$cczBQ7V5AVNNEWXN84.PF.Ljn5SkarPxOKnVQHD6mJ0c5.Wec.9CO,anonymous@localhost,true,4,2017-09-13,2017-09-13
+5,employee2,$2a$06$a.ySD8GTiO/AHm92z/0Ly.OSJ8J96RP9fUaYvPwkQO.fr8CMFmlKO,employee2@localhost,true,2,2017-09-13,2017-09-13
+6,employee3,$2a$06$joXlrRoYoOyXJ0YyZEJs7uHhM4EIpfWT7A0F8kwT6HJMwW/4.Y6Xu,employee3@localhost,true,2,2017-09-13,2017-09-13
+7,user2,$2a$06$D/uiPmYFMEhbg2izOc.5/uINpPeNcV75qn2mSnS2XK6epz8hIG9Iq,user2@localhost,true,3,2017-09-13,2017-09-13
+8,user3,$2a$06$tNAm8V3Q1jKTdfkkFHSH1u0CYvsVg8cpzAK3lLpZvAipSPOUXsugG,user3@localhost,true,3,2017-09-13,2017-09-13

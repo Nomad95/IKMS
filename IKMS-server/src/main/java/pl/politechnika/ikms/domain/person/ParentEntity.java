@@ -6,7 +6,6 @@ import lombok.ToString;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -21,9 +20,8 @@ public class ParentEntity extends AbstractEntity {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personal_data_id")
+    @JoinColumn(name = "personal_data_id", nullable = false)
     private PersonalDataEntity personalData;
 
 }

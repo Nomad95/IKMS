@@ -1,6 +1,7 @@
 package pl.politechnika.ikms.rest.dto.person;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.NotEmpty;
 import pl.politechnika.ikms.commons.abstracts.AbstractDto;
 import pl.politechnika.ikms.domain.person.enums.Gender;
@@ -12,11 +13,11 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class PersonalDataDto extends AbstractDto {
 
     private Long id;
 
-    @NotNull
     private MinimalDto<Long, String> user;
 
     @NotEmpty

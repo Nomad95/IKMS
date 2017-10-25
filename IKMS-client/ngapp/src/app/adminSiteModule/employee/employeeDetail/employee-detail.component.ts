@@ -6,8 +6,9 @@ import { ActivatedRoute } from "@angular/router";
 import { Employee } from "../../model/employee/employee";
 import {PersonalData} from "../../model/personalData/personal-data";
 import {Address} from "../../model/address/address";
-import {Message} from "primeng/primeng";
+import {MenuItem, Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
+import {BreadMaker} from "../../../commons/util/bread-maker";
 
 @Component({
   selector: 'employee-detail',
@@ -28,15 +29,19 @@ export class EmployeeDetailComponent implements OnInit{
     private addresses: Address[];
     private editAddressId = -1;
     private msgs: Message[] = [];
+    private isLoading: boolean = true;
+    private items: MenuItem[];
 
     private displayEmployeeEditModal = false;
     private displayPersonalDataEditModal = false;
     private displayAddressEditModal = false;
+
     private displayAddressCreateModal = false;
 
     ngOnInit(){
         this.employeeId = this.route.snapshot.params['id'];
         this.personalDataId = this.route.snapshot.queryParams['personalDataId'] || -1;
+        this.items = BreadMaker.makeBreadcrumbs("Pracownicy","Lista pracowników","Podgląd");
 
         this.getEmployee();
         this.getPersonalData();
@@ -44,10 +49,10 @@ export class EmployeeDetailComponent implements OnInit{
     }
 
     getEmployee(){
+        this.isLoading = true;
         this.employeeAdminService.getEmployee(this.employeeId)
             .subscribe( data => {
                 this.employee = data;
-                console.log(data);
                 this.msgs = [];
             }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
@@ -56,7 +61,6 @@ export class EmployeeDetailComponent implements OnInit{
         this.personalDataAdminService.getPersonalData(this.personalDataId)
             .subscribe( data => {
                 this.personalData = data;
-                console.log(data);
                 this.msgs = [];
             }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
@@ -65,9 +69,12 @@ export class EmployeeDetailComponent implements OnInit{
         this.addressAdminService.getAddressesByPersonalDataId(this.personalDataId)
             .subscribe( data => {
                 this.addresses = data;
-                console.log(data);
                 this.msgs = [];
-            }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+                this.isLoading = false;
+            }, err => {
+                this.msgs = ErrorHandler.handleGenericServerError(err);
+                this.isLoading = false;
+            });
     }
 
     showEmployeeEditModal(): void{
@@ -105,6 +112,7 @@ export class EmployeeDetailComponent implements OnInit{
     }
 
     handleAddressUpdate(): void{
+        this.isLoading = true;
         this.getAddresses();
         this.displayPersonalDataEditModal = false;
         this.displayAddressCreateModal = false;

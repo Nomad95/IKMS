@@ -9,6 +9,11 @@
   "ADDRESS": "Adres zamieszkania",
   "REGISTERED_ADDRESS": "Adres zameldowania",
 
+  "NONE":"Brak",
+  "MILD":"Łagodny",
+  "MODERATE":"Umirakowany",
+  "CONSIDERABLE":"Znaczny",
+
   "ROLE_ADMIN": "Administrator",
   "ROLE_EMPLOYEE": "Pracownik",
   "ROLE_PARENT": "Rodzic",

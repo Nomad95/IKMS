@@ -12,12 +12,16 @@ export class AdminSideMenu {
             ]
         },
         {
-            label: 'Użytkownicy',
-            icon: 'fa-file-o',
+            label: 'Rodzice',
+            icon: 'fa-id-card-o',
             items: [
-                {
-                    label: 'Dodaj użytkownika',
-                    routerLink: ['/admin/addUser']
+              {
+                label: 'Dodaj użytkownika',
+                routerLink: ['/admin/addUser']
+              },
+              {
+                  label: 'Lista rodziców',
+                    routerLink: ['/admin/parent']
                 },
                 {
                     label: 'Zarządzaj'
@@ -25,14 +29,16 @@ export class AdminSideMenu {
             ]
         },
         {
-            label: 'Item2',
-            icon: 'fa-file-o',
+            label: 'Dzieci',
+            icon: 'fa-child',
             items: [
                 {
-                    label: 'siemka1'
+                    label: 'Lista dzieci',
+                    routerLink: ['/admin/child']
                 },
                 {
-                    label: 'siemka2'
+                    label: 'Dodaj dziecko',
+                    routerLink: ['/admin/child/new']
                 }
             ]
         }

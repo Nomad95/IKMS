@@ -9,6 +9,8 @@ import pl.politechnika.ikms.repository.user.UserRepository;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.person.PersonalDataDto;
 
+import java.util.Objects;
+
 @Component
 public class PersonalDataEntityMapper extends AbstractModelMapper<PersonalDataEntity, PersonalDataDto> {
 
@@ -22,17 +24,20 @@ public class PersonalDataEntityMapper extends AbstractModelMapper<PersonalDataEn
     @Override
     public PersonalDataDto convertToDto(PersonalDataEntity personalDataEntity) {
         PersonalDataDto personalDataDto = modelMapper.map(personalDataEntity, PersonalDataDto.class);
-        personalDataDto.setUser(new MinimalDto<>(
-                personalDataEntity.getUser().getId(),
-                personalDataEntity.getUser().getUsername()
-        ));
+        if(Objects.nonNull(personalDataEntity.getUser())) {
+            personalDataDto.setUser(new MinimalDto<>(
+                    personalDataEntity.getUser().getId(),
+                    personalDataEntity.getUser().getUsername()
+            ));
+        }
         return personalDataDto;
     }
 
     @Override
     public PersonalDataEntity convertToEntity(PersonalDataDto personalDataDto) {
         PersonalDataEntity personalDataEntity = modelMapper.map(personalDataDto, PersonalDataEntity.class);
-        personalDataEntity.setUser(userRepository.findOne(personalDataDto.getUser().getId()));
+        if(Objects.nonNull(personalDataDto.getUser()))
+            personalDataEntity.setUser(userRepository.findOne(personalDataDto.getUser().getId()));
         return personalDataEntity;
     }
 }

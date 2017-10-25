@@ -35,8 +35,13 @@
 
         <createSequence
                 sequenceName="employees_seq"
-                startValue="1"
+                startValue="4"
                 incrementBy="1"/>
+
+        <loadData
+                tableName="employees"
+                file="liquibase/data/employees.csv"
+        />
 
     </changeSet>
 

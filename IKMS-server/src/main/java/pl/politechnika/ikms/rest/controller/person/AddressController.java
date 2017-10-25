@@ -24,13 +24,11 @@ public class AddressController {
     private final @NonNull AddressEntityMapper addressEntityMapper;
 
     @GetMapping(value = "/{addressId}")
-    @ResponseBody
     public AddressDto getOneAddress(@PathVariable Long addressId){
         return addressEntityMapper.convertToDto(addressService.findOne(addressId));
     }
 
     @PostMapping
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public AddressDto createAddress(@Valid @RequestBody AddressDto addressDto){
         AddressEntity addressEntity = addressService.create(addressEntityMapper.convertToEntity(addressDto));
@@ -38,13 +36,11 @@ public class AddressController {
     }
 
     @GetMapping
-    @ResponseBody
     public Page<AddressDto> getAllAddresses(Pageable pageable){
         return addressService.findAllPaginated(pageable).map(addressEntityMapper::convertToDto);
     }
 
     @PutMapping
-    @ResponseBody
     public AddressDto updateAddress(@Valid @RequestBody AddressDto addressDto){
         AddressEntity addressEntity = addressService.update(addressEntityMapper.convertToEntity(addressDto));
         return addressEntityMapper.convertToDto(addressEntity);
@@ -56,9 +52,15 @@ public class AddressController {
     }
 
     @GetMapping(value = "/personalData/{personalDataId}")
-    @ResponseBody
     public List<AddressDto> getAddressesByPersonalDataId(@PathVariable Long personalDataId){
         return addressService.findByPersonalDataId(personalDataId).stream()
+                .map(addressEntityMapper::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/parent/{parentId}")
+    public List<AddressDto> getAddressesByParentId(@PathVariable Long parentId){
+        return addressService.findByParentId(parentId).stream()
                 .map(addressEntityMapper::convertToDto)
                 .collect(Collectors.toList());
     }

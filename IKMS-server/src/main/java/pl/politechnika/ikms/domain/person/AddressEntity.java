@@ -7,9 +7,6 @@ import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 import pl.politechnika.ikms.domain.person.enums.AddressType;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -24,48 +21,38 @@ public class AddressEntity extends AbstractEntity {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personal_data_id")
+    @JoinColumn(name = "personal_data_id", nullable = false)
     private PersonalDataEntity personalData;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "address_type")
+    @Column(name = "address_type", nullable = false)
     private AddressType addressType;
 
-    @Size(max = 35)
-    @Column(name = "street")
+    @Column(name = "street", length = 35)
     private String street;
 
-    @Min(1)
     @Column(name = "street_number")
     private Integer streetNumber;
 
-    @Column(name = "house_number")
+    @Column(name = "house_number", length = 10)
     private String houseNumber;
 
-    @Size(max = 6)
-    @Column(name = "post_code")
+    @Column(name = "post_code", length = 6)
     private String postCode;
 
-    @Size(max = 35)
-    @Column(name = "city")
+    @Column(name = "city", length = 35)
     private String city;
 
-    @Size(max = 35)
-    @Column(name = "community")
+    @Column(name = "community", length = 35)
     private String community;
 
-    @Size(max = 35)
-    @Column(name = "county")
+    @Column(name = "county", length = 35)
     private String county;
 
-    @Size(max = 35)
-    @Column(name = "voivodeship")
+    @Column(name = "voivodeship", length = 35)
     private String voivodeship;
 
-    @Size(max = 35)
-    @Column(name = "country")
+    @Column(name = "country", length = 35)
     private String country;
 }

@@ -1,10 +1,7 @@
-import { User } from "../user/user";
-
 export class PersonalData {
   
    id: number;
    user: any;
-   employeeRole: string;
    name: string;
    secondaryName: string;
    pesel: string;
@@ -22,11 +19,10 @@ export class PersonalData {
   
   
   constructor(){
-      this.id = -1;
-      this.employeeRole = '';
+      this.id = null;
       this.name = '';
       this.surname = '';
-      this.user = new User();
+      this.user = null;
       this.secondaryName = '';
       this.pesel = '';
       this.dateOfBirth = null;

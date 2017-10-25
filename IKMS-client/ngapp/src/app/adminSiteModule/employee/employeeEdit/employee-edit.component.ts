@@ -28,7 +28,6 @@ export class EmployeeEditComponent implements OnInit{
     ngOnInit(){
         this.employeeAdminService.getEmployee(this.employeeId)
             .subscribe( data => {
-                console.log(data);
                 this.employee = data;
                 this.msgs = [];
             }, err => this.msgs = ErrorHandler.handleGenericServerError(err));

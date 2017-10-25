@@ -1,15 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
-import { HttpModule } from "@angular/http";
-
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent } from './login.component';
+import {
+    CommonModule, NgModule, FormsModule,
+    HttpModule, LoginRoutingModule, LoginComponent } from './index';
 
 import {
-  InputTextModule, ButtonModule,
-  CodeHighlighterModule, MessagesModule,
-  CheckboxModule, PasswordModule } from './index';
+    InputTextModule, ButtonModule,
+    CodeHighlighterModule, MessagesModule,
+    CheckboxModule, PasswordModule } from './index';
 
 
 @NgModule({

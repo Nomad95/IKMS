@@ -22,13 +22,11 @@ public class PersonalDataController {
     private final @NonNull PersonalDataService personalDataService;
 
     @GetMapping(value = "/{personalDataId}")
-    @ResponseBody
     public PersonalDataDto getOnePersonalData(@PathVariable Long personalDataId){
         return personalDataEntityMapper.convertToDto(personalDataService.findOne(personalDataId));
     }
 
     @PostMapping
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public PersonalDataDto createPersonalData(@Valid @RequestBody PersonalDataDto personalDataDto){
         PersonalDataEntity personalDataEntity = personalDataService.create(personalDataEntityMapper.convertToEntity(personalDataDto));
@@ -36,13 +34,11 @@ public class PersonalDataController {
     }
 
     @GetMapping
-    @ResponseBody
     public Page<PersonalDataDto> getAllPersonalData(Pageable pageable){
         return personalDataService.findAllPaginated(pageable).map(personalDataEntityMapper::convertToDto);
     }
 
     @PutMapping
-    @ResponseBody
     public PersonalDataDto updatePersonalData(@Valid @RequestBody PersonalDataDto personalDataDto){
         PersonalDataEntity personalDataEntity = personalDataService.update(personalDataEntityMapper.convertToEntity(personalDataDto));
         return personalDataEntityMapper.convertToDto(personalDataEntity);

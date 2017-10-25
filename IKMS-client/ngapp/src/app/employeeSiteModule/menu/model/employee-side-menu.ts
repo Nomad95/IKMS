@@ -16,14 +16,12 @@ export class EmployeeSideMenu {
             ]
         },
         {
-            label: 'Item1',
-            icon: 'fa-file-o',
+            label: 'Dzieci',
+            icon: 'fa-child',
             items: [
                 {
-                    label: 'siemka1'
-                },
-                {
-                    label: 'siemka2'
+                    label: 'Lista dzieci',
+                    routerLink: ['/employee/child']
                 }
             ]
         },

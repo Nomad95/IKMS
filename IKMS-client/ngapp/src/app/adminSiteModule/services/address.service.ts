@@ -36,4 +36,9 @@ export class AddressAdminService{
         return this.http.post('api/address', JSON.stringify(address) ,{headers: this.headers})
             .map( res => res.json());
     }
+    
+    getAddressesByParentId(parentId): Observable<Address[]>{
+        return this.http.get('api/address/parent/' + parentId, {headers: this.headers})
+        .map( res => res.json());
+    }
 }

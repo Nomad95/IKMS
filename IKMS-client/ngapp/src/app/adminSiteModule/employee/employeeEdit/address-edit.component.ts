@@ -34,7 +34,6 @@ export class AddressEditComponent implements OnInit, OnChanges{
         if(this.addressId != -1) {
             this.addressAdminService.getAddress(this.addressId)
             .subscribe(data => {
-                console.log(data);
                 this.address = data;
                 this.msgs = [];
             }, err => this.msgs = ErrorHandler.handleGenericServerError(err));

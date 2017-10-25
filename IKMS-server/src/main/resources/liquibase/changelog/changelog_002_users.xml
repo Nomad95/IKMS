@@ -45,7 +45,7 @@
 
         <createSequence
                 sequenceName="users_seq"
-                startValue="5"
+                startValue="9"
                 incrementBy="1"/>
 
         <loadData
