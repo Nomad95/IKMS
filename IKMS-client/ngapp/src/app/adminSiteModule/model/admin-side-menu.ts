@@ -12,14 +12,15 @@ export class AdminSideMenu {
             ]
         },
         {
-            label: 'Item1',
+            label: 'Użytkownicy',
             icon: 'fa-file-o',
             items: [
                 {
-                    label: 'siemka1'
+                    label: 'Dodaj użytkownika',
+                    routerLink: ['/admin/addUser']
                 },
                 {
-                    label: 'siemka2'
+                    label: 'Zarządzaj'
                 }
             ]
         },

@@ -7,5 +7,10 @@
 
   "CORRESPONDENCE_ADDRESS": "Adres do korespondencji",
   "ADDRESS": "Adres zamieszkania",
-  "REGISTERED_ADDRESS": "Adres zameldowania"
+  "REGISTERED_ADDRESS": "Adres zameldowania",
+
+  "ROLE_ADMIN": "Administrator",
+  "ROLE_EMPLOYEE": "Pracownik",
+  "ROLE_PARENT": "Rodzic",
+  "ROLE_ANONYMOUS": "Niezdefiniowany"
 }

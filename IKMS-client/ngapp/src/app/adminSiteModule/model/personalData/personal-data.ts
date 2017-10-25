@@ -1,3 +1,5 @@
+import { User } from "../user/user";
+
 export class PersonalData {
   
    id: number;
@@ -24,7 +26,7 @@ export class PersonalData {
       this.employeeRole = '';
       this.name = '';
       this.surname = '';
-      this.user = {};
+      this.user = new User();
       this.secondaryName = '';
       this.pesel = '';
       this.dateOfBirth = null;

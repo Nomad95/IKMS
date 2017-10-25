@@ -9,6 +9,11 @@ import { EmployeeEditComponent } from "./employee/employeeEdit/employee-edit.com
 import { PersonalDataEditComponent } from "./employee/employeeEdit/personal-data-edit.component";
 import { AddressEditComponent } from "./employee/employeeEdit/address-edit.component";
 import { AddressCreateComponent } from "./employee/employeeEdit/address-create.component";
+import { RegistrationComponent } from "./registration/registration.component";
+import { EmployeeRegistrationComponent } from "./registration/employee-registration/employee-registration.component";
+import { AdminRegistrationComponent } from "./registration/admin-registration/admin-registration.component";
+import { ParentRegistrationComponent } from "./registration/parent-registration/parent-registration.component";
+import { AddressRegistrationComponent } from "./registration/address-registration/address-registration.component";
 
 import { EnumTranslatePipe } from "../commons/pipes/enum-translate";
 
@@ -52,7 +57,7 @@ import { GrowlModule } from "../../../node_modules/primeng/components/growl/grow
         PanelModule,
         CalendarModule,
         ConfirmDialogModule,
-        GrowlModule
+        GrowlModule,
     ],
     declarations: [
         AdminSiteComponent,
@@ -63,7 +68,12 @@ import { GrowlModule } from "../../../node_modules/primeng/components/growl/grow
         AddressEditComponent,
         PersonalDataEditComponent,
         AddressCreateComponent,
-        EnumTranslatePipe
+        EnumTranslatePipe,
+        RegistrationComponent,
+        AdminRegistrationComponent,
+        EmployeeRegistrationComponent,
+        ParentRegistrationComponent,
+        AddressRegistrationComponent
   ]
 })
 export class AdminSiteModule { }

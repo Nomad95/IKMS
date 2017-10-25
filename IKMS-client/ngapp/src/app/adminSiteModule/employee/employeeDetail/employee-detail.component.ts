@@ -3,9 +3,9 @@ import { EmployeeAdminService } from "../../services/employee-admin.service";
 import { AddressAdminService } from "../../services/address.service";
 import { PersonalDataAdminService } from "../../services/personal-data.service";
 import { ActivatedRoute } from "@angular/router";
-import { Employee } from "../../menu/model/employee/employee";
-import {PersonalData} from "../../menu/model/personalData/personal-data";
-import {Address} from "../../menu/model/address/address";
+import { Employee } from "../../model/employee/employee";
+import {PersonalData} from "../../model/personalData/personal-data";
+import {Address} from "../../model/address/address";
 import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 
@@ -20,7 +20,7 @@ export class EmployeeDetailComponent implements OnInit{
         private addressAdminService: AddressAdminService,
         private personalDataAdminService: PersonalDataAdminService,
         private route: ActivatedRoute){}
-  
+
     private employeeId: number;
     private personalDataId: number;
     private employee: Employee;
@@ -28,21 +28,21 @@ export class EmployeeDetailComponent implements OnInit{
     private addresses: Address[];
     private editAddressId = -1;
     private msgs: Message[] = [];
-    
+
     private displayEmployeeEditModal = false;
     private displayPersonalDataEditModal = false;
     private displayAddressEditModal = false;
     private displayAddressCreateModal = false;
-    
+
     ngOnInit(){
         this.employeeId = this.route.snapshot.params['id'];
         this.personalDataId = this.route.snapshot.queryParams['personalDataId'] || -1;
-        
+
         this.getEmployee();
         this.getPersonalData();
         this.getAddresses();
     }
-    
+
     getEmployee(){
         this.employeeAdminService.getEmployee(this.employeeId)
             .subscribe( data => {
@@ -51,7 +51,7 @@ export class EmployeeDetailComponent implements OnInit{
                 this.msgs = [];
             }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
-    
+
     getPersonalData(){
         this.personalDataAdminService.getPersonalData(this.personalDataId)
             .subscribe( data => {
@@ -60,7 +60,7 @@ export class EmployeeDetailComponent implements OnInit{
                 this.msgs = [];
             }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
-    
+
     getAddresses(){
         this.addressAdminService.getAddressesByPersonalDataId(this.personalDataId)
             .subscribe( data => {
@@ -69,41 +69,41 @@ export class EmployeeDetailComponent implements OnInit{
                 this.msgs = [];
             }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
     }
-    
+
     showEmployeeEditModal(): void{
         this.displayEmployeeEditModal = true;
     }
-    
+
     showPersonalDataEditModal(): void{
         this.displayPersonalDataEditModal = true;
     }
-    
+
     showAddressEditModal(addressId): void{
         this.editAddressId = addressId;
         this.displayAddressEditModal = true;
     }
-    
+
     showAddressCreateModal(){
         this.displayAddressCreateModal = true;
     }
-    
+
     handleModalClose(value): void{
         this.displayEmployeeEditModal = value;
         this.displayPersonalDataEditModal = value;
         this.displayAddressEditModal = value;
         this.displayAddressCreateModal = value;
     }
-    
+
     handleEmployeeUpdate(value): void{
         this.employee = value;
         this.displayEmployeeEditModal = false;
     }
-    
+
     handlePersonalDataUpdate(value): void{
         this.personalData = value;
         this.displayPersonalDataEditModal = false;
     }
-    
+
     handleAddressUpdate(): void{
         this.getAddresses();
         this.displayPersonalDataEditModal = false;
