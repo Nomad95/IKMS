@@ -1,0 +1,4 @@
+id,personal_data_id,parent_id,diseases,allergies,disability_level
+1,8,1,,,NONE
+2,9,2,Opryszczka,Banany Pleśń,NONE
+3,10,3,,,NONE
