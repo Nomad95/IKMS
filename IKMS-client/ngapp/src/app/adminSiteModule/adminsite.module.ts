@@ -15,9 +15,10 @@ import {
     PanelModule, InputTextModule, DialogModule,
     MessagesModule, DropdownModule, InputMaskModule,
     CalendarModule, ConfirmDialogModule, GrowlModule,
-    BreadcrumbModule, TooltipModule, InputTextareaModule } from './index';
+    BreadcrumbModule, TooltipModule, InputTextareaModule,
+    SharedModule } from './index';
 
-import {SharedModule} from "./sharedModule/shared-module.module";
+
 
 @NgModule({
     imports: [

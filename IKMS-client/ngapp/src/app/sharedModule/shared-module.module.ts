@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
+import {EnumTranslatePipe} from "../commons/pipes/enum-translate";
 
-import {EnumTranslatePipe} from "../../commons/pipes/enum-translate";
 
 @NgModule({
     declarations: [

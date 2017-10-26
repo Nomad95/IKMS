@@ -1,12 +1,10 @@
 import { Injectable }       from '@angular/core';
 import {
-    CanActivate, Router,
-    ActivatedRouteSnapshot,
-    RouterStateSnapshot, CanActivateChild
-}                           from '@angular/router';
+    CanActivate, Router, ActivatedRouteSnapshot,
+    RouterStateSnapshot, CanActivateChild } from '@angular/router';
 import {LoginService} from "../../loginModule/service/login.service";
-import {TokenUtils} from "../util/token-utils";
 import {Observable} from "rxjs/Observable";
+import {TokenUtils} from "../util/token-utils";
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
@@ -32,7 +30,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                 currentRole = data.role;
                 this.loginService.setStoredRole(currentRole);
                 return this.checkRoleAndLogin(role,currentRole,prevUrl);
-    
             });
         } else {
             return this.checkRoleAndLogin(role,currentRole,prevUrl);
@@ -42,6 +39,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     checkRoleAndLogin(neededRole, currentRole, prevUrl){
         if (neededRole != currentRole) {
             this.router.navigate(prevUrl);
+            this.loginService.setStoredRole(null);
             return false;
         }
     

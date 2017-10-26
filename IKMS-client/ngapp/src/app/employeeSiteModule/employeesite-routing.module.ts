@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmployeeSiteComponent } from './employeesite.component';
-import {AuthGuard} from "../commons/guards/auth-guard";
-import {ChildrenListComponent} from "./children/childrenList/children-list.component";
-import {ChildrenDetailComponent} from "./children/childrenDetail/children-detail.component";
+import { ChildrenListComponent} from "./children/childrenList/children-list.component";
+import { ChildrenDetailComponent} from "./children/childrenDetail/children-detail.component";
+import { AuthGuard} from "../commons/guards/auth-guard";
 
 const routes: Routes = [
     {

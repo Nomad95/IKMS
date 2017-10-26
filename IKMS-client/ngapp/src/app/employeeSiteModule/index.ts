@@ -29,6 +29,7 @@ export { ConfirmDialogModule } from "../../../node_modules/primeng/components/co
 export { GrowlModule } from "../../../node_modules/primeng/components/growl/growl";
 export { BreadcrumbModule } from "../../../node_modules/primeng/components/breadcrumb/breadcrumb";
 export { TooltipModule } from "../../../node_modules/primeng/components/tooltip/tooltip";
+export { SharedModule } from "../sharedModule/shared-module.module";
 
 export {AddressEditComponent} from "./shared/address-edit.component";
 export {PersonalDataEditComponent} from "./shared/personal-data-edit.component";
