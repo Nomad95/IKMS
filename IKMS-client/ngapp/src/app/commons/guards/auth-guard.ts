@@ -10,7 +10,6 @@ import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
-    
     constructor(
             private loginService: LoginService,
             private router: Router
@@ -25,24 +24,33 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     }
     
     checkAuth(role, prevUrl, nextUrl){
-        let currentRole = null;
+        let currentRole = this.loginService.getStoredRole();
         this.loginService.redirectUrl = nextUrl;
-        return this.loginService.getRole()
-            .map(data =>{
+        if(!currentRole) {
+            return this.loginService.getRoleFromToken()
+            .map(data => {
                 currentRole = data.role;
+                this.loginService.setStoredRole(currentRole);
+                return this.checkRoleAndLogin(role,currentRole,prevUrl);
     
-                if(role != currentRole){
-                    this.router.navigate(prevUrl);
-                    return false;
-                }
-    
-                let isLogged = TokenUtils.isLogged();
-                if(isLogged){
-                    return true;
-                } else {
-                    this.router.navigate(prevUrl);
-                }
-                return false;
             });
+        } else {
+            return this.checkRoleAndLogin(role,currentRole,prevUrl);
+        }
+    }
+    
+    checkRoleAndLogin(neededRole, currentRole, prevUrl){
+        if (neededRole != currentRole) {
+            this.router.navigate(prevUrl);
+            return false;
+        }
+    
+        let isLogged = TokenUtils.isLogged();
+        if (isLogged) {
+            return true;
+        } else {
+            this.router.navigate(prevUrl);
+        }
+        return false;
     }
 }

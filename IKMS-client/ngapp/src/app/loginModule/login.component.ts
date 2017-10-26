@@ -26,7 +26,7 @@ export class LoginComponent {
         
         this.loginService.login(credentials).subscribe(response => {
             this.messages = [];
-            this.loginService.getRole()
+            this.loginService.getRoleFromToken()
             .subscribe(data => {
                 this.forwardToSiteByRole(data);
                 this.isLoading = false;

@@ -12,6 +12,7 @@ export class LoginService {
     public username: string;
     public redirectUrl: string;
     private headers: Headers;
+    private storedRole: string = null;
     
     constructor(private http: Http,private router: Router) {
         // set token if saved in local storage
@@ -55,7 +56,15 @@ export class LoginService {
         TokenUtils.removeStoredTokens();
     }
     
-    getRole(): Observable<any> {
+    getStoredRole(): string{
+        return this.storedRole;
+    }
+    
+    setStoredRole(role){
+        this.storedRole = role;
+    }
+    
+    getRoleFromToken(): Observable<any> {
         let headers: Headers = TokenUtils.createHeaderWithToken();
         return this.http.get('auth/role', {headers: headers})
         .map(res => {
