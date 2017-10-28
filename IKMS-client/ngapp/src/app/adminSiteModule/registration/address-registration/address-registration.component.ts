@@ -16,6 +16,7 @@ export class AddressRegistrationComponent implements OnInit, OnDestroy {
   constructor(private registrationService: RegistrationService, private utilMethods: UtilMethods, private enumProvider: EnumProvider) { }
 
   @Output() deleteAddressEmitter: EventEmitter<number> = new EventEmitter<number>();
+  @Output() addressIsValidEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() address: Address;
   @Input() id: number;
   private addressTypes = EnumProvider.ADDRESS_TYPES;
@@ -23,16 +24,21 @@ export class AddressRegistrationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.addressTypes = this.enumProvider.translateToDropdown(this.addressTypes);
     this.address.addressType = this.addressTypes[0]['value'];
+    this.addressIsValid();
   }
 
   deleteAddress() {
     this.deleteAddressEmitter.emit(this.id);
   }
 
+  addressIsValid() {   
+    this.addressIsValidEmitter.emit(this.address.streetNumber>0);
+  }
+
   firstLetterUpperCase(value: string) {
     return this.utilMethods.firstLetterUpperCase(value);
   }
-  
+
   ngOnDestroy() {
 
   }

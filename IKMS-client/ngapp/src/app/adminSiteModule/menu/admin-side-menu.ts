@@ -1,6 +1,16 @@
 export class AdminSideMenu {
     static items = [
         {
+            label: 'Użytkownicy',
+            icon: 'fa-users',
+            items: [
+                {
+                    label: 'Dodaj użytkownika',
+                    routerLink: ['/admin/addUser']
+                },
+            ]
+        },
+        {
             label: 'Pracownicy',
             icon: 'fa-address-card',
             items: [{
@@ -15,10 +25,6 @@ export class AdminSideMenu {
             label: 'Rodzice',
             icon: 'fa-id-card-o',
             items: [
-              {
-                label: 'Dodaj użytkownika',
-                routerLink: ['/admin/addUser']
-              },
               {
                   label: 'Lista rodziców',
                     routerLink: ['/admin/parent']

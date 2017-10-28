@@ -35,7 +35,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   private employeeRoles = EnumProvider.EMPLOYEE_ROLES;
   private genders = EnumProvider.GENDERS;
   private numberOfAddresses = 1;
-  private nipIsCorrect;
+  private nipIsCorrect: boolean;
+  private addressIsValidArray: boolean[] = [];
+  private addressesIsValid: boolean;
   private msgs: Message[] = [];
 
   private init() {
@@ -121,6 +123,21 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     if (index !== -1) {
       this.addresses.splice(index, 1);
     }
+  }
+
+  addressIsValid(isValid: boolean, id:number): void {
+    this.addressIsValidArray[id] = isValid;
+    this.addressesValidate();
+    console.log("valid: "+isValid);
+    
+  }
+
+  addressesValidate(){
+    let isTrue = true;
+    for(let isValid of this.addressIsValidArray)
+      if(isValid == false) isTrue = false;
+      
+      this.addressesIsValid = isTrue;
   }
 
   numberOfAddressesExhausted(): boolean {

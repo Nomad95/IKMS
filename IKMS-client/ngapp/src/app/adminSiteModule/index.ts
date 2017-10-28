@@ -28,7 +28,6 @@ export {LoginService} from "../loginModule/service/login.service";
 
 export { HttpModule } from "@angular/http";
 export { FormsModule } from "@angular/forms";
-export { SharedModule } from "../sharedModule/shared-module.module";
 export { PanelMenuModule } from "../../../node_modules/primeng/components/panelmenu/panelmenu";
 export { ButtonModule } from "../../../node_modules/primeng/components/button/button";
 export { TabViewModule } from "../../../node_modules/primeng/components/tabview/tabview";
@@ -48,4 +47,4 @@ export { GrowlModule } from "../../../node_modules/primeng/components/growl/grow
 export { BreadcrumbModule } from "../../../node_modules/primeng/components/breadcrumb/breadcrumb";
 export { TooltipModule } from "../../../node_modules/primeng/components/tooltip/tooltip";
 export { InputTextareaModule } from "../../../node_modules/primeng/components/inputtextarea/inputtextarea";
-export {SharedModule} from "./sharedModule/shared-module.module";
+export { SharedModule } from "../sharedModule/shared-module.module";
