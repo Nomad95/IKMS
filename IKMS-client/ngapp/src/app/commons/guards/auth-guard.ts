@@ -14,11 +14,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     ){};
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean |  Observable<boolean> | Promise<boolean>{
-        return this.checkAuth(route.data['role'], route.url, state.url);
+        return this.checkAuth(route.data['role'], state.url, route.url);
     }
     
     canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-        return this.checkAuth(childRoute.data['role'], childRoute.url, state.url);
+        return this.checkAuth(childRoute.data['role'], state.url, childRoute.url);
     }
     
     checkAuth(role, prevUrl, nextUrl){
@@ -38,7 +38,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     
     checkRoleAndLogin(neededRole, currentRole, prevUrl){
         if (neededRole != currentRole) {
-            this.router.navigate(prevUrl);
+            //this.router.navigate([prevUrl]);//todo: dont work
+            this.router.navigate(['/login']);
             this.loginService.setStoredRole(null);
             return false;
         }
@@ -47,7 +48,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         if (isLogged) {
             return true;
         } else {
-            this.router.navigate(prevUrl);
+            this.router.navigate(['/login']);
         }
         return false;
     }

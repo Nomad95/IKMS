@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
+import pl.politechnika.ikms.domain.group.GroupEntity;
 import pl.politechnika.ikms.domain.person.enums.DisabilityLevel;
 
 import javax.persistence.*;
@@ -38,4 +39,8 @@ public class ChildEntity extends AbstractEntity{
     @Column(name = "disability_level", nullable = false)
     @Enumerated(EnumType.STRING)
     private DisabilityLevel disabilityLevel;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private GroupEntity group;
 }

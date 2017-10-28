@@ -69,6 +69,10 @@
                 referencedColumnNames="id"
                 referencedTableName="users"/>
 
+        <createIndex tableName="personal_data" indexName="idx_fk_per_data_usr">
+            <column name="user_id"></column>
+        </createIndex>
+
         <createSequence
                 sequenceName="personal_data_seq"
                 startValue="8"

@@ -27,6 +27,10 @@
                 referencedColumnNames="id"
                 referencedTableName="personal_data"/>
 
+        <createIndex tableName="parents" indexName="idx_fk_prnt_per_data">
+            <column name="personal_data_id"></column>
+        </createIndex>
+
         <createSequence
                 sequenceName="parents_seq"
                 startValue="4"

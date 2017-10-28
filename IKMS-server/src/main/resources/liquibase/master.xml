@@ -10,6 +10,7 @@
     <include file="liquibase/changelog/changelog_004_parents.xml"/>
     <include file="liquibase/changelog/changelog_005_employees.xml"/>
     <include file="liquibase/changelog/changelog_006_addresses.xml"/>
-    <include file="liquibase/changelog/changelog_007_children.xml"/>
+    <include file="liquibase/changelog/changelog_007_groups.xml"/>
+    <include file="liquibase/changelog/changelog_008_children.xml"/>
 
 </databaseChangeLog>
