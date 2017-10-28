@@ -11,14 +11,16 @@ import {
 import {AuthGuard, LoginService} from './index';
 
 import {
-  HttpModule, FormsModule, PanelMenuModule,
-  ButtonModule, TabViewModule, CodeHighlighterModule,
-  MegaMenuModule, DataTableModule, PaginatorModule,
-  PanelModule, InputTextModule, DialogModule,
-  MessagesModule, DropdownModule, InputMaskModule,
-  CalendarModule, ConfirmDialogModule, GrowlModule,
-  BreadcrumbModule, TooltipModule, InputTextareaModule, SharedModule
-} from './index';
+    HttpModule, FormsModule, PanelMenuModule,
+    ButtonModule, TabViewModule, CodeHighlighterModule,
+    MegaMenuModule, DataTableModule, PaginatorModule,
+    PanelModule, InputTextModule, DialogModule,
+    MessagesModule, DropdownModule, InputMaskModule,
+    CalendarModule, ConfirmDialogModule, GrowlModule,
+    BreadcrumbModule, TooltipModule, InputTextareaModule,
+    SharedModule } from './index';
+
+
 
 @NgModule({
   imports: [

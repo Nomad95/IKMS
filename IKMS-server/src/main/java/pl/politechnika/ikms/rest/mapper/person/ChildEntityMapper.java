@@ -5,22 +5,27 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import pl.politechnika.ikms.commons.abstracts.AbstractModelMapper;
 import pl.politechnika.ikms.domain.person.ChildEntity;
+import pl.politechnika.ikms.repository.group.GroupRepository;
 import pl.politechnika.ikms.repository.person.ParentRepository;
 import pl.politechnika.ikms.repository.person.PersonalDataRepository;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.person.ChildDto;
 import pl.politechnika.ikms.rest.dto.person.ChildGeneralDetailDto;
 
+import java.util.Objects;
+
 @Component
 public class ChildEntityMapper extends AbstractModelMapper<ChildEntity,ChildDto> {
 
     private final @NonNull PersonalDataRepository personalDataRepository;
     private final @NonNull ParentRepository parentRepository;
+    private final @NonNull GroupRepository groupRepository;
 
-    public ChildEntityMapper(ModelMapper modelMapper, PersonalDataRepository personalDataRepository, ParentRepository parentRepository) {
+    public ChildEntityMapper(ModelMapper modelMapper, PersonalDataRepository personalDataRepository, ParentRepository parentRepository, GroupRepository groupRepository) {
         super(modelMapper);
         this.personalDataRepository = personalDataRepository;
         this.parentRepository = parentRepository;
+        this.groupRepository = groupRepository;
     }
 
     @Override
@@ -28,6 +33,10 @@ public class ChildEntityMapper extends AbstractModelMapper<ChildEntity,ChildDto>
         ChildDto childDto = modelMapper.map(childEntity, ChildDto.class);
         childDto.setPersonalData(new MinimalDto<>(childEntity.getPersonalData().getId(),childEntity.getPersonalData().getPesel()));
         childDto.setParent(new MinimalDto<>(childEntity.getParent().getId(),""));
+
+        if(Objects.nonNull(childEntity.getGroup()))
+            childDto.setGroup(new MinimalDto<>(childEntity.getGroup().getId(),childEntity.getGroup().getName()));
+
         return childDto;
     }
 
@@ -36,6 +45,9 @@ public class ChildEntityMapper extends AbstractModelMapper<ChildEntity,ChildDto>
         ChildEntity childEntity = modelMapper.map(childDto, ChildEntity.class);
         childEntity.setPersonalData(personalDataRepository.findOne(childDto.getPersonalData().getId()));
         childEntity.setParent(parentRepository.findOne(childDto.getParent().getId()));
+
+        if(Objects.nonNull(childDto.getGroup()))
+            childEntity.setGroup(groupRepository.findOne(childDto.getGroup().getId()));
 
         return childEntity;
     }

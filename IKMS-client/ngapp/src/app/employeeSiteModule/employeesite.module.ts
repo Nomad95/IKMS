@@ -1,7 +1,7 @@
 import {
     NgModule, CommonModule, EmployeeSiteComponent,
     EmployeeSiteRoutingModule, EmployeeSidebar,
-    FormsModule, HttpModule
+    FormsModule, HttpModule, SharedModule
 } from './index';
 
 import {AuthGuard} from "./index";
@@ -19,10 +19,9 @@ import {
 
 import {
     AddressEditComponent,
-    PersonalDataEditComponent, EnumTranslatePipe, AddressCreateComponent,
+    PersonalDataEditComponent, AddressCreateComponent,
     ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent
 } from './index';
-import {SharedModule} from "../adminSiteModule/sharedModule/shared-module.module";
 
 @NgModule({
     imports: [

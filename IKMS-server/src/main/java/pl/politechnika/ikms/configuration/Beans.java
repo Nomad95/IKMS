@@ -3,6 +3,8 @@ package pl.politechnika.ikms.configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -28,5 +30,10 @@ public class Beans {
         javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer());
         objectMapper.registerModule(javaTimeModule);
         return objectMapper;
+    }
+
+    @Bean
+    public CacheManager cacheManager(){
+        return new ConcurrentMapCacheManager(ApplicationConstants.ROLE_CACHE);
     }
 }

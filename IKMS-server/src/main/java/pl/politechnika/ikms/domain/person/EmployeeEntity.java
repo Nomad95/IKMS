@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
+import pl.politechnika.ikms.domain.group.GroupEntity;
 import pl.politechnika.ikms.domain.person.enums.EmployeeRole;
 
 import javax.persistence.*;
@@ -31,4 +32,7 @@ public class EmployeeEntity extends AbstractEntity {
 
     @Column(name = "nip", length = 13)
     private String nip;
+
+    @OneToOne(mappedBy = "employee")
+    private GroupEntity groupEntity;
 }

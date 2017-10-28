@@ -43,6 +43,10 @@
                 referencedColumnNames="id"
                 referencedTableName="roles"/>
 
+        <createIndex tableName="users" indexName="idx_fk_usr_role">
+            <column name="role"></column>
+        </createIndex>
+
         <createSequence
                 sequenceName="users_seq"
                 startValue="9"

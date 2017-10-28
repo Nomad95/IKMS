@@ -6,4 +6,6 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 
 public final class ApplicationConstants {
     public static final DateTimeFormatter FORMATTER = ofPattern("yyy-MM-dd");
+
+    public static final String ROLE_CACHE = "role";
 }

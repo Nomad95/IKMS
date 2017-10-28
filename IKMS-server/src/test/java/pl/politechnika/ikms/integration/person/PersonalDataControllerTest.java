@@ -304,8 +304,18 @@ public class PersonalDataControllerTest {
 
     //is static because is long and needed in another classes
     public static PersonalDataEntity createPersonalDataEntity(UserEntity savedUser,PersonalDataRepository personalDataRepository) {
-        PersonalDataEntity personalDataEntity = new PersonalDataEntity();
+        PersonalDataEntity personalDataEntity = setPersonalDataEntityFields();
         personalDataEntity.setUser(savedUser);
+        return personalDataRepository.saveAndFlush(personalDataEntity);
+    }
+
+    public static PersonalDataEntity createPersonalDataWithoutUser(PersonalDataRepository personalDataRepository){
+        PersonalDataEntity personalDataEntity = setPersonalDataEntityFields();
+        return personalDataRepository.saveAndFlush(personalDataEntity);
+    }
+
+    private static PersonalDataEntity setPersonalDataEntityFields() {
+        PersonalDataEntity personalDataEntity = new PersonalDataEntity();
         personalDataEntity.setContactNumber(DEFAULT_NUMBER);
         personalDataEntity.setDateOfBirth(DEFAULT_LOCAL_DATE);
         personalDataEntity.setFamilyName(DEFAULT_STRING);
@@ -320,7 +330,7 @@ public class PersonalDataControllerTest {
         personalDataEntity.setSecondaryName(DEFAULT_STRING);
         personalDataEntity.setPlaceOfBirth(DEFAULT_STRING);
         personalDataEntity.setSurname(DEFAULT_STRING);
-        return personalDataRepository.saveAndFlush(personalDataEntity);
+        return personalDataEntity;
     }
 
     private UserEntity createUserEntity() {

@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet author="Kopec" id="changelog_007_children">
+    <changeSet author="Kopec" id="changelog_008_children">
         <createTable tableName="children">
             <column name="id" type="bigint" >
                 <constraints nullable="false" unique="true"/>
@@ -24,6 +24,9 @@
             </column>
             <column name="disability_level" type="varchar(255)" >
                 <constraints nullable="false" />
+            </column>
+            <column name="group_id" type="bigint" >
+                <constraints nullable="true" />
             </column>
         </createTable>
 
@@ -46,6 +49,13 @@
                 referencedColumnNames="id"
                 referencedTableName="parents"/>
 
+        <addForeignKeyConstraint
+                baseColumnNames="group_id"
+                baseTableName="children"
+                constraintName="fk_child_group"
+                referencedColumnNames="id"
+                referencedTableName="groups"/>
+
         <createIndex tableName="children" indexName="idx_fk_chld_per_data">
             <column name="personal_data_id"></column>
         </createIndex>
@@ -54,10 +64,19 @@
             <column name="parent_id"></column>
         </createIndex>
 
+        <createIndex tableName="children" indexName="idx_fk_chld_group">
+            <column name="group_id"></column>
+        </createIndex>
+
         <createSequence
                 sequenceName="children_seq"
                 startValue="1"
                 incrementBy="1"/>
+
+        <loadData
+                tableName="children"
+                file="liquibase/data/children.csv"
+        />
 
     </changeSet>
 

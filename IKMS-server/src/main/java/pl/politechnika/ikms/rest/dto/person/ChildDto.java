@@ -29,4 +29,6 @@ public class ChildDto extends AbstractDto {
 
     @NotNull
     private DisabilityLevel disabilityLevel;
+
+    private MinimalDto<Long, String> group;
 }

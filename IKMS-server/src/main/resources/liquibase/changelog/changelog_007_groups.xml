@@ -5,47 +5,45 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet author="Kopec" id="changelog_005_employees">
-        <createTable tableName="employees">
+    <changeSet author="Kopec" id="changelog_007_groups">
+        <createTable tableName="groups">
             <column name="id" type="bigint" >
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="employee_role" type="varchar(255)" >
+            <column name="name" type="varchar(35)" >
                 <constraints nullable="false" />
             </column>
-            <column name="personal_data_id" type="bigint" >
+            <column name="created_date" type="date" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="boolean" >
                 <constraints nullable="false" />
             </column>
-            <column name="nip" type="varchar(13)" >
-                <constraints nullable="false" />
+            <column name="employee_id" type="bigint" >
+                <constraints nullable="true" />
             </column>
         </createTable>
 
         <addPrimaryKey
                 columnNames="id"
-                constraintName="pk_employee"
-                tableName="employees"/>
+                constraintName="pk_groups"
+                tableName="groups"/>
 
         <addForeignKeyConstraint
-                baseColumnNames="personal_data_id"
-                baseTableName="employees"
-                constraintName="fk_empl_per_data"
+                baseColumnNames="employee_id"
+                baseTableName="groups"
+                constraintName="fk_empl_group"
                 referencedColumnNames="id"
-                referencedTableName="personal_data"/>
+                referencedTableName="employees"/>
 
-        <createIndex tableName="employees" indexName="idx_fk_empl_per_data">
-            <column name="personal_data_id"></column>
+        <createIndex tableName="groups" indexName="idx_fk_empl_group">
+            <column name="employee_id"/>
         </createIndex>
 
         <createSequence
-                sequenceName="employees_seq"
-                startValue="4"
+                sequenceName="groups_seq"
+                startValue="1"
                 incrementBy="1"/>
-
-        <loadData
-                tableName="employees"
-                file="liquibase/data/employees.csv"
-        />
 
     </changeSet>
 
