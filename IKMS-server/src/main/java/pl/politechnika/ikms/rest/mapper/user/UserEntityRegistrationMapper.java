@@ -40,7 +40,7 @@ public class UserEntityRegistrationMapper extends AbstractModelMapper<UserEntity
         UserEntity entity = modelMapper.map(userRegistrationDto, UserEntity.class);
         //hash the password
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        entity.setPassword(bCryptPasswordEncoder.encode(userRegistrationDto.getPassword()));
+        entity.setPassword(bCryptPasswordEncoder.encode("user"));
 
         entity.setCreatedDate(new Date());
         entity.setRole(roleMapper.getRoleFromEnum(userRegistrationDto.getRole()));

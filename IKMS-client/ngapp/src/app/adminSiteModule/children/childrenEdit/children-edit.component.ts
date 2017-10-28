@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EmployeeAdminService } from "../../services/employee-admin.service";
-import { Employee } from "../../menu/model/employee/employee";
+import { Employee } from "../../model/employee/employee";
 import { EnumProvider } from "../../../commons/util/enum-provider";
 import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";

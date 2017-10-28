@@ -22,6 +22,7 @@ export class AddressRegistrationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.addressTypes = this.enumProvider.translateToDropdown(this.addressTypes);
+    this.address.addressType = this.addressTypes[0]['value'];
   }
 
   deleteAddress() {

@@ -16,6 +16,9 @@ export { ParentListComponent } from "./parent/parentList/parent-list.component";
 export { ParentDetailComponent } from "./parent/parentDetails/parent-detail.component";
 export { ParentEditComponent } from "./parent/parentEdit/parent-edit.component";
 export { ChildrenCreateComponent } from "./children/childrenCreate/children-create.component";
+export { RegistrationComponent } from './registration/registration.component';
+export { AddressRegistrationComponent } from "./registration/address-registration/address-registration.component";
+
 
 
 export { EnumTranslatePipe } from "../commons/pipes/enum-translate";
@@ -44,3 +47,4 @@ export { GrowlModule } from "../../../node_modules/primeng/components/growl/grow
 export { BreadcrumbModule } from "../../../node_modules/primeng/components/breadcrumb/breadcrumb";
 export { TooltipModule } from "../../../node_modules/primeng/components/tooltip/tooltip";
 export { InputTextareaModule } from "../../../node_modules/primeng/components/inputtextarea/inputtextarea";
+export {SharedModule} from "./sharedModule/shared-module.module";

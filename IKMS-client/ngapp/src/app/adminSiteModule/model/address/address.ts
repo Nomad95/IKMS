@@ -14,7 +14,7 @@ export class Address{
   
   
   constructor() {
-    this.id = null;
+    this.id = -1;
     this.addressType = '';
     this.personalData = {};
     this.street = '';

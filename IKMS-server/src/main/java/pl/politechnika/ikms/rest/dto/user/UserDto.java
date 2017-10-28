@@ -2,7 +2,9 @@ package pl.politechnika.ikms.rest.dto.user;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.CreatedDate;
 import pl.politechnika.ikms.commons.abstracts.AbstractDto;
+import pl.politechnika.ikms.domain.user.Role;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,4 +29,6 @@ public class UserDto extends AbstractDto {
     private Date lastLogged;
 
     private Date createdDate;
+
+    private Role role;
 }

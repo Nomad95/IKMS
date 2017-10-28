@@ -40,7 +40,7 @@
 							<div class="ui-g-4 ">Nazwisko:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="Nazwisko" class="detail-view-input" maxlength="35" required pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
-								 [(ngModel)]="personalData.surname" (ngModelChange)="personalData.surname = firstLetterUpperCaseAndGenerateUsername(personalData.surname)"
+								 [(ngModel)]="personalData.surname" (ngModelChange)="personalData.surname = firstLetterUpperCaseAndGenerateUsername(personalData.surname); onChange();"
 								 name="personalData.surname" #surname="ngModel">
 								<div class="ui-g-12 validation-err" *ngIf="surname.errors?.pattern">
 									Pole nie może zawierać znaków specjalnych
@@ -186,8 +186,8 @@
 						<div class="ui-g-12">
 							<div class="ui-g-4 ">Nazwa użytkownika:</div>
 							<div class="ui-g-8 ">
-								<input type="text" pInputText placeholder="username" class="detail-view-input" [(ngModel)]="personalData.user.username" disabled
-								 name="personalData.user.username" #username="ngModel">
+								<input type="text" pInputText placeholder="username" class="detail-view-input" [(ngModel)]="user.username" disabled
+								 name="user.username" #username="ngModel">
 							</div>
 						</div>
 
@@ -195,7 +195,7 @@
 							<div class="ui-g-4 ">E-mail:</div>
 							<div class="ui-g-8 ">
 								<input type="email" pInputText #email="ngModel" class="detail-view-input" maxlength="45" required placeholder="nazwa@poczta.pl"
-								 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,3}$" name="personalData.user.email" [(ngModel)]="personalData.user.email">
+								 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,3}$" name="user.email" [(ngModel)]="user.email">
 								<div class="ui-g-12 validation-err" *ngIf="email.errors?.pattern">
 									Podany email jest niepoprawny.
 								</div>
@@ -205,16 +205,54 @@
 						<div class="ui-g-12">
 							<div class="ui-g-4 ">Typ użytkownika:</div>
 							<div class="ui-g-8 ">
-								<p-dropdown [options]="roles" [autoWidth]="true" required placeholder="Wybierz typ..." [(ngModel)]="personalData.user.role"
-								 name="personalData.user.role" #role="ngModel">
+								<p-dropdown [options]="userRoles" [autoWidth]="true" required placeholder="Wybierz typ..." [(ngModel)]="user.role"
+								 name="user.role" #role="ngModel" (ngModelChange)="whoIsThis()">
 								</p-dropdown>
 							</div>
 						</div>
-
+						<div class="ui-g-12 ui-sm-12">
+							<div *ngIf="user.role == 'ROLE_ADMIN'">
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">NIP:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText placeholder="1234567890" class="detail-view-input" maxlength="10" pattern="[0-9]*" [(ngModel)]="employee.nip"
+										 name="employee.nip" #nip="ngModel" (ngModelChange)="nipIsValid()">
+										<div class="ui-g-12 validation-err" *ngIf="nip.errors?.pattern">
+											Pole może zawierać tylko cyfry.
+										</div>
+										<div class="ui-g-12 validation-err" *ngIf="employee.nip.length > 9 && !nipIsCorrect">
+											Podany NIP jest niepoprawny.
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ui-g-12 ui-sm-12">
+								<div *ngIf="user.role == 'ROLE_EMPLOYEE'">
+									<div class="ui-g-12">
+										<div class="ui-g-4 ">NIP:</div>
+										<div class="ui-g-8 ">
+											<input type="text" pInputText placeholder="1234567890" class="detail-view-input" maxlength="10" pattern="[0-9]*" [(ngModel)]="employee.nip"
+											 name="employee.nip" #nip="ngModel" (ngModelChange)="nipIsValid()">
+											<div class="ui-g-12 validation-err" *ngIf="nip.errors?.pattern">
+												Pole może zawierać tylko cyfry.
+											</div>
+											<div class="ui-g-12 validation-err" *ngIf="employee.nip.length > 9 && !nipIsCorrect">
+												Podany NIP jest niepoprawny.
+											</div>
+										</div>
+									</div>
+									<div class="ui-g-12">
+											<div class="ui-g-4 ">Stanowisko pracownika:</div>
+											<div class="ui-g-8 ">
+												<p-dropdown [options]="employeeRoles" [autoWidth]="true" required placeholder="Wybierz stanowisko..." [(ngModel)]="employee.employeeRole"
+												 name="employee.employeeRole" #role="ngModel">
+												</p-dropdown>
+											</div>
+									</div>
+								</div>
+							</div>
 					</div>
-					<!-- <div class="ui-g-12 ui-sm-12" *ngIf="numberOfAddresses == 1">
-						<address-registration (addAddressToAddressesList)='addAddressToAddressesList($event)'></address-registration>
-					</div> -->
 				 	<div class="ui-g-12 ui-sm-12" *ngFor="let address of addresses">
 								<address-registration (deleteAddressEmitter)='deleteAddress($event)' [id]='addresses.indexOf(address)' [address]='address'></address-registration>
 							</div>
@@ -223,21 +261,10 @@
 						<button pButton title="Dodaj adres" label="Dodaj adres" (click)="addNewAddressToAddressesList()"></button>
 					</div>
 
-					<div class="ui-g-12 ui-sm-12">
-						<div *ngIf="personalData.user.role == 'ROLE_ADMIN'">
-							<admin-registration></admin-registration>
-						</div>
-						<div *ngIf="personalData.user.role == 'ROLE_EMPLOYEE'">
-							<employee-registration></employee-registration>
-						</div>
-						<div *ngIf="personalData.user.role == 'ROLE_PARENT'">
-							<parent-registration></parent-registration>
-						</div>
-					</div>
 					<div class="ui-g-11 ui-sm-12">
 						<div class="pull-right">
 							<button pButton title="Wyczyść formularz" label="Wyczyść" (click)="resetForm()"></button>
-							<button type="submit" pButton [disabled]="!editForm.valid" label="Dodaj" [title]="!editForm.valid ? 'Niepoprawne dane' : 'Dodaj'" (click)="addUser()"></button>
+							<button type="submit" pButton [disabled]="!editForm.valid" label="Dodaj" [title]="!editForm.valid ? 'Niepoprawne dane' : 'Dodaj'" (click)="submit()"></button>
 						</div>
 					</div>
 				</div>

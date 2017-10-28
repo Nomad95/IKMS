@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeAdminService } from "../../services/employee-admin.service";
-import { EmployeeGeneral } from "../../menu/model/employee/employee-general";
+import { EmployeeGeneral } from "../../model/employee/employee-general";
 import { Page } from "../../../commons/model/page";
 import { Router } from "@angular/router";
 import {ConfirmationService, MenuItem, Message} from "primeng/primeng";
