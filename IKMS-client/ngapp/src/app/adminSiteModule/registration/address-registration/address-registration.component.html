@@ -1,12 +1,12 @@
 <div class="ui-g-11 ui-sm-11">
-<i class="fa fa-times fa-2x pull-right" role="button" title="Usuń adres" (click)="deleteAddress()">
-</i>
+	<i class="fa fa-times fa-2x pull-right" role="button" title="Usuń adres" (click)="deleteAddress()"></i>
+	<i class="fa fa-undo fa-2x" aria-hidden="true" role="button" title="Wyczyść pola" (click)="resetAddress()"></i>
 </div>
 <div class="ui-g-6 ui-sm-12">
 	<div class="ui-g-12">
 		<div class="ui-g-4 ">Ulica:</div>
 		<div class="ui-g-8 ">
-			<input type="text" pInputText placeholder="-" class="detail-view-input" maxlength="35" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ0-9\-\ ]*"
+			<input type="text" pInputText placeholder="-" class="detail-view-input" maxlength="35" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ0-9\-\. ]*"
 			 [(ngModel)]="address.street" name="street" #street="ngModel">
 			<div class="ui-g-12 validation-err" *ngIf="street.errors?.pattern">
 				Pole nie może zawierać znaków specjalnych
@@ -15,12 +15,17 @@
 	</div>
 
 	<div class="ui-g-12">
-		<div class="ui-g-4 ">Numer domu:<span class="red">*</span></div>
+		<div class="ui-g-4 ">Numer domu:<span class="red">*</span>
+			
+		</div>
 		<div class="ui-g-8 ">
 			<input type="text" pInputText placeholder="-" class="detail-view-input" required maxlength="10" pattern="[0-9]*" [(ngModel)]="address.streetNumber"
 			 name="streetNumber" #streetNumber="ngModel" (ngModelChange)="addressIsValid()">
 			<div class="ui-g-12 validation-err" *ngIf="streetNumber.errors?.pattern">
 				Pole może zawierać tylko cyfry
+			</div>
+			<div class="ui-g-12 validation-err" *ngIf="streetNumber.touched && streetNumber.errors?.required">
+				Pole nie może być puste
 			</div>
 		</div>
 	</div>
@@ -105,7 +110,8 @@
 	<div class="ui-g-12">
 		<div class="ui-g-4 ">Rodzaj adresu:</div>
 		<div class="ui-g-8 ">
-			<p-dropdown [options]="addressTypes" [autoWidth]="false" required [(ngModel)]="address.addressType" name="address.addressType" #addressType></p-dropdown>
+			<p-dropdown [options]="addressTypes" [autoWidth]="false" required [(ngModel)]="address.addressType" name="address.addressType"
+			 #addressType></p-dropdown>
 		</div>
 	</div>
 </div>

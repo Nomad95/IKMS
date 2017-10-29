@@ -4,13 +4,15 @@
 	<h3>Dodaj użytkownika:</h3>
 	<div class="row">
 		<div class="col-md-12">
-			<form #editForm="ngForm">
+			<form #registrationForm="ngForm">
 
 				<div class="ui-g-12">
 					<div class="ui-g-6 ui-sm-12">
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Imię:<span class="red">*</span></div>
+							<div class="ui-g-4 ">Imię:
+								<span class="red">*</span>
+							</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="Imię" class="detail-view-input" maxlength="25" required pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
 								 [(ngModel)]="personalData.name" (ngModelChange)="personalData.name = firstLetterUpperCaseAndGenerateUsername(personalData.name)"
@@ -37,7 +39,9 @@
 						</div>
 
 						<div class=" ui-g-6 ui-g-12">
-							<div class="ui-g-4 ">Nazwisko:<span class="red">*</span></div>
+							<div class="ui-g-4 ">Nazwisko:
+								<span class="red">*</span>
+							</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="Nazwisko" class="detail-view-input" maxlength="35" required pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
 								 [(ngModel)]="personalData.surname" (ngModelChange)="personalData.surname = firstLetterUpperCaseAndGenerateUsername(personalData.surname); onChange();"
@@ -52,7 +56,9 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Data urodzenia:<span class="red">*</span></div>
+							<div class="ui-g-4 ">Data urodzenia:
+								<span class="red">*</span>
+							</div>
 							<div class="ui-g-8 ">
 								<p-calendar [dataType]="string" [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:2020" (onSelect)="onDateSelected($event)"
 								 required inputStyleClass="detail-view-input" [(ngModel)]="personalData.dateOfBirth" [maxDate]="maxDate" name="dateOfBirth"
@@ -61,13 +67,15 @@
 									To pole jest wymagane.
 								</div>
 								<div class="ui-g-12 validation-err" *ngIf="dateOfBirth.touched && dateOfBirth.errors?.required">
-										To pole jest wymagane.
+									To pole jest wymagane.
 								</div>
 							</div>
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Płeć:<span class="red">*</span></div>
+							<div class="ui-g-4 ">Płeć:
+								<span class="red">*</span>
+							</div>
 							<div class="ui-g-8 ">
 								<p-dropdown [options]="genders" [autoWidth]="true" placeholder="Wybierz płeć" class="detail-view-input" [(ngModel)]="personalData.gender"
 								 (ngModelChange)="whetherMan()" required name="gender" #gender="ngModel"></p-dropdown>
@@ -108,7 +116,9 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">PESEL:<span class="red">*</span></div>
+							<div class="ui-g-4 ">PESEL:
+								<span class="red">*</span>
+							</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="-" class="detail-view-input" maxlength="11" required pattern="[0-9]*" [(ngModel)]="personalData.pesel"
 								 name="pesel" #pesel="ngModel">
@@ -126,7 +136,9 @@
 					<div class="ui-g-6 ui-sm-12">
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Miejsce urodzenia:<span class="red">*</span></div>
+							<div class="ui-g-4 ">Miejsce urodzenia:
+								<span class="red">*</span>
+							</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="-" class="detail-view-input" required maxlength="30" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
 								 [(ngModel)]="personalData.placeOfBirth" name="placeOfBirth" #placeOfBirth="ngModel" (ngModelChange)="personalData.placeOfBirth = firstLetterUpperCase(personalData.placeOfBirth)">
@@ -140,7 +152,10 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Narodowość:<span class="red">*</span></div>
+							<div class="ui-g-4 ">Narodowość:
+								<span class="red">*</span>
+
+							</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="-" class="detail-view-input" [(ngModel)]="personalData.nationality" required maxlength="45"
 								 pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*" name="nationality" #nationality="ngModel" (ngModelChange)="personalData.nationality = firstLetterUpperCase(personalData.nationality)">
@@ -189,27 +204,34 @@
 						<div class="ui-g-12">
 							<div class="ui-g-4 ">Nazwa użytkownika:</div>
 							<div class="ui-g-8 ">
-								<input type="text" pInputText placeholder="username" class="detail-view-input" [(ngModel)]="user.username" disabled
-								 name="user.username" #username="ngModel">
+								<input type="text" pInputText placeholder="username" class="detail-view-input" [(ngModel)]="user.username" disabled name="user.username"
+								 #username="ngModel">
 							</div>
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">E-mail:<span class="red">*</span></div>
+							<div class="ui-g-4 ">E-mail:
+								<span class="red">*</span>
+							</div>
 							<div class="ui-g-8 ">
 								<input type="email" pInputText #email="ngModel" class="detail-view-input" maxlength="45" required placeholder="nazwa@poczta.pl"
 								 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,3}$" name="user.email" [(ngModel)]="user.email">
-								<div class="ui-g-12 validation-err" *ngIf="email.errors?.pattern">
+								<div class="ui-g-12 validation-err" *ngIf="email.touched && email.errors?.required">
+									Pole nie może być puste
+								</div>
+								<div class="ui-g-12 validation-err" *ngIf="email.touched && email.errors?.pattern">
 									Podany email jest niepoprawny.
 								</div>
 							</div>
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Typ użytkownika:<span class="red">*</span></div>
+							<div class="ui-g-4 ">Typ użytkownika:
+								<span class="red">*</span>
+							</div>
 							<div class="ui-g-8 ">
-								<p-dropdown [options]="userRoles" [autoWidth]="true" required placeholder="Wybierz typ..." [(ngModel)]="user.role"
-								 name="user.role" #role="ngModel" (ngModelChange)="whoIsThis()">
+								<p-dropdown [options]="userRoles" [autoWidth]="true" required placeholder="Wybierz typ..." [(ngModel)]="user.role" name="user.role"
+								 #role="ngModel" (ngModelChange)="whoIsThis()">
 								</p-dropdown>
 							</div>
 						</div>
@@ -223,7 +245,7 @@
 										<div class="ui-g-12 validation-err" *ngIf="nip.errors?.pattern">
 											Pole może zawierać tylko cyfry.
 										</div>
-										<div class="ui-g-12 validation-err" *ngIf="employee.nip.length > 9 && !nipIsCorrect">
+										<div class="ui-g-12 validation-err" *ngIf="nip.touched && !isNipCorrect">
 											Podany NIP jest niepoprawny.
 										</div>
 									</div>
@@ -231,35 +253,39 @@
 							</div>
 						</div>
 						<div class="ui-g-12 ui-sm-12">
-								<div *ngIf="user.role == 'ROLE_EMPLOYEE'">
-									<div class="ui-g-12">
-										<div class="ui-g-4 ">NIP:</div>
-										<div class="ui-g-8 ">
-											<input type="text" pInputText placeholder="1234567890" class="detail-view-input" maxlength="10" pattern="[0-9]*" [(ngModel)]="employee.nip"
-											 name="employee.nip" #nip="ngModel" (ngModelChange)="nipIsValid()">
-											<div class="ui-g-12 validation-err" *ngIf="nip.errors?.pattern">
-												Pole może zawierać tylko cyfry.
-											</div>
-											<div class="ui-g-12 validation-err" *ngIf="employee.nip.length > 9 && !nipIsCorrect">
-												Podany NIP jest niepoprawny.
-											</div>
+							<div *ngIf="user.role == 'ROLE_EMPLOYEE'">
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">NIP:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText placeholder="1234567890" class="detail-view-input" maxlength="10" pattern="[0-9]*" [(ngModel)]="employee.nip"
+										 name="employee.nip" #nip="ngModel" (ngModelChange)="nipIsValid()">
+										<div class="ui-g-12 validation-err" *ngIf="nip.errors?.pattern">
+											Pole może zawierać tylko cyfry.
+										</div>
+
+										<div class="ui-g-12 validation-err" *ngIf="nip.touched && !isNipCorrect">
+											Podany NIP jest niepoprawny.
 										</div>
 									</div>
-									<div class="ui-g-12">
-											<div class="ui-g-4 ">Stanowisko pracownika:<span class="red">*</span></div>
-											<div class="ui-g-8 ">
-												<p-dropdown [options]="employeeRoles" [autoWidth]="true" required placeholder="Wybierz stanowisko..." [(ngModel)]="employee.employeeRole"
-												 name="employee.employeeRole" #role="ngModel">
-												</p-dropdown>
-											</div>
+								</div>
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Stanowisko pracownika:
+										<span class="red">*</span>
+									</div>
+									<div class="ui-g-8 ">
+										<p-dropdown [options]="employeeRoles" [autoWidth]="true" required placeholder="Wybierz stanowisko..." [(ngModel)]="employee.employeeRole"
+										 name="employee.employeeRole" #role="ngModel">
+										</p-dropdown>
 									</div>
 								</div>
 							</div>
+						</div>
 					</div>
-				 	<div class="ui-g-12 ui-sm-12" *ngFor="let address of addresses">
-								<address-registration (deleteAddressEmitter)='deleteAddress($event)' (addressIsValidEmitter)='addressIsValid($event, addresses.indexOf(address))' [id]='addresses.indexOf(address)' [address]='address'></address-registration>
-							</div>
-						
+					<div class="ui-g-12 ui-sm-12" *ngFor="let address of addresses">
+						<address-registration (deleteAddressEmitter)='deleteAddress($event)' (resetAddressEmitter)='resetAddress($event)' (isAddressValidEmitter)='addressIsValid($event, addresses.indexOf(address))'
+						 [id]='addresses.indexOf(address)' [address]='address'></address-registration>
+					</div>
+
 					<div class="ui-g-11 ui-sm-12" [style.visibility]="numberOfAddressesExhausted() ? 'visible' : 'hidden'">
 						<button pButton title="Dodaj adres" label="Dodaj adres" (click)="addNewAddressToAddressesList()"></button>
 					</div>
@@ -267,13 +293,15 @@
 					<div class="ui-g-11 ui-sm-12">
 						<div class="pull-right">
 							<button pButton title="Wyczyść formularz" label="Wyczyść" (click)="resetForm()"></button>
-							<button type="submit" pButton [disabled]="!editForm.valid || !addressesIsValid" label="Dodaj" [title]="(!editForm.valid || !addressesIsValid) ? 'Uzupełnij wymagane pola' : 'Dodaj'" (click)="submit()"></button>
+							<button type="submit" pButton [disabled]="!registrationForm.valid || !isAllAddressesValid || !isNipCorrect" label="Dodaj"
+							 [title]="(!registrationForm.valid || !isAllAddressesValid || !isNipCorrect) ? 'Uzupełnij wymagane pola' : 'Dodaj'"
+							 (click)="submit()"></button>
 						</div>
 					</div>
 				</div>
-				
-				</form>
-			
-			</div>
+
+			</form>
+
 		</div>
 	</div>
+</div>
