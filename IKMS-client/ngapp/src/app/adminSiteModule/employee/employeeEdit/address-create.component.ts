@@ -27,7 +27,6 @@ export class AddressCreateComponent implements OnInit{
 
     ngOnInit(){
         this.addressTypes = this.enumProvider.translateToDropdown(this.addressTypes);
-        this.address.addressType = 'ADDRESS'; //todo: jak wskazac na jakis element w dropdownie?
     }
 
     closeModal(){

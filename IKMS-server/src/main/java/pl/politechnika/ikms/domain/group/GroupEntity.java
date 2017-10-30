@@ -1,7 +1,9 @@
 package pl.politechnika.ikms.domain.group;
 
+import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 import pl.politechnika.ikms.domain.person.ChildEntity;
 import pl.politechnika.ikms.domain.person.EmployeeEntity;
@@ -14,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "groups")
 @EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"employee","children"})
 @SequenceGenerator(name="gropus_seq_name",sequenceName="groups_seq", allocationSize = 1)
 public class GroupEntity extends AbstractEntity{
 
@@ -31,8 +34,8 @@ public class GroupEntity extends AbstractEntity{
     @Column(name = "active")
     private boolean active;
 
-    @OneToMany(mappedBy = "group")
-    private List<ChildEntity> children;
+    @OneToMany(mappedBy = "group", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    private List<ChildEntity> children = Lists.newArrayList();
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")

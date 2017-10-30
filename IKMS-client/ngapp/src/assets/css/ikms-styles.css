@@ -9,6 +9,12 @@ html {
 
 body {
     height: 100%;
+    font-family: "Roboto-Regular", Arial, Helvetica, sans-serif !important;
+}
+
+.ui-widget {
+    font-family: "Roboto-Regular", Arial, Helvetica, sans-serif;
+    font-size: 1em;
 }
 
 /* ażeby cos bylo po prawej :) */

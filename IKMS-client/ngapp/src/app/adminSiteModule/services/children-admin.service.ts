@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map'
 import { TokenUtils } from "../../commons/util/token-utils";
 import {Page} from "../../commons/model/page";
 import {Child} from "../menu/model/children/child";
+import {ChildGeneral} from "../menu/model/children/child-general";
 
 @Injectable()
 export class ChildrenAdminService{
@@ -21,6 +22,16 @@ export class ChildrenAdminService{
     getChildrenGeneralDetails(size, page): Observable<Page>{
         return this.http.get('api/child/general?page=' + page + '&size=' + size, {headers: this.headers})
             .map( res => res.json());
+    }
+    
+    getChildrenGeneralDetailsByIds(ids): Observable<ChildGeneral[]>{
+        return this.http.post('api/child/general', JSON.stringify(ids),{headers: this.headers})
+        .map( res => res.json());
+    }
+    
+    getChildrenGrouplessMinimal(): Observable<any[]>{
+        return this.http.get('api/child/minimal/groupless',{headers: this.headers})
+        .map( res => res.json());
     }
     
     getChild(childId): Observable<Child>{

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Data
 @Table(name = "employees")
 @EqualsAndHashCode(callSuper = true, exclude = "personalData")
-@ToString(exclude = "personalData")
+@ToString(exclude = "groupEntity")
 @SequenceGenerator(name="employees_seq_name",sequenceName="employees_seq", allocationSize = 1)
 public class EmployeeEntity extends AbstractEntity {
 

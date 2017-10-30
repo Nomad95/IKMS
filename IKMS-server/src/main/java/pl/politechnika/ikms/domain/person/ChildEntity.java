@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "children")
 @EqualsAndHashCode(callSuper = true, exclude = {"personalData","parent"})
-@ToString(exclude = {"personalData","parent"})
+@ToString(exclude = {"personalData","parent","group"})
 @SequenceGenerator(name="children_seq_name",sequenceName="children_seq", allocationSize = 1)
 public class ChildEntity extends AbstractEntity{
 
@@ -40,7 +40,7 @@ public class ChildEntity extends AbstractEntity{
     @Enumerated(EnumType.STRING)
     private DisabilityLevel disabilityLevel;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name = "group_id")
     private GroupEntity group;
 }

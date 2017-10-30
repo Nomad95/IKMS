@@ -1,0 +1,79 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
+	<div class="row">
+		<div class="col-md-12" >
+			<div class="content-section implementation text-center" *ngIf="isLoading">
+				<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+			</div>
+			<form novalidate
+				  #groupForm="ngForm">
+				<div class="content-section implementation" *ngIf="!isLoading">
+					<div class="ui-g">
+
+						<div class="ui-g-6 ui-sm-12">
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Nazwa grupy:<span class="red">*</span></div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   required maxlength="35"
+									   pattern="[a-zA-Z1-9ęóąśłżźćńĘÓĄŚŁŻŹĆŃ\ ]*"
+									   [(ngModel)]="group.name"
+									   name="name" #name = "ngModel" >
+								<div class="ui-g-12 validation-err" *ngIf="name.touched && name.errors?.required">
+									Pole nie może być puste
+								</div>
+								<div class="ui-g-12 validation-err" *ngIf="name.errors?.pattern">
+									Pole nie może zawierać cyfr.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Aktywna:<span class="red">*</span></div>
+							<div class="ui-g-8 ">
+								<p-dropdown
+										[options]="yesNoChoice" [autoWidth]="false"
+										required
+										[(ngModel)]="group.active" name="active"
+										#active ></p-dropdown>
+							</div>
+						</div>
+
+					</div>
+					<div class="ui-g-6 ui-sm-12">
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Opiekun:</div>
+							<div class="ui-g-8 ">
+								<p-dropdown
+										[options]="employees" [autoWidth]="false"
+										required placeholder="Wybierz opiekuna"
+										[(ngModel)]="group.employee.id" name="employee"
+										#employee ></p-dropdown>
+							</div>
+						</div>
+
+					</div>
+					</div>
+				</div>
+				<br/>
+					<div class="ui-g-12">
+						<button type="button" pButton icon="fa-check" [disabled]="groupForm.invalid || isCreating"
+								(click)="saveData(group)" label="Dodaj"></button>
+						<button type="button" pButton icon="fa-close"
+								(click)="clearForm()" label="Wyczyść"></button>
+						<i *ngIf="isCreating" class="fa fa-spinner fa-pulse fa fa-fw"></i>
+					</div>
+				<br/>
+			</form>
+
+			<br/>
+		</div>
+	</div>
+</div>
+
+

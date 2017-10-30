@@ -1,0 +1,56 @@
+<p-growl [(value)]="msgs"></p-growl>
+<p-dialog header="Edytuj Grupę" [(visible)]="isVisible" modal="modal"
+		  [draggable]="false" [resizable]="false" [width]="700" [closable]="false">
+	<div class="row">
+		<div class="col-md-12">
+			<form novalidate
+				  #editForm="ngForm">
+
+				<div class="ui-g-12">
+
+					<div class="ui-g-12">
+						<div class="ui-g-4">Nazwa grupy</div>
+						<div class="ui-inputgroup ng-invalid ui-g-8">
+							<input type="text" pInputText
+								   placeholder="-" class="detail-view-input"
+								   maxlength="35"
+								   pattern="[a-zA-Z0-9ęóąśłżźćńĘÓĄŚŁŻŹĆŃ\-\ \,\:]*"
+								   [(ngModel)]="group.name"
+								   name="name" #name= "ngModel" >
+							<div class="ui-g-12 validation-err" *ngIf="name.errors?.pattern">
+								Pole nie może zawierać znaków specjalnych.
+							</div>
+						</div>
+					</div>
+
+					<div class="ui-g-12">
+						<div class="ui-g-4">Pracownik</div>
+						<div class="ui-inputgroup ng-invalid ui-g-8 ">
+							<p-dropdown
+									[options]="employees" [autoWidth]="false"
+									required
+									[(ngModel)]="group.employee" name="employee"
+									#employee></p-dropdown>
+						</div>
+					</div>
+
+					<div class="ui-g-12">
+						<div class="ui-g-4">Aktywna</div>
+						<div class="ui-inputgroup ng-invalid ui-g-8 ">
+							<p-dropdown
+									[options]="yesNoChoice" [autoWidth]="false"
+									required
+									[(ngModel)]="group.active" name="active"
+									#active></p-dropdown>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>{{group | json}}
+	<p-footer>
+		<button type="button" pButton icon="fa-check"[disabled]="editForm.invalid"
+				(click)="saveData(group)" label="Zapisz"></button>
+		<button type="button" pButton icon="fa-close" (click)="closeModal()" label="Anuluj"></button>
+	</p-footer>
+</p-dialog>

@@ -55,7 +55,6 @@ export class ChildrenCreateComponent implements OnInit{
     
         this.child.disabilityLevel = (<any>this.disabilityLevels[0]).value;
         this.personalData.gender = (<any>this.genders[0]).value;
-        this.child.parent.id = (<any>this.parents[0]).value;
     }
     
     getParentList(){

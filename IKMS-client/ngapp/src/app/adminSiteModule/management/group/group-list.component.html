@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="ui-g-12" *ngIf="!isLoading">
-				<button type="button" pButton  icon="fa-plus" label="Dodaj pracownika"></button>
+				<button type="button" pButton  [routerLink]="['/admin/group/new']" icon="fa-plus" label="Dodaj Grupę"></button>
 			</div>
 		</div>
 	</div>
@@ -17,32 +17,32 @@
 				<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
 			</div>
             <div class="content-section implementation" *ngIf="!isLoading">
-                <p-dataTable [value]="employees" [rows]="20"
+                <p-dataTable [value]="groups" [rows]="20"
                              [responsive]="true" >
                     <p-header>
 						<div class="bold">
-							Pracownicy
+							Grupy
 						</div>
 					</p-header>
                     <p-column [sortable]="true" field="id" header="Id" [style]="{'width':'50px'}"></p-column>
-                    <p-column [sortable]="true" field="employeeRole" header="Rola">
-						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
-							<span>{{role[col.field] | translateEnum}}</span>
+                    <p-column [sortable]="true" field="name" header="Nazwa"></p-column>
+                    <p-column [sortable]="true" field="active" header="Aktywna">
+						<ng-template let-col let-active="rowData" let-ri="rowIndex" pTemplate="body">
+							<span>{{active[col.field] | translateEnum}}</span>
 						</ng-template>
 					</p-column>
-                    <p-column [sortable]="true" field="name" header="Imię"></p-column>
-                    <p-column [sortable]="true" field="surname" header="Nazwisko"></p-column>
-                    <p-column [sortable]="true" field="nip" header="NIP"></p-column>
-                    <p-column styleClass="col-button" [style]="{'width':'120px', 'text-align':'center'}">
+                    <p-column [sortable]="true" field="groupSize" header="Liczebnosć"></p-column>
+					<p-column [sortable]="true" field="employee.value" header="Opiekun"></p-column>
+                    <p-column styleClass="col-button" [style]="{'width':'80px', 'text-align':'center'}">
                         <ng-template pTemplate="header" >
                         </ng-template>
-                        <ng-template let-empl="rowData" pTemplate="body">
-                            <button type="button" pButton (click)="selectCar(car)" icon="fa-user" title="Użytkownik"></button>
-                            <button type="button" pButton title="Podgląd"
-                                    (click)="navigateToEmployeeDetails(empl.id, empl.personalData.id)"
+                        <ng-template let-group="rowData" pTemplate="body">
+							<button type="button" pButton
+									title="Podgląd"
+                                    (click)="navigateToGroupDetails(group.id)"
                                     icon="fa-search"></button>
                             <button type="button" pButton title="Usuń"
-									(click)="delete(empl.id)" icon="fa-trash"></button>
+									(click)="delete(group.id)" icon="fa-trash" ></button>
                         </ng-template>
                     </p-column>
                     <ng-template pTemplate="emptymessage">

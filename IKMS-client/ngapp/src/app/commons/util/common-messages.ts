@@ -19,4 +19,20 @@ export class CommonMessages {
     public static childCreatingError(){
         return [{severity:'error', detail: 'Wystąpił błąd podczas dodawania dziecka'}];
     }
+    
+    public static groupChildListSuccess(){
+        return [{severity:'success', detail: 'Edycja zakończona powodzeniem'}];
+    }
+    
+    public static groupChildListError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas edycji listy'}];
+    }
+    
+    public static groupCreatingSuccess(name){
+        return [{severity:'success', detail: 'Dodano grupę ' + name}];
+    }
+    
+    public static groupCreatingError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas tworzenia grupy'}];
+    }
 }

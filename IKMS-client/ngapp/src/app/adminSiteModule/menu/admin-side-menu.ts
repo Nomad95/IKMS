@@ -16,9 +16,7 @@ export class AdminSideMenu {
             items: [{
                 label: 'Lista pracowników',
                 routerLink: ['/admin/employee']
-                },
-                    {label: 'Open'},
-                    {label: 'Quit'}
+                }
             ]
         },
         {
@@ -45,6 +43,20 @@ export class AdminSideMenu {
                 {
                     label: 'Dodaj dziecko',
                     routerLink: ['/admin/child/new']
+                }
+            ]
+        },
+        {
+            label: 'Zarządzanie',
+            icon: 'fa-sliders',
+            items: [
+                {
+                    label: 'Grupy',
+                    routerLink: ['/admin/group']
+                },
+                {
+                    label: 'Dodaj grupę',
+                    routerLink: ['/admin/group/new']
                 }
             ]
         }

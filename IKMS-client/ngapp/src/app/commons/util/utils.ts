@@ -8,4 +8,22 @@ export class Utils {
         }
         return result;
     }
+    
+    static minimalToDropdownMinimal(values): any[]{
+        let result = [];
+        
+        for (let item of values){
+            result.push({label: item.value, value: {id: item.id, value: item.value}});
+        }
+        return result;
+    }
+    
+    static minimalToIdList(values): any[]{
+        let result = [];
+        
+        for (let child of values){
+            result.push(child.id);
+        }
+        return result;
+    }
 }

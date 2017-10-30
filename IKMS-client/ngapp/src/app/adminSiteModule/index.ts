@@ -18,13 +18,16 @@ export { ParentEditComponent } from "./parent/parentEdit/parent-edit.component";
 export { ChildrenCreateComponent } from "./children/childrenCreate/children-create.component";
 export { RegistrationComponent } from './registration/registration.component';
 export { AddressRegistrationComponent } from "./registration/address-registration/address-registration.component";
-
-
+export { GroupListComponent } from "./management/group/group-list.component";
+export { GroupDetailComponent } from "./management/group/group-detail.component";
+export { GroupEditComponent } from "./management/group/group-edit.component";
+export { GroupListManageComponent } from "./management/group/group-list-manage.component";
+export { GroupCreateComponent } from "./management/groupCreate/group-create.component";
 
 export { EnumTranslatePipe } from "../commons/pipes/enum-translate";
 
 export { AuthGuard } from "../commons/guards/auth-guard";
-export {LoginService} from "../loginModule/service/login.service";
+export { LoginService } from "../loginModule/service/login.service";
 
 export { HttpModule } from "@angular/http";
 export { FormsModule } from "@angular/forms";
@@ -48,3 +51,4 @@ export { BreadcrumbModule } from "../../../node_modules/primeng/components/bread
 export { TooltipModule } from "../../../node_modules/primeng/components/tooltip/tooltip";
 export { InputTextareaModule } from "../../../node_modules/primeng/components/inputtextarea/inputtextarea";
 export { SharedModule } from "../sharedModule/shared-module.module";
+export { PickListModule } from '../../../node_modules/primeng/components/picklist/picklist';

@@ -1,12 +1,12 @@
 import {
-  NgModule, CommonModule, ChildrenCreateComponent,
-  AdminSiteComponent, AdminSiteRoutingModule, AdminSidebar,
-  EmployeeListComponent, EmployeeDetailComponent, EmployeeEditComponent,
-  PersonalDataEditComponent, AddressEditComponent, AddressCreateComponent,
-  ParentListComponent, ParentDetailComponent, ParentEditComponent,
-  ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent, RegistrationComponent,
-  AddressRegistrationComponent
-} from './index';
+    NgModule, CommonModule, ChildrenCreateComponent,
+    AdminSiteComponent, AdminSiteRoutingModule, AdminSidebar,
+    EmployeeListComponent, EmployeeDetailComponent, EmployeeEditComponent,
+    PersonalDataEditComponent, AddressEditComponent, AddressCreateComponent,
+    ParentListComponent, ParentDetailComponent, ParentEditComponent,
+    ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent,
+    RegistrationComponent, AddressRegistrationComponent, GroupListComponent,
+    GroupDetailComponent, GroupEditComponent, GroupListManageComponent } from './index';
 
 import {AuthGuard, LoginService} from './index';
 
@@ -18,63 +18,70 @@ import {
     MessagesModule, DropdownModule, InputMaskModule,
     CalendarModule, ConfirmDialogModule, GrowlModule,
     BreadcrumbModule, TooltipModule, InputTextareaModule,
-    SharedModule } from './index';
-
+    SharedModule, PickListModule } from './index';
+import {GroupCreateComponent} from "./management/groupCreate/group-create.component";
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    AdminSiteRoutingModule,
-    HttpModule,
-    SharedModule,
-    PanelMenuModule,
-    DataTableModule,
-    ButtonModule,
-    MessagesModule,
-    TabViewModule,
-    InputTextModule,
-    CodeHighlighterModule,
-    MegaMenuModule,
-    DropdownModule,
-    PaginatorModule,
-    InputMaskModule,
-    DialogModule,
-    PanelModule,
-    CalendarModule,
-    ConfirmDialogModule,
-    GrowlModule,
-    BreadcrumbModule,
-    TooltipModule,
-    InputTextareaModule
-  ],
-  declarations: [
-    AdminSiteComponent,
-    AdminSidebar,
-    EmployeeListComponent,
-    EmployeeDetailComponent,
-    EmployeeEditComponent,
-    AddressEditComponent,
-    PersonalDataEditComponent,
-    AddressCreateComponent,
-    ParentListComponent,
-    ParentDetailComponent,
-    ParentEditComponent,
-    ChildrenListComponent,
-    ChildrenDetailComponent,
-    ChildrenEditComponent,
-    ChildrenCreateComponent,
-    ParentListComponent,
-    ParentDetailComponent,
-    ParentEditComponent,
-    RegistrationComponent,
-    AddressRegistrationComponent
-  ],
-  providers: [
-    AuthGuard,
-    LoginService
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        FormsModule,
+        AdminSiteRoutingModule,
+        HttpModule,
+        PanelMenuModule,
+        DataTableModule,
+        ButtonModule,
+        MessagesModule,
+        TabViewModule,
+        InputTextModule,
+        CodeHighlighterModule,
+        MegaMenuModule,
+        DropdownModule,
+        PaginatorModule,
+        InputMaskModule,
+        DialogModule,
+        PanelModule,
+        CalendarModule,
+        ConfirmDialogModule,
+        GrowlModule,
+        BreadcrumbModule,
+        TooltipModule,
+        InputTextareaModule,
+        PickListModule
+    ],
+    declarations: [
+        AdminSiteComponent,
+        AdminSidebar,
+        EmployeeListComponent,
+        EmployeeDetailComponent,
+        EmployeeEditComponent,
+        AddressEditComponent,
+        PersonalDataEditComponent,
+        AddressCreateComponent,
+        ParentListComponent,
+        ParentDetailComponent,
+        ParentEditComponent,
+        ChildrenListComponent,
+        ChildrenDetailComponent,
+        ChildrenEditComponent,
+        ChildrenCreateComponent,
+        ParentListComponent,
+        ParentDetailComponent,
+        ParentEditComponent,
+        GroupListComponent,
+        GroupDetailComponent,
+        GroupEditComponent,
+        RegistrationComponent,
+        AddressRegistrationComponent,
+        GroupListManageComponent,
+        GroupCreateComponent
+        
+    ],
+    providers: [
+        AuthGuard,
+        LoginService
+    ]
 })
 export class AdminSiteModule {
 }

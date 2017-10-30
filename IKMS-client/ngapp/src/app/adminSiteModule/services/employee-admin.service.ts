@@ -22,7 +22,12 @@ export class EmployeeAdminService{
         return this.http.get('api/employee/general?page=' + page + '&size=' + size, {headers: this.headers})
             .map( res => res.json());
     }
-
+    
+    getEmployeesMinimal(): Observable<any>{
+        return this.http.get('api/employee/minimal', {headers: this.headers})
+        .map( res => res.json());
+    }
+    
     getEmployee(employeeId): Observable<Employee>{
         return this.http.get('api/employee/' + employeeId, {headers: this.headers})
             .map( res => res.json());
