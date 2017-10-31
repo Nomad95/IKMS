@@ -1,31 +1,31 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { EmployeeAdminService } from "../../services/employee-admin.service";
-import { AddressAdminService } from "../../services/address.service";
-import { PersonalDataAdminService } from "../../services/personal-data.service";
+import { EmployeeService } from "../../../sharedModule/services/employee.service";
+import { AddressService } from "../../../sharedModule/services/address.service";
+import { PersonalDataService } from "../../../sharedModule/services/personal-data.service";
 import { ActivatedRoute } from "@angular/router";
 import {PersonalData} from "../../model/personalData/personal-data";
 import {Address} from "../../model/address/address";
 import {MenuItem, Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {BreadMaker} from "../../../commons/util/bread-maker";
-import {ChildrenAdminService} from "../../services/children-admin.service";
+import {ChildrenService} from "../../../sharedModule/services/children.service";
 import {Child} from "../../menu/model/children/child";
 import {EnumProvider} from "../../../commons/util/enum-provider";
 import {DateUtils} from "../../../commons/util/date-utils";
-import {ParentAdminService} from "../../services/parent-admin.service";
+import {ParentService} from "../../../sharedModule/services/parent.service";
 import {Utils} from "../../../commons/util/utils";
 import {CommonMessages} from "../../../commons/util/common-messages";
 
 @Component({
   selector: 'child-create',
   templateUrl: './children-create.component.html',
-  providers: [ChildrenAdminService, ParentAdminService, PersonalDataAdminService, EnumProvider]
+  providers: [EnumProvider]
 })
 export class ChildrenCreateComponent implements OnInit{
     constructor(
-        private childrenAdminService: ChildrenAdminService,
-        private parentAdminService: ParentAdminService,
-        private personalDataAdminService: PersonalDataAdminService,
+        private childrenService: ChildrenService,
+        private parentService: ParentService,
+        private personalDataService: PersonalDataService,
         private route: ActivatedRoute,
         private enumProvider: EnumProvider){}
     
@@ -58,7 +58,7 @@ export class ChildrenCreateComponent implements OnInit{
     }
     
     getParentList(){
-        this.parentAdminService.getAllMinimal()
+        this.parentService.getAllMinimal()
             .subscribe( data => {
             this.parents = Utils.minimalToDropdown(data);
             this.clearForm();
@@ -75,11 +75,11 @@ export class ChildrenCreateComponent implements OnInit{
     
     saveData(child, personalData){
         this.isCreating = true;
-        this.personalDataAdminService.createPersonalData(personalData)
+        this.personalDataService.createPersonalData(personalData)
             .subscribe( data => {
                 personalData = data;
                 child.personalData.id = data.id;
-                this.childrenAdminService.createChild(child)
+                this.childrenService.createChild(child)
                     .subscribe( data => {
                         this.msgs = CommonMessages.childCreatingSuccess(personalData.name + ' ' + personalData.surname);
                         this.isCreating = false;

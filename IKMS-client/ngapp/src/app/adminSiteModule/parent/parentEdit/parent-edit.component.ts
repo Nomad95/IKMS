@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {ParentAdminService} from "../../services/parent-admin.service";
+import {ParentService} from "../../../sharedModule/services/parent.service";
 import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {Parent} from "../../menu/model/parent/parent";
@@ -7,11 +7,11 @@ import {Parent} from "../../menu/model/parent/parent";
 @Component({
   selector: 'parent-edit',
   templateUrl: './parent-edit.component.html',
-  providers: [ParentAdminService]
+  providers: []
 })
 export class ParentEditComponent implements OnInit {
 
-  constructor(private parentAdminService: ParentAdminService,) {
+  constructor(private parentService: ParentService,) {
   }
 
   @Input() private parentId: number;
@@ -24,7 +24,7 @@ export class ParentEditComponent implements OnInit {
   private msgs: Message[] = [];
 
   ngOnInit(): void {
-    this.parentAdminService.getParent(this.parentId)
+    this.parentService.getParent(this.parentId)
       .subscribe( data => {
         this.parent = data;
         this.msgs = [];
@@ -37,7 +37,7 @@ export class ParentEditComponent implements OnInit {
   }
 
   saveData(parent){
-    this.parentAdminService.updateParent(parent)
+    this.parentService.updateParent(parent)
       .subscribe( data => {
         this.eventSave.emit(data);
         this.isVisible = false;

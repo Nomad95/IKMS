@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { RegistrationService } from "../../services/registration.service";
+import { RegistrationService } from "../../../sharedModule/services/registration.service";
 import { EnumProvider } from "../../../commons/util/enum-provider";
 import { Address } from "../../model/address/address";
 import { UtilMethods } from '../../../commons/util/util-methods.service';
@@ -8,7 +8,7 @@ import { UtilMethods } from '../../../commons/util/util-methods.service';
 @Component({
   selector: 'address-registration',
   templateUrl: './address-registration.component.html',
-  providers: [RegistrationService]
+  providers: []
 })
 
 export class AddressRegistrationComponent implements OnInit {

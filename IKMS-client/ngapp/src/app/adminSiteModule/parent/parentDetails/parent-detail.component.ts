@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {ParentAdminService} from "../../services/parent-admin.service";
-import {AddressAdminService} from "../../services/address.service";
-import {PersonalDataAdminService} from "../../services/personal-data.service";
+import {ParentService} from "../../../sharedModule/services/parent.service";
+import {AddressService} from "../../../sharedModule/services/address.service";
+import {PersonalDataService} from "../../../sharedModule/services/personal-data.service";
 import {ActivatedRoute} from "@angular/router";
 import {PersonalData} from "../../model/personalData/personal-data";
 import {Address} from "../../model/address/address";
@@ -13,14 +13,14 @@ import {BreadMaker} from "../../../commons/util/bread-maker";
 @Component({
   selector: 'parent-detail',
   templateUrl: './parent-detail.component.html',
-  providers: [ParentAdminService, AddressAdminService, PersonalDataAdminService]
+  providers: []
 })
 export class ParentDetailComponent implements OnInit {
 
 
-  constructor(  private parentAdminService: ParentAdminService,
-                private addressAdminService: AddressAdminService,
-                private personalDataAdminService: PersonalDataAdminService,
+  constructor(  private parentService: ParentService,
+                private addressService: AddressService,
+                private personalDataService: PersonalDataService,
                 private route: ActivatedRoute) {}
 
   private parentId: number;
@@ -51,7 +51,7 @@ export class ParentDetailComponent implements OnInit {
 
   getParent(){
     this.isLoading = true;
-    this.parentAdminService.getParent(this.parentId)
+    this.parentService.getParent(this.parentId)
       .subscribe( data => {
         this.parent = data;
         this.msgs = [];
@@ -59,7 +59,7 @@ export class ParentDetailComponent implements OnInit {
   }
 
   getPersonalData(){
-    this.personalDataAdminService.getPersonalData(this.personalDataId)
+    this.personalDataService.getPersonalData(this.personalDataId)
       .subscribe( data => {
         this.personalData = data;
         this.msgs = [];
@@ -67,7 +67,7 @@ export class ParentDetailComponent implements OnInit {
   }
 
   getAddresses(){
-    this.addressAdminService.getAddressesByPersonalDataId(this.personalDataId)
+    this.addressService.getAddressesByPersonalDataId(this.personalDataId)
       .subscribe( data => {
         this.addresses = data;
         this.msgs = [];

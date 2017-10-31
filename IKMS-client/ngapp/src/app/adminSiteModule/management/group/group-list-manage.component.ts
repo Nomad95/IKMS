@@ -3,9 +3,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MenuItem, Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {BreadMaker} from "../../../commons/util/bread-maker";
-import {ChildrenAdminService} from "../../services/children-admin.service";
+import {ChildrenService} from "../../../sharedModule/services/children.service";
 import {Group} from "../../model/group/group";
-import {GroupAdminService} from "../../services/group.service";
+import {GroupService} from "../../../sharedModule/services/group.service";
 import {Utils} from "../../../commons/util/utils";
 import {ChildGeneral} from "../../menu/model/children/child-general";
 import {CommonMessages} from "../../../commons/util/common-messages";
@@ -13,12 +13,12 @@ import {CommonMessages} from "../../../commons/util/common-messages";
 @Component({
   selector: 'group-list-manage',
   templateUrl: './group-list-manage.component.html',
-  providers: [GroupAdminService, ChildrenAdminService]
+  providers: []
 })
 export class GroupListManageComponent implements OnInit{
     constructor(
-        private groupAdminService: GroupAdminService,
-        private childrenAdminService: ChildrenAdminService,
+        private groupService: GroupService,
+        private childrenService: ChildrenService,
         private router: Router,
         private route: ActivatedRoute){}
   
@@ -42,7 +42,7 @@ export class GroupListManageComponent implements OnInit{
     
     getGroup(){
         this.isLoading = true;
-        this.groupAdminService.getGroup(this.groupId)
+        this.groupService.getGroup(this.groupId)
             .subscribe( data => {
                 this.group = data;
                 this.msgs = [];
@@ -53,7 +53,7 @@ export class GroupListManageComponent implements OnInit{
     }
     
     getGrouplessChildrenList(){
-        this.childrenAdminService.getChildrenGrouplessMinimal()
+        this.childrenService.getChildrenGrouplessMinimal()
             .subscribe( data => {
                 this.grouplessChildrenList = data;
                 this.msgs = [];
@@ -67,7 +67,7 @@ export class GroupListManageComponent implements OnInit{
     updateChildrenList(){
         this.isSaving = true;
         this.group.children = this.currentChildrenList;
-        this.groupAdminService.updateGroup(this.group)
+        this.groupService.updateGroup(this.group)
             .subscribe( data => {
                 this.msgs = CommonMessages.groupChildListSuccess();
                 this.isSaving = false;

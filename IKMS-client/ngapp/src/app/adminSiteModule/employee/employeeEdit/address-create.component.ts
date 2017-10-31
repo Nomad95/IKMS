@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { AddressAdminService } from "../../services/address.service";
+import { AddressService } from "../../../sharedModule/services/address.service";
 import { Address } from "../../model/address/address";
 import {EnumProvider} from "../../../commons/util/enum-provider";
 import {ErrorHandler} from "../../../commons/util/error-handler";
@@ -8,11 +8,11 @@ import {Message} from "primeng/primeng";
 @Component({
   selector: 'address-create',
   templateUrl: './address-create.component.html',
-  providers: [AddressAdminService, EnumProvider]
+  providers: [EnumProvider]
 })
 export class AddressCreateComponent implements OnInit{
     constructor(
-        private addressAdminService: AddressAdminService,
+        private addressService: AddressService,
         private enumProvider: EnumProvider){}
 
     @Input() private isVisible: boolean = false;
@@ -36,7 +36,7 @@ export class AddressCreateComponent implements OnInit{
 
     saveData(address){
         address.personalData = {id: this.personalDataId};
-        this.addressAdminService.createAddress(address)
+        this.addressService.createAddress(address)
         .subscribe( data => {
             this.eventSave.emit(data);
             this.isVisible = false;

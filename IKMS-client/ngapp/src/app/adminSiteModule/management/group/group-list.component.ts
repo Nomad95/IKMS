@@ -6,16 +6,16 @@ import {CommonMessages} from "../../../commons/util/common-messages";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {BreadMaker} from "../../../commons/util/bread-maker";
 import {Group} from "../../model/group/group";
-import {GroupAdminService} from "../../services/group.service";
+import {GroupService} from "../../../sharedModule/services/group.service";
 
 @Component({
   selector: 'group-list',
   templateUrl: './group-list.component.html',
-  providers: [GroupAdminService, ConfirmationService]
+  providers: [ConfirmationService]
 })
 export class GroupListComponent implements OnInit{
     constructor(
-        private groupAdminService: GroupAdminService,
+        private groupService: GroupService,
         private confirmationService: ConfirmationService,
         private router: Router){}
     
@@ -39,7 +39,7 @@ export class GroupListComponent implements OnInit{
     
     loadGroups(size, page){
         this.isLoading = true;
-        this.groupAdminService.getGroupList(size, page)
+        this.groupService.getGroupList(size, page)
         .subscribe( data => {
             this.currentPageData = data;
             this.groups = data.content;
@@ -61,7 +61,7 @@ export class GroupListComponent implements OnInit{
             message: 'Czy napewno chcesz usunąć tą grupe? Wszystkie związane z nim dane, zostaną usunięte.',
             header: 'Potwierdzenie usunięcia',
             accept: () => {
-                this.groupAdminService.deleteGroup(groupId)
+                this.groupService.deleteGroup(groupId)
                     .subscribe( data =>{
                         this.loadGroups(this.size,this.page);
                         this.msgs = [];

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeAdminService } from "../../services/employee-admin.service";
-import { AddressAdminService } from "../../services/address.service";
-import { PersonalDataAdminService } from "../../services/personal-data.service";
+import { EmployeeService } from "../../../sharedModule/services/employee.service";
+import { AddressService } from "../../../sharedModule/services/address.service";
+import { PersonalDataService } from "../../../sharedModule/services/personal-data.service";
 import { ActivatedRoute } from "@angular/router";
 import { Employee } from "../../model/employee/employee";
 import {PersonalData} from "../../model/personalData/personal-data";
@@ -13,13 +13,13 @@ import {BreadMaker} from "../../../commons/util/bread-maker";
 @Component({
   selector: 'employee-detail',
   templateUrl: './employee-detail.component.html',
-  providers: [EmployeeAdminService, AddressAdminService, PersonalDataAdminService]
+  providers: []
 })
 export class EmployeeDetailComponent implements OnInit{
     constructor(
-        private employeeAdminService: EmployeeAdminService,
-        private addressAdminService: AddressAdminService,
-        private personalDataAdminService: PersonalDataAdminService,
+        private employeeService: EmployeeService,
+        private addressService: AddressService,
+        private personalDataService: PersonalDataService,
         private route: ActivatedRoute){}
 
     private employeeId: number;
@@ -50,7 +50,7 @@ export class EmployeeDetailComponent implements OnInit{
 
     getEmployee(){
         this.isLoading = true;
-        this.employeeAdminService.getEmployee(this.employeeId)
+        this.employeeService.getEmployee(this.employeeId)
             .subscribe( data => {
                 this.employee = data;
                 this.msgs = [];
@@ -58,7 +58,7 @@ export class EmployeeDetailComponent implements OnInit{
     }
 
     getPersonalData(){
-        this.personalDataAdminService.getPersonalData(this.personalDataId)
+        this.personalDataService.getPersonalData(this.personalDataId)
             .subscribe( data => {
                 this.personalData = data;
                 this.msgs = [];
@@ -66,7 +66,7 @@ export class EmployeeDetailComponent implements OnInit{
     }
 
     getAddresses(){
-        this.addressAdminService.getAddressesByPersonalDataId(this.personalDataId)
+        this.addressService.getAddressesByPersonalDataId(this.personalDataId)
             .subscribe( data => {
                 this.addresses = data;
                 this.msgs = [];

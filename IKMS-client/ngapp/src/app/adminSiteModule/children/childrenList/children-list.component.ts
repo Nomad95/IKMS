@@ -5,20 +5,20 @@ import {ConfirmationService, MenuItem, Message} from "primeng/primeng";
 import {CommonMessages} from "../../../commons/util/common-messages";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {BreadMaker} from "../../../commons/util/bread-maker";
-import {ChildrenAdminService} from "../../services/children-admin.service";
+import {ChildrenService} from "../../../sharedModule/services/children.service";
 import {ChildGeneral} from "../../menu/model/children/child-general";
-import {ParentAdminService} from "../../services/parent-admin.service";
+import {ParentService} from "../../../sharedModule/services/parent.service";
 
 @Component({
   selector: 'children-list',
   templateUrl: './children-list.component.html',
-  providers: [ChildrenAdminService, ConfirmationService, ParentAdminService]
+  providers: [ConfirmationService]
 })
 export class ChildrenListComponent implements OnInit{
     constructor(
-        private childrenAdminService: ChildrenAdminService,
+        private childrenService: ChildrenService,
         private confirmationService: ConfirmationService,
-        private parentService: ParentAdminService,
+        private parentService: ParentService,
         private router: Router){}
     
     private page: number = 0;
@@ -41,7 +41,7 @@ export class ChildrenListComponent implements OnInit{
     
     loadChildren(size, page){
         this.isLoading = true;
-        this.childrenAdminService.getChildrenGeneralDetails(size, page)
+        this.childrenService.getChildrenGeneralDetails(size, page)
         .subscribe( data => {
             this.currentPageData = data;
             this.children = data.content;
@@ -73,7 +73,7 @@ export class ChildrenListComponent implements OnInit{
             message: 'Czy napewno chcesz usunąć to dziecko? Wszystkie związane z nim dane, zostaną usunięte.',
             header: 'Potwierdzenie usunięcia',
             accept: () => {
-                this.childrenAdminService.deleteChild(childId)
+                this.childrenService.deleteChild(childId)
                     .subscribe( data =>{
                         this.loadChildren(this.size,this.page);
                         this.msgs = [];

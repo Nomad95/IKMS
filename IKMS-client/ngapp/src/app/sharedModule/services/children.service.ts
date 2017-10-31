@@ -4,10 +4,11 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import { TokenUtils } from "../../commons/util/token-utils";
 import {Page} from "../../commons/model/page";
-import {Child} from "../model/children/child";
+import {Child} from "../../adminSiteModule/menu/model/children/child";
+import {ChildGeneral} from "../../adminSiteModule/menu/model/children/child-general";
 
 @Injectable()
-export class ChildrenEmployeeService{
+export class ChildrenService{
     public token: string;
     public username: string;
     private headers: Headers;
@@ -23,6 +24,16 @@ export class ChildrenEmployeeService{
             .map( res => res.json());
     }
     
+    getChildrenGeneralDetailsByIds(ids): Observable<ChildGeneral[]>{
+        return this.http.post('api/child/general', JSON.stringify(ids),{headers: this.headers})
+        .map( res => res.json());
+    }
+    
+    getChildrenGrouplessMinimal(): Observable<any[]>{
+        return this.http.get('api/child/minimal/groupless',{headers: this.headers})
+        .map( res => res.json());
+    }
+    
     getChild(childId): Observable<Child>{
         return this.http.get('api/child/' + childId, {headers: this.headers})
             .map( res => res.json());
@@ -35,5 +46,10 @@ export class ChildrenEmployeeService{
     
     deleteChild(childId): Observable<any>{
         return this.http.delete('api/child/'+childId, {headers: this.headers});
+    }
+    
+    createChild(child): Observable<Child>{
+        return this.http.post('api/child', JSON.stringify(child), {headers: this.headers})
+        .map( res => res.json());
     }
 }

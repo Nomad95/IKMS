@@ -2,20 +2,20 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EnumProvider } from "../../../commons/util/enum-provider";
 import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
-import {GroupAdminService} from "../../services/group.service";
+import {GroupService} from "../../../sharedModule/services/group.service";
 import {Group} from "../../model/group/group";
-import {EmployeeAdminService} from "../../services/employee-admin.service";
+import {EmployeeService} from "../../../sharedModule/services/employee.service";
 import {Utils} from "../../../commons/util/utils";
 
 @Component({
   selector: 'group-edit',
   templateUrl: './group-edit.component.html',
-  providers: [GroupAdminService, EnumProvider, EmployeeAdminService]
+  providers: [EnumProvider]
 })
 export class GroupEditComponent implements OnInit{
     constructor(
-        private groupAdminService: GroupAdminService,
-        private employeeAdminService: EmployeeAdminService,
+        private groupService: GroupService,
+        private employeeService: EmployeeService,
         private enumProvider: EnumProvider){}
         
     @Input() private groupId: number;
@@ -41,7 +41,7 @@ export class GroupEditComponent implements OnInit{
     }
     
     saveData(group){
-        this.groupAdminService.updateGroup(group)
+        this.groupService.updateGroup(group)
             .subscribe( data => {
                 this.eventSave.emit(data);
                 this.isVisible = false;
@@ -50,7 +50,7 @@ export class GroupEditComponent implements OnInit{
     }
     
     getGroup(){
-        this.groupAdminService.getGroup(this.groupId)
+        this.groupService.getGroup(this.groupId)
         .subscribe( data => {
             this.group = data;
             this.msgs = [];
@@ -58,7 +58,7 @@ export class GroupEditComponent implements OnInit{
     }
     
     getEmployees(){
-        this.employeeAdminService.getEmployeesMinimal()
+        this.employeeService.getEmployeesMinimal()
             .subscribe( data => {
                 this.employees = Utils.minimalToDropdownMinimal(data);
             }, err => this.msgs = ErrorHandler.handleGenericServerError(err));

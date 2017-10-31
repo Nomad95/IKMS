@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import { TokenUtils } from "../../commons/util/token-utils";
 import {Page} from "../../commons/model/page";
-import {Employee} from "../model/employee/employee";
+import {Employee} from "../../adminSiteModule/model/employee/employee";
 
 @Injectable()
-export class EmployeeAdminService{
+export class EmployeeService{
     public token: string;
     public username: string;
     private headers: Headers;

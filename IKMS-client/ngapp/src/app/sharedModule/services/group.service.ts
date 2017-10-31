@@ -3,11 +3,11 @@ import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import { TokenUtils } from "../../commons/util/token-utils";
-import {Group} from "../model/group/group";
+import {Group} from "../../adminSiteModule/model/group/group";
 import {Page} from "../../commons/model/page";
 
 @Injectable()
-export class GroupAdminService{
+export class GroupService{
     public token: string;
     public username: string;
     private headers: Headers;

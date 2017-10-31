@@ -3,21 +3,21 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MenuItem, Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {BreadMaker} from "../../../commons/util/bread-maker";
-import {ChildrenAdminService} from "../../services/children-admin.service";
+import {ChildrenService} from "../../../sharedModule/services/children.service";
 import {Group} from "../../model/group/group";
-import {GroupAdminService} from "../../services/group.service";
 import {Utils} from "../../../commons/util/utils";
 import {ChildGeneral} from "../../menu/model/children/child-general";
+import {GroupService} from "../../../sharedModule/services/group.service";
 
 @Component({
   selector: 'group-detail',
   templateUrl: './group-detail.component.html',
-  providers: [GroupAdminService, ChildrenAdminService]
+  providers: []
 })
 export class GroupDetailComponent implements OnInit{
     constructor(
-        private groupAdminService: GroupAdminService,
-        private childrenAdminService: ChildrenAdminService,
+        private groupService: GroupService,
+        private childrenService: ChildrenService,
         private router: Router,
         private route: ActivatedRoute){}
   
@@ -43,7 +43,7 @@ export class GroupDetailComponent implements OnInit{
     
     getGroup(){
         this.isLoading = true;
-        this.groupAdminService.getGroup(this.groupId)
+        this.groupService.getGroup(this.groupId)
             .subscribe( data => {
                 this.group = data;
                 this.msgs = [];
@@ -54,7 +54,7 @@ export class GroupDetailComponent implements OnInit{
     }
     
     getChildren(children){
-        this.childrenAdminService.getChildrenGeneralDetailsByIds(Utils.minimalToIdList(children))
+        this.childrenService.getChildrenGeneralDetailsByIds(Utils.minimalToIdList(children))
             .subscribe( data => {
                 this.children = data;
                 this.msgs = [];

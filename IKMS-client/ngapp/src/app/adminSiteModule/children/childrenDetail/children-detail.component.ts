@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeAdminService } from "../../services/employee-admin.service";
-import { AddressAdminService } from "../../services/address.service";
-import { PersonalDataAdminService } from "../../services/personal-data.service";
+import { EmployeeService } from "../../../sharedModule/services/employee.service";
+import { AddressService } from "../../../sharedModule/services/address.service";
+import { PersonalDataService } from "../../../sharedModule/services/personal-data.service";
 import { ActivatedRoute } from "@angular/router";
 import {PersonalData} from "../../model/personalData/personal-data";
 import {Address} from "../../model/address/address";
 import {MenuItem, Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {BreadMaker} from "../../../commons/util/bread-maker";
-import {ChildrenAdminService} from "../../services/children-admin.service";
+import {ChildrenService} from "../../../sharedModule/services/children.service";
 import {Child} from "../../menu/model/children/child";
 
 @Component({
   selector: 'child-detail',
   templateUrl: './children-detail.component.html',
-  providers: [ChildrenAdminService, AddressAdminService, PersonalDataAdminService]
+  providers: []
 })
 export class ChildrenDetailComponent implements OnInit{
     constructor(
-        private childrenAdminService: ChildrenAdminService,
-        private addressAdminService: AddressAdminService,
-        private personalDataAdminService: PersonalDataAdminService,
+        private childrenService: ChildrenService,
+        private addressService: AddressService,
+        private personalDataService: PersonalDataService,
         private route: ActivatedRoute){}
   
     private childId: number;
@@ -51,7 +51,7 @@ export class ChildrenDetailComponent implements OnInit{
     
     getChild(){
         this.isLoading = true;
-        this.childrenAdminService.getChild(this.childId)
+        this.childrenService.getChild(this.childId)
             .subscribe( data => {
                 this.child = data;
                 this.msgs = [];
@@ -59,7 +59,7 @@ export class ChildrenDetailComponent implements OnInit{
     }
     
     getPersonalData(){
-        this.personalDataAdminService.getPersonalData(this.personalDataId)
+        this.personalDataService.getPersonalData(this.personalDataId)
             .subscribe( data => {
                 this.personalData = data;
                 this.msgs = [];
@@ -67,7 +67,7 @@ export class ChildrenDetailComponent implements OnInit{
     }
     
     getAddresses(){
-        this.addressAdminService.getAddressesByPersonalDataId(this.personalDataId)
+        this.addressService.getAddressesByPersonalDataId(this.personalDataId)
             .subscribe( data => {
                 this.addresses = data;
                 this.msgs = [];
@@ -120,7 +120,7 @@ export class ChildrenDetailComponent implements OnInit{
     }
     
     showParentAddress(): void{
-        this.addressAdminService.getAddressesByParentId(this.child.parent.id)
+        this.addressService.getAddressesByParentId(this.child.parent.id)
             .subscribe( data => {
                 console.log(data);
                 this.addresses = data;

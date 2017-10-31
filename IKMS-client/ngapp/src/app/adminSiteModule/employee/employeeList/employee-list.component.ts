@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeAdminService } from "../../services/employee-admin.service";
+import { EmployeeService } from "../../../sharedModule/services/employee.service";
 import { EmployeeGeneral } from "../../model/employee/employee-general";
 import { Page } from "../../../commons/model/page";
 import { Router } from "@angular/router";
@@ -11,11 +11,11 @@ import {BreadMaker} from "../../../commons/util/bread-maker";
 @Component({
   selector: 'employee-list',
   templateUrl: './employee-list.component.html',
-  providers: [EmployeeAdminService, ConfirmationService]
+  providers: [ConfirmationService]
 })
 export class EmployeeListComponent implements OnInit{
     constructor(
-        private employeeAdminService: EmployeeAdminService,
+        private employeeService: EmployeeService,
         private confirmationService: ConfirmationService,
         private router: Router){}
     
@@ -38,7 +38,7 @@ export class EmployeeListComponent implements OnInit{
     
     loadEmployees(size, page){
         this.isLoading = true;
-        this.employeeAdminService.getEmployeeGeneralDetails(size, page)
+        this.employeeService.getEmployeeGeneralDetails(size, page)
         .subscribe( data => {
             this.currentPageData = data;
             this.employees = data.content;
@@ -59,7 +59,7 @@ export class EmployeeListComponent implements OnInit{
             message: 'Czy napewno chcesz usunąć tego pracownika? Wszystkie związane z nim dane, zostaną usunięte.',
             header: 'Potwierdzenie usunięcia',
             accept: () => {
-                this.employeeAdminService.deleteEmployee(employeeId)
+                this.employeeService.deleteEmployee(employeeId)
                     .subscribe( data =>{
                         this.loadEmployees(this.size,this.page);
                         this.msgs = [];

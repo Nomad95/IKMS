@@ -5,20 +5,20 @@ import {ConfirmationService, MenuItem, Message} from "primeng/primeng";
 import {CommonMessages} from "../../../commons/util/common-messages";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {BreadMaker} from "../../../commons/util/bread-maker";
-import {ChildrenEmployeeService} from "../../services/children-employee.service";
 import {ChildGeneral} from "../../model/children/child-general";
-import {ParentEmployeeService} from "../../services/parent-employee.service";
+import {ParentService} from "../../../sharedModule/services/parent.service";
+import {ChildrenService} from "../../../sharedModule/services/children.service";
 
 @Component({
   selector: 'children-list',
   templateUrl: './children-list.component.html',
-  providers: [ChildrenEmployeeService, ConfirmationService, ParentEmployeeService]
+  providers: [ConfirmationService]
 })
 export class ChildrenListComponent implements OnInit{
     constructor(
-        private childrenEmployeeService: ChildrenEmployeeService,
+        private childrenService: ChildrenService,
         private confirmationService: ConfirmationService,
-        private parentEmployeeService: ParentEmployeeService,
+        private parentService: ParentService,
         private router: Router){}
     
     private page: number = 0;
@@ -41,7 +41,7 @@ export class ChildrenListComponent implements OnInit{
     
     loadChildren(size, page){
         this.isLoading = true;
-        this.childrenEmployeeService.getChildrenGeneralDetails(size, page)
+        this.childrenService.getChildrenGeneralDetails(size, page)
         .subscribe( data => {
             this.currentPageData = data;
             this.children = data.content;
@@ -59,7 +59,7 @@ export class ChildrenListComponent implements OnInit{
     
     navigateToParentDetails(parentId){
         this.isNavigating = true;
-        this.parentEmployeeService.getParent(parentId).subscribe( data => {
+        this.parentService.getParent(parentId).subscribe( data => {
             console.log("not implemented yet");//todo
             this.router.navigate(['/admin/parent', parentId], { queryParams: {personalDataId: data.personalData.id}});
             this.isNavigating = false;
@@ -74,7 +74,7 @@ export class ChildrenListComponent implements OnInit{
             message: 'Czy napewno chcesz usunąć to dziecko? Wszystkie związane z nim dane, zostaną usunięte.',
             header: 'Potwierdzenie usunięcia',
             accept: () => {
-                this.childrenEmployeeService.deleteChild(childId)
+                this.childrenService.deleteChild(childId)
                     .subscribe( data =>{
                         this.loadChildren(this.size,this.page);
                         this.msgs = [];

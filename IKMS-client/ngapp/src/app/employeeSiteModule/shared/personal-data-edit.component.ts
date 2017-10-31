@@ -1,19 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EnumProvider } from "../../commons/util/enum-provider";
 import { PersonalData } from "../model/personalData/personal-data";
-import { PersonalDataEmployeeService } from "../services/personal-employee.service";
 import {DateUtils} from "../../commons/util/date-utils";
 import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../commons/util/error-handler";
+import {PersonalDataService} from "../../sharedModule/services/personal-data.service";
 
 @Component({
   selector: 'personal-data-edit',
   templateUrl: './personal-data-edit.component.html',
-  providers: [PersonalDataEmployeeService, EnumProvider]
+  providers: [EnumProvider]
 })
 export class PersonalDataEditComponent implements OnInit{
     constructor(
-        private personalDataEmployeeService: PersonalDataEmployeeService,
+        private personalDataService: PersonalDataService,
         private enumProvider: EnumProvider){}
         
     @Input() private personalDataId: number;
@@ -28,7 +28,7 @@ export class PersonalDataEditComponent implements OnInit{
     private msgs: Message[] = [];
     
     ngOnInit(){
-        this.personalDataEmployeeService.getPersonalData(this.personalDataId)
+        this.personalDataService.getPersonalData(this.personalDataId)
             .subscribe( data => {
                 this.personalData = data;
                 this.msgs = [];
@@ -42,7 +42,7 @@ export class PersonalDataEditComponent implements OnInit{
     }
     
     saveData(personalData){
-        this.personalDataEmployeeService.updatePersonalData(personalData)
+        this.personalDataService.updatePersonalData(personalData)
         .subscribe( data => {
             this.eventSave.emit(data);
             this.isVisible = false;

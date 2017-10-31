@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild } from '@angular/core';
-import { RegistrationService } from "../services/registration.service";
+import { RegistrationService } from "../../sharedModule/services/registration.service";
 import { EnumProvider } from "../../commons/util/enum-provider";
 import { UtilMethods } from "../../commons/util/util-methods.service";
 import { PersonalData } from "../model/personalData/personal-data";
@@ -18,7 +18,7 @@ const NIP_WEIGHT_NUMBERS = [6, 5, 7, 2, 3, 4, 5, 6, 7];
 @Component({
   selector: 'registration',
   templateUrl: './registration.component.html',
-  providers: [RegistrationService, EnumProvider, UtilMethods, DateUtils]
+  providers: [EnumProvider, UtilMethods, DateUtils]
 })
 
 export class RegistrationComponent implements OnInit, OnDestroy {
@@ -197,7 +197,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         else this.isNipCorrect = false;
       }
       else this.isNipCorrect = false;
-    } 
+    }
     else this.isNipCorrect = true;
 
   }

@@ -3,10 +3,10 @@ import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import { TokenUtils } from "../../commons/util/token-utils";
-import {PersonalData} from "../model/personalData/personal-data";
+import {PersonalData} from "../../adminSiteModule/model/personalData/personal-data";
 
 @Injectable()
-export class PersonalDataAdminService{
+export class PersonalDataService{
     public token: string;
     public username: string;
     private headers: Headers;

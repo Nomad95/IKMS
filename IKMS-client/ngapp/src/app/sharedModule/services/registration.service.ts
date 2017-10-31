@@ -3,11 +3,11 @@ import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import { TokenUtils } from "../../commons/util/token-utils";
-import { User} from '../model/user/user';
-import { PersonalData } from '../model/personalData/personal-data';
-import { Employee } from '../model/employee/employee';
-import { Parent } from '../menu/model/parent/parent';
-import { Address } from '../model/address/address';
+import { User} from '../../adminSiteModule/model/user/user';
+import { PersonalData } from '../../adminSiteModule/model/personalData/personal-data';
+import { Employee } from '../../adminSiteModule/model/employee/employee';
+import { Parent } from '../../adminSiteModule/menu/model/parent/parent';
+import { Address } from '../../adminSiteModule/model/address/address';
 
 @Injectable()
 export class RegistrationService {
