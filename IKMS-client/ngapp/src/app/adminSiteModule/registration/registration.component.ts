@@ -7,10 +7,11 @@ import { DateUtils } from "../../commons/util/date-utils";
 import { Address } from "../model/address/address";
 import { Employee } from '../model/employee/employee';
 import { Parent } from '../menu/model/parent/parent';
-import { Message, InputMaskModule } from "primeng/primeng";
+import {Message, InputMaskModule, MenuItem} from "primeng/primeng";
 import { UserRegistrationDTO } from '../model/user/userRegistrationDTO';
 import { ErrorHandler } from '../../commons/util/error-handler';
 import { Router } from '@angular/router';
+import {BreadMaker} from "../../commons/util/bread-maker";
 
 const NUMBER_OF_ADDRESSES = 3;
 const NIP_WEIGHT_NUMBERS = [6, 5, 7, 2, 3, 4, 5, 6, 7];
@@ -41,8 +42,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   private isAdressesArrayValid: boolean[] = [];
   private isAllAddressesValid: boolean;
   private msgs: Message[] = [];
-
-  private init() {
+  private items: MenuItem[];
+    
+    private init() {
     this.personalData = new PersonalData();
     this.user = new UserRegistrationDTO();
     this.employee = new Employee();
@@ -51,9 +53,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.init();
-    this.translateEnumsToDropdown();
-    this.getDataFromSessionStorage();
+      this.items = BreadMaker.makeBreadcrumbs("Użytkownicy","Dodaj");
+      this.init();
+      this.translateEnumsToDropdown();
+      this.getDataFromSessionStorage();
   }
 
   translateEnumsToDropdown() {

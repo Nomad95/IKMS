@@ -3,6 +3,11 @@
     font-size: 10px;
 }
 
+.form-blue{
+    color: #42486d;
+    font-weight: 600;
+}
+
 html {
     height: 100%;
 }
@@ -15,6 +20,47 @@ body {
 .ui-widget {
     font-family: "Roboto-Regular", Arial, Helvetica, sans-serif;
     font-size: 1em;
+}
+
+.ui-widget-header{
+    background: #e8eaf6;
+}
+
+.ui-sortable-column{
+    background: #c5cae9 !important;
+    border-color: #9fa8da !important;
+}
+
+.ui-column-title{
+    background: #c5cae9 !important;
+    border-color: #9fa8da !important;
+}
+
+.ui-unselectable-text{
+    background: #c5cae9 !important;
+    border-color: #9fa8da !important;
+}
+
+.ui-sortable-column:hover{
+    color: #3f51b5;
+}
+
+.ui-column-title:hover{
+    color: #3f51b5;
+}
+
+.ui-tabview-selected{
+    background: #9fa8da !important;
+    color: #FFFFFF !important;
+    box-shadow: 3px -3px 10px -2px rgba(0, 0, 0, 0.2);
+}
+
+.ui-tabview .ui-tabview-nav > li.ui-state-default {
+    background: #e8eaf6;
+}
+
+.ui-tabview-nav{
+    border-radius: 5px 5px 0px 0px;
 }
 
 /* ażeby cos bylo po prawej :) */
@@ -91,6 +137,14 @@ textarea {
 .ikms-body {
     padding-left: 180px;
     padding-top: 60px;
+}
+
+.ui-datatable{
+    box-shadow: 3px 0 6px -2px rgba(0, 0, 0, 0.3);
+}
+
+.ui-paginator{
+    box-shadow: 3px 0 6px -2px rgba(0, 0, 0, 0.3);
 }
 
 .small-hr{
@@ -178,6 +232,12 @@ a:-webkit-any-link {
     background: rgba(0,0,0,0);
     border: none;
     font-size: 9px;
+}
+
+.ui-button{
+    box-shadow: 3px -3px 10px -2px rgba(0, 0, 0, 0.2);
+    background-color: #5c6bc0 !important;
+    border-color: #5c6bc0 !important;
 }
 
 /* ładne i równe wyswietlanie wartosci w inpucie*/

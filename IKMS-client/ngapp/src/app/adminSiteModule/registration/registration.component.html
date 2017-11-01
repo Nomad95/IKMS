@@ -1,12 +1,13 @@
 <p-growl [(value)]="msgs"></p-growl>
 
 <div class="ikms-body">
-	<h3>Dodaj użytkownika:</h3>
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
 	<div class="row">
 		<div class="col-md-12">
 			<form #registrationForm="ngForm">
 
-				<div class="ui-g-12">
+				<div class="ui-g-12 form-blue">
 					<div class="ui-g-6 ui-sm-12">
 
 						<div class="ui-g-12">
@@ -281,25 +282,27 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="ui-g-12 ui-sm-12" *ngFor="let address of addresses">
 						<address-registration (deleteAddressEmitter)='deleteAddress($event)' (resetAddressEmitter)='resetAddress($event)' (isAddressValidEmitter)='addressIsValid($event, addresses.indexOf(address))'
 						 [id]='addresses.indexOf(address)' [address]='address'></address-registration>
 					</div>
 
-					<div class="ui-g-11 ui-sm-12" [style.visibility]="numberOfAddressesExhausted() ? 'visible' : 'hidden'">
-						<button pButton title="Dodaj adres" label="Dodaj adres" (click)="addNewAddressToAddressesList()"></button>
-					</div>
-
-					<div class="ui-g-11 ui-sm-12">
-						<div class="pull-right">
-							<button pButton title="Wyczyść formularz" label="Wyczyść" (click)="resetForm()"></button>
-							<button type="submit" pButton [disabled]="!registrationForm.valid || !isAllAddressesValid || !isNipCorrect" label="Dodaj"
-							 [title]="(!registrationForm.valid || !isAllAddressesValid || !isNipCorrect) ? 'Uzupełnij wymagane pola' : 'Dodaj'"
-							 (click)="submit()"></button>
-						</div>
-					</div>
 				</div>
 
+				<div class="ui-g-11 ui-sm-12" [style.visibility]="numberOfAddressesExhausted() ? 'visible' : 'hidden'">
+					<button pButton title="Dodaj adres" icon="fa-plus" label="Dodaj adres" (click)="addNewAddressToAddressesList()"></button>
+				</div>
+
+				<div class="ui-g-11 ui-sm-12">
+					<div class="pull-right">
+						<button pButton title="Wyczyść formularz" label="Wyczyść" (click)="resetForm()" icon="fa-close"></button>
+						<button type="submit" pButton icon="fa-check"
+								[disabled]="!registrationForm.valid || !isAllAddressesValid || !isNipCorrect" label="Dodaj"
+								[title]="(!registrationForm.valid || !isAllAddressesValid || !isNipCorrect) ? 'Uzupełnij wymagane pola' : 'Dodaj'"
+								(click)="submit()"></button>
+					</div>
+				</div>
 			</form>
 
 		</div>
