@@ -43,4 +43,20 @@ export class CommonMessages {
     public static groupDeletingSuccess(name){
         return [{severity:'success', detail: 'Usunięto grupę ' + name}];
     }
+    
+    public static editError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas edycji'}];
+    }
+    
+    public static editSuccess(){
+        return [{severity:'success', detail: 'Zmodyfikowano pomyślnie'}];
+    }
+    
+    public static addressCreatingSuccess(){
+        return [{severity:'success', detail: 'Dodano nowy adres'}];
+    }
+    
+    public static addressCreatingError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas dodawania adresu'}];
+    }
 }

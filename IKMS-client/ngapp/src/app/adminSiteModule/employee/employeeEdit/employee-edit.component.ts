@@ -4,6 +4,7 @@ import { Employee } from "../../model/employee/employee";
 import { EnumProvider } from "../../../commons/util/enum-provider";
 import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
+import {CommonMessages} from "../../../commons/util/common-messages";
 
 @Component({
   selector: 'employee-edit',
@@ -44,8 +45,8 @@ export class EmployeeEditComponent implements OnInit{
         .subscribe( data => {
             this.eventSave.emit(data);
             this.isVisible = false;
-            this.msgs = [];
-        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+            this.msgs = CommonMessages.editSuccess();
+        }, err => this.msgs = CommonMessages.editError());
     }
 
 }

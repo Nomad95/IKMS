@@ -3,6 +3,7 @@ import {ParentService} from "../../../sharedModule/services/parent.service";
 import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {Parent} from "../../menu/model/parent/parent";
+import {CommonMessages} from "../../../commons/util/common-messages";
 
 @Component({
   selector: 'parent-edit',
@@ -22,26 +23,26 @@ export class ParentEditComponent implements OnInit {
 
   private parent: Parent = new Parent();
   private msgs: Message[] = [];
-
-  ngOnInit(): void {
-    this.parentService.getParent(this.parentId)
-      .subscribe( data => {
-        this.parent = data;
-        this.msgs = [];
-      }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
-  }
-
-  closeModal(){
-    this.isVisible = false;
-    this.eventClose.emit(false);
-  }
-
-  saveData(parent){
-    this.parentService.updateParent(parent)
-      .subscribe( data => {
-        this.eventSave.emit(data);
+    
+    ngOnInit(): void {
+        this.parentService.getParent(this.parentId)
+        .subscribe(data => {
+            this.parent = data;
+            this.msgs = [];
+        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+    }
+    
+    closeModal() {
         this.isVisible = false;
-        this.msgs = [];
-      }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
-  }
+        this.eventClose.emit(false);
+    }
+    
+    saveData(parent) {
+        this.parentService.updateParent(parent)
+        .subscribe(data => {
+            this.eventSave.emit(data);
+            this.isVisible = false;
+            this.msgs = CommonMessages.editSuccess();
+        }, err => this.msgs = CommonMessages.editError());
+    }
 }

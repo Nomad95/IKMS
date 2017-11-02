@@ -6,6 +6,7 @@ import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {ChildrenService} from "../../../sharedModule/services/children.service";
 import {Child} from "../../menu/model/children/child";
+import {CommonMessages} from "../../../commons/util/common-messages";
 
 @Component({
   selector: 'child-edit',
@@ -46,8 +47,8 @@ export class ChildrenEditComponent implements OnInit{
         .subscribe( data => {
             this.eventSave.emit(data);
             this.isVisible = false;
-            this.msgs = [];
-        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+            this.msgs = CommonMessages.editSuccess();
+        }, err => this.msgs = CommonMessages.editSuccess());
     }
   
 }

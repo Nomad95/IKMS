@@ -4,6 +4,7 @@ import { Address } from "../../model/address/address";
 import {EnumProvider} from "../../../commons/util/enum-provider";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {Message} from "primeng/primeng";
+import {CommonMessages} from "../../../commons/util/common-messages";
 
 @Component({
   selector: 'address-create',
@@ -41,8 +42,8 @@ export class AddressCreateComponent implements OnInit{
             this.eventSave.emit(data);
             this.isVisible = false;
             this.address = new Address();
-            this.msgs = [];
-        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+            this.msgs = CommonMessages.addressCreatingSuccess();
+        }, err => this.msgs = CommonMessages.addressCreatingError());
     }
 
 }

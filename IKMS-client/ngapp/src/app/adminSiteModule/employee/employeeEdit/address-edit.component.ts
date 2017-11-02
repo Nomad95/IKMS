@@ -3,6 +3,7 @@ import { AddressService } from "../../../sharedModule/services/address.service";
 import { Address } from "../../model/address/address";
 import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
+import {CommonMessages} from "../../../commons/util/common-messages";
 
 @Component({
   selector: 'address-edit',
@@ -50,8 +51,8 @@ export class AddressEditComponent implements OnInit, OnChanges{
         .subscribe( data => {
             this.eventSave.emit(data);
             this.isVisible = false;
-            this.msgs = [];
-        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+            this.msgs = CommonMessages.editSuccess();
+        }, err => this.msgs = CommonMessages.editError());
     }
 
 }

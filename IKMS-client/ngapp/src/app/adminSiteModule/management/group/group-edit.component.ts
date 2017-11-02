@@ -6,6 +6,7 @@ import {GroupService} from "../../../sharedModule/services/group.service";
 import {Group} from "../../model/group/group";
 import {EmployeeService} from "../../../sharedModule/services/employee.service";
 import {Utils} from "../../../commons/util/utils";
+import {CommonMessages} from "../../../commons/util/common-messages";
 
 @Component({
   selector: 'group-edit',
@@ -45,8 +46,8 @@ export class GroupEditComponent implements OnInit{
             .subscribe( data => {
                 this.eventSave.emit(data);
                 this.isVisible = false;
-                this.msgs = [];
-            }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+                this.msgs = CommonMessages.editSuccess();
+            }, err => this.msgs = CommonMessages.editError());
     }
     
     getGroup(){

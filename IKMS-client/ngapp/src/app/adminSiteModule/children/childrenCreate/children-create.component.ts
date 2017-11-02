@@ -85,6 +85,9 @@ export class ChildrenCreateComponent implements OnInit{
                         this.isCreating = false;
                         this.form.reset();
                         this.clearForm();
+                    }, err => {
+                        this.msgs = CommonMessages.childCreatingError();
+                        this.isCreating = false;
                     });
             }, err => {
                 this.msgs = CommonMessages.childCreatingError();
