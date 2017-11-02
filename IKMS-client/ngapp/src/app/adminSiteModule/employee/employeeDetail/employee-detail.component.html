@@ -14,6 +14,7 @@
 					<p-panel>
 						<p-header>
 							<div class="ui-helper-clearfix" >
+								<span class="form-blue vertical-center italic">{{personalData?.name}} {{personalData?.surname}}</span>
 								<button pButton label="Edytuj" icon="fa-pencil" (click)="showEmployeeEditModal()" class="ikms-float-right"></button>
 							</div>
 						</p-header>
@@ -57,6 +58,7 @@
 					<p-panel>
 						<p-header>
 							<div class="ui-helper-clearfix" >
+								<span class="form-blue vertical-center italic">{{personalData?.name}} {{personalData?.surname}}</span>
 								<button pButton label="Edytuj" (click)="showPersonalDataEditModal()" icon="fa-pencil" class="ikms-float-right"></button>
 							</div>
 						</p-header>
@@ -210,6 +212,7 @@
 					<p-panel>
 						<p-header>
 							<div class="ui-helper-clearfix" >
+								<span class="form-blue vertical-center italic">{{personalData?.name}} {{personalData?.surname}}</span>
 								<button pButton label="Dodaj" (click)="showAddressCreateModal()" icon="fa-plus" class="ikms-float-right"></button>
 							</div>
 						</p-header>
@@ -225,8 +228,8 @@
 						<p-panel>
 							<p-header>
 								<div class="ui-helper-clearfix" >
+									<span class="form-blue vertical-center italic">{{personalData?.name}} {{personalData?.surname}}</span>
 									<button pButton label="Edytuj" (click)="showAddressEditModal(address.id)" icon="fa-pencil" class="ikms-float-right"></button>
-
 									<button pButton label="Dodaj" (click)="showAddressCreateModal()" icon="fa-plus" class="ikms-float-right"></button>
 								</div>
 							</p-header>

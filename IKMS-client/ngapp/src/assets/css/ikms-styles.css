@@ -80,6 +80,14 @@ textarea {
     resize : none;
 }
 
+.vertical-center{
+    vertical-align: -webkit-baseline-middle;
+}
+
+.italic{
+    font-style: italic;
+}
+
 /* obrazek na stronie logowania */
 .background {
     background: url('../img/background2.png') no-repeat center center fixed;
