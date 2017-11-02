@@ -55,7 +55,6 @@ export class GroupListComponent implements OnInit{
       this.router.navigate(['/admin/group/detail', groupId]);
     }
     
-    
     delete(groupId){
         this.confirmationService.confirm({//todo: !!!
             message: 'Czy napewno chcesz usunąć tą grupe? Wszystkie związane z nim dane, zostaną usunięte.',
@@ -64,8 +63,10 @@ export class GroupListComponent implements OnInit{
                 this.groupService.deleteGroup(groupId)
                     .subscribe( data =>{
                         this.loadGroups(this.size,this.page);
-                        this.msgs = [];
-                    }, err => this.msgs = CommonMessages.childDeletingError());
+                        this.msgs = CommonMessages.groupDeletingSuccess(data.name);
+                    }, err => {
+                        this.msgs = CommonMessages.groupDeletingError();
+                    });
             },
             reject: () => {}
         });

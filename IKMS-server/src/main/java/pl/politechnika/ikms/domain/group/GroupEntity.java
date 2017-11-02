@@ -37,7 +37,7 @@ public class GroupEntity extends AbstractEntity{
     @OneToMany(mappedBy = "group", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private List<ChildEntity> children = Lists.newArrayList();
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,CascadeType.PERSIST, CascadeType.DETACH})
     @JoinColumn(name = "employee_id")
     private EmployeeEntity employee;
 }

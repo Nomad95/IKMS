@@ -35,4 +35,12 @@ export class CommonMessages {
     public static groupCreatingError(){
         return [{severity:'error', detail: 'Wystąpił błąd podczas tworzenia grupy'}];
     }
+    
+    public static groupDeletingError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas usuwania grupy'}];
+    }
+    
+    public static groupDeletingSuccess(name){
+        return [{severity:'success', detail: 'Usunięto grupę ' + name}];
+    }
 }

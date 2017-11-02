@@ -4,7 +4,6 @@ import { ActivatedRoute } from "@angular/router";
 import {MenuItem, Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {BreadMaker} from "../../../commons/util/bread-maker";
-import {ChildrenService} from "../../../sharedModule/services/children.service";
 import {EnumProvider} from "../../../commons/util/enum-provider";
 import {DateUtils} from "../../../commons/util/date-utils";
 import {Utils} from "../../../commons/util/utils";
@@ -35,17 +34,17 @@ export class GroupCreateComponent implements OnInit{
     private employees = [];
     
     ngOnInit(){
-        this. clearForm();
         this.items = BreadMaker.makeBreadcrumbs("Zarządzanie","Grupy","Dodaj");
         this.yesNoChoice = this.enumProvider.translateToDropdown(this.yesNoChoice);
-        this.group.active = this.yesNoChoice[0];
     
+        this.clearForm();
         this.getEmployeeList();
     }
     
     clearForm(){
         this.group = new Group();
         this.form.reset();
+        this.group.active = (<any>this.yesNoChoice[0]).value;
     }
     
     getEmployeeList(){
