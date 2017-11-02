@@ -1,0 +1,15 @@
+package pl.politechnika.ikms.repository.notification;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import pl.politechnika.ikms.domain.notification.NotificationEntity;
+import pl.politechnika.ikms.domain.user.UserEntity;
+
+@Repository
+public interface NotificationRepository extends JpaRepository<NotificationEntity, Long>{
+
+    Page<NotificationEntity> findNotificationEntityByRecipientOrderByDateOfSendDesc(UserEntity userEntity, Pageable pageable);
+
+}
