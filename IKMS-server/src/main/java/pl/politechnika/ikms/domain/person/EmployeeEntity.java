@@ -8,6 +8,7 @@ import pl.politechnika.ikms.domain.group.GroupEntity;
 import pl.politechnika.ikms.domain.person.enums.EmployeeRole;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -33,6 +34,6 @@ public class EmployeeEntity extends AbstractEntity {
     @Column(name = "nip", length = 13)
     private String nip;
 
-    @OneToOne(mappedBy = "employee")
-    private GroupEntity groupEntity;
+    @OneToMany(mappedBy = "employee", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    private List<GroupEntity> groupEntity;
 }

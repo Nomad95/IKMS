@@ -40,7 +40,7 @@ public class ChildEntity extends AbstractEntity{
     @Enumerated(EnumType.STRING)
     private DisabilityLevel disabilityLevel;
 
-    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name = "group_id")
     private GroupEntity group;
 }
