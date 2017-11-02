@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
-public class GroupEntityMapper extends AbstractModelMapper<GroupEntity, GroupDto> {
+public class    GroupEntityMapper extends AbstractModelMapper<GroupEntity, GroupDto> {
 
     private final @NonNull EmployeeRepository employeeRepository;
     private final @NonNull ChildRepository childRepository;
