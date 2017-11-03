@@ -1,0 +1,4 @@
+id, content, recipient_id, date_of_send, was_read, priority
+1, Pierwsze powiadomienie, 1, 2017-01-11, TRUE, INFORMATION
+2, Drugie powiadomienie, 1, 2017-02-11, FALSE, IMPORTANT
+3, Trzecie powiadomienie, 1, 2017-03-11, FALSE, CHILD_ALLERT

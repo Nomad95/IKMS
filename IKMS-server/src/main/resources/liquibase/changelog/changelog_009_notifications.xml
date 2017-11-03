@@ -47,6 +47,11 @@
                 sequenceName="notifications_seq"
                 startValue="1"
                 incrementBy="1"/>
+        <loadData
+                tableName="notifications"
+                file="liquibase/data/notifications.csv"
+        />
+
 
 
     </changeSet>
