@@ -39,11 +39,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   private genders = EnumProvider.GENDERS;
   private numberOfAddresses = 1;
   private isNipCorrect: boolean;
+  private isSubmiting: boolean = false;
   private isAdressesArrayValid: boolean[] = [];
   private isAllAddressesValid: boolean;
   private msgs: Message[] = [];
   private items: MenuItem[];
-    
+
     private init() {
     this.personalData = new PersonalData();
     this.user = new UserRegistrationDTO();
@@ -180,10 +181,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     }
   }
 
-  resetForm() {
-    this.form.reset();
-  };
-
   nipIsValid() {
     let sum = 0;
     if (this.employee.nip) {
@@ -208,6 +205,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.whetherMan();
   }
   submit() {
+    this.isSubmiting = true;
     this.createUser();
   }
 
@@ -217,7 +215,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         this.personalData.user = { id: data.id, value: "" };
         this.createPersonalData();
         this.msgs = [];
-      }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+      }, err => {this.msgs = ErrorHandler.handleGenericServerError(err); this.isSubmiting = false;});
   }
 
   createPersonalData() {
@@ -227,7 +225,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         this.createAddress();
         this.createOfTheSelectedRole();
         this.msgs = [];
-      }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+      }, err =>{this.msgs = ErrorHandler.handleGenericServerError(err); this.isSubmiting = false;});
   }
 
   createAddress() {
@@ -237,7 +235,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         .subscribe(data => {
           this.addresses[i] = data;
           this.msgs = [];
-        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+        }, err => {this.msgs = ErrorHandler.handleGenericServerError(err), this.isSubmiting = false;});
     }
   }
 
@@ -262,7 +260,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         this.resetForm();
         this.resetAddresses();
         this.msgs = [];
-      }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+      }, err => {this.msgs = ErrorHandler.handleGenericServerError(err), this.isSubmiting = false;});
   }
 
   createEmployee() {
@@ -272,7 +270,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         this.resetForm();
         this.resetAddresses();
         this.msgs = [];
-      }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+      }, err => {this.msgs = ErrorHandler.handleGenericServerError(err), this.isSubmiting = false;});
   }
 
   createParent() {
@@ -283,8 +281,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         this.resetAddresses();
         this.router.navigateByUrl('admin/addUser');
         this.msgs = [];
-      }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+      }, err => {this.msgs = ErrorHandler.handleGenericServerError(err), this.isSubmiting = false;});
   }
+
+  resetForm() {
+    this.isSubmiting = false;
+    this.form.reset();
+  };
 
   resetAddresses() {
     this.addresses = [];

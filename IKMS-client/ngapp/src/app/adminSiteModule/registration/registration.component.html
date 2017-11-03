@@ -298,7 +298,7 @@
 					<div class="pull-right">
 						<button pButton title="Wyczyść formularz" label="Wyczyść" (click)="resetForm()" icon="fa-close"></button>
 						<button type="submit" pButton icon="fa-check"
-								[disabled]="!registrationForm.valid || !isAllAddressesValid || !isNipCorrect" label="Dodaj"
+								[disabled]="!registrationForm.valid || !isAllAddressesValid || !isNipCorrect || isSubmiting" label="Dodaj"
 								[title]="(!registrationForm.valid || !isAllAddressesValid || !isNipCorrect) ? 'Uzupełnij wymagane pola' : 'Dodaj'"
 								(click)="submit()"></button>
 					</div>

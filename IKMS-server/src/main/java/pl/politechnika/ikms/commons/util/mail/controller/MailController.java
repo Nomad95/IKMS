@@ -15,7 +15,7 @@ import pl.politechnika.ikms.commons.util.mail.service.MailService;
 
 @RestController
 @RequestMapping(value = "/api/mail")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class MailController {
 
     private final @NonNull
