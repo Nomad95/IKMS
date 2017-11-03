@@ -1,5 +1,6 @@
 drop table databasechangelog;
 drop table databasechangeloglock;
+drop table notifications;
 drop table children;
 drop table addresses;
 drop table groups;
@@ -8,8 +9,8 @@ drop table parents;
 drop table personal_data;
 drop table users;
 drop table roles;
-drop table notifications;
 
+drop sequence notifications_seq;
 drop sequence roles_seq;
 drop sequence users_seq;
 drop sequence addresses_seq;
@@ -18,4 +19,3 @@ drop sequence parents_seq;
 drop sequence personal_data_seq;
 drop sequence children_seq;
 drop sequence groups_seq;
-drop sequence notifications_seq;
