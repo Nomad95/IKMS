@@ -3,6 +3,7 @@ package pl.politechnika.ikms.rest.dto.notification;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import pl.politechnika.ikms.commons.abstracts.AbstractDto;
+import pl.politechnika.ikms.domain.notification.enums.Priority;
 import pl.politechnika.ikms.rest.dto.user.UserDto;
 
 import javax.validation.constraints.NotNull;
@@ -23,6 +24,6 @@ public class NotificationDto extends AbstractDto {
 
     private Boolean wasRead;
 
-    private String priority;
+    private Priority priority;
 
 }

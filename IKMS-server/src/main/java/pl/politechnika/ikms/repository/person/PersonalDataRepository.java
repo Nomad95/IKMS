@@ -1,9 +1,17 @@
 package pl.politechnika.ikms.repository.person;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.politechnika.ikms.domain.person.PersonalDataEntity;
 
+
 @Repository
 public interface PersonalDataRepository extends JpaRepository<PersonalDataEntity, Long>{
+
+    @Query(value = "select pd.name, pd.surname from personal_data pd " +
+            "join users u ON u.id = pd.id where u.username = ?1",
+            nativeQuery = true)
+    String findNameAndSurNameSeparatedByComma(String username);
+
 }

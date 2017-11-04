@@ -1,6 +1,5 @@
 package pl.politechnika.ikms.service.notification.impl;
 
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +10,7 @@ import pl.politechnika.ikms.domain.notification.NotificationEntity;
 import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 import pl.politechnika.ikms.repository.notification.NotificationRepository;
+import pl.politechnika.ikms.repository.person.PersonalDataRepository;
 import pl.politechnika.ikms.repository.user.UserRepository;
 import pl.politechnika.ikms.service.notification.NotificationService;
 
@@ -25,6 +25,9 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PersonalDataRepository personalDataRepository;
+
     public NotificationServiceImpl(NotificationRepository repository, UserRepository userRepository) {
         super(repository, NotificationEntity.class);
         this.userRepository = userRepository;
@@ -32,13 +35,18 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
 
 
     @Override
-    public NotificationEntity create(NotificationEntity entity, String recipient_username) {
+    public NotificationEntity create(NotificationEntity notification, String recipient_username, String sender_username) {
+        Optional<String> senderFullName = Optional.ofNullable(personalDataRepository.findNameAndSurNameSeparatedByComma(sender_username)
+                .replace(",", " "));
         Optional<UserEntity> foundUser = Optional.ofNullable(userRepository.findByUsername(recipient_username));
-        entity.setRecipient(foundUser.orElseThrow(()-> new EntityNotFoundException("Nie znaleziono użytkownika o loginie: "+ recipient_username)));
-        entity.setDateOfSend(LocalDate.now());
-        entity.setWasRead(false);
+        notification.setRecipient(foundUser
+                .orElseThrow(()-> new EntityNotFoundException("Nie znaleziono odbiorcy o loginie: "+ recipient_username)));
+        notification.setDateOfSend(LocalDate.now());
+        notification.setWasRead(false);
+        notification.setSenderFullName(senderFullName
+                .orElseThrow(()-> new EntityNotFoundException("Nie znaleziono adresata o loginie: " + sender_username  )));
 
-        return super.create(entity);
+        return super.create(notification);
     }
 
     @Override
