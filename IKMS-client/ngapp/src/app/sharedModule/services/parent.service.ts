@@ -3,10 +3,10 @@ import {Headers, Http} from "@angular/http";
 import {TokenUtils} from "../../commons/util/token-utils";
 import {Observable} from "rxjs/Observable";
 import {Page} from "../../commons/model/page";
-import {Parent} from "../model/parent/parent";
+import {Parent} from "../../adminSiteModule/menu/model/parent/parent";
 
 @Injectable()
-export class ParentEmployeeService {
+export class ParentService {
   public token: string;
   public username: string;
   private headers: Headers;
@@ -33,6 +33,11 @@ export class ParentEmployeeService {
 
   deleteParent(parentId): Observable<any>{
     return this.http.delete('api/parent/'+parentId, {headers: this.headers});
+  }
+  
+  getAllMinimal(): Observable<any>{
+      return this.http.get('api/parent/minimal/all', {headers: this.headers})
+        .map(res => res.json());
   }
 
 }

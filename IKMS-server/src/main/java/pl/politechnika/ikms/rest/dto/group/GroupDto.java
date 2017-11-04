@@ -25,6 +25,8 @@ public class GroupDto extends AbstractDto {
 
     private boolean active;
 
+    private int groupSize;
+
     private MinimalDto<Long, String> employee;
 
     private List<MinimalDto<Long, String>> children;

@@ -17,5 +17,8 @@
   "ROLE_ADMIN": "Administrator",
   "ROLE_EMPLOYEE": "Pracownik",
   "ROLE_PARENT": "Rodzic",
-  "ROLE_ANONYMOUS": "Niezdefiniowany"
+  "ROLE_ANONYMOUS": "Niezdefiniowany",
+
+  "true":"Tak",
+  "false": "Nie"
 }

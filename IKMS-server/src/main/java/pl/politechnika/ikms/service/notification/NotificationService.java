@@ -13,12 +13,16 @@ import java.util.List;
 
 public interface NotificationService extends GenericService<NotificationEntity> {
 
-    NotificationEntity create(NotificationEntity notificationEntity, String recipient_username);
+    NotificationEntity create(NotificationEntity notificationEntity, String recipient_username, String me);
 
     Page<NotificationEntity> findMyNotificationByPage(UserEntity user, Pageable pageable);
 
     NotificationEntity findMyNotificationById(Long notificationId, UserEntity user);
 
     void deleteMyNotification(Long notificationId, UserEntity user);
+
+    Long countNumberOfUnreadNotifications(String usernameFromToken);
+
+    void setNotificationToRead(Long idNotification);
 }
 

@@ -17,6 +17,9 @@ public class UserRegistrationDto extends AbstractDto{
     @Size(max = 30, min = 5)
     private String username;
 
+    @Size(max = 30, min = 5)
+    private String password;
+
     @NotNull
     @Size(max = 70, min = 5)
     private String email;

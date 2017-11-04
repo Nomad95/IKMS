@@ -41,9 +41,10 @@ public class NotificationController {
     @PostMapping("/user/{recipient_username}")
     @ResponseStatus(HttpStatus.CREATED)
     public NotificationDto notifyUser(@RequestBody @Valid NotificationDto notificationDto,
-                                      @PathVariable("recipient_username") String recipient_username){
+                                      @PathVariable("recipient_username") String recipient_username,
+                                      HttpServletRequest request){
         NotificationEntity notificationEntity = notificationService
-                .create(notificationEntityMapper.convertToEntity(notificationDto), recipient_username);
+                .create(notificationEntityMapper.convertToEntity(notificationDto), recipient_username, this.getUserByUsernameFromToken(request).getUsername());
         return notificationEntityMapper.convertToDto(notificationEntity);
     }
 
@@ -59,7 +60,6 @@ public class NotificationController {
     @GetMapping("/{notificationId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public NotificationDto getNotificationById(@PathVariable("notificationId") Long notificationId){
-        Preconditions.checkNotNull(notificationId, "Expected argument notificationId should be not null");
 
         return notificationEntityMapper.convertToDto(notificationService.findOne(notificationId));
     }
@@ -67,8 +67,6 @@ public class NotificationController {
     @GetMapping("/myNotifications/{notificationId}")
     public NotificationDto getMyOneNotification(@PathVariable("notificationId") Long notificationId,
                                                 HttpServletRequest request){
-        Preconditions.checkNotNull(notificationId, "Expected argument notificationId should be not null");
-
         UserEntity user = getUserByUsernameFromToken(request);
         NotificationEntity notificationEntity = notificationService.findMyNotificationById(notificationId, user);
 
@@ -78,8 +76,6 @@ public class NotificationController {
     @DeleteMapping("/myNotifications/{notificationId}")
     public void deleteMyNotification(@PathVariable("notificationId") Long notificationId,
                                      HttpServletRequest request){
-        Preconditions.checkNotNull(notificationId, "Expected argument notificationId should be not null");
-
         UserEntity user = getUserByUsernameFromToken(request);
         notificationService.deleteMyNotification(notificationId, user);
 
@@ -88,10 +84,24 @@ public class NotificationController {
     @DeleteMapping("/{notificationId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteNotificationById(@PathVariable("notificationId") Long notificationId){
-        Preconditions.checkNotNull(notificationId, "Expected argument notificationId should be not null");
-
         notificationService.deleteById(notificationId);
     }
+
+    @GetMapping(value = "/myNotifications/quantity/unread")
+    public String getNumberOfUnreadNotifications(HttpServletRequest request) {
+        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(tokenHeader);
+        Long count = notificationService.countNumberOfUnreadNotifications(usernameFromToken);
+
+        return "{\"count\": \" " + count + "\"}";
+    }
+
+    @PutMapping("/myNotifications/{notificationId}/read")
+    public void readNotification(@PathVariable("notificationId") Long notificationId){
+        notificationService.setNotificationToRead(notificationId);
+    }
+
+
+
 
     //TODO: [Arek] W późniejszym czasie trzeba to wynieść gdzieś niżej bo to będzie w wielu miejscach potrzebne
     public UserEntity getUserByUsernameFromToken(HttpServletRequest request){

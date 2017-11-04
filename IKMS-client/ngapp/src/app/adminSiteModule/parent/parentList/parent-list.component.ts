@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Page } from "../../../commons/model/page";
 import { Router } from "@angular/router";
 import {ParentGeneral} from "../../menu/model/parent/parent-general";
-import {ParentAdminService} from "../../services/parent-admin.service";
+import {ParentService} from "../../../sharedModule/services/parent.service";
 import {ConfirmationService, MenuItem, Message} from "primeng/primeng";
 import {CommonMessages} from "../../../commons/util/common-messages";
 import {ErrorHandler} from "../../../commons/util/error-handler";
@@ -11,11 +11,11 @@ import {BreadMaker} from "../../../commons/util/bread-maker";
 @Component({
   selector: 'parent-list',
   templateUrl: './parent-list.component.html',
-  providers: [ParentAdminService, ConfirmationService]
+  providers: [ConfirmationService]
 })
 export class ParentListComponent implements OnInit{
   constructor(
-    private parentAdminService: ParentAdminService,
+    private parentService: ParentService,
     private confirmationService: ConfirmationService,
     private router: Router){}
 
@@ -38,7 +38,7 @@ export class ParentListComponent implements OnInit{
 
   loadParents(size, page){
     this.isLoading = true;
-    this.parentAdminService.getParentGeneralDetails(size, page)
+    this.parentService.getParentGeneralDetails(size, page)
       .subscribe( data => {
         this.currentPageData = data;
         this.parents = data.content;
@@ -59,7 +59,7 @@ export class ParentListComponent implements OnInit{
       message: 'Czy napewno chcesz usunąć tego rodzica? Wszystkie związane z nim dane, zostaną usunięte.',
       header: 'Potwierdzenie usunięcia',
       accept: () => {
-        this.parentAdminService.deleteParent(parentId)
+        this.parentService.deleteParent(parentId)
           .subscribe( data =>{
             this.loadParents(this.size,this.page);
             this.msgs = [];

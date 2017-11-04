@@ -7,7 +7,7 @@
 			<form novalidate
 				  #editForm="ngForm">
 
-				<div class="ui-g-12">
+				<div class="ui-g-12 form-blue">
 
 					<div class="ui-g-6 ui-sm-12">
 						<div class="ui-g-12">
@@ -148,7 +148,7 @@
 							<div class="ui-g-8 ">
 								<p-dropdown
 										[options]="addressTypes" [autoWidth]="false"
-										required
+										required placeholder="Wybierz rodzaj adresu"
 										[(ngModel)]="address.addressType" name="addressType"
 										#addressType></p-dropdown>
 							</div>

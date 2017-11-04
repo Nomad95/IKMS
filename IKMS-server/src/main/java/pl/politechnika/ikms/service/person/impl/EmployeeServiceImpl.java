@@ -7,9 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.politechnika.ikms.commons.abstracts.AbstractService;
 import pl.politechnika.ikms.domain.person.EmployeeEntity;
 import pl.politechnika.ikms.repository.person.EmployeeRepository;
+import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.person.EmployeeGeneralDetailDto;
 import pl.politechnika.ikms.rest.mapper.person.EmployeeEntityMapper;
 import pl.politechnika.ikms.service.person.EmployeeService;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -23,5 +26,10 @@ public class EmployeeServiceImpl extends AbstractService<EmployeeEntity,Employee
     public Page<EmployeeGeneralDetailDto> getEmployeesGeneralDetails(Pageable pageable) {
         Page<EmployeeEntity> employees = findAllPaginated(pageable);
         return employees.map(e -> EmployeeEntityMapper.convertToGeneralDetail(e, e.getPersonalData(),e.getPersonalData().getUser()));
+    }
+
+    @Override
+    public List<MinimalDto<Long, String>> getEmployeesMinimal() {
+        return getRepository().getEmployeesMinimal();
     }
 }

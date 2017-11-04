@@ -5,6 +5,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.politechnika.ikms.commons.abstracts.AbstractModelMapper;
@@ -20,11 +23,13 @@ import java.util.Date;
 public class UserEntityRegistrationMapper extends AbstractModelMapper<UserEntity,UserRegistrationDto> {
 
     private final @NonNull RoleEnumToRoleEntityMapper roleMapper;
+    private final @NonNull JavaMailSender mailSender;
 
     @Autowired
-    public UserEntityRegistrationMapper(ModelMapper modelMapper, RoleEnumToRoleEntityMapper roleMapper) {
+    public UserEntityRegistrationMapper(ModelMapper modelMapper, RoleEnumToRoleEntityMapper roleMapper, JavaMailSenderImpl mailSender) {
         super(modelMapper);
         this.roleMapper = roleMapper;
+        this.mailSender = mailSender;
     }
 
     /**
@@ -38,9 +43,9 @@ public class UserEntityRegistrationMapper extends AbstractModelMapper<UserEntity
     @Override
     public UserEntity convertToEntity(UserRegistrationDto userRegistrationDto) {
         UserEntity entity = modelMapper.map(userRegistrationDto, UserEntity.class);
-        //hash the password
+
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        entity.setPassword(bCryptPasswordEncoder.encode("users"));
+        entity.setPassword(bCryptPasswordEncoder.encode(userRegistrationDto.getPassword()));
 
         entity.setCreatedDate(new Date());
         entity.setRole(roleMapper.getRoleFromEnum(userRegistrationDto.getRole()));

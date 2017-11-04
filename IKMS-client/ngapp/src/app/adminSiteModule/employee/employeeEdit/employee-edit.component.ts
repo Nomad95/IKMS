@@ -1,18 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { EmployeeAdminService } from "../../services/employee-admin.service";
+import { EmployeeService } from "../../../sharedModule/services/employee.service";
 import { Employee } from "../../model/employee/employee";
 import { EnumProvider } from "../../../commons/util/enum-provider";
 import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
+import {CommonMessages} from "../../../commons/util/common-messages";
 
 @Component({
   selector: 'employee-edit',
   templateUrl: './employee-edit.component.html',
-  providers: [EmployeeAdminService, EnumProvider]
+  providers: [EnumProvider]
 })
 export class EmployeeEditComponent implements OnInit{
     constructor(
-        private employeeAdminService: EmployeeAdminService,
+        private employeeService: EmployeeService,
         private enumProvider: EnumProvider){}
 
     @Input() private employeeId: number;
@@ -26,7 +27,7 @@ export class EmployeeEditComponent implements OnInit{
     private msgs: Message[] = [];
 
     ngOnInit(){
-        this.employeeAdminService.getEmployee(this.employeeId)
+        this.employeeService.getEmployee(this.employeeId)
             .subscribe( data => {
                 this.employee = data;
                 this.msgs = [];
@@ -40,12 +41,12 @@ export class EmployeeEditComponent implements OnInit{
     }
 
     saveData(employee){
-        this.employeeAdminService.updateEmployee(employee)
+        this.employeeService.updateEmployee(employee)
         .subscribe( data => {
             this.eventSave.emit(data);
             this.isVisible = false;
-            this.msgs = [];
-        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+            this.msgs = CommonMessages.editSuccess();
+        }, err => this.msgs = CommonMessages.editError());
     }
 
 }

@@ -1,12 +1,13 @@
 package pl.politechnika.ikms.rest.dto.person;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import pl.politechnika.ikms.commons.abstracts.AbstractDto;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class ChildGeneralDetailDto extends AbstractDto {
 
     private Long id;

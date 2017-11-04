@@ -1,0 +1,31 @@
+<p-confirmDialog  width="425"></p-confirmDialog>
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+  <p-breadcrumb [model]="items"></p-breadcrumb>
+  <hr class="small-hr"/>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="ui-g-12" *ngIf="!isLoading">
+        <button type="button" pButton  [routerLink]="['/admin/child/new']" icon="fa-plus" label="Dodaj dziecko"></button>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-section implementation text-center" *ngIf="isLoading">
+        <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+      </div>
+      <div class="content-section implementation" *ngIf="!isLoading">
+        <p-dataList [value]="notifications" [paginator]="true" [rows]="10">
+          <ng-template let-car pTemplate="item">
+            <p-fieldset>
+               ABCD
+            </p-fieldset>
+          </ng-template>
+        </p-dataList>
+      </div>
+    </div>
+  </div>
+
+</div>

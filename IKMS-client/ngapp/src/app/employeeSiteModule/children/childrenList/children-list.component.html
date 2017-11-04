@@ -28,16 +28,16 @@
                     <p-column [sortable]="true" field="name" header="Imię"></p-column>
                     <p-column [sortable]="true" field="surname" header="Nazwisko"></p-column>
                     <p-column [sortable]="true" field="parent.value" header="Rodzic"></p-column>
-                    <p-column styleClass="col-button" [style]="{'width':'120px', 'text-align':'center'}">
+                    <p-column styleClass="col-button" [style]="{'width':'80px', 'text-align':'center'}">
                         <ng-template pTemplate="header" >
                         </ng-template>
                         <ng-template let-child="rowData" pTemplate="body">
-                            <button *ngIf="!isNavigating" type="button" pButton (click)="navigateToParentDetails(child.parent.id)" icon="fa-id-card-o"></button>
+                            <button *ngIf="!isNavigating" type="button" pButton title="Rodzic"
+									(click)="navigateToParentDetails(child.parent.id)" icon="fa-id-card-o"></button>
 							<button *ngIf="isNavigating" type="button" pButton  icon="fa-spinner fa-pulse"></button>
-							<button type="button" pButton
+							<button type="button" pButton title="Podgląd"
                                     (click)="navigateToChildDetails(child.id, child.personalData.id)"
                                     icon="fa-search"></button>
-                            <button type="button" pButton (click)="delete(child.id)" icon="fa-trash"></button>
                         </ng-template>
                     </p-column>
                     <ng-template pTemplate="emptymessage">

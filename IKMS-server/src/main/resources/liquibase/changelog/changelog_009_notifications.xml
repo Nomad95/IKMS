@@ -25,6 +25,9 @@
             <column name="priority" type="varchar(30)">
                 <constraints nullable="false"/>
             </column>
+            <column name="sender" type="varchar(40)">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
 
         <addPrimaryKey
@@ -45,7 +48,7 @@
 
         <createSequence
                 sequenceName="notifications_seq"
-                startValue="1"
+                startValue="4"
                 incrementBy="1"/>
         <loadData
                 tableName="notifications"

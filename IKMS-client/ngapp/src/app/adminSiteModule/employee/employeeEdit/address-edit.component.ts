@@ -1,17 +1,18 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import { AddressAdminService } from "../../services/address.service";
+import { AddressService } from "../../../sharedModule/services/address.service";
 import { Address } from "../../model/address/address";
 import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
+import {CommonMessages} from "../../../commons/util/common-messages";
 
 @Component({
   selector: 'address-edit',
   templateUrl: './address-edit.component.html',
-  providers: [AddressAdminService]
+  providers: []
 })
 export class AddressEditComponent implements OnInit, OnChanges{
     constructor(
-        private addressAdminService: AddressAdminService){}
+        private addressService: AddressService){}
 
     @Input() private addressId: number;
     @Input() private isVisible: boolean = false;
@@ -32,7 +33,7 @@ export class AddressEditComponent implements OnInit, OnChanges{
 
     getAddress(){
         if(this.addressId != -1) {
-            this.addressAdminService.getAddress(this.addressId)
+            this.addressService.getAddress(this.addressId)
             .subscribe(data => {
                 this.address = data;
                 this.msgs = [];
@@ -46,12 +47,12 @@ export class AddressEditComponent implements OnInit, OnChanges{
     }
 
     saveData(address){
-        this.addressAdminService.updateAddress(address)
+        this.addressService.updateAddress(address)
         .subscribe( data => {
             this.eventSave.emit(data);
             this.isVisible = false;
-            this.msgs = [];
-        }, err => this.msgs = ErrorHandler.handleGenericServerError(err));
+            this.msgs = CommonMessages.editSuccess();
+        }, err => this.msgs = CommonMessages.editError());
     }
 
 }

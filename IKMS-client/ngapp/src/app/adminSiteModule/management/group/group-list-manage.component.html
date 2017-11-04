@@ -1,0 +1,35 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
+	<div class="row">
+		<div class="col-md-12">
+			<div *ngIf="isLoading" class="text-center">
+				<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+			</div>
+			<p-pickList *ngIf="!isLoading" [source]="grouplessChildrenList" [target]="currentChildrenList" filterBy="value"
+						sourceHeader="Dostępne dzieci" targetHeader="Wybrana grupa" [responsive]="true"
+						dragdrop="true" (onMoveToTarget)="costam()"
+						[sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+				<ng-template let-child pTemplate="item">
+					<div class="ui-helper-clearfix">
+						<div >{{child.value}}</div>
+					</div>
+				</ng-template>
+			</p-pickList>
+		</div>
+	</div>
+	<br />
+	<div class="row">
+		<div class="col-md-12">
+			<div class="ui-g-12" *ngIf="!isLoading">
+				<button *ngIf="!isSaving" type="button" pButton  (click)="updateChildrenList()" icon="fa-check" label="Zatwierdź"></button>
+				<button *ngIf="isSaving" type="button" pButton  icon="fa-spinner fa-pulse"></button>
+				<button type="button" pButton  (click)="routeBackToDetails()" icon="fa-arrow-left" label="Powrót"></button>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+

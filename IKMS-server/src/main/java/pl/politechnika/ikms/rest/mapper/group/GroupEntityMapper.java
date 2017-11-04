@@ -31,7 +31,15 @@ public class    GroupEntityMapper extends AbstractModelMapper<GroupEntity, Group
     @Override
     public GroupDto convertToDto(GroupEntity groupEntity) {
         GroupDto groupDto = modelMapper.map(groupEntity, GroupDto.class);
-        groupDto.setEmployee(new MinimalDto<>(groupEntity.getEmployee().getId(), groupEntity.getEmployee().getNip()));
+
+        if(Objects.nonNull(groupEntity.getEmployee())) {
+            groupDto.setEmployee(new MinimalDto<>(groupEntity.getEmployee().getId(),
+                    groupEntity.getEmployee().getPersonalData().getName()
+                            + " " + groupEntity.getEmployee().getPersonalData().getSurname()));
+        }
+
+        if(Objects.nonNull(groupEntity.getChildren()))
+            groupDto.setGroupSize(groupEntity.getChildren().size());
 
         if(Objects.nonNull(groupEntity.getChildren())) {
             ArrayList<MinimalDto<Long, String>> children = groupEntity.getChildren().stream()

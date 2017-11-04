@@ -8,12 +8,13 @@ import pl.politechnika.ikms.domain.group.GroupEntity;
 import pl.politechnika.ikms.domain.person.enums.EmployeeRole;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
 @Table(name = "employees")
 @EqualsAndHashCode(callSuper = true, exclude = "personalData")
-@ToString(exclude = "personalData")
+@ToString(exclude = "groupEntity")
 @SequenceGenerator(name="employees_seq_name",sequenceName="employees_seq", allocationSize = 1)
 public class EmployeeEntity extends AbstractEntity {
 
@@ -33,6 +34,6 @@ public class EmployeeEntity extends AbstractEntity {
     @Column(name = "nip", length = 13)
     private String nip;
 
-    @OneToOne(mappedBy = "employee")
-    private GroupEntity groupEntity;
+    @OneToMany(mappedBy = "employee", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    private List<GroupEntity> groupEntity;
 }

@@ -10,7 +10,7 @@
 			<form novalidate
 				  #childForm="ngForm">
 				<div class="content-section implementation" *ngIf="!isLoading">
-					<div class="ui-g bold">
+					<div class="ui-g form-blue">
 
 						<div class="ui-g-6 ui-sm-12">
 
@@ -58,7 +58,7 @@
 							<div class="ui-g-8 ">
 								<p-dropdown
 										[options]="parents" [autoWidth]="false"
-										required
+										required placeholder="Wybierz rodzica"
 										[(ngModel)]="child.parent.id" name="parent"
 										#parent></p-dropdown>
 							</div>
@@ -71,7 +71,7 @@
 			<hr/>
 			<form novalidate
 				  #personalDataForm="ngForm">
-				<div class="ui-g bold" *ngIf="!isLoading">
+				<div class="ui-g form-blue" *ngIf="!isLoading">
 					<div class="ui-g-6 ui-sm-12">
 						<div class="ui-g-12">
 							<div class="ui-g-4 ">Imię:<span class="red">*</span></div>
@@ -271,6 +271,8 @@
 				<div class="ui-g-12">
 					<button type="button" pButton icon="fa-check" [disabled]="personalDataForm.invalid || childForm.invalid || isCreating"
 							(click)="saveData(child, personalData)" label="Dodaj"></button>
+					<button type="button" pButton icon="fa-close"
+							(click)="clearForm()" label="Wyczyść"></button>
 					<i *ngIf="isCreating" class="fa fa-spinner fa-pulse fa fa-fw"></i>
 				</div>
 				<br/>

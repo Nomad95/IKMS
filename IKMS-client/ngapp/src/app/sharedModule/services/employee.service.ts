@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import { TokenUtils } from "../../commons/util/token-utils";
 import {Page} from "../../commons/model/page";
-import {Employee} from "../model/employee/employee";
+import {Employee} from "../../adminSiteModule/model/employee/employee";
 
 @Injectable()
-export class EmployeeAdminService{
+export class EmployeeService{
     public token: string;
     public username: string;
     private headers: Headers;
@@ -22,7 +22,12 @@ export class EmployeeAdminService{
         return this.http.get('api/employee/general?page=' + page + '&size=' + size, {headers: this.headers})
             .map( res => res.json());
     }
-
+    
+    getEmployeesMinimal(): Observable<any>{
+        return this.http.get('api/employee/minimal', {headers: this.headers})
+        .map( res => res.json());
+    }
+    
     getEmployee(employeeId): Observable<Employee>{
         return this.http.get('api/employee/' + employeeId, {headers: this.headers})
             .map( res => res.json());

@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="ui-g-12" *ngIf="!isLoading">
-        <button type="button" pButton  icon="fa-plus" label="Dodaj rodzica"></button>
+        <button type="button" pButton  icon="fa-plus" label="Dodaj rodzica" [routerLink]="['/admin/addUser']"></button>
       </div>
     </div>
   </div>
@@ -31,11 +31,12 @@
             <ng-template pTemplate="header" >
             </ng-template>
             <ng-template let-parent="rowData" pTemplate="body">
-              <button type="button" pButton icon="fa-user"></button>
-              <button type="button" pButton
+              <button type="button" pButton icon="fa-user" title="Użytkownik"></button>
+              <button type="button" pButton title="Podgląd"
                       (click)="navigateToParentDetails(parent.id, parent.personalData.id)"
                       icon="fa-search"></button>
-              <button type="button" pButton (click)="delete(parent.id)" icon="fa-trash"></button>
+              <button type="button" pButton title="Usuń"
+					  (click)="delete(parent.id)" icon="fa-trash"></button>
             </ng-template>
           </p-column>
           <ng-template pTemplate="emptymessage">

@@ -10,6 +10,11 @@ import {ParentDetailComponent} from "./parent/parentDetails/parent-detail.compon
 import {ChildrenCreateComponent} from "./children/childrenCreate/children-create.component";
 import { RegistrationComponent } from "./registration/registration.component";
 import {AuthGuard} from "../commons/guards/auth-guard";
+import {GroupListComponent} from "./management/group/group-list.component";
+import {GroupDetailComponent} from "./management/group/group-detail.component";
+import {GroupListManageComponent} from "./management/group/group-list-manage.component";
+import {GroupCreateComponent} from "./management/groupCreate/group-create.component";
+import {NotificationComponent} from "../sharedModule/notification/notificiationList/notification-list.component";
 
 const routes: Routes = [
     {
@@ -31,7 +36,7 @@ const routes: Routes = [
                         path: 'employee/detail/:id', component: EmployeeDetailComponent
                     },
                     {
-                      path: 'addUser', component: RegistrationComponent
+                        path: 'addUser', component: RegistrationComponent
                     },
                     {
                         path: 'child', component: ChildrenListComponent
@@ -47,6 +52,21 @@ const routes: Routes = [
                     },
                     {
                         path: 'parent/detail/:id', component: ParentDetailComponent
+                    },
+                    {
+                        path: 'group', component: GroupListComponent
+                    },
+                    {
+                        path: 'group/detail/:id', component: GroupDetailComponent
+                    },
+                    {
+                        path: 'group/manage/childList/:groupId', component: GroupListManageComponent
+                    },
+                    {
+                        path: 'group/new', component: GroupCreateComponent
+                    },
+                    {
+                        path: 'notification', component: NotificationComponent
                     }
                 ]
             }

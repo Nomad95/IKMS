@@ -14,11 +14,12 @@
 					<p-panel>
 						<p-header>
 							<div class="ui-helper-clearfix">
+								<span class="form-blue vertical-center italic">{{personalData?.name}} {{personalData?.surname}}</span>
 								<button pButton label="Edytuj" icon="fa-pencil" (click)="showParentEditModal()"
 										class="ikms-float-right"></button>
 							</div>
 						</p-header>
-						<div class="ui-g bold">
+						<div class="ui-g form-blue">
 							<div class="ui-g-6 ui-sm-12">
 								<div class="ui-g-12">
 									<div class="ui-g-4 ">Id Rodzica:</div>
@@ -37,11 +38,12 @@
 					<p-panel>
 						<p-header>
 							<div class="ui-helper-clearfix">
+								<span class="form-blue vertical-center italic">{{personalData?.name}} {{personalData?.surname}}</span>
 								<button pButton label="Edytuj" (click)="showPersonalDataEditModal()" icon="fa-pencil"
 										class="ikms-float-right"></button>
 							</div>
 						</p-header>
-						<div class="ui-g bold">
+						<div class="ui-g form-blue">
 							<div class="ui-g-6 ui-sm-12">
 								<div class="ui-g-12">
 									<div class="ui-g-4 ">Imię:</div>
@@ -191,6 +193,7 @@
 					<p-panel>
 						<p-header>
 							<div class="ui-helper-clearfix">
+								<span class="form-blue vertical-center italic">{{personalData?.name}} {{personalData?.surname}}</span>
 								<button pButton label="Dodaj" (click)="showAddressCreateModal()" icon="fa-plus"
 										class="ikms-float-right"></button>
 							</div>
@@ -207,6 +210,7 @@
 						<p-panel>
 							<p-header>
 								<div class="ui-helper-clearfix">
+									<span class="form-blue vertical-center italic">{{personalData?.name}} {{personalData?.surname}}</span>
 									<button pButton label="Edytuj" (click)="showAddressEditModal(address.id)"
 											icon="fa-pencil" class="ikms-float-right"></button>
 
@@ -214,7 +218,7 @@
 											class="ikms-float-right"></button>
 								</div>
 							</p-header>
-							<div class="ui-g bold">
+							<div class="ui-g form-blue">
 								<div class="ui-g-6">
 									<div class="ui-g-12">
 
