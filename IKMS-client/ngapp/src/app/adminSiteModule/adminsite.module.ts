@@ -6,7 +6,8 @@ import {
     ParentListComponent, ParentDetailComponent, ParentEditComponent,
     ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent,
     RegistrationComponent, AddressRegistrationComponent, GroupListComponent,
-    GroupDetailComponent, GroupEditComponent, GroupListManageComponent } from './index';
+    GroupDetailComponent, GroupEditComponent, GroupListManageComponent,
+    NotificationComponent } from './index';
 
 import {AuthGuard, LoginService} from './index';
 
@@ -20,6 +21,7 @@ import {
     BreadcrumbModule, TooltipModule, InputTextareaModule,
     SharedModule, PickListModule } from './index';
 import {GroupCreateComponent} from "./management/groupCreate/group-create.component";
+import {DataListModule, FieldsetModule} from "primeng/primeng";
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import {GroupCreateComponent} from "./management/groupCreate/group-create.compon
         BreadcrumbModule,
         TooltipModule,
         InputTextareaModule,
-        PickListModule
+        PickListModule,
+        DataListModule,
+        FieldsetModule
     ],
     declarations: [
         AdminSiteComponent,
@@ -75,8 +79,9 @@ import {GroupCreateComponent} from "./management/groupCreate/group-create.compon
         RegistrationComponent,
         AddressRegistrationComponent,
         GroupListManageComponent,
-        GroupCreateComponent
-        
+        GroupCreateComponent,
+        NotificationComponent
+
     ],
     providers: [
         AuthGuard,

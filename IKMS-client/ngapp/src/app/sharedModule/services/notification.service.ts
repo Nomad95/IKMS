@@ -37,4 +37,10 @@ export class NotificationService {
       .map(() => null);
   }
 
+  countMyUnreadNotifications(){
+    this.url = "/api/notification/myNotifications/quantity/unread";
+    return this.http.get(this.url,{headers :this.headers})
+      .map(res => res.json());
+  }
+
 }

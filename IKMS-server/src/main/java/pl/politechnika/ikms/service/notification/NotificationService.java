@@ -20,5 +20,9 @@ public interface NotificationService extends GenericService<NotificationEntity> 
     NotificationEntity findMyNotificationById(Long notificationId, UserEntity user);
 
     void deleteMyNotification(Long notificationId, UserEntity user);
+
+    Long countNumberOfUnreadNotifications(String usernameFromToken);
+
+    void setNotificationToRead(Long idNotification);
 }
 

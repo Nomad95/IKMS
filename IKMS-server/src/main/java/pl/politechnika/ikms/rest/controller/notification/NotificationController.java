@@ -87,6 +87,22 @@ public class NotificationController {
         notificationService.deleteById(notificationId);
     }
 
+    @GetMapping(value = "/myNotifications/quantity/unread")
+    public String getNumberOfUnreadNotifications(HttpServletRequest request) {
+        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(tokenHeader);
+        Long count = notificationService.countNumberOfUnreadNotifications(usernameFromToken);
+
+        return "{\"count\": \" " + count + "\"}";
+    }
+
+    @PutMapping("/myNotifications/{notificationId}/read")
+    public void readNotification(@PathVariable("notificationId") Long notificationId){
+        notificationService.setNotificationToRead(notificationId);
+    }
+
+
+
+
     //TODO: [Arek] W późniejszym czasie trzeba to wynieść gdzieś niżej bo to będzie w wielu miejscach potrzebne
     public UserEntity getUserByUsernameFromToken(HttpServletRequest request){
         String token = request.getHeader(tokenHeader);

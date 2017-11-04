@@ -23,6 +23,7 @@ export { GroupDetailComponent } from "./management/group/group-detail.component"
 export { GroupEditComponent } from "./management/group/group-edit.component";
 export { GroupListManageComponent } from "./management/group/group-list-manage.component";
 export { GroupCreateComponent } from "./management/groupCreate/group-create.component";
+export { NotificationComponent } from "../sharedModule/notification/notificiationList/notification-list.component";
 
 export { EnumTranslatePipe } from "../commons/pipes/enum-translate";
 

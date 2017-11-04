@@ -59,6 +59,16 @@ export class AdminSideMenu {
                     routerLink: ['/admin/group/new']
                 }
             ]
+        },
+        {
+            label: 'Powiadomienia',
+            icon: 'fa-sliders',
+            items: [
+                {
+                   label: 'Moje powiadomienia',
+                   routerLink: ['/admin/notification']
+                }
+            ]
         }
     ]
 }

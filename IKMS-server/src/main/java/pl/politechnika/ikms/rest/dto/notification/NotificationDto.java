@@ -18,12 +18,12 @@ public class NotificationDto extends AbstractDto {
     @NotNull
     private String content;
 
-    private UserDto recipient;
-
     private LocalDate dateOfSend;
 
     private Boolean wasRead;
 
     private Priority priority;
+
+    private String senderFullName;
 
 }

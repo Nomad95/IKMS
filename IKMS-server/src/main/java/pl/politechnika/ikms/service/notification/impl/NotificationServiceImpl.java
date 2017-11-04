@@ -3,6 +3,7 @@ package pl.politechnika.ikms.service.notification.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 import pl.politechnika.ikms.commons.abstracts.AbstractService;
@@ -14,6 +15,7 @@ import pl.politechnika.ikms.repository.person.PersonalDataRepository;
 import pl.politechnika.ikms.repository.user.UserRepository;
 import pl.politechnika.ikms.service.notification.NotificationService;
 
+import javax.sql.DataSource;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -27,6 +29,9 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
 
     @Autowired
     private PersonalDataRepository personalDataRepository;
+
+    @Autowired
+    private DataSource dataSource;
 
     public NotificationServiceImpl(NotificationRepository repository, UserRepository userRepository) {
         super(repository, NotificationEntity.class);
@@ -82,6 +87,18 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
         } else{
             delete(notification);
         }
+    }
 
+    @Override
+    public Long countNumberOfUnreadNotifications(String usernameFromToken) {
+        return getRepository().countByRecipient_UsernameAndWasRead(usernameFromToken, false).get();
+    }
+
+    @Transactional
+    @Override
+    public void setNotificationToRead(Long idNotification) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate.update(
+                "update notifications set was_read = TRUE where id = ?", idNotification);
     }
 }
