@@ -17,6 +17,8 @@ public interface NotificationRepository extends JpaRepository<NotificationEntity
 
     Page<NotificationEntity> findNotificationEntityByRecipientOrderByDateOfSendDesc(UserEntity userEntity, Pageable pageable);
 
+    List<NotificationEntity> findNotificationEntityByRecipientOrderByDateOfSendDesc(UserEntity user);
+
     @Query(value = "select count(n) from notifications n " +
             "join users u ON u.id = n.recipient_id " +
             "where u.username = :username AND n.was_read = :was_read", nativeQuery = true)

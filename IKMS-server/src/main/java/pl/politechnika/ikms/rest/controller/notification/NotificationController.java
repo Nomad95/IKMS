@@ -19,6 +19,8 @@ import pl.politechnika.ikms.service.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -50,11 +52,19 @@ public class NotificationController {
 
 
     @GetMapping("/myNotifications")
-    public Page<NotificationDto> getMyNotification(Pageable pageable, HttpServletRequest request){
+    public Page<NotificationDto> getMyAllNotification(Pageable pageable, HttpServletRequest request){
         UserEntity user = getUserByUsernameFromToken(request);
         Page<NotificationEntity> myNotifications = notificationService.findMyNotificationByPage(user, pageable);
 
         return myNotifications.map(notificationEntityMapper::convertToDto);
+    }
+
+    @GetMapping("/myAllNotifications")
+    public List<NotificationDto> getMyNotification(HttpServletRequest request){
+        UserEntity user = getUserByUsernameFromToken(request);
+        List<NotificationEntity> myNotifications = notificationService.findMyNotificationByUser(user);
+
+        return myNotifications.stream().map(notificationEntityMapper::convertToDto).collect(Collectors.toList());
     }
 
     @GetMapping("/{notificationId}")

@@ -1,6 +1,7 @@
 package pl.politechnika.ikms.service.notification.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,6 +19,7 @@ import pl.politechnika.ikms.service.notification.NotificationService;
 import javax.sql.DataSource;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,6 +32,7 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
     @Autowired
     private PersonalDataRepository personalDataRepository;
 
+    @Qualifier("dataSource")
     @Autowired
     private DataSource dataSource;
 
@@ -58,6 +61,15 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
     public Page<NotificationEntity> findMyNotificationByPage(UserEntity user, Pageable pageable) {
         Optional<Page<NotificationEntity>> myNotifications = Optional.ofNullable(getRepository().
                 findNotificationEntityByRecipientOrderByDateOfSendDesc(user, pageable));
+
+        return myNotifications
+                .orElseThrow(()-> new EntityNotFoundException("Użytkownik o loginie "+ user.getUsername() + " nie ma żadnych powiadomień"));
+    }
+
+    @Override
+    public List<NotificationEntity> findMyNotificationByUser(UserEntity user) {
+        Optional<List<NotificationEntity>> myNotifications = Optional.ofNullable(getRepository().
+                findNotificationEntityByRecipientOrderByDateOfSendDesc(user));
 
         return myNotifications
                 .orElseThrow(()-> new EntityNotFoundException("Użytkownik o loginie "+ user.getUsername() + " nie ma żadnych powiadomień"));
