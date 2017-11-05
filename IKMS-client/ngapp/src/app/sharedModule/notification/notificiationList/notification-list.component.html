@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="ui-g-12" *ngIf="!isLoading">
-        <button type="button" pButton  [routerLink]="['/admin/child/new']" icon="fa-plus" label="Dodaj dziecko"></button>
+        <button (click)="deleteSelectedNotificatins();" type="button" pButton  icon="fa-minus" label="Usuń wybrane"></button>
       </div>
     </div>
   </div>
@@ -18,14 +18,26 @@
       </div>
       <div class="content-section implementation" *ngIf="!isLoading">
         <p-dataList [value]="notifications" [paginator]="true" [rows]="10">
-          <ng-template let-car pTemplate="item">
-            <p-fieldset>
-               ABCD
-            </p-fieldset>
+          <p-header>
+            Twoje powiadomienia
+          </p-header>
+          <ng-template let-notification pTemplate="item">
+            <div class="ui-g-12 ui-md-1" style="text-align:center;">
+                <p-checkbox name="notification" [(ngModel)]="notification.checked" value="notification.id" ></p-checkbox>
+            </div>
+            <div class="ui-g ui-fluid car-item">
+              <div class="ui-g-9 ui-md-9 car-details">
+                <p-header >
+                </p-header>
+                <p-fieldset>
+                  {{notification.content}}
+                </p-fieldset>
+              </div>
+            </div>
           </ng-template>
         </p-dataList>
-      </div>
     </div>
   </div>
+
 
 </div>

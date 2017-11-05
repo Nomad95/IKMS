@@ -62,7 +62,7 @@ export class AdminSideMenu {
         },
         {
             label: 'Powiadomienia',
-            icon: 'fa-sliders',
+            icon: 'fa-bell',
             items: [
                 {
                    label: 'Moje powiadomienia',

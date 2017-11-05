@@ -21,7 +21,7 @@ import {
     BreadcrumbModule, TooltipModule, InputTextareaModule,
     SharedModule, PickListModule } from './index';
 import {GroupCreateComponent} from "./management/groupCreate/group-create.component";
-import {DataListModule, FieldsetModule} from "primeng/primeng";
+import {CheckboxModule, DataListModule, FieldsetModule} from "primeng/primeng";
 
 
 @NgModule({
@@ -52,7 +52,8 @@ import {DataListModule, FieldsetModule} from "primeng/primeng";
         InputTextareaModule,
         PickListModule,
         DataListModule,
-        FieldsetModule
+        FieldsetModule,
+        CheckboxModule
     ],
     declarations: [
         AdminSiteComponent,

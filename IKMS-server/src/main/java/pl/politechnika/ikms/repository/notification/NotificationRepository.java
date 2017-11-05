@@ -20,6 +20,6 @@ public interface NotificationRepository extends JpaRepository<NotificationEntity
     @Query(value = "select count(n) from notifications n " +
             "join users u ON u.id = n.recipient_id " +
             "where u.username = :username AND n.was_read = :was_read", nativeQuery = true)
-    Optional<Long> countByRecipient_UsernameAndWasRead(@Param("username") String username,
-                                                       @Param("was_read") Boolean was_read);
+    Long countByRecipient_UsernameAndWasRead(@Param("username") String username,
+                                             @Param("was_read") Boolean was_read);
 }

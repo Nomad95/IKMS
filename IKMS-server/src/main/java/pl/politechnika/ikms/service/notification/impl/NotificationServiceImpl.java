@@ -91,7 +91,7 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
 
     @Override
     public Long countNumberOfUnreadNotifications(String usernameFromToken) {
-        return getRepository().countByRecipient_UsernameAndWasRead(usernameFromToken, false).get();
+        return getRepository().countByRecipient_UsernameAndWasRead(usernameFromToken, Boolean.FALSE);
     }
 
     @Transactional

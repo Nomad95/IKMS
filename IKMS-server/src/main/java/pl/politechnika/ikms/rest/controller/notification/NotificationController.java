@@ -3,6 +3,7 @@ package pl.politechnika.ikms.rest.controller.notification;
 import com.google.common.base.Preconditions;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(value = "api/notification")
 @RequiredArgsConstructor
+@Slf4j
 public class NotificationController {
 
     @Value("${jwt.header}")
@@ -89,8 +91,10 @@ public class NotificationController {
 
     @GetMapping(value = "/myNotifications/quantity/unread")
     public String getNumberOfUnreadNotifications(HttpServletRequest request) {
-        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(tokenHeader);
-        Long count = notificationService.countNumberOfUnreadNotifications(usernameFromToken);
+        String token = request.getHeader(tokenHeader);
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+
+        Long count = notificationService.countNumberOfUnreadNotifications(username);
 
         return "{\"count\": \" " + count + "\"}";
     }
@@ -99,8 +103,6 @@ public class NotificationController {
     public void readNotification(@PathVariable("notificationId") Long notificationId){
         notificationService.setNotificationToRead(notificationId);
     }
-
-
 
 
     //TODO: [Arek] W późniejszym czasie trzeba to wynieść gdzieś niżej bo to będzie w wielu miejscach potrzebne

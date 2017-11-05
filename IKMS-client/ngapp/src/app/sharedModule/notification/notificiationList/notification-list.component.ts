@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {NotificationService} from "../../services/notification.service";
-import {Page} from "../../../commons/model/page";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Notification} from "../model/notification";
 import {ConfirmationService} from "primeng/primeng";
+import {GenericPage} from "../model/genericPage";
 
 @Component({
   selector: 'notification',
@@ -12,8 +12,10 @@ import {ConfirmationService} from "primeng/primeng";
 })
 export class NotificationComponent implements OnInit, OnDestroy {
 
-  private pageWithNotifications: Page;
-  private notifications: Notification[];
+
+  private isLoading: boolean = true;
+  private pageWithNotifications: GenericPage<Notification>;
+  private notifications: Array<Notification>;
   private indexesOfPage;
   private notificationsToDelete;
   private currentPage: number;
@@ -21,7 +23,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
   private countUnreadNotifications = {
     count:''
   };
-  private isLoading: boolean = true;
 
   constructor(private notificationService: NotificationService,
               private route: ActivatedRoute,
@@ -38,17 +39,27 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   getMyNotificationsByPage(numberOfPage: number): void{
-    this.isLoading = true
+    console.log(this.notifications);
     this.notifications = [];
     this.indexesOfPage = [];
+    this.isLoading = true;
+    console.log(this.notifications);
     this.notificationService
       .getMyNotifications(numberOfPage)
       .subscribe( result => {
         this.pageWithNotifications = result;
-        for(let note of this.pageWithNotifications.content)
+        console.log(result);
+        for(let note of this.pageWithNotifications.content){
+          note.checked = false;
           this.notifications.push(note);
+          console.log("Check: "+note.checked);
+        }
         this.generateTabForPagination(this.pageWithNotifications.totalPages);
         this.countMyUnreadNotifications();
+        console.log(this.notifications);
+        this.isLoading = false;
+      }, err => {
+        this.isLoading = false;
       })
   }
 
@@ -69,7 +80,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.notificationService.countMyUnreadNotifications().subscribe(
       result => {
         this.countUnreadNotifications = result;
-      }
+      },
+      err =>{}
     );
   }
 
@@ -104,5 +116,5 @@ export class NotificationComponent implements OnInit, OnDestroy {
     var currentUrl = this.router.url;
     var refreshUrl = currentUrl.indexOf('messagebox/sent') > -1 ? '/messagebox' : 'messagebox/sent';
     this.router.navigateByUrl(refreshUrl).then(() => this.router.navigateByUrl(currentUrl));
-   }
+  }
 }

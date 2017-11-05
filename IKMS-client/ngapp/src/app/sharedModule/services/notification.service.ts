@@ -4,6 +4,7 @@ import {Injectable} from "@angular/core";
 import {Headers, Http} from "@angular/http";
 import {TokenUtils} from "../../commons/util/token-utils";
 import {Observable} from "rxjs/Observable";
+import {Notification} from "../notification/model/notification";
 
 @Injectable()
 export class NotificationService {
