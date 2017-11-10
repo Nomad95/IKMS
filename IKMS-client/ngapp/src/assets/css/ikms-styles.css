@@ -41,6 +41,19 @@ body {
     border-color: #9fa8da !important;
 }
 
+.ui-chkbox-label {
+    vertical-align: unset;
+}
+
+.ui-chkbox .ui-chkbox-icon {
+    display: block;
+    margin: -2px;
+}
+
+.ui-chkbox {
+    padding-bottom: 2px;
+}
+
 .ui-sortable-column:hover{
     color: #3f51b5;
 }
