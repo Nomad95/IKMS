@@ -20,7 +20,8 @@ import {
 import {
     AddressEditComponent,
     PersonalDataEditComponent, AddressCreateComponent,
-    ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent
+    ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent,
+    NgbModule
 } from './index';
 
 @NgModule({
@@ -47,7 +48,8 @@ import {
         GrowlModule,
         BreadcrumbModule,
         TooltipModule,
-        FormsModule
+        FormsModule,
+        NgbModule.forRoot()
     ],
     declarations: [
         EmployeeSiteComponent,

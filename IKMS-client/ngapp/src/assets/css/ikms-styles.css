@@ -131,8 +131,38 @@ textarea {
     padding-right: 25px;
 }
 
+.navbar-collapse-box{
+    right: 25px !important;
+    left: unset !important;
+    top: 36px;
+    padding: 0px !important;
+    background: rgba(0,0,0,0);
+}
+
+.navbar-collapse-button{
+    width: 100% !important;
+    background: white;
+    border: none;
+    padding: 0.12em;
+    font-family: "Roboto-Regular", Arial, Helvetica, sans-serif !important;
+    text-align: left;
+    font-size: 100%;
+    font-weight: 300;
+    color: #4d4b50;
+}
+
+.navbar-collapsed-box{
+    float: right;
+    margin-top: 6px;
+}
+
+.navbar-collapse-button:hover{
+    background: #D5D5D5;
+    color: #000000;
+}
+
 .navbar-nav > li > a {
-    padding-top: 8px;
+    padding-top: 6px;
     padding-bottom: 0px;
     font-size: 100%;
 }
@@ -258,6 +288,11 @@ a:-webkit-any-link {
     border: none !important;
     border-bottom: 1px solid #3949ab !important;
 }
+@media only screen and (min-width: 768px) {
+    .navbar-collapsed-box{
+       display: none;
+    }
+}
 
 /** responsywnosc lewego paska**/
 @media only screen and (max-width: 768px) {
@@ -303,5 +338,11 @@ a:-webkit-any-link {
         opacity: 1;
         visibility: visible;
     }
+
+    .navbar-nav > li > a {
+        display: none;
+    }
+
+
 
 }

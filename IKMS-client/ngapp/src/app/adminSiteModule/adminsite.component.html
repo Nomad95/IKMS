@@ -1,38 +1,43 @@
 <section class="container-fluid">
-  <div class="row">
+	<div class="row">
 
-      <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand brand-text" >I.K.M.S</a>
-        </div>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="navbar-header">
+				<div class="navbar-collapsed-box navbar-right" style="height: 100%">
+					<li ngbDropdown class="dropdown">
+						<a class="dropdown-toggle brand-text" data-toggle="dropdown" id="dropdownMobile"
+						   ngbDropdownToggle role="button" aria-haspopup="true" aria-expanded="false"><i
+								class="fa fa-2x fa-ellipsis-h navbar-dropdown" aria-hidden="true"></i></a>
+						<ul ngbDropdownMenu class="dropdown-menu navbar-collapse-box" aria-labelledby="dropdownMobile">
+							<button (click)="logout()"  class="dropdown-item navbar-collapse-button">
+								<i class="fa fa-sign-out" aria-hidden="true"></i>Wyloguj
+							</button>
+						</ul>
+					</li>
+				</div>
+				<a class="navbar-brand brand-text">I.K.M.S</a>
+			</div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right" style="height: 100%">
-            <li class="dropdown" >
-              <a href="#" class="dropdown-toggle brand-text" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-2x fa-ellipsis-h navbar-dropdown" aria-hidden="true"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </nav>
-      <div>
-          <admin-sidebar></admin-sidebar>
-      </div>
-  </div>
-  <router-outlet >
+			<div class="collapse navbar-collapse" id="navbar-collapse">
+				<ul class="nav navbar-nav navbar-right" style="height: 100%">
+					<li ngbDropdown class="dropdown">
+						<a class="dropdown-toggle brand-text" data-toggle="dropdown" id="dropdown"
+						   ngbDropdownToggle role="button" aria-haspopup="true" aria-expanded="false"><i
+								class="fa fa-2x fa-ellipsis-h navbar-dropdown" aria-hidden="true"></i></a>
+						<ul ngbDropdownMenu class="dropdown-menu navbar-collapse-box" aria-labelledby="dropdown">
+							<button (click)="logout()" class="dropdown-item navbar-collapse-button">
+								<i class="fa fa-sign-out" style="padding: 4px;" aria-hidden="true"></i>Wyloguj
+							</button>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<div>
+			<admin-sidebar></admin-sidebar>
+		</div>
+	</div>
+	<router-outlet>
 
-  </router-outlet>
+	</router-outlet>
 </section>

@@ -52,3 +52,7 @@ export { TooltipModule } from "../../../node_modules/primeng/components/tooltip/
 export { InputTextareaModule } from "../../../node_modules/primeng/components/inputtextarea/inputtextarea";
 export { SharedModule } from "../sharedModule/shared-module.module";
 export { PickListModule } from '../../../node_modules/primeng/components/picklist/picklist';
+export { MenubarModule } from "../../../node_modules/primeng/components/menubar/menubar";
+export { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+

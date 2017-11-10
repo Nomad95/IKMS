@@ -30,6 +30,7 @@ export { GrowlModule } from "../../../node_modules/primeng/components/growl/grow
 export { BreadcrumbModule } from "../../../node_modules/primeng/components/breadcrumb/breadcrumb";
 export { TooltipModule } from "../../../node_modules/primeng/components/tooltip/tooltip";
 export { SharedModule } from "../sharedModule/shared-module.module";
+export { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 export {AddressEditComponent} from "./shared/address-edit.component";
 export {PersonalDataEditComponent} from "./shared/personal-data-edit.component";

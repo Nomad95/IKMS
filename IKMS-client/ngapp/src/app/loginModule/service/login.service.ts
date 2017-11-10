@@ -55,6 +55,7 @@ export class LoginService {
         this.token = null;
         this.storedRole = null;
         TokenUtils.removeStoredTokens();
+        this.router.navigate(['/login']);
     }
     
     getStoredRole(): string{

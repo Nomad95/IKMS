@@ -18,7 +18,8 @@ import {
     MessagesModule, DropdownModule, InputMaskModule,
     CalendarModule, ConfirmDialogModule, GrowlModule,
     BreadcrumbModule, TooltipModule, InputTextareaModule,
-    SharedModule, PickListModule } from './index';
+    SharedModule, PickListModule, MenubarModule,
+    NgbModule } from './index';
 import {GroupCreateComponent} from "./management/groupCreate/group-create.component";
 
 
@@ -48,7 +49,9 @@ import {GroupCreateComponent} from "./management/groupCreate/group-create.compon
         BreadcrumbModule,
         TooltipModule,
         InputTextareaModule,
-        PickListModule
+        PickListModule,
+        MenubarModule,
+        NgbModule.forRoot()
     ],
     declarations: [
         AdminSiteComponent,
