@@ -1,0 +1,16 @@
+<p-schedule
+		[events]="events"
+		[defaultView]="configuration.defaultView"
+		[header]="configuration.headerConfig"
+		[allDaySlot]="configuration.allDaySlot"
+		[weekends]="configuration.weekends"
+		[minTime]="configuration.minTime"
+		[maxTime]="configuration.maxTime"
+		[height]="configuration.height"
+		[options]="configuration.options"
+		[defaultDate]="configuration.defaultDate"
+		[timeFormat]="configuration.timeFormat"
+		[editable]="true" >
+</p-schedule>
+
+<!-- Do not use getters here because of infinite recursion -->

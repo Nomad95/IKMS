@@ -23,6 +23,7 @@ export { GroupDetailComponent } from "./management/group/group-detail.component"
 export { GroupEditComponent } from "./management/group/group-edit.component";
 export { GroupListManageComponent } from "./management/group/group-list-manage.component";
 export { GroupCreateComponent } from "./management/groupCreate/group-create.component";
+export { SchedulesListComponent } from "./management/schedule/schedules-list.component";
 
 export { EnumTranslatePipe } from "../commons/pipes/enum-translate";
 
@@ -54,5 +55,8 @@ export { SharedModule } from "../sharedModule/shared-module.module";
 export { PickListModule } from '../../../node_modules/primeng/components/picklist/picklist';
 export { MenubarModule } from "../../../node_modules/primeng/components/menubar/menubar";
 export { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+export { ScheduleModule } from "../../../node_modules/primeng/components/schedule/schedule";
+
+
 
 

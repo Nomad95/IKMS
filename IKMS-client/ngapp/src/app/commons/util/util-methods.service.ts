@@ -5,7 +5,7 @@ export class UtilMethods {
     constructor() {
     }
 
-    /** //TODO: zmien komentarze xD
+    /**
     * Takes string and returns first letter Uppercase
     * Example: forces input values to be first ltter upper case
     *      (keypress)="newEventType1.description = firstLetterUpperCase(newEventType1.description)"

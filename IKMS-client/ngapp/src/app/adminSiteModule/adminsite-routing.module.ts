@@ -14,6 +14,7 @@ import {GroupListComponent} from "./management/group/group-list.component";
 import {GroupDetailComponent} from "./management/group/group-detail.component";
 import {GroupListManageComponent} from "./management/group/group-list-manage.component";
 import {GroupCreateComponent} from "./management/groupCreate/group-create.component";
+import {SchedulesListComponent} from "./management/schedule/schedules-list.component";
 
 const routes: Routes = [
     {
@@ -63,6 +64,9 @@ const routes: Routes = [
                     },
                     {
                         path: 'group/new', component: GroupCreateComponent
+                    },
+                    {
+                        path: 'schedule/list', component: SchedulesListComponent
                     }
                 ]
             }

@@ -6,7 +6,8 @@ import {
     ParentListComponent, ParentDetailComponent, ParentEditComponent,
     ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent,
     RegistrationComponent, AddressRegistrationComponent, GroupListComponent,
-    GroupDetailComponent, GroupEditComponent, GroupListManageComponent } from './index';
+    GroupDetailComponent, GroupEditComponent, GroupListManageComponent,
+    GroupCreateComponent, SchedulesListComponent } from './index';
 
 import {AuthGuard, LoginService} from './index';
 
@@ -19,8 +20,8 @@ import {
     CalendarModule, ConfirmDialogModule, GrowlModule,
     BreadcrumbModule, TooltipModule, InputTextareaModule,
     SharedModule, PickListModule, MenubarModule,
-    NgbModule } from './index';
-import {GroupCreateComponent} from "./management/groupCreate/group-create.component";
+    NgbModule, ScheduleModule } from './index';
+import {SchedulesModule} from "../scheduleModule/schedule.module";
 
 
 @NgModule({
@@ -51,7 +52,9 @@ import {GroupCreateComponent} from "./management/groupCreate/group-create.compon
         InputTextareaModule,
         PickListModule,
         MenubarModule,
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        ScheduleModule,
+        SchedulesModule
     ],
     declarations: [
         AdminSiteComponent,
@@ -78,8 +81,8 @@ import {GroupCreateComponent} from "./management/groupCreate/group-create.compon
         RegistrationComponent,
         AddressRegistrationComponent,
         GroupListManageComponent,
-        GroupCreateComponent
-        
+        GroupCreateComponent,
+        SchedulesListComponent
     ],
     providers: [
         AuthGuard,

@@ -15,6 +15,8 @@ export class EnumProvider{
     static ADDRESS_TYPES = ['CORRESPONDENCE_ADDRESS','ADDRESS','REGISTERED_ADDRESS'];
     static DISABILITY_LEVELS = ['NONE','MILD','MODERATE','CONSIDERABLE'];
     static ROLES = ['ROLE_ADMIN','ROLE_EMPLOYEE','ROLE_PARENT'];
+    static WEEK_DAYS_LONG_PL = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'];
+    static WEEK_DAYS_SHORT_PL = ['Nie', 'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob'];
 
      translateToDropdown(values): any[]{
         let result = [];
