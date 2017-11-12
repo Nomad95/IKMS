@@ -6,6 +6,7 @@ import lombok.ToString;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 import pl.politechnika.ikms.domain.group.GroupEntity;
 import pl.politechnika.ikms.domain.person.enums.EmployeeRole;
+import pl.politechnika.ikms.domain.schedule.ScheduleActivityEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -36,4 +37,7 @@ public class EmployeeEntity extends AbstractEntity {
 
     @OneToMany(mappedBy = "employee", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private List<GroupEntity> groupEntity;
+
+    @ManyToMany(mappedBy = "employees")
+    private List<ScheduleActivityEntity> activities;
 }

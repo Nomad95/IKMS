@@ -1,0 +1,47 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Kopec" id="changelog_012_activities_has_children">
+        <createTable tableName="activities_has_children">
+            <column name="schedule_activity_id" type="bigint" >
+                <constraints nullable="false" />
+            </column>
+            <column name="child_id" type="bigint" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="schedule_activity_id, child_id"
+                constraintName="pk_activit_has_child"
+                tableName="activities_has_children"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="schedule_activity_id"
+                baseTableName="activities_has_children"
+                constraintName="fk_activities_activities"
+                referencedColumnNames="id"
+                referencedTableName="schedule_activities"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="child_id"
+                baseTableName="activities_has_children"
+                constraintName="fk_activities_children"
+                referencedColumnNames="id"
+                referencedTableName="children"/>
+
+        <createIndex tableName="activities_has_children" indexName="idx_fk_act_act_chld">
+            <column name="schedule_activity_id"></column>
+        </createIndex>
+
+        <createIndex tableName="activities_has_children" indexName="idx_fk_act_chld">
+            <column name="child_id"></column>
+        </createIndex>
+
+    </changeSet>
+
+</databaseChangeLog>

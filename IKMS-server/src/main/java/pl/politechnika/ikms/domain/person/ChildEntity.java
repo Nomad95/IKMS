@@ -6,8 +6,10 @@ import lombok.ToString;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 import pl.politechnika.ikms.domain.group.GroupEntity;
 import pl.politechnika.ikms.domain.person.enums.DisabilityLevel;
+import pl.politechnika.ikms.domain.schedule.ScheduleActivityEntity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -43,4 +45,7 @@ public class ChildEntity extends AbstractEntity{
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name = "group_id")
     private GroupEntity group;
+
+    @ManyToMany(mappedBy = "employees")
+    private List<ScheduleActivityEntity> activities;
 }

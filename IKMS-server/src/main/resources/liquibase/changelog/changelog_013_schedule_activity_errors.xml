@@ -1,0 +1,43 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Kopec" id="changelog_013_schedule_activity_errors">
+        <createTable tableName="schedule_activity_errors">
+            <column name="id" type="bigint" >
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="message" type="varchar(255)">
+            </column>
+            <column name="activity_id" type="bigint" >
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="id"
+                constraintName="pk_activity_errors"
+                tableName="schedule_activity_errors"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="activity_id"
+                baseTableName="schedule_activity_errors"
+                constraintName="fk_sched_err"
+                referencedColumnNames="id"
+                referencedTableName="schedule_activities"/>
+
+        <createIndex tableName="schedule_activity_errors" indexName="idx_fk_sched_err">
+            <column name="activity_id"></column>
+        </createIndex>
+
+        <createSequence
+                sequenceName="activities_err_seq"
+                startValue="1"
+                incrementBy="1"/>
+
+    </changeSet>
+
+</databaseChangeLog>

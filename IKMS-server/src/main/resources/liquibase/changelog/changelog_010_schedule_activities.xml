@@ -1,0 +1,69 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Kopec" id="changelog_010_schedule_activities">
+        <createTable tableName="schedule_activities">
+            <column name="id" type="bigint" >
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="title" type="varchar(50)">
+            </column>
+            <column name="activity_start" type="timestamp">
+            </column>
+            <column name="activity_end" type="timestamp">
+            </column>
+            <column name="classroom_id" type="bigint" >
+                <constraints nullable="true" />
+            </column>
+            <column name="group_id" type="bigint" >
+                <constraints nullable="true" />
+            </column>
+            <column name="comment" type="varchar(255)" >
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="id"
+                constraintName="pk_schedule_activities"
+                tableName="schedule_activities"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="classroom_id"
+                baseTableName="schedule_activities"
+                constraintName="fk_sched_classrm"
+                referencedColumnNames="id"
+                referencedTableName="classrooms"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="group_id"
+                baseTableName="schedule_activities"
+                constraintName="fk_sched_group"
+                referencedColumnNames="id"
+                referencedTableName="groups"/>
+
+        <createIndex tableName="schedule_activities" indexName="idx_fk_sched_classrm">
+            <column name="classroom_id"></column>
+        </createIndex>
+
+        <createIndex tableName="schedule_activities" indexName="idx_fk_sched_grp">
+            <column name="group_id"></column>
+        </createIndex>
+
+        <createSequence
+                sequenceName="schedule_activities_seq"
+                startValue="1"
+                incrementBy="1"/>
+
+        <!--<loadData
+                tableName="children"
+                file="liquibase/data/children.csv"
+        />-->
+
+    </changeSet>
+
+</databaseChangeLog>

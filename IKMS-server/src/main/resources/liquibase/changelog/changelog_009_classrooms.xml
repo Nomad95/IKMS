@@ -1,0 +1,37 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Kopec" id="changelog_009_classrooms">
+        <createTable tableName="classrooms">
+            <column name="id" type="bigint" >
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(30)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="available" type="boolean" >
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="id"
+                constraintName="pk_classrooms"
+                tableName="classrooms"/>
+
+        <createSequence
+                sequenceName="classrooms_seq"
+                startValue="1"
+                incrementBy="1"/>
+
+        <!--<loadData
+                tableName="children"
+                file="liquibase/data/children.csv"
+        />-->
+
+    </changeSet>
+
+</databaseChangeLog>

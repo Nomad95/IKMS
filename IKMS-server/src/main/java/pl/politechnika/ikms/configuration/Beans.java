@@ -10,8 +10,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import pl.politechnika.ikms.commons.serializers.LocalDateDeserializer;
 import pl.politechnika.ikms.commons.serializers.LocalDateSerializer;
+import pl.politechnika.ikms.commons.serializers.LocalDateTimeDeserializer;
+import pl.politechnika.ikms.commons.serializers.LocalDateTimeSerializer;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Configuration
 public class Beans {
@@ -28,6 +31,8 @@ public class Beans {
         JavaTimeModule javaTimeModule = new JavaTimeModule();
         javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer());
         javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer());
+        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
+        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
         objectMapper.registerModule(javaTimeModule);
         return objectMapper;
     }
