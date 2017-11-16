@@ -5,6 +5,7 @@ import {Headers, Http} from "@angular/http";
 import {TokenUtils} from "../../commons/util/token-utils";
 import {Observable} from "rxjs/Observable";
 import {Notification} from "../notification/model/notification";
+import {NewNotification} from "../notification/model/newNotification";
 
 @Injectable()
 export class NotificationService {
@@ -20,7 +21,7 @@ export class NotificationService {
 
   }
 
-  sendNotification(notifcation: Notification, recipient_username):Observable<Notification>{
+  sendNotification(notifcation: NewNotification, recipient_username):Observable<Notification>{
     this.url = 'api/notification/user/'+ recipient_username;
     return this.http.post(this.url, JSON.stringify(notifcation), {headers: this.headers})
       .map(res => res.json());

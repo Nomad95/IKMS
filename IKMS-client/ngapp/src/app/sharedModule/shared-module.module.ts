@@ -12,7 +12,7 @@ import {NotificationService} from "./services/notification.service";
 
 @NgModule({
     declarations: [
-        EnumTranslatePipe
+        EnumTranslatePipe,
     ],
     imports: [
     ],

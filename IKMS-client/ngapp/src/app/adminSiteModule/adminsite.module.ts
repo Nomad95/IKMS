@@ -7,7 +7,7 @@ import {
     ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent,
     RegistrationComponent, AddressRegistrationComponent, GroupListComponent,
     GroupDetailComponent, GroupEditComponent, GroupListManageComponent,
-    NotificationComponent } from './index';
+    NotificationComponent, SendingNotificationComponent } from './index';
 
 import {AuthGuard, LoginService} from './index';
 
@@ -53,7 +53,7 @@ import {CheckboxModule, DataListModule, FieldsetModule} from "primeng/primeng";
         PickListModule,
         DataListModule,
         FieldsetModule,
-        CheckboxModule
+        CheckboxModule,
     ],
     declarations: [
         AdminSiteComponent,
@@ -81,8 +81,8 @@ import {CheckboxModule, DataListModule, FieldsetModule} from "primeng/primeng";
         AddressRegistrationComponent,
         GroupListManageComponent,
         GroupCreateComponent,
-        NotificationComponent
-
+        NotificationComponent,
+        SendingNotificationComponent
     ],
     providers: [
         AuthGuard,

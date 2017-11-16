@@ -8,13 +8,14 @@ import * as enumTranslations from '../../../assets/json/enums.json';
 @Injectable()
 export class EnumProvider{
     constructor(){};
-    
+
     static YES_NO = [true,false];
     static EMPLOYEE_ROLES = ['BABYSITTER','SPEECH_TERAPIST'];
     static GENDERS = ['MAN','WOMAN'];
     static ADDRESS_TYPES = ['CORRESPONDENCE_ADDRESS','ADDRESS','REGISTERED_ADDRESS'];
     static DISABILITY_LEVELS = ['NONE','MILD','MODERATE','CONSIDERABLE'];
     static ROLES = ['ROLE_ADMIN','ROLE_EMPLOYEE','ROLE_PARENT'];
+    static PRIORITY = ['INFORMATION','IMPORTANT'];
 
      translateToDropdown(values): any[]{
         let result = [];

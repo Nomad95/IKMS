@@ -17,6 +17,8 @@ public interface NotificationService extends GenericService<NotificationEntity> 
 
     Page<NotificationEntity> findMyNotificationByPage(UserEntity user, Pageable pageable);
 
+    List<NotificationEntity> findMyNotificationByUser(UserEntity user);
+
     NotificationEntity findMyNotificationById(Long notificationId, UserEntity user);
 
     void deleteMyNotification(Long notificationId, UserEntity user);

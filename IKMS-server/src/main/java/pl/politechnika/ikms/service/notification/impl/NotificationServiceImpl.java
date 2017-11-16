@@ -1,6 +1,7 @@
 package pl.politechnika.ikms.service.notification.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,6 +19,8 @@ import pl.politechnika.ikms.service.notification.NotificationService;
 import javax.sql.DataSource;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,6 +33,7 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
     @Autowired
     private PersonalDataRepository personalDataRepository;
 
+    @Qualifier("dataSource")
     @Autowired
     private DataSource dataSource;
 
@@ -38,18 +42,18 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
         this.userRepository = userRepository;
     }
 
-
     @Override
-    public NotificationEntity create(NotificationEntity notification, String recipient_username, String sender_username) {
-        Optional<String> senderFullName = Optional.ofNullable(personalDataRepository.findNameAndSurNameSeparatedByComma(sender_username)
+    public NotificationEntity create(NotificationEntity notification, String recipientUsername, String senderUsername) {
+        Optional<String> senderFullName = Optional.ofNullable(personalDataRepository.findNameAndSurNameSeparatedByComma(senderUsername)
                 .replace(",", " "));
-        Optional<UserEntity> foundUser = Optional.ofNullable(userRepository.findByUsername(recipient_username));
+
+        Optional<UserEntity> foundUser = Optional.ofNullable(userRepository.findByUsername(recipientUsername));
         notification.setRecipient(foundUser
-                .orElseThrow(()-> new EntityNotFoundException("Nie znaleziono odbiorcy o loginie: "+ recipient_username)));
-        notification.setDateOfSend(LocalDate.now());
+                .orElseThrow(()-> new EntityNotFoundException("Nie znaleziono odbiorcy o loginie: "+ recipientUsername)));
+        notification.setDateOfSend(LocalDateTime.now());
         notification.setWasRead(false);
         notification.setSenderFullName(senderFullName
-                .orElseThrow(()-> new EntityNotFoundException("Nie znaleziono adresata o loginie: " + sender_username  )));
+                .orElseThrow(()-> new EntityNotFoundException("Nie znaleziono adresata o loginie: " + senderUsername  )));
 
         return super.create(notification);
     }
@@ -58,6 +62,20 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
     public Page<NotificationEntity> findMyNotificationByPage(UserEntity user, Pageable pageable) {
         Optional<Page<NotificationEntity>> myNotifications = Optional.ofNullable(getRepository().
                 findNotificationEntityByRecipientOrderByDateOfSendDesc(user, pageable));
+
+        myNotifications.get().forEach(notification -> {
+            if(!notification.getWasRead())
+                this.setNotificationToRead(notification.getId());
+        });
+
+        return myNotifications
+                .orElseThrow(()-> new EntityNotFoundException("Użytkownik o loginie "+ user.getUsername() + " nie ma żadnych powiadomień"));
+    }
+
+    @Override
+    public List<NotificationEntity> findMyNotificationByUser(UserEntity user) {
+        Optional<List<NotificationEntity>> myNotifications = Optional.ofNullable(getRepository().
+                findNotificationEntityByRecipientOrderByDateOfSendDesc(user));
 
         return myNotifications
                 .orElseThrow(()-> new EntityNotFoundException("Użytkownik o loginie "+ user.getUsername() + " nie ma żadnych powiadomień"));

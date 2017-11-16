@@ -1,16 +1,22 @@
 package pl.politechnika.ikms.domain.notification;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
+import pl.politechnika.ikms.commons.serializers.LocalDateTimeDeserializer;
+import pl.politechnika.ikms.commons.serializers.LocalDateTimeSerializer;
 import pl.politechnika.ikms.domain.notification.enums.Priority;
 import pl.politechnika.ikms.domain.user.UserEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -29,6 +35,7 @@ public class NotificationEntity extends AbstractEntity {
 
     @Column(name = "content")
     @Size(max=200)
+    @NotNull
     private String content;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -36,7 +43,9 @@ public class NotificationEntity extends AbstractEntity {
     private UserEntity recipient;
 
     @Column(name = "date_of_send")
-    private LocalDate dateOfSend;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime dateOfSend;
 
     @Column(name = "was_read")
     private Boolean wasRead;

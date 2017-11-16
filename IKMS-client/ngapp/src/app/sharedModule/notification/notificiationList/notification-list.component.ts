@@ -2,8 +2,10 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {NotificationService} from "../../services/notification.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Notification} from "../model/notification";
-import {ConfirmationService} from "primeng/primeng";
+import {ConfirmationService, MenuItem, Message} from "primeng/primeng";
 import {GenericPage} from "../model/genericPage";
+import {BreadMaker} from "../../../commons/util/bread-maker";
+import {ErrorHandler} from "../../../commons/util/error-handler";
 
 @Component({
   selector: 'notification',
@@ -12,17 +14,18 @@ import {GenericPage} from "../model/genericPage";
 })
 export class NotificationComponent implements OnInit, OnDestroy {
 
-
   private isLoading: boolean = true;
   private pageWithNotifications: GenericPage<Notification>;
   private notifications: Array<Notification>;
-  private indexesOfPage;
   private notificationsToDelete;
   private currentPage: number;
   private sub:any;
   private countUnreadNotifications = {
     count:''
   };
+  private msgs: Message[] = [];
+  private items: MenuItem[];
+  private first;
 
   constructor(private notificationService: NotificationService,
               private route: ActivatedRoute,
@@ -31,6 +34,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.items = BreadMaker.makeBreadcrumbs("Powiadomienia", "Moje powiadomienia");
     this.getIndexOfPageAndGetMyNotifications();
   }
 
@@ -39,34 +43,23 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   getMyNotificationsByPage(numberOfPage: number): void{
-    console.log(this.notifications);
     this.notifications = [];
-    this.indexesOfPage = [];
     this.isLoading = true;
-    console.log(this.notifications);
     this.notificationService
       .getMyNotifications(numberOfPage)
       .subscribe( result => {
         this.pageWithNotifications = result;
-        console.log(result);
         for(let note of this.pageWithNotifications.content){
           note.checked = false;
           this.notifications.push(note);
-          console.log("Check: "+note.checked);
         }
-        this.generateTabForPagination(this.pageWithNotifications.totalPages);
         this.countMyUnreadNotifications();
-        console.log(this.notifications);
+        this.first = (this.pageWithNotifications.number)*10;
         this.isLoading = false;
       }, err => {
         this.isLoading = false;
+        this.msgs = ErrorHandler.handleGenericServerError(err);
       })
-  }
-
-  // generate list with number of pages
-  generateTabForPagination(numberOfPage) {
-    for (var i = 0; i < numberOfPage; i++)
-      this.indexesOfPage.push(i+1);
   }
 
   getIndexOfPageAndGetMyNotifications():void{
@@ -113,8 +106,11 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   reloadPage():void{
-    var currentUrl = this.router.url;
-    var refreshUrl = currentUrl.indexOf('messagebox/sent') > -1 ? '/messagebox' : 'messagebox/sent';
-    this.router.navigateByUrl(refreshUrl).then(() => this.router.navigateByUrl(currentUrl));
+    window.location.reload();
   }
+
+  paginate(event) {
+    this.getMyNotificationsByPage(event.page);
+  }
+
 }

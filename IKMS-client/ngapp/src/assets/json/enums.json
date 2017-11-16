@@ -20,5 +20,8 @@
   "ROLE_ANONYMOUS": "Niezdefiniowany",
 
   "true":"Tak",
-  "false": "Nie"
+  "false": "Nie",
+
+  "INFORMATION":"Informacyjny",
+  "IMPORTANT":"Ważny"
 }
