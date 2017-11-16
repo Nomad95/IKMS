@@ -3,7 +3,6 @@ package pl.politechnika.ikms.rest.controller.notification;
 import com.google.common.base.Preconditions;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,11 +22,9 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @RestController
 @RequestMapping(value = "api/notification")
 @RequiredArgsConstructor
-@Slf4j
 public class NotificationController {
 
     @Value("${jwt.header}")
@@ -46,13 +43,13 @@ public class NotificationController {
     UserService userService;
 
 
-    @PostMapping("/user/{recipientUsername}")
+    @PostMapping("/user/{recipient_username}")
     @ResponseStatus(HttpStatus.CREATED)
     public NotificationDto notifyUser(@RequestBody @Valid NotificationDto notificationDto,
-                                      @PathVariable("recipientUsername") String recipientUsername,
-                                      HttpServletRequest request) {
+                                      @PathVariable("recipient_username") String recipient_username,
+                                      HttpServletRequest request){
         NotificationEntity notificationEntity = notificationService
-                .create(notificationEntityMapper.convertToEntity(notificationDto), recipientUsername, this.getUserByUsernameFromToken(request).getUsername());
+                .create(notificationEntityMapper.convertToEntity(notificationDto), recipient_username, this.getUserByUsernameFromToken(request).getUsername());
         return notificationEntityMapper.convertToDto(notificationEntity);
     }
 
