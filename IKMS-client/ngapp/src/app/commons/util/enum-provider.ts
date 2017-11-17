@@ -8,7 +8,7 @@ import * as enumTranslations from '../../../assets/json/enums.json';
 @Injectable()
 export class EnumProvider{
     constructor(){};
-    
+
     static YES_NO = [true,false];
     static EMPLOYEE_ROLES = ['BABYSITTER','SPEECH_TERAPIST'];
     static GENDERS = ['MAN','WOMAN'];
@@ -17,6 +17,7 @@ export class EnumProvider{
     static ROLES = ['ROLE_ADMIN','ROLE_EMPLOYEE','ROLE_PARENT'];
     static WEEK_DAYS_LONG_PL = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'];
     static WEEK_DAYS_SHORT_PL = ['Nie', 'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob'];
+    static PRIORITY = ['INFORMATION','IMPORTANT'];
 
      translateToDropdown(values): any[]{
         let result = [];

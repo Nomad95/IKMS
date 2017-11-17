@@ -7,7 +7,8 @@ import {
     ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent,
     RegistrationComponent, AddressRegistrationComponent, GroupListComponent,
     GroupDetailComponent, GroupEditComponent, GroupListManageComponent,
-    GroupCreateComponent, SchedulesListComponent } from './index';
+    GroupCreateComponent, SchedulesListComponent,   NotificationComponent,
+    SendingNotificationComponent } from './index';
 
 import {AuthGuard, LoginService} from './index';
 
@@ -22,6 +23,7 @@ import {
     SharedModule, PickListModule, MenubarModule,
     NgbModule, ScheduleModule } from './index';
 import {SchedulesModule} from "../scheduleModule/schedule.module";
+import {CheckboxModule, DataListModule, FieldsetModule} from "primeng/primeng";
 
 
 @NgModule({
@@ -54,7 +56,10 @@ import {SchedulesModule} from "../scheduleModule/schedule.module";
         MenubarModule,
         NgbModule.forRoot(),
         ScheduleModule,
-        SchedulesModule
+        SchedulesModule,
+        DataListModule,
+        FieldsetModule,
+        CheckboxModule,
     ],
     declarations: [
         AdminSiteComponent,
@@ -82,7 +87,10 @@ import {SchedulesModule} from "../scheduleModule/schedule.module";
         AddressRegistrationComponent,
         GroupListManageComponent,
         GroupCreateComponent,
-        SchedulesListComponent
+        SchedulesListComponent,
+        GroupCreateComponent,
+        NotificationComponent,
+        SendingNotificationComponent
     ],
     providers: [
         AuthGuard,

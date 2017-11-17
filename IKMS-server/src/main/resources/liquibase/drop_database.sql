@@ -3,6 +3,7 @@ drop table databasechangeloglock;
 drop table schedule_activity_errors;
 drop table activities_has_children;
 drop table activities_has_employees;
+drop table notifications;
 drop table children;
 drop table addresses;
 drop table groups;
@@ -14,6 +15,7 @@ drop table roles;
 drop table schedule_activities;
 drop table classrooms;
 
+drop sequence notifications_seq;
 drop sequence roles_seq;
 drop sequence users_seq;
 drop sequence addresses_seq;

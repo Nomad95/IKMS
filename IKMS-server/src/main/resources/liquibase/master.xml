@@ -17,5 +17,6 @@
     <include file="liquibase/changelog/changelog_011_activities_has_employees.xml"/>
     <include file="liquibase/changelog/changelog_012_activities_has_children.xml"/>
     <include file="liquibase/changelog/changelog_013_schedule_activity_errors.xml"/>
+    <include file="liquibase/changelog/changelog_009_notifications.xml"/>
 
 </databaseChangeLog>
