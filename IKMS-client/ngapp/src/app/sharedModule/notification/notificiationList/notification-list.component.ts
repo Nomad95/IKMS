@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {NotificationService} from "../../services/notification.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Data, Router} from "@angular/router";
 import {Notification} from "../model/notification";
 import {ConfirmationService, MenuItem, Message} from "primeng/primeng";
 import {GenericPage} from "../model/genericPage";
@@ -51,6 +51,12 @@ export class NotificationComponent implements OnInit, OnDestroy {
         this.pageWithNotifications = result;
         for(let note of this.pageWithNotifications.content){
           note.checked = false;
+          let date = new Date(note.dateOfSend);
+          if(date.toDateString() === new Date(Date.now()).toDateString()){
+            note.dateOfSend = new Date(note.dateOfSend).toLocaleTimeString();
+          } else {
+            note.dateOfSend = new Date(note.dateOfSend).toUTCString();
+          }
           this.notifications.push(note);
         }
         this.countMyUnreadNotifications();
@@ -112,5 +118,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
   paginate(event) {
     this.getMyNotificationsByPage(event.page);
   }
+
 
 }

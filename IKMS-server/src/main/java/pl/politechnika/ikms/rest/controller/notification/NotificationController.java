@@ -43,13 +43,13 @@ public class NotificationController {
     UserService userService;
 
 
-    @PostMapping("/user/{recipient_username}")
+    @PostMapping("/user/{recipientUsername}")
     @ResponseStatus(HttpStatus.CREATED)
     public NotificationDto notifyUser(@RequestBody @Valid NotificationDto notificationDto,
-                                      @PathVariable("recipient_username") String recipient_username,
+                                      @PathVariable("recipientUsername") String recipientUsername,
                                       HttpServletRequest request){
         NotificationEntity notificationEntity = notificationService
-                .create(notificationEntityMapper.convertToEntity(notificationDto), recipient_username, this.getUserByUsernameFromToken(request).getUsername());
+                .create(notificationEntityMapper.convertToEntity(notificationDto), recipientUsername, this.getUserByUsernameFromToken(request).getUsername());
         return notificationEntityMapper.convertToDto(notificationEntity);
     }
 
