@@ -10,6 +10,7 @@ import pl.politechnika.ikms.domain.person.ChildEntity;
 import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 import pl.politechnika.ikms.repository.group.GroupRepository;
 import pl.politechnika.ikms.repository.person.ChildRepository;
+import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.service.group.GroupService;
 
 import java.util.List;
@@ -38,5 +39,10 @@ public class GroupServiceImpl extends AbstractService<GroupEntity, GroupReposito
         childRepository.save(children);
 
         return getRepository().save(entity);
+    }
+
+    @Override
+    public List<MinimalDto<Long, String>> getGroupsMinimal() {
+        return getRepository().getGroupsMinimal();
     }
 }

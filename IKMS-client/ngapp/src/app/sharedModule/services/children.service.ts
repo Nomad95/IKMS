@@ -34,6 +34,11 @@ export class ChildrenService{
         .map( res => res.json());
     }
     
+    getChildrenMinimal(): Observable<any[]>{
+        return this.http.get('api/child/minimal/all',{headers: this.headers})
+        .map( res => res.json());
+    }
+    
     getChild(childId): Observable<Child>{
         return this.http.get('api/child/' + childId, {headers: this.headers})
             .map( res => res.json());

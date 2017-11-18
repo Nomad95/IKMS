@@ -67,4 +67,8 @@ public class ChildController {
         return childService.getGrouplessChildrenMinimal();
     }
 
+    @GetMapping(value = "/minimal/all")
+    public List<MinimalDto<Long, String>> getChildrenMinimal(){
+        return childService.getChildrenMinimal();
+    }
 }

@@ -1,0 +1,137 @@
+<p-growl [(value)]="msgs"></p-growl>
+<p-dialog header="Dodaj zajęcia" [(visible)]="isVisible" modal="modal"
+		  [draggable]="false" [resizable]="false" [width]="800" [closable]="false"
+		  [responsive]="false" >
+	<div class="row">
+		<div class="col-md-12">
+			<form novalidate
+				  #createForm="ngForm">
+
+				<div class="ui-g-12 form-blue">
+
+					<div class="ui-g-6 ui-sm-12">
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Nazwa zajęć:</div>
+							<div class="ui-g-8 ">
+								<input type="text" pInputText
+									   placeholder="-" class="detail-view-input"
+									   maxlength="50"
+									   minlength="1"
+									   required
+									   pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ0-9\-\ \(\)\.]*"
+									   [(ngModel)]="activity.title"
+									   name="title" #title= "ngModel" >
+								<div class="ui-g-12 validation-err" *ngIf="title.errors?.pattern">
+									Pole nie może zawierać znaków specjalnych
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Data rozpoczęcia:</div>
+							<div class="ui-g-8 ">
+								<p-calendar [dataType]="string" [showTime]="true" hourFormat="24"
+											[monthNavigator]="true" [yearNavigator]="true"
+											yearRange="2016:2030" (onSelect)="onDateSelected($event,'start')"
+											required inputStyleClass="detail-view-input"
+											[(ngModel)]="activity.start" [defaultDate]="defaultDate"
+											[maxDate]="maxDate" stepMinute="5"
+											name="start" #start = "ngModel"
+											dateFormat="yy-mm-dd"></p-calendar>
+								<div class="ui-g-12 validation-err" *ngIf="start.errors?.minlength">
+									To pole jest wymagane.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Grupa:</div>
+							<div class="ui-g-8 ">
+								<p-dropdown
+										[options]="groupList" [autoWidth]="false"
+										placeholder="Wybierz"
+										[(ngModel)]="activity.group" name="group"
+										#group></p-dropdown>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Dzieci:</div>
+							<div class="ui-g-8 " *ngIf="activity.children">
+								<p-multiSelect
+										[options]="childrenList" defaultLabel="Wybierz"
+										maxSelectedLabels="1" dataKey="value"
+										selectedItemsLabel="Wybrano {0}"
+										[(ngModel)]="activity.children" name="children"
+										#children>
+								</p-multiSelect >
+							</div>
+						</div>
+
+					</div>
+					<div class="ui-g-6 ui-sm-12">
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Sala:</div>
+							<div class="ui-g-8 ">
+								<p-dropdown
+										[options]="classroomList" [autoWidth]="false"
+										required placeholder="Wybierz"
+										[(ngModel)]="classroomss" name="classroom"
+										#classroom></p-dropdown>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Data zakończenia:</div>
+							<div class="ui-g-8 ">
+								<p-calendar [dataType]="string" [showTime]="true" hourFormat="24"
+											[monthNavigator]="true" [yearNavigator]="true"
+											yearRange="2016:2030" (onSelect)="onDateSelected($event,'end')"
+											required inputStyleClass="detail-view-input"
+											[(ngModel)]="activity.end" [defaultDate]="defaultDate"
+											[maxDate]="maxDate" stepMinute="5"
+											name="end" #end = "ngModel"
+											dateFormat="yy-mm-dd"></p-calendar>
+								<div class="ui-g-12 validation-err" *ngIf="end.errors?.minlength">
+									To pole jest wymagane.
+								</div>
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Pracownicy:</div>
+							<div class="ui-g-8 ">
+								<p-multiSelect *ngIf="activity.employees"
+									    [options]="employeeList" defaultLabel="Wybierz"
+									    maxSelectedLabels="1" dataKey="value"
+									   	selectedItemsLabel="Wybrano {0}"
+									    required
+									   	[(ngModel)]="activity.employees" name="employees"
+										#employees></p-multiSelect >
+							</div>
+						</div>
+
+						<div class="ui-g-12">
+							<div class="ui-g-4 ">Komentarz:</div>
+							<div class="ui-g-8 ">
+								<textarea
+										pInputTextarea [rows]="3" [cols]="20"
+										[(ngModel)]="activity.comment"
+										placeholder="-" class="detail-view-input long-text"
+										maxlength="255"
+										pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ\-\ \,\.\!]+"
+										name="comment" #comment="ngModel"></textarea>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<p-footer>
+		<button type="button" pButton icon="fa-check" [disabled]="createForm.invalid"
+				(click)="saveData(activity)" label="Zapisz"></button>
+		<button type="button" pButton icon="fa-close" (click)="closeModal()" label="Anuluj"></button>
+	</p-footer>
+</p-dialog>

@@ -1,3 +1,4 @@
+import {ScheduleActivity} from "../../adminSiteModule/model/schedule/schedule-activity";
 export class Utils {
     
     static minimalToDropdown(values): any[]{
@@ -25,5 +26,12 @@ export class Utils {
             result.push(child.id);
         }
         return result;
+    }
+    
+    static deleteActivityUnwantedFields(activityList){
+        for( let i=0; i< activityList.length; i++ ){
+            activityList[i] = ScheduleActivity.fromPrimengEvent(activityList[i]);
+        }
+        return activityList;
     }
 }

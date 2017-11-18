@@ -43,4 +43,9 @@ export class GroupService{
         return this.http.delete('api/group/' + groupId, {headers: this.headers})
         .map( res => res.json());
     }
+    
+    getGroupsMinimal(): Observable<Group>{
+        return this.http.get('api/group/minimal/all', {headers: this.headers})
+        .map( res => res.json());
+    }
 }

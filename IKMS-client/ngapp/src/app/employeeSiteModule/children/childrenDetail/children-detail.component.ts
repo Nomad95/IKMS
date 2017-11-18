@@ -121,7 +121,6 @@ export class ChildrenDetailComponent implements OnInit{
     showParentAddress(): void{
         this.addressService.getAddressesByParentId(this.child.parent.id)
             .subscribe( data => {
-                console.log(data);
                 this.addresses = data;
                 this.msgs = [];
             }, err =>{

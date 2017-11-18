@@ -7,8 +7,8 @@ import {
     ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent,
     RegistrationComponent, AddressRegistrationComponent, GroupListComponent,
     GroupDetailComponent, GroupEditComponent, GroupListManageComponent,
-    GroupCreateComponent, SchedulesListComponent,   NotificationComponent,
-    SendingNotificationComponent } from './index';
+    GroupCreateComponent, NotificationComponent,
+    SendingNotificationComponent, CollectiveScheduleComponent } from './index';
 
 import {AuthGuard, LoginService} from './index';
 
@@ -87,10 +87,10 @@ import {CheckboxModule, DataListModule, FieldsetModule} from "primeng/primeng";
         AddressRegistrationComponent,
         GroupListManageComponent,
         GroupCreateComponent,
-        SchedulesListComponent,
         GroupCreateComponent,
         NotificationComponent,
-        SendingNotificationComponent
+        SendingNotificationComponent,
+        CollectiveScheduleComponent
     ],
     providers: [
         AuthGuard,

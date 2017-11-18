@@ -2,6 +2,7 @@ package pl.politechnika.ikms.domain.schedule;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 
 import javax.persistence.*;
@@ -9,7 +10,8 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "schedule_activity_errors")
-@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"activity"})
+@EqualsAndHashCode(callSuper = true, exclude = {"activity"})
 @SequenceGenerator(name="activities_err_seq_name",sequenceName="activities_err_seq", allocationSize = 1)
 public class ScheduleActivityError extends AbstractEntity{
 

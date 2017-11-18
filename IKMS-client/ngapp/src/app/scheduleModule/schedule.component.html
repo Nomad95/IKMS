@@ -1,5 +1,6 @@
 <p-schedule
 		[events]="events"
+		[editable]="editMode"
 		[defaultView]="configuration.defaultView"
 		[header]="configuration.headerConfig"
 		[allDaySlot]="configuration.allDaySlot"
@@ -10,7 +11,19 @@
 		[options]="configuration.options"
 		[defaultDate]="configuration.defaultDate"
 		[timeFormat]="configuration.timeFormat"
-		[editable]="true" >
+		[editable]="true"
+		(onEventClick)="handleEventClick($event)">
 </p-schedule>
+
+<activity-details *ngIf="selectedEvent"
+				  [event]="selectedEvent"
+				 [isVisible]="displayActivityDetailModal"
+				 (eventClose)="handleDetailModalClose()"></activity-details>
+
+<activity-edit *ngIf="selectedEvent && displayActivityEditModal"
+				  [activity]="selectedEvent"
+				  [isVisible]="displayActivityEditModal"
+				  (eventSave)="handleEditModalClose($event)"
+				  (eventClose)="handleDetailModalClose()"></activity-edit>
 
 <!-- Do not use getters here because of infinite recursion -->

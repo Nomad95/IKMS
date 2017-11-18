@@ -61,12 +61,26 @@ export class AdminSideMenu {
             ]
         },
         {
+            label: 'Plany',
+            icon: 'fa-calendar',
+            items: [
+                {
+                    label: 'Zbiorczy',
+                    routerLink: ['/admin/schedule/collective']
+                },
+                {
+                    label: 'Dla pracowników',
+                    routerLink: ['/admin/schedule/list']
+                }
+            ]
+        },
+        {
             label: 'Powiadomienia',
             icon: 'fa-bell',
             items: [
                 {
-                   label: 'Moje powiadomienia',
-                   routerLink: ['/admin/notification']
+                    label: 'Moje powiadomienia',
+                    routerLink: ['/admin/notification']
                 }
             ]
         }

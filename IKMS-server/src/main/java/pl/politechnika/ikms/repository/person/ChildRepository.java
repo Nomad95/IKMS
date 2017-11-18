@@ -18,4 +18,8 @@ public interface ChildRepository extends JpaRepository<ChildEntity, Long> {
     @Query("SELECT NEW pl.politechnika.ikms.rest.dto.MinimalDto(c.id, concat(c.personalData.name, ' ', c.personalData.surname) ) "
             + " FROM ChildEntity c WHERE c.group is NULL ")
     List<MinimalDto<Long, String>> getGrouplessChildrenMinimal();
+
+    @Query("SELECT NEW pl.politechnika.ikms.rest.dto.MinimalDto(c.id, concat(c.personalData.name, ' ', c.personalData.surname) ) "
+            + " FROM ChildEntity c")
+    List<MinimalDto<Long,String>> getChildrenMinimal();
 }

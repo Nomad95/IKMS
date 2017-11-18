@@ -1,0 +1,92 @@
+<p-growl [(value)]="msgs"></p-growl>
+<p-dialog [header]="event.title" [(visible)]="isVisible" modal="modal"
+		  [draggable]="false" [resizable]="false" [width]="800" [closable]="false"
+		  [responsive]="false" >
+	<div class="row">
+		<div class="col-md-12">
+
+			<div class="ui-g-12 form-blue">
+
+				<div class="ui-g-12 ">
+					<div class="ui-g-6">
+						<div class="ui-g-4 ">Nazwa zajęć:</div>
+						<div class="ui-g-8 ">
+							{{event.title}}
+						</div>
+					</div>
+					<div class="ui-g-6">
+						<div class="ui-g-4 ">Sala:</div>
+						<div class="ui-g-8 ">
+							{{getElement(event.classroom)}}
+						</div>
+					</div>
+				</div>
+
+				<div class="ui-g-12 ">
+
+					<div class="ui-g-6">
+						<div class="ui-g-4 ">Data rozpoczęcia:</div>
+						<div class="ui-g-8 ">
+							{{getDate(event.start)}}
+						</div>
+					</div>
+
+					<div class="ui-g-6">
+						<div class="ui-g-4 ">Data zakończenia:</div>
+						<div class="ui-g-8 ">
+							{{getDate(event.end)}}
+						</div>
+					</div>
+
+				</div>
+				<div class="ui-g-12 ">
+
+					<div class="ui-g-6">
+						<div class="ui-g-4 ">Grupa:</div>
+						<div class="ui-g-8 ">
+							{{getElement(event.group)}}
+						</div>
+					</div>
+
+					<div class="ui-g-6">
+						<div class="ui-g-4 ">Pracownicy:</div>
+						<div class="ui-g-8 " >
+							<ng-template *ngIf="event.employees.length" let-empl ngFor [ngForOf]="event.employees">
+								• {{empl.value}}<br/>
+							</ng-template>
+							<span *ngIf="!event.employees.length">
+								-
+							</span>
+						</div>
+					</div>
+
+				</div>
+				<div class="ui-g-12 ">
+
+					<div class="ui-g-6">
+						<div class="ui-g-4 ">Dzieci:</div>
+						<div class="ui-g-8 " >
+							<ng-template  *ngIf="event.children.length" let-chld ngFor [ngForOf]="event.children">
+								• {{chld.value}}<br/>
+							</ng-template>
+							<span *ngIf="!event.children.length">
+								-
+							</span>
+						</div>
+					</div>
+
+					<div class="ui-g-6">
+						<div class="ui-g-4 ">Komentarz:</div>
+						<div class="ui-g-8 ">
+							{{event.comment}}
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<p-footer>
+		<button type="button" pButton icon="fa-chevron-left " (click)="closeModal()" label="Powrót"></button>
+	</p-footer>
+</p-dialog>

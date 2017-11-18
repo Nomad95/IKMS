@@ -18,6 +18,10 @@ export class EnumProvider{
     static WEEK_DAYS_LONG_PL = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'];
     static WEEK_DAYS_SHORT_PL = ['Nie', 'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob'];
     static PRIORITY = ['INFORMATION','IMPORTANT'];
+    static MONTH_NAMES_SHORT_PL = ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze',
+        'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'];
+    static MONTH_NAMES_PL = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec',
+        'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
 
      translateToDropdown(values): any[]{
         let result = [];

@@ -1,5 +1,6 @@
 package pl.politechnika.ikms.rest.dto.schedule;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import pl.politechnika.ikms.commons.abstracts.AbstractDto;
@@ -23,8 +24,10 @@ public class ScheduleActivityDto extends AbstractDto{
     @Size(max = 255)
     private String comment;
 
+    @JsonProperty("start")
     private LocalDateTime activityStart;
 
+    @JsonProperty("end")
     private LocalDateTime activityEnd;
 
     private List<MinimalDto<Long, String>> errors;

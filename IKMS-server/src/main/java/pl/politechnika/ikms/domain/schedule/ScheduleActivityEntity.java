@@ -2,6 +2,7 @@ package pl.politechnika.ikms.domain.schedule;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 import pl.politechnika.ikms.domain.classroom.ClassroomEntity;
 import pl.politechnika.ikms.domain.group.GroupEntity;
@@ -15,7 +16,8 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "schedule_activities")
-@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"errors","employees","children"})
+@EqualsAndHashCode(callSuper = true, exclude = {"errors","employees","children"})
 @SequenceGenerator(name="schedule_activities_seq_name",sequenceName="schedule_activities_seq", allocationSize = 1)
 public class ScheduleActivityEntity extends AbstractEntity{
 
@@ -40,11 +42,11 @@ public class ScheduleActivityEntity extends AbstractEntity{
     @JoinColumn(name="activity_id")
     private List<ScheduleActivityError> errors;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "classroom_id")
     private ClassroomEntity classroom;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "group_id")
     private GroupEntity group;
 

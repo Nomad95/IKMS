@@ -45,4 +45,9 @@ public class ChildServiceImpl extends AbstractService<ChildEntity,ChildRepositor
     public List<MinimalDto<Long, String>> getGrouplessChildrenMinimal() {
         return getRepository().getGrouplessChildrenMinimal();
     }
+
+    @Override
+    public List<MinimalDto<Long, String>> getChildrenMinimal() {
+        return getRepository().getChildrenMinimal();
+    }
 }

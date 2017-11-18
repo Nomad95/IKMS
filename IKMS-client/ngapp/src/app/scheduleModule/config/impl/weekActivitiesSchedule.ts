@@ -1,5 +1,6 @@
 import {IConfig} from "../IConfig";
 import {EnumProvider} from "../../../commons/util/enum-provider";
+import {DateUtils} from "../../../commons/util/date-utils";
 
 export class WeekActivitiesSchedule implements IConfig{
     constructor(){}
@@ -7,15 +8,18 @@ export class WeekActivitiesSchedule implements IConfig{
     options = {
         dayNamesShort: EnumProvider.WEEK_DAYS_SHORT_PL,
         dayNames: EnumProvider.WEEK_DAYS_LONG_PL,
-        columnFormat: 'ddd',
-        titleFormat: 'YYYY',
-        duration: {
-            days: 7
-        }
+        monthNamesShort: EnumProvider.MONTH_NAMES_SHORT_PL,
+        monthNames: EnumProvider.MONTH_NAMES_PL,
+        columnFormat: 'dddd D',
+        titleFormat: 'MMMM D YYYY'
+};
+    
+    headerConfig = {
+        left:   'title',
+        center: '',
+        right:  'month,agendaWeek,agendaDay today prev,next'
     };
-
-    headerConfig = false;
-
+    
     allDaySlot = false;
 
     defaultView = "agendaWeek";
@@ -27,9 +31,9 @@ export class WeekActivitiesSchedule implements IConfig{
     maxTime = "20:00:00";
 
     height = "auto";
-
-    defaultDate = "2017-12-12";
-
+    
+    defaultDate = DateUtils.newISODate();
+    
     timeFormat = "h:mm";
 
     getOptions(): any {
@@ -71,13 +75,4 @@ export class WeekActivitiesSchedule implements IConfig{
     getTimeFormat(): string {
         return this.timeFormat;
     }
-
-    private events = [
-        {
-            title: 'Event',
-            start: '2017-12-12T11:00:00',
-            end: '2017-12-12T12:00:00',
-            editable: true
-        }
-    ];
 }

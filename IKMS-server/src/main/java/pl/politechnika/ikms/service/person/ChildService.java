@@ -17,4 +17,5 @@ public interface ChildService extends GenericService<ChildEntity> {
 
     List<MinimalDto<Long, String>> getGrouplessChildrenMinimal();
 
+    List<MinimalDto<Long,String>> getChildrenMinimal();
 }

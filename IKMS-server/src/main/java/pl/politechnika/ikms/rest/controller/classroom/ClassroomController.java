@@ -7,11 +7,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.politechnika.ikms.domain.classroom.ClassroomEntity;
+import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.classroom.ClassroomDto;
 import pl.politechnika.ikms.rest.mapper.classroom.ClassroomEntityMapper;
 import pl.politechnika.ikms.service.classroom.ClassroomService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/classroom")
@@ -47,6 +49,11 @@ public class ClassroomController {
     @DeleteMapping(value = "/{classroomId}")
     public void deleteClassroom(@PathVariable Long classroomId){
         classroomService.deleteById(classroomId);
+    }
+
+    @GetMapping(value = "/minimal/all")
+    public List<MinimalDto<Long, String>> getAllClassroomsMinimal(){
+        return classroomService.getAllMinimal();
     }
 
 }

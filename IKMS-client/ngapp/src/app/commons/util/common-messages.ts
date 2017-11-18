@@ -59,4 +59,12 @@ export class CommonMessages {
     public static addressCreatingError(){
         return [{severity:'error', detail: 'Wystąpił błąd podczas dodawania adresu'}];
     }
+    
+    public static scheduleCreatingSuccess(){
+        return [{severity:'success', detail: 'Plan zmodyfikowany pomyślnie'}];
+    }
+    
+    public static scheduleCreatingError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas edycji'}];
+    }
 }
