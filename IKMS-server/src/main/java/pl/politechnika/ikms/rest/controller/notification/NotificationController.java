@@ -26,20 +26,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NotificationController {
 
-    @Value("${jwt.header}")
-    private String tokenHeader;
-
     private final @NonNull
     NotificationService notificationService;
 
     private final @NonNull
     NotificationEntityMapper notificationEntityMapper;
 
-    private final @NonNull
-    JwtTokenUtil jwtTokenUtil;
 
-    private final @NonNull
-    JwtUserFacilities jwtUserFacilities;
 
 
     @PostMapping("/user/{recipientUsername}")
@@ -49,22 +42,20 @@ public class NotificationController {
                                       HttpServletRequest request){
         NotificationEntity notificationEntity = notificationService.
                 sendNotification(notificationEntityMapper.convertToEntity(notificationDto),recipientUsername,
-                        jwtUserFacilities.findUserByUsernameFromToken(request).getUsername());
+                        request);
         return notificationEntityMapper.convertToDto(notificationEntity);
     }
 
     @GetMapping("/myNotifications")
     public Page<NotificationDto> getMyAllNotification(Pageable pageable, HttpServletRequest request) {
-        UserEntity user = jwtUserFacilities.findUserByUsernameFromToken(request);
-        Page<NotificationEntity> myNotifications = notificationService.findMyNotificationByPage(user, pageable);
+        Page<NotificationEntity> myNotifications = notificationService.findMyNotificationByPage(request, pageable);
 
         return myNotifications.map(notificationEntityMapper::convertToDto);
     }
 
     @GetMapping("/myAllNotifications")
     public List<NotificationDto> getMyNotification(HttpServletRequest request) {
-        UserEntity user = jwtUserFacilities.findUserByUsernameFromToken(request);
-        List<NotificationEntity> myNotifications = notificationService.findMyNotificationByUser(user);
+        List<NotificationEntity> myNotifications = notificationService.findMyNotificationByUser(request);
 
         return myNotifications.stream().map(notificationEntityMapper::convertToDto).collect(Collectors.toList());
     }
@@ -79,8 +70,7 @@ public class NotificationController {
     @GetMapping("/myNotifications/{notificationId}")
     public NotificationDto getMyOneNotification(@PathVariable("notificationId") Long notificationId,
                                                 HttpServletRequest request) {
-        UserEntity user = jwtUserFacilities.findUserByUsernameFromToken(request);
-        NotificationEntity notificationEntity = notificationService.findMyNotificationById(notificationId, user);
+        NotificationEntity notificationEntity = notificationService.findMyNotificationById(notificationId, request);
 
         return notificationEntityMapper.convertToDto(notificationEntity);
     }
@@ -88,8 +78,7 @@ public class NotificationController {
     @DeleteMapping("/myNotifications/{notificationId}")
     public void deleteMyNotification(@PathVariable("notificationId") Long notificationId,
                                      HttpServletRequest request) {
-        UserEntity user = jwtUserFacilities.findUserByUsernameFromToken(request);
-        notificationService.deleteMyNotification(notificationId, user);
+        notificationService.deleteMyNotification(notificationId, request);
 
     }
 
@@ -101,10 +90,7 @@ public class NotificationController {
 
     @GetMapping(value = "/myNotifications/quantity/unread")
     public String getNumberOfUnreadNotifications(HttpServletRequest request) {
-        String token = request.getHeader(tokenHeader);
-        String username = jwtTokenUtil.getUsernameFromToken(token);
-
-        Long count = notificationService.countNumberOfUnreadNotifications(username);
+        Long count = notificationService.countNumberOfMyUnreadNotifications(request);
 
         return "{\"count\": \" " + count + "\"}";
     }
