@@ -3,6 +3,7 @@ package pl.politechnika.ikms.exceptions.advice;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import pl.politechnika.ikms.exceptions.EntityNotFoundException;
+
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
@@ -29,6 +31,12 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler(value = BadCredentialsException.class)
     protected ResponseEntity<Object> handleBadCredentials(RuntimeException ex, WebRequest request){
         final String message = "Błędny login lub hasło";
+        return handleExceptionInternal(ex, message, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
+    }
+
+    @ExceptionHandler(value = AccessDeniedException.class)
+    protected ResponseEntity<Object> handleAuthentication(RuntimeException ex, WebRequest request){
+        final String message = "Błąd podczas autoryzacji";
         return handleExceptionInternal(ex, message, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }
 }

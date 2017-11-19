@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface NotificationService extends GenericService<NotificationEntity> {
 
-    NotificationEntity create(NotificationEntity notificationEntity, String recipient_username, String me);
+    NotificationEntity sendNotification(NotificationEntity notificationEntity, String recipient_username, String me);
 
     Page<NotificationEntity> findMyNotificationByPage(UserEntity user, Pageable pageable);
 

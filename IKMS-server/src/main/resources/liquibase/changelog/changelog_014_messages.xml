@@ -1,0 +1,77 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Boruch" id="changelog_014_messages">
+        <createTable tableName="messages">
+            <column name="id" type="bigint" >
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="sender_id" type="bigint" >
+                <constraints nullable="true" />
+            </column>
+            <column name="title" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recipient_id" type="bigint" >
+                <constraints nullable="true" />
+            </column>
+            <column name="date_of_send" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message_content" type="varchar" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="was_read" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recipient_username" type="varchar(40)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="sender_username" type="varchar(40)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="id"
+                constraintName="pk_messages"
+                tableName="messages"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="sender_id"
+                baseTableName="messages"
+                constraintName="fk_send_msg_per_data"
+                referencedColumnNames="id"
+                referencedTableName="users"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="recipient_id"
+                baseTableName="messages"
+                constraintName="fk_recive_msg_per_data"
+                referencedColumnNames="id"
+                referencedTableName="users"/>
+
+        <createIndex tableName="messages" indexName="idx_fk_send_msg_per_data">
+            <column name="sender_id"></column>
+        </createIndex>
+
+        <createIndex tableName="messages" indexName="idx_fk_recive_msg_per_parent">
+            <column name="recipient_id"></column>
+        </createIndex>
+
+        <createSequence
+                sequenceName="messages_seq"
+                startValue="5"
+                incrementBy="1"/>
+
+        <loadData
+                tableName="messages"
+                file="liquibase/data/messages.csv"
+        />
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,6 +1,5 @@
 package pl.politechnika.ikms.rest.controller.notification;
 
-import com.google.common.base.Preconditions;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,8 +13,8 @@ import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.rest.dto.notification.NotificationDto;
 import pl.politechnika.ikms.rest.mapper.notification.NotificationEntityMapper;
 import pl.politechnika.ikms.security.JwtTokenUtil;
+import pl.politechnika.ikms.security.JwtUserFacilities;
 import pl.politechnika.ikms.service.notification.NotificationService;
-import pl.politechnika.ikms.service.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -40,7 +39,7 @@ public class NotificationController {
     JwtTokenUtil jwtTokenUtil;
 
     private final @NonNull
-    UserService userService;
+    JwtUserFacilities jwtUserFacilities;
 
 
     @PostMapping("/user/{recipientUsername}")
@@ -48,15 +47,15 @@ public class NotificationController {
     public NotificationDto notifyUser(@RequestBody @Valid NotificationDto notificationDto,
                                       @PathVariable("recipientUsername") String recipientUsername,
                                       HttpServletRequest request){
-        NotificationEntity notificationEntity = notificationService
-                .create(notificationEntityMapper.convertToEntity(notificationDto), recipientUsername, this.getUserByUsernameFromToken(request).getUsername());
+        NotificationEntity notificationEntity = notificationService.
+                sendNotification(notificationEntityMapper.convertToEntity(notificationDto),recipientUsername,
+                        jwtUserFacilities.findUserByUsernameFromToken(request).getUsername());
         return notificationEntityMapper.convertToDto(notificationEntity);
     }
 
-
     @GetMapping("/myNotifications")
     public Page<NotificationDto> getMyAllNotification(Pageable pageable, HttpServletRequest request) {
-        UserEntity user = getUserByUsernameFromToken(request);
+        UserEntity user = jwtUserFacilities.findUserByUsernameFromToken(request);
         Page<NotificationEntity> myNotifications = notificationService.findMyNotificationByPage(user, pageable);
 
         return myNotifications.map(notificationEntityMapper::convertToDto);
@@ -64,7 +63,7 @@ public class NotificationController {
 
     @GetMapping("/myAllNotifications")
     public List<NotificationDto> getMyNotification(HttpServletRequest request) {
-        UserEntity user = getUserByUsernameFromToken(request);
+        UserEntity user = jwtUserFacilities.findUserByUsernameFromToken(request);
         List<NotificationEntity> myNotifications = notificationService.findMyNotificationByUser(user);
 
         return myNotifications.stream().map(notificationEntityMapper::convertToDto).collect(Collectors.toList());
@@ -80,7 +79,7 @@ public class NotificationController {
     @GetMapping("/myNotifications/{notificationId}")
     public NotificationDto getMyOneNotification(@PathVariable("notificationId") Long notificationId,
                                                 HttpServletRequest request) {
-        UserEntity user = getUserByUsernameFromToken(request);
+        UserEntity user = jwtUserFacilities.findUserByUsernameFromToken(request);
         NotificationEntity notificationEntity = notificationService.findMyNotificationById(notificationId, user);
 
         return notificationEntityMapper.convertToDto(notificationEntity);
@@ -89,7 +88,7 @@ public class NotificationController {
     @DeleteMapping("/myNotifications/{notificationId}")
     public void deleteMyNotification(@PathVariable("notificationId") Long notificationId,
                                      HttpServletRequest request) {
-        UserEntity user = getUserByUsernameFromToken(request);
+        UserEntity user = jwtUserFacilities.findUserByUsernameFromToken(request);
         notificationService.deleteMyNotification(notificationId, user);
 
     }
@@ -114,16 +113,5 @@ public class NotificationController {
     public void readNotification(@PathVariable("notificationId") Long notificationId) {
         notificationService.setNotificationToRead(notificationId);
     }
-
-
-    //TODO: [Arek] W późniejszym czasie trzeba to wynieść gdzieś niżej bo to będzie w wielu miejscach potrzebne
-    public UserEntity getUserByUsernameFromToken(HttpServletRequest request) {
-        String token = request.getHeader(tokenHeader);
-        String username = jwtTokenUtil.getUsernameFromToken(token);
-
-        return userService.getUserByUsername(username);
-
-    }
-
 
 }

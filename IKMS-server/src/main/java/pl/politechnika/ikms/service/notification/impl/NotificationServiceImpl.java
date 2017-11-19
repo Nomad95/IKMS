@@ -43,9 +43,12 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
     }
 
     @Override
-    public NotificationEntity create(NotificationEntity notification, String recipientUsername, String senderUsername) {
-        Optional<String> senderFullName = Optional.ofNullable(personalDataRepository.findNameAndSurNameSeparatedByComma(senderUsername)
-                .replace(",", " "));
+    public NotificationEntity sendNotification(NotificationEntity notification,
+                                               String recipientUsername,
+                                               String senderUsername) {
+        Optional<String> senderFullName =
+                Optional.ofNullable(personalDataRepository
+                        .findNameAndSurNameSeparatedByComma(senderUsername).replace(",", " "));
 
         Optional<UserEntity> foundUser = Optional.ofNullable(userRepository.findByUsername(recipientUsername));
         notification.setRecipient(foundUser

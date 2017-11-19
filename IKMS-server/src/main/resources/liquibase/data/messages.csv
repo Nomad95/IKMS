@@ -1,0 +1,5 @@
+id, sender_id, title, recipient_id, date_of_send, message_content, was_read, recipient_username, sender_username
+1, 2, Pierwsza wiadomość, 1, 2017-01-11, Treść pierwszej wiadomości testowej, false, admin, employee
+2, 2, Druga wiadomość, 1, 2017-01-11, Treść drugiej wiadomości testowej, false, admin, employee
+3, 2, Trzecia wiadomość, 1, 2017-01-11, Treść trzeciej wiadomości testowej, true, admin, employee
+4, 2, Czwarta wiadomość, 1, 2017-01-11, Treść czwartej wiadomości testowej, false, admin, employee
