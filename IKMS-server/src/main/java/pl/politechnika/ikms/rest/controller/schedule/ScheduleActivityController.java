@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.politechnika.ikms.domain.schedule.ScheduleActivityEntity;
 import pl.politechnika.ikms.rest.dto.schedule.ScheduleActivityDto;
@@ -55,8 +56,9 @@ public class ScheduleActivityController {
     }
 
     @DeleteMapping(value = "/{activityId}")
-    public void deleteActivity(@PathVariable Long activityId){
+    public ResponseEntity<Boolean> deleteActivity(@PathVariable Long activityId){
         scheduleActivityService.deleteById(activityId);
+        return ResponseEntity.ok(Boolean.TRUE);
     }
 
     @PostMapping(value = "/addMany")

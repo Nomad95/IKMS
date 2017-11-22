@@ -36,6 +36,7 @@
 											required inputStyleClass="detail-view-input"
 											[(ngModel)]="activity.start" [defaultDate]="defaultDate"
 											[maxDate]="maxDate" stepMinute="5"
+											[locale]="pl"
 											name="start" #start = "ngModel"
 											dateFormat="yy-mm-dd"></p-calendar>
 								<div class="ui-g-12 validation-err" *ngIf="start.errors?.minlength">
@@ -89,7 +90,8 @@
 											yearRange="2016:2030" (onSelect)="onDateSelected($event,'end')"
 											required inputStyleClass="detail-view-input"
 											[(ngModel)]="activity.end" [defaultDate]="defaultDate"
-											[maxDate]="maxDate" stepMinute="5"
+											[minDate]="minDate" stepMinute="5"
+											[locale]="pl"
 											name="end" #end = "ngModel"
 											dateFormat="yy-mm-dd"></p-calendar>
 								<div class="ui-g-12 validation-err" *ngIf="end.errors?.minlength">

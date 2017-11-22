@@ -8,9 +8,9 @@
 				<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
 			</div>
 			<div class="ui-g-12" *ngIf="!isLoading">
-				<button *ngIf="!editMode" type="button" pButton (click)="changeEditMode()" icon="fa-pencil" label="Edytuj"></button>
+				<button *ngIf="!editMode" type="button" pButton (click)="enterEditMode()" icon="fa-pencil" label="Edytuj"></button>
 				<button *ngIf="editMode && !isUpdating" type="button" pButton (click)="saveAndExitEdit()" icon="fa-check" label="Zakończ i zapisz"></button>
-				<button *ngIf="editMode && isUpdating" type="button" pButton  icon="fa-spinner fa-pulse" label="Zakończ i zapisz"></button>
+				<button *ngIf="editMode && isUpdating"  type="button" pButton  icon="fa-spinner fa-pulse" label="Zakończ i zapisz"></button>
 				<button *ngIf="editMode" type="button" pButton (click)="cancel()" icon="fa-ban" label="Anuluj"></button>
 			</div>
 		</div>
@@ -18,8 +18,9 @@
 	<div class="row" *ngIf="editMode">
 		<div class="col-md-12">
 			<div class="ui-g-12" *ngIf="!isLoading">
-				<button type="button" pButton (click)="showCreateModal()" icon="fa-plus" label="Dodaj"></button>
-				<button type="button" pButton (click)="deleteActivity()" icon="fa-times" label="Usuń"></button>
+				<button type="button" pButton (click)="showCreateModal()" [disabled]="deleteMode" icon="fa-plus" label="Dodaj"></button>
+				<button type="button" *ngIf="!deleteMode" pButton (click)="enterDeleteMode()" icon="fa-times" label="Usuń"></button>
+				<button type="button" *ngIf="deleteMode" pButton (click)="exitDeleteMode()" icon="fa-ban" label="Zakończ usuwanie"></button>
 				<button type="button" pButton (click)="resetChanges()" icon="fa-undo" label="Cofnij zmiany"></button>
 
 			</div>
@@ -28,13 +29,17 @@
 	<div class="row">
 		<div class="col-md-12" *ngIf="!isLoading">
 			<div class="ui-g-12">
-				<schedule-component [scheduleType]="scheduleType" [events]="events" [editMode]="editMode"></schedule-component>
+				<schedule-component [scheduleType]="scheduleType"
+									[events]="events"
+									[editMode]="editMode"
+									[deleteMode]="deleteMode"
+									(eventActivityUpdate)="onActivityUpdate($event)"></schedule-component>
 			</div>
 		</div>
 	</div>
 	<br />
 	<activity-create *ngIf="events"
-					(eventSave)="handleAddressUpdate($event)"
+					(eventSave)="handleActivityCreation($event)"
 					[isVisible]="displayActivityCreateModal"
 					(eventClose)="handleModalClose($event)"></activity-create>
 </div>

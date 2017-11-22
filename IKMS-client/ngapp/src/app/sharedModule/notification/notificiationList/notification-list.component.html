@@ -1,63 +1,65 @@
-<p-confirmDialog  width="425"></p-confirmDialog>
+<p-confirmDialog width="425"></p-confirmDialog>
 <p-growl [(value)]="msgs"></p-growl>
 <div class="ikms-body">
-  <p-breadcrumb [model]="items"></p-breadcrumb>
-  <hr class="small-hr"/>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="ui-g-12" *ngIf="!isLoading">
-        <button (click)="deleteSelectedNotificatins();" type="button" pButton  icon="fa-minus" label="Usuń wybrane"></button>
-      </div>
-    </div>
-  </div>
-  <br/>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="content-section implementation text-center" *ngIf="isLoading">
-        <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-      </div>
-      <div class="content-section implementation" *ngIf="!isLoading">
-        <p-dataList [value]="notifications"
-                    [paginator]="false">
-          <p-header>
-            Twoje powiadomienia
-          </p-header>
-          <ng-template let-notification pTemplate="item">
-            <div class="ui-g-12 ui-md-2" style="text-align:center;">
-            </div>
-            <div class="ui-g ui-fluid notification-item">
-              <div class="ui-g-9 ui-md-9 notification-details">
-                <div [ngClass]="notification.wasRead ? 'panel panel-default' : 'panel panel-primary'">
-                  <div class="panel-heading">
-                    <div class="row">
-                      <div class="col-md-1">
-                        <p-checkbox name="notification" [(ngModel)]="notification.checked" value="notification.id" ></p-checkbox>
-                      </div>
-                      <div class="col-md-6">
-                        <div style="text-align: left;"> {{notification.priority}} </div>
-                      </div>
-                      <div class="col-md-5">
-                        <div style="text-align: right;" >{{notification.dateOfSend}}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="panel-body">
-                    <p>Od: {{notification.senderFullName}}</p>
-                    <p>{{notification.content}}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-template>
-        </p-dataList>
-        <p-paginator (onPageChange)="paginate($event)"
-                     [rows]="10"
-                     [(first)]="first"
-                     [totalRecords]="pageWithNotifications.totalElements"
-                     *ngIf="!isLoading">
-        </p-paginator>
-      </div>
-  </div>
-</div>
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="ui-g-12" *ngIf="!isLoading">
+				<button (click)="deleteSelectedNotificatins();" type="button" pButton icon="fa-minus"
+						label="Usuń wybrane"></button>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="content-section implementation text-center" *ngIf="isLoading">
+				<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+			</div>
+			<div class="content-section implementation" *ngIf="!isLoading">
+				<p-dataList [value]="notifications"
+							[paginator]="false">
+					<p-header>
+						Twoje powiadomienia
+					</p-header>
+					<ng-template let-notification pTemplate="item">
+						<div class="ui-g-12 ui-md-2" style="text-align:center;">
+						</div>
+						<div class="ui-g ui-fluid notification-item">
+							<div class="ui-g-9 ui-md-9 notification-details">
+								<div [ngClass]="notification.wasRead ? 'panel panel-default' : 'panel panel-primary'">
+									<div class="panel-heading">
+										<div class="row">
+											<div class="col-md-1">
+												<p-checkbox name="notification" [(ngModel)]="notification.checked"
+															value="notification.id"></p-checkbox>
+											</div>
+											<div class="col-md-6">
+												<div style="text-align: left;"> {{notification.priority}}</div>
+											</div>
+											<div class="col-md-5">
+												<div style="text-align: right;">{{notification.dateOfSend}}
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="panel-body">
+										<p>Od: {{notification.senderFullName}}</p>
+										<p>{{notification.content}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</ng-template>
+				</p-dataList>
+				<p-paginator (onPageChange)="paginate($event)"
+							 [rows]="10"
+							 [(first)]="first"
+							 [totalRecords]="pageWithNotifications.totalElements"
+							 *ngIf="!isLoading">
+				</p-paginator>
+			</div>
+		</div>
+	</div>
 </div>

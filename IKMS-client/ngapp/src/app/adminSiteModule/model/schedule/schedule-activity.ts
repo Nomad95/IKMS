@@ -1,3 +1,4 @@
+import {DateUtils} from "../../../commons/util/date-utils";
 export class ScheduleActivity {
     id: number;
     title: string;
@@ -9,6 +10,7 @@ export class ScheduleActivity {
     group: any;
     employees: any[];
     children: any[];
+    color: any;
     
     
     constructor() {
@@ -21,21 +23,46 @@ export class ScheduleActivity {
         this.group = null;
         this.employees = [];
         this.children= [];
+        this.color = null;
     }
     
-    static fromPrimengEvent(event): ScheduleActivity{
+    static fromPrimengEvent(activity): ScheduleActivity{
         var scheduleActivity = new ScheduleActivity();
-        scheduleActivity.id = event.id;
-        scheduleActivity.title = event.title;
-        scheduleActivity.comment = event.comment;
-        scheduleActivity.start = event.start;
-        scheduleActivity.end = event.end;
-        scheduleActivity.errors = event.errors;
-        scheduleActivity.classroom = event.classroom;
-        scheduleActivity.group = event.group;
-        scheduleActivity.employees = event.employees;
-        scheduleActivity.children= event.children;
+        scheduleActivity.id = activity.id;
+        scheduleActivity.title = activity.title;
+        scheduleActivity.comment = activity.comment;
+        scheduleActivity.start = activity.start;
+        scheduleActivity.end = activity.end;
+        scheduleActivity.errors = activity.errors;
+        scheduleActivity.classroom = activity.classroom;
+        scheduleActivity.group = activity.group;
+        scheduleActivity.employees = activity.employees;
+        scheduleActivity.children= activity.children;
         
         return scheduleActivity;
+    }
+    
+    static equals(act1, act2){
+        if( act1.title != act2.title){
+            return false;
+        }
+    
+        if( act1.classroom != act2.classroom ){
+            return false;
+        }
+    
+        if( act1.employees != act2.employees){
+            return false;
+        }
+    
+        if( act1.group != act2.group){
+            return false;
+        }
+    
+        if( act1.children != act2.children){
+            return false;
+        }
+        
+        return true;
     }
 }

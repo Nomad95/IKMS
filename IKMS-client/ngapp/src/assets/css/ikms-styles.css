@@ -81,6 +81,10 @@ body {
     float: right;
 }
 
+.fc-today{
+    background: #9fa8da !important;
+}
+
 .long-text{
     text-overflow: ellipsis !important;
 }

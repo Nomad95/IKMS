@@ -30,6 +30,8 @@ public class ScheduleActivityDto extends AbstractDto{
     @JsonProperty("end")
     private LocalDateTime activityEnd;
 
+    private String color;
+
     private List<MinimalDto<Long, String>> errors;
 
     private MinimalDto<Long, String> classroom;

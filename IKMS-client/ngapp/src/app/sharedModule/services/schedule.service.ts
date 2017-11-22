@@ -32,4 +32,9 @@ export class ScheduleService{
         .map( res => res.json());
     }
     
+    deleteActivity(activityId): Observable<any>{
+        return this.http.delete('api/schedule/' + activityId, {headers: this.headers})
+        .map( res => res.json());
+    }
+    
 }

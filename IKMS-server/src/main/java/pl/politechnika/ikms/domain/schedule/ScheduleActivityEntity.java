@@ -38,6 +38,9 @@ public class ScheduleActivityEntity extends AbstractEntity{
     @Column(name = "comment")
     private String comment;
 
+    @Transient
+    private String color;
+
     @OneToMany
     @JoinColumn(name="activity_id")
     private List<ScheduleActivityError> errors;

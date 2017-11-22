@@ -1,6 +1,16 @@
 import {ScheduleActivity} from "../../adminSiteModule/model/schedule/schedule-activity";
 export class Utils {
     
+    static polishLocale = {
+        dayNames: ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
+        dayNamesShort: ["Nie", "Pon", "Wto", "Śr", "Czw", "Pi", "Sob"],
+        dayNamesMin: ["Ni","Pn","Wt","Śr","Cz","Pi","So"],
+        monthNames: [ "Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień" ],
+        monthNamesShort: [ "Sty", "Lut", "Mar", "Kwi", "Maj", "Cze","Lip", "Sie", "Wrz", "Paź", "Lis", "Gru" ],
+        today: 'Dziś',
+        clear: 'Wyczyść'
+    };
+    
     static minimalToDropdown(values): any[]{
         let result = [];
         

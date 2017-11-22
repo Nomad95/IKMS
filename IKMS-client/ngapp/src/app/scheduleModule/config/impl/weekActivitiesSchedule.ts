@@ -11,13 +11,14 @@ export class WeekActivitiesSchedule implements IConfig{
         monthNamesShort: EnumProvider.MONTH_NAMES_SHORT_PL,
         monthNames: EnumProvider.MONTH_NAMES_PL,
         columnFormat: 'dddd D',
-        titleFormat: 'MMMM D YYYY'
+        titleFormat: 'MMMM D YYYY',
+        eventColor: '#3f51b5'
 };
     
     headerConfig = {
         left:   'title',
         center: '',
-        right:  'month,agendaWeek,agendaDay today prev,next'
+        right:  ''
     };
     
     allDaySlot = false;
@@ -26,7 +27,7 @@ export class WeekActivitiesSchedule implements IConfig{
 
     weekends = false;
 
-    minTime = "06:00:00";
+    minTime = "05:00:00";
 
     maxTime = "20:00:00";
 
@@ -34,7 +35,7 @@ export class WeekActivitiesSchedule implements IConfig{
     
     defaultDate = DateUtils.newISODate();
     
-    timeFormat = "h:mm";
+    timeFormat = "H:mm";
 
     getOptions(): any {
         return this.options;

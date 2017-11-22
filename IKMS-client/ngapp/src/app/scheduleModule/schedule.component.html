@@ -1,4 +1,12 @@
-<p-schedule
+<p-confirmDialog  width="425"></p-confirmDialog>
+<button type="button" pButton (click)="changeView(schedule,'agendaDay')" label="Dzień" class="ikms-float-right"></button>
+<button type="button" pButton (click)="changeView(schedule,'agendaWeek')" label="Tydzień" class="ikms-float-right"></button>
+<button type="button" pButton (click)="changeView(schedule,'month')" label="Miesiąc" class="ikms-float-right"></button>
+<button type="button" pButton (click)="today(schedule)" label="Dziś" class="ikms-float-right"></button>
+<button type="button" pButton (click)="right(schedule)" icon="fa-chevron-right" class="ikms-float-right"></button>
+<button type="button" pButton (click)="left(schedule)" icon="fa-chevron-left" class="ikms-float-right"></button>
+
+	<p-schedule
 		[events]="events"
 		[editable]="editMode"
 		[defaultView]="configuration.defaultView"
@@ -11,8 +19,9 @@
 		[options]="configuration.options"
 		[defaultDate]="configuration.defaultDate"
 		[timeFormat]="configuration.timeFormat"
-		[editable]="true"
-		(onEventClick)="handleEventClick($event)">
+		(onEventDrop)="onEventDrop($event)"
+		(onEventClick)="handleEventClick($event)"
+		#schedule>
 </p-schedule>
 
 <activity-details *ngIf="selectedEvent"

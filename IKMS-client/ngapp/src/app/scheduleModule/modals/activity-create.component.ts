@@ -1,10 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Message, SelectItem} from "primeng/primeng";
-import {ScheduleService} from "../../sharedModule/services/schedule.service";
+import {Message} from "primeng/primeng";
 import {EnumProvider} from "../../commons/util/enum-provider";
 import {ScheduleActivity} from "../../adminSiteModule/model/schedule/schedule-activity";
-import {CommonMessages} from "../../commons/util/common-messages";
-import {MinimalDto} from "../../adminSiteModule/model/minimal-dto";
 import {EmployeeService} from "../../sharedModule/services/employee.service";
 import {Utils} from "../../commons/util/utils";
 import {ChildrenService} from "../../sharedModule/services/children.service";
@@ -19,8 +16,6 @@ import {DateUtils} from "../../commons/util/date-utils";
 })
 export class ActivityCreateComponent implements OnInit{
     constructor(
-        private activityService: ScheduleService,
-        private enumProvider: EnumProvider,
         private employeeService: EmployeeService,
         private childrenService: ChildrenService,
         private groupService: GroupService,
@@ -31,13 +26,11 @@ export class ActivityCreateComponent implements OnInit{
     }
     
     @Input() private isVisible: boolean = false;
-    @Input() private personalDataId: number = -1;
 
     @Output() eventClose = new EventEmitter();
     @Output() eventSave = new EventEmitter();
     
     @ViewChild('createForm') form;
-    
     
     private activity: ScheduleActivity = new ScheduleActivity();
     private childrenList = [];
@@ -46,6 +39,9 @@ export class ActivityCreateComponent implements OnInit{
     private classroomList = [];
     private msgs: Message[] = [];
     private defaultDate = new Date();
+    private minDate = null;
+    private maxDate = null;
+    private pl = Utils.polishLocale;
 
     ngOnInit(){
         this.getEmployees();
@@ -54,34 +50,6 @@ export class ActivityCreateComponent implements OnInit{
         this.getClassrooms();
         this.defaultDate.setMinutes(0);
     }
-    
-    getChildren(){
-        this.childrenService.getChildrenMinimal()
-            .subscribe( data => {
-                this.childrenList = this.childrenList.concat(Utils.minimalToDropdownMinimal(data));
-            });
-    }
-    
-    getEmployees(){
-        this.employeeService.getEmployeesMinimal()
-            .subscribe( data => {
-                this.employeeList = this.employeeList.concat(Utils.minimalToDropdownMinimal(data));
-            });
-    }
-    
-    getGroups(){
-        this.groupService.getGroupsMinimal()
-            .subscribe( data => {
-                this.groupList = Utils.minimalToDropdownMinimal(data);
-            });
-    }
-    
-    getClassrooms(){
-        this.classroomService.getClassroomMinimal()
-            .subscribe( data => {
-                this.classroomList = Utils.minimalToDropdownMinimal(data);
-            });
-    }
 
     closeModal(){
         this.isVisible = false;
@@ -89,22 +57,54 @@ export class ActivityCreateComponent implements OnInit{
     }
     
     onDateSelected(event, type){
-         if (type == 'start') {
-             this.activity.start = DateUtils.formatDateTime(event);
-         } else if (type == 'end'){
-             this.activity.end = DateUtils.formatDateTime(event);
-         }
+        if (type == 'start') {
+            this.activity.start = DateUtils.formatDateTime(event);
+            this.minDate = DateUtils.toPrimeNgCalendarDate(event);
+        } else if (type == 'end') {
+            this.activity.end = DateUtils.formatDateTime(event);
+            this.maxDate = DateUtils.toPrimeNgCalendarDate(event);
+        }
     }
 
     saveData(activity){
         let activityCopy = {...activity};
         activityCopy.start = DateUtils.addSeconds(activityCopy.start);
         activityCopy.end = DateUtils.addSeconds(activityCopy.end);
+        activityCopy.color = '#5c6bc0';
     
         this.eventSave.emit(activityCopy);
         this.isVisible = false;
         this.activity = new ScheduleActivity();
-        this.form.reset();
+        this.maxDate = null;
+        this.minDate = null;
+    }
+    
+    getChildren(){
+        this.childrenService.getChildrenMinimal()
+        .subscribe( data => {
+            this.childrenList = this.childrenList.concat(Utils.minimalToDropdownMinimal(data));
+        });
+    }
+    
+    getEmployees(){
+        this.employeeService.getEmployeesMinimal()
+        .subscribe( data => {
+            this.employeeList = this.employeeList.concat(Utils.minimalToDropdownMinimal(data));
+        });
+    }
+    
+    getGroups(){
+        this.groupService.getGroupsMinimal()
+        .subscribe( data => {
+            this.groupList = Utils.minimalToDropdownMinimal(data);
+        });
+    }
+    
+    getClassrooms(){
+        this.classroomService.getClassroomMinimal()
+        .subscribe( data => {
+            this.classroomList = Utils.minimalToDropdownMinimal(data);
+        });
     }
 
 }

@@ -40,6 +40,10 @@ export class DateUtils {
         return resultDate + ' ' + resultTime;
     }
     
+    static toPrimeNgCalendarDate(date){
+        return new Date(date);
+    }
+    
     static newISODate(): any {
         let d = new Date(),
                 month = '' + (d.getMonth() + 1),
@@ -64,12 +68,24 @@ export class DateUtils {
         } else return dateTime;
     }
     
+    /**
+     * ale fajna funkcja
+     */
     static substractSeconds(dateTime): any{
-        if(typeof dateTime === "object"){
+        if(typeof dateTime === 'string'){
+            console.log(dateTime);
+            return dateTime.substr(0, dateTime.lastIndexOf(":"));
+        }
+        if(dateTime instanceof Array){
+            let date =  new (Function.prototype.bind.apply(
+                    Date, [null].concat(dateTime)));
+            return this.formatDateTime(date);
+        }
+        if(typeof dateTime === 'object'){
             return dateTime._i.substr(0, dateTime.lastIndexOf(":"));
         }
-        return dateTime.substr(0, dateTime.lastIndexOf(":"));
-        
+    
+        return dateTime;
     }
     
     static ISODateToServerLocalDateTime(dateTime){
