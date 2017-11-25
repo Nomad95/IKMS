@@ -129,6 +129,20 @@
 					</div>
 				</div>
 			</form>
+			<div *ngIf="activity.currentErrors.length > 0 && activity.errors.length == 0" class="col-md-12">
+				<div class="ui-g-12">
+					<div class="ui-g-12 form-red" *ngFor="let error of activity.currentErrors">
+						<span><i class="fa fa-circle" aria-hidden="true"></i> {{error}} </span>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="activity.errors.length > 0" class="col-md-12">
+				<div class="ui-g-12">
+					<div class="ui-g-12 form-red" *ngFor="let error of activity.errors">
+						<span><i class="fa fa-circle" aria-hidden="true"></i> {{error.value}} </span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<p-footer>

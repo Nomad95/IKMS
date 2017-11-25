@@ -6,6 +6,7 @@ import {DateUtils} from "../commons/util/date-utils";
 import {ConfirmationService, Message} from "primeng/primeng";
 import {CommonMessages} from "../commons/util/common-messages";
 import {ScheduleService} from "../sharedModule/services/schedule.service";
+import {Utils} from "../commons/util/utils";
 
 @Component({
     selector: 'schedule-component',
@@ -24,6 +25,7 @@ export class ScheduleComponent implements OnInit{
     @Input() private deleteMode: boolean = false;
     
     @Output() private eventActivityUpdate = new EventEmitter();
+    @Output() private eventActivityValidationCheck = new EventEmitter();
     
     private configuration: IConfig;
     private isInEditMode: boolean = false;
@@ -54,6 +56,13 @@ export class ScheduleComponent implements OnInit{
     
     onEventDrop(event){
         this.parseDate(event.event);
+        this.validateActivity(event.event);
+        this.eventActivityUpdate.emit(this.selectedEvent);
+    }
+    
+    onEventResizeStop(event){
+        this.parseDate(event.event);
+        this.validateActivity(event.event);
         this.eventActivityUpdate.emit(this.selectedEvent);
     }
     
@@ -75,12 +84,9 @@ export class ScheduleComponent implements OnInit{
     }
     
     deleteActivity(event){
-        console.log(event);
         if (!event.id) {
-            console.log("found!");
             for (let i = this.events.length - 1; i > 0; i--) {
                 if (ScheduleActivity.equals(this.events[i],event)) {
-                    console.log("SPLICE!");
                     this.events.splice(i, 1);
                     break;
                 }
@@ -107,6 +113,14 @@ export class ScheduleComponent implements OnInit{
                 },
                 reject: () => {}
         });
+    }
+    
+    validateActivity(activity){
+        let toValidate = ScheduleActivity.fromPrimengEvent(activity);
+        toValidate.start = DateUtils.addSeconds(toValidate.start);
+        toValidate.end = DateUtils.addSeconds(toValidate.end);
+        
+        this.eventActivityValidationCheck.emit(toValidate);
     }
     
     changeEditMode(){

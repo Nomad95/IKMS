@@ -84,6 +84,20 @@
 
 				</div>
 			</div>
+			<div *ngIf="event.currentErrors.length > 0 && event.errors.length == 0" class="col-md-12">
+				<div class="ui-g-12">
+					<div class="ui-g-12 form-red" *ngFor="let error of event.currentErrors">
+						<span><i class="fa fa-circle" aria-hidden="true"></i> {{error}} </span>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="event.errors.length > 0" class="col-md-12">
+				<div class="ui-g-12">
+					<div class="ui-g-12 form-red" *ngFor="let error of event.errors">
+						<span><i class="fa fa-circle" aria-hidden="true"></i> {{error.value}} </span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<p-footer>

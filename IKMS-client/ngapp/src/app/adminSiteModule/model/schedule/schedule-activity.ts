@@ -1,4 +1,3 @@
-import {DateUtils} from "../../../commons/util/date-utils";
 export class ScheduleActivity {
     id: number;
     title: string;
@@ -11,6 +10,7 @@ export class ScheduleActivity {
     employees: any[];
     children: any[];
     color: any;
+    currentErrors: string[]; //list of errors that exist locally
     
     
     constructor() {
@@ -24,6 +24,7 @@ export class ScheduleActivity {
         this.employees = [];
         this.children= [];
         this.color = null;
+        this.currentErrors = [];
     }
     
     static fromPrimengEvent(activity): ScheduleActivity{
@@ -38,6 +39,8 @@ export class ScheduleActivity {
         scheduleActivity.group = activity.group;
         scheduleActivity.employees = activity.employees;
         scheduleActivity.children= activity.children;
+        scheduleActivity.color = activity.color;
+        scheduleActivity.currentErrors = activity.currentErrors;
         
         return scheduleActivity;
     }

@@ -38,10 +38,7 @@ public class ScheduleActivityEntity extends AbstractEntity{
     @Column(name = "comment")
     private String comment;
 
-    @Transient
-    private String color;
-
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     @JoinColumn(name="activity_id")
     private List<ScheduleActivityError> errors;
 

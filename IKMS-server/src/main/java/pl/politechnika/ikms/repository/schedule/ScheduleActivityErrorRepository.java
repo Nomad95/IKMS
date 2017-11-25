@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.politechnika.ikms.domain.schedule.ScheduleActivityError;
 
 @Repository
-public interface ScheduleActivityErrorsRepository extends JpaRepository<ScheduleActivityError, Long> {
+public interface ScheduleActivityErrorRepository extends JpaRepository<ScheduleActivityError, Long> {
 }

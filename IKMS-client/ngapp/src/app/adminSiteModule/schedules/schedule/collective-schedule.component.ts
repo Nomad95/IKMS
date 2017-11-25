@@ -5,6 +5,7 @@ import {DateUtils} from "../../../commons/util/date-utils";
 import {CommonMessages} from "../../../commons/util/common-messages";
 import {Message} from "primeng/primeng";
 import {Utils} from "../../../commons/util/utils";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'collective-schedule',
@@ -23,6 +24,7 @@ export class CollectiveScheduleComponent implements OnInit{
     private msgs: Message[] = [];
     private isLoading: boolean = false;
     private isUpdating: boolean = false;
+    private schemaHasErrors: boolean = false;
     
     private displayActivityCreateModal = false;
     
@@ -41,7 +43,7 @@ export class CollectiveScheduleComponent implements OnInit{
             this.events[i].end = DateUtils.ISODateToServerLocalDateTime(this.events[i].end);
         }
         
-        this.events = Utils.deleteActivityUnwantedFields(this.events);
+        this.events = Utils.deleteActivitiesUnwantedFields(this.events);
         
         this.scheduleService.createActivities(this.events)
             .subscribe( data => {
@@ -80,6 +82,19 @@ export class CollectiveScheduleComponent implements OnInit{
                     this.events[i] = activity;
                     break;
                 }
+            }
+        }
+    }
+    
+    onActivityValidationCheck(activity){
+        for (let i = this.events.length - 1; i > 0; i--) {
+            if (ScheduleActivity.equals(this.events[i], activity)) {
+                this.events[i] = activity;
+                
+                if(activity.currentErrors.length > 0 || activity.errors.length > 0 ){
+                    this.schemaHasErrors = true;
+                }
+                break;
             }
         }
     }

@@ -1,6 +1,7 @@
 package pl.politechnika.ikms.rest.dto.schedule;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import pl.politechnika.ikms.commons.abstracts.AbstractDto;
@@ -31,6 +32,8 @@ public class ScheduleActivityDto extends AbstractDto{
     private LocalDateTime activityEnd;
 
     private String color;
+
+    private List<String> currentErrors = Lists.newArrayList();
 
     private List<MinimalDto<Long, String>> errors;
 

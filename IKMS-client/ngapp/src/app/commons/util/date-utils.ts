@@ -73,7 +73,6 @@ export class DateUtils {
      */
     static substractSeconds(dateTime): any{
         if(typeof dateTime === 'string'){
-            console.log(dateTime);
             return dateTime.substr(0, dateTime.lastIndexOf(":"));
         }
         if(dateTime instanceof Array){

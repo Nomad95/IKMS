@@ -38,7 +38,7 @@ export class Utils {
         return result;
     }
     
-    static deleteActivityUnwantedFields(activityList){
+    static deleteActivitiesUnwantedFields(activityList){
         for( let i=0; i< activityList.length; i++ ){
             activityList[i] = ScheduleActivity.fromPrimengEvent(activityList[i]);
         }

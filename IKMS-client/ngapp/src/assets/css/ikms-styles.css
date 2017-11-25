@@ -8,6 +8,11 @@
     font-weight: 600;
 }
 
+.form-red{
+    color: #DC3D3B;
+    font-weight: 600;
+}
+
 html {
     height: 100%;
 }

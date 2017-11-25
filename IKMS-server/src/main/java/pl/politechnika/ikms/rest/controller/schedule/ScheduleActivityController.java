@@ -11,9 +11,9 @@ import pl.politechnika.ikms.domain.schedule.ScheduleActivityEntity;
 import pl.politechnika.ikms.rest.dto.schedule.ScheduleActivityDto;
 import pl.politechnika.ikms.rest.mapper.schedule.ScheduleActivityEntityMapper;
 import pl.politechnika.ikms.service.schedule.ScheduleActivityService;
+import pl.politechnika.ikms.validators.schedule.ScheduleValidator;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +24,7 @@ public class ScheduleActivityController {
 
     private final @NonNull ScheduleActivityService scheduleActivityService;
     private final @NonNull ScheduleActivityEntityMapper scheduleActivityEntityMapper;
+    private final @NonNull ScheduleValidator scheduleValidator;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -37,11 +38,13 @@ public class ScheduleActivityController {
         return scheduleActivityService.findAllPaginated(pageable).map(scheduleActivityEntityMapper::convertToDto);
     }
 
-    @GetMapping(value = "/all") //TODO: stub
+    @GetMapping(value = "/all")
     public List<ScheduleActivityDto> getAllActivitiesNotPaged(Pageable pageable){
-        return scheduleActivityService.findAll().stream()
+        List<ScheduleActivityDto> dtos = scheduleActivityService.findAll().stream()
                 .map(scheduleActivityEntityMapper::convertToDto)
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toList());
+
+        return scheduleValidator.validateMany(dtos);
     }
 
     @GetMapping(value = "/{activityId}")
@@ -63,13 +66,12 @@ public class ScheduleActivityController {
 
     @PostMapping(value = "/addMany")
     public List<ScheduleActivityDto> updateActivities(@Valid @RequestBody List<ScheduleActivityDto> activityDtos){
-        ArrayList<ScheduleActivityEntity> activities = activityDtos.stream()
-                .map(scheduleActivityEntityMapper::convertToEntity)
-                .collect(Collectors.toCollection(ArrayList::new));
+        return scheduleActivityService.addMany(activityDtos);
+    }
 
-        ArrayList<ScheduleActivityDto> dtos = scheduleActivityService.addMany(activities).stream()
-                .map(scheduleActivityEntityMapper::convertToDto)
-                .collect(Collectors.toCollection(ArrayList::new));
-        return dtos;
+    @PostMapping(value = "/validate/single")
+    public ResponseEntity<List<String>> validateActivity(@Valid @RequestBody ScheduleActivityDto activityDto){
+        List<String> result = scheduleActivityService.validateOne(activityDto);
+        return ResponseEntity.ok(result);
     }
 }
