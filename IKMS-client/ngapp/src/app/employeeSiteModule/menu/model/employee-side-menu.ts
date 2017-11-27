@@ -26,14 +26,24 @@ export class EmployeeSideMenu {
             ]
         },
         {
-            label: 'Item2',
-            icon: 'fa-file-o',
+            label: 'Plany',
+            icon: 'fa-calendar',
             items: [
                 {
-                    label: 'siemka1'
+                    label: 'Zbiorczy',
+                    routerLink: ['/employee/schedule/collective']
                 },
                 {
-                    label: 'siemka2'
+                    label: 'Dla pracowników',
+                    routerLink: ['/employee/schedule/employee']
+                },
+                {
+                    label: 'Dla dzieci',
+                    routerLink: ['/employee/schedule/child']
+                },
+                {
+                    label: 'Dla grup',
+                    routerLink: ['/employee/schedule/group']
                 }
             ]
         }

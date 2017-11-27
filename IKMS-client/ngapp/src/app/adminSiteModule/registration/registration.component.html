@@ -11,7 +11,7 @@
 					<div class="ui-g-6 ui-sm-12">
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Imię:
+							<div class="ui-g-4 form-4-str-sm ">Imię:
 								<span class="red">*</span>
 							</div>
 							<div class="ui-g-8 ">
@@ -29,7 +29,7 @@
 
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Drugie imię:</div>
+							<div class="ui-g-4 form-4-str-sm ">Drugie imię:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="-" class="detail-view-input" maxlength="25" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
 								 [(ngModel)]="personalData.secondaryName" name="secondaryName" #secondaryName="ngModel" (ngModelChange)="personalData.secondaryName = firstLetterUpperCase(personalData.secondaryName)">
@@ -40,7 +40,7 @@
 						</div>
 
 						<div class=" ui-g-6 ui-g-12">
-							<div class="ui-g-4 ">Nazwisko:
+							<div class="ui-g-4 form-4-str-sm ">Nazwisko:
 								<span class="red">*</span>
 							</div>
 							<div class="ui-g-8 ">
@@ -57,7 +57,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Data urodzenia:
+							<div class="ui-g-4 form-4-str-sm ">Data urodzenia:
 								<span class="red">*</span>
 							</div>
 							<div class="ui-g-8 ">
@@ -74,17 +74,17 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Płeć:
+							<div class="ui-g-4 form-4-str-sm ">Płeć:
 								<span class="red">*</span>
 							</div>
-							<div class="ui-g-8 ">
+							<div class="ui-g-8 drp-srt">
 								<p-dropdown [options]="genders" [autoWidth]="true" placeholder="Wybierz płeć" class="detail-view-input" [(ngModel)]="personalData.gender"
 								 (ngModelChange)="whetherMan()" required name="gender" #gender="ngModel"></p-dropdown>
 							</div>
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Numer Kontaktowy:</div>
+							<div class="ui-g-4 form-4-str-sm ">Numer Kontaktowy:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="np.123456789" class="detail-view-input" maxlength="12" pattern="[0-9\+\-]*" [(ngModel)]="personalData.contactNumber"
 								 name="contactNumber" #contactNumber="ngModel">
@@ -95,7 +95,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Imię ojca:</div>
+							<div class="ui-g-4 form-4-str-sm ">Imię ojca:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="-" class="detail-view-input" [(ngModel)]="personalData.fathersName" maxlength="25"
 								 pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*" name="fathersName" #fathersName="ngModel" (ngModelChange)="personalData.fathersName = firstLetterUpperCase(personalData.fathersName)">
@@ -106,7 +106,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Nazwisko rodowe:</div>
+							<div class="ui-g-4 form-4-str-sm ">Nazwisko rodowe:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="-" class="detail-view-input" [(ngModel)]="personalData.familyName" maxlength="35"
 								 pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*" name="familyName" #familyName="ngModel" (ngModelChange)="personalData.familyName = firstLetterUpperCase(personalData.familyName)">
@@ -117,7 +117,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">PESEL:
+							<div class="ui-g-4 form-4-str-sm ">PESEL:
 								<span class="red">*</span>
 							</div>
 							<div class="ui-g-8 ">
@@ -137,7 +137,7 @@
 					<div class="ui-g-6 ui-sm-12">
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Miejsce urodzenia:
+							<div class="ui-g-4 form-4-str-sm ">Miejsce urodzenia:
 								<span class="red">*</span>
 							</div>
 							<div class="ui-g-8 ">
@@ -153,7 +153,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Narodowość:
+							<div class="ui-g-4 form-4-str-sm ">Narodowość:
 								<span class="red">*</span>
 
 							</div>
@@ -170,7 +170,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Fax:</div>
+							<div class="ui-g-4 form-4-str-sm ">Fax:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="-" class="detail-view-input" maxlength="12" pattern="[0-9\+\-]*" [(ngModel)]="personalData.faxNumber"
 								 name="faxNumber" #faxNumber="ngModel">
@@ -181,7 +181,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Imię matki:</div>
+							<div class="ui-g-4 form-4-str-sm ">Imię matki:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="-" class="detail-view-input" [(ngModel)]="personalData.mothersName" maxlength="25"
 								 pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*" name="mothersName" #mothersName="ngModel" (ngModelChange)="personalData.mothersName = firstLetterUpperCase(personalData.mothersName)">
@@ -192,7 +192,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Nazwisko rodowe matki:</div>
+							<div class="ui-g-4 form-4-str-sm ">Nazwisko rodowe matki:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="-" class="detail-view-input" [(ngModel)]="personalData.mothersMaidenName" maxlength="25"
 								 pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*" name="mothersMaidenName" #mothersMaidenName="ngModel" (ngModelChange)="personalData.mothersMaidenName = firstLetterUpperCase(personalData.mothersMaidenName)">
@@ -203,7 +203,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Nazwa użytkownika:</div>
+							<div class="ui-g-4 form-4-str-sm ">Nazwa użytkownika:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="username" class="detail-view-input" [(ngModel)]="user.username" disabled name="user.username"
 								 #username="ngModel">
@@ -211,7 +211,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">E-mail:
+							<div class="ui-g-4 form-4-str-sm ">E-mail:
 								<span class="red">*</span>
 							</div>
 							<div class="ui-g-8 ">
@@ -227,10 +227,10 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Typ użytkownika:
+							<div class="ui-g-4 form-4-str-sm ">Typ użytkownika:
 								<span class="red">*</span>
 							</div>
-							<div class="ui-g-8 ">
+							<div class="ui-g-8 drp-srt">
 								<p-dropdown [options]="userRoles" [autoWidth]="true" required placeholder="Wybierz typ..." [(ngModel)]="user.role" name="user.role"
 								 #role="ngModel" (ngModelChange)="whoIsThis()">
 								</p-dropdown>
@@ -239,7 +239,7 @@
 						<div class="ui-g-12 ui-sm-12">
 							<div *ngIf="user.role == 'ROLE_ADMIN'">
 								<div class="ui-g-12">
-									<div class="ui-g-4 ">NIP:</div>
+									<div class="ui-g-4 form-4-str-sm ">NIP:</div>
 									<div class="ui-g-8 ">
 										<input type="text" pInputText placeholder="1234567890" class="detail-view-input" maxlength="10" pattern="[0-9]*" [(ngModel)]="employee.nip"
 										 name="employee.nip" #nip="ngModel" (ngModelChange)="nipIsValid()">
@@ -256,7 +256,7 @@
 						<div class="ui-g-12 ui-sm-12">
 							<div *ngIf="user.role == 'ROLE_EMPLOYEE'">
 								<div class="ui-g-12">
-									<div class="ui-g-4 ">NIP:</div>
+									<div class="ui-g-4 form-4-str-sm ">NIP:</div>
 									<div class="ui-g-8 ">
 										<input type="text" pInputText placeholder="1234567890" class="detail-view-input" maxlength="10" pattern="[0-9]*" [(ngModel)]="employee.nip"
 										 name="employee.nip" #nip="ngModel" (ngModelChange)="nipIsValid()">
@@ -270,7 +270,7 @@
 									</div>
 								</div>
 								<div class="ui-g-12">
-									<div class="ui-g-4 ">Stanowisko pracownika:
+									<div class="ui-g-4 form-4-str-sm ">Stanowisko pracownika:
 										<span class="red">*</span>
 									</div>
 									<div class="ui-g-8 ">
@@ -292,16 +292,11 @@
 
 				<div class="ui-g-11 ui-sm-12" [style.visibility]="numberOfAddressesExhausted() ? 'visible' : 'hidden'">
 					<button pButton title="Dodaj adres" icon="fa-plus" label="Dodaj adres" (click)="addNewAddressToAddressesList()"></button>
-				</div>
-
-				<div class="ui-g-11 ui-sm-12">
-					<div class="pull-right">
-						<button pButton title="Wyczyść formularz" label="Wyczyść" (click)="resetForm()" icon="fa-close"></button>
-						<button type="submit" pButton icon="fa-check"
-								[disabled]="!registrationForm.valid || !isAllAddressesValid || !isNipCorrect || isSubmiting" label="Dodaj"
-								[title]="(!registrationForm.valid || !isAllAddressesValid || !isNipCorrect) ? 'Uzupełnij wymagane pola' : 'Dodaj'"
-								(click)="submit()"></button>
-					</div>
+					<button pButton title="Wyczyść formularz" label="Wyczyść" class="ikms-float-right" (click)="resetForm()" icon="fa-close"></button>
+					<button type="submit" pButton icon="fa-check" class="ikms-float-right"
+							[disabled]="!registrationForm.valid || !isAllAddressesValid || !isNipCorrect || isSubmiting" label="Dodaj"
+							[title]="(!registrationForm.valid || !isAllAddressesValid || !isNipCorrect) ? 'Uzupełnij wymagane pola' : 'Dodaj'"
+							(click)="submit()"></button>
 				</div>
 			</form>
 

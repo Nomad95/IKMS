@@ -16,13 +16,17 @@ import {
     InputMaskModule, CalendarModule, ConfirmDialogModule,
     GrowlModule, BreadcrumbModule, TooltipModule
 } from './index';
-
 import {
     AddressEditComponent,
     PersonalDataEditComponent, AddressCreateComponent,
     ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent,
     NgbModule
 } from './index';
+import {SchedulesModule} from "../scheduleModule/schedule.module";
+import {GroupScheduleComponent} from "./schedules/schedule/group-schedule.component";
+import {ChildScheduleComponent} from "./schedules/schedule/child-schedule.component";
+import {EmployeeScheduleComponent} from "./schedules/schedule/employee-schedule.component";
+import {CollectiveScheduleComponent} from "./schedules/schedule/collective-schedule.component";
 
 @NgModule({
     imports: [
@@ -49,7 +53,8 @@ import {
         BreadcrumbModule,
         TooltipModule,
         FormsModule,
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+            SchedulesModule
     ],
     declarations: [
         EmployeeSiteComponent,
@@ -59,7 +64,11 @@ import {
         AddressCreateComponent,
         ChildrenListComponent,
         ChildrenDetailComponent,
-        ChildrenEditComponent
+        ChildrenEditComponent,
+        CollectiveScheduleComponent,
+        EmployeeScheduleComponent,
+        ChildScheduleComponent,
+        GroupScheduleComponent
     ],
     providers: [
         AuthGuard,

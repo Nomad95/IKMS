@@ -7,15 +7,18 @@ import {MenuItem, Message} from "primeng/primeng";
 import {Utils} from "../../../commons/util/utils";
 import {Observable} from "rxjs/Observable";
 import {BreadMaker} from "../../../commons/util/bread-maker";
+import {EmployeeService} from "../../../sharedModule/services/employee.service";
+import {ErrorHandler} from "../../../commons/util/error-handler";
 
 @Component({
-  selector: 'collective-schedule',
-  templateUrl: './collective-schedule.component.html',
+  selector: 'employee-schedule',
+  templateUrl: './employee-schedule.component.html',
   providers: []
 })
-export class CollectiveScheduleComponent implements OnInit{
+export class EmployeeScheduleComponent implements OnInit{
     constructor(
-        private scheduleService: ScheduleService){}
+        private scheduleService: ScheduleService,
+        private employeeService: EmployeeService){}
   
     private events: ScheduleActivity[] = [];
     private oldEvents: ScheduleActivity[] = [];
@@ -27,16 +30,26 @@ export class CollectiveScheduleComponent implements OnInit{
     private isUpdating: boolean = false;
     private schemaHasErrors: boolean = false;
     private items: MenuItem[];
+    private employees = [];
+    private selectedEmployeeId = -1;
     
     private displayActivityCreateModal = false;
     
     ngOnInit() {
-        this.items = BreadMaker.makeBreadcrumbs("Plany","Plan zbiorczy");
         this.isLoading = true;
-        this.scheduleService.getActivities().subscribe( data => {
-            this.events = data;
-            this.isLoading = false;
-        });
+        this.getEmployees();
+        this.items = BreadMaker.makeBreadcrumbs("Plany","Plan pracownika");
+    }
+    
+    getEmployees(){
+        this.employeeService.getEmployeesMinimal()
+            .subscribe( data => {
+                this.employees = Utils.minimalToDropdown(data);
+                this.isLoading = false;
+            }, err => {
+                this.msgs = ErrorHandler.handleGenericServerError(err);
+                this.isLoading = false;
+            });
     }
     
     saveAndExitEdit(){
@@ -50,7 +63,12 @@ export class CollectiveScheduleComponent implements OnInit{
         
         this.scheduleService.createActivities(this.events)
             .subscribe( data => {
-                this.events = data;
+                if(this.selectedEmployeeId != -1){
+                    this.scheduleService.getActivitiesFor('employee', this.selectedEmployeeId).subscribe( data => {
+                        this.events = data;
+                        this.isLoading = false;
+                    });
+                }
                 this.editMode = false;
                 this.isUpdating = false;
                 this.msgs = CommonMessages.scheduleCreatingSuccess();
@@ -64,12 +82,25 @@ export class CollectiveScheduleComponent implements OnInit{
         this.events = JSON.parse(sessionStorage.getItem('cachedEvents'));
         this.scheduleService.createActivities(this.events)
             .subscribe( data => {
-                this.events = data;
+                if(this.selectedEmployeeId != -1){
+                    this.scheduleService.getActivitiesFor('employee', this.selectedEmployeeId).subscribe( data => {
+                        this.events = data;
+                        this.isLoading = false;
+                    });
+                }
             }, err => {
                 this.msgs = CommonMessages.scheduleCreatingError()
             });
         this.editMode = false;
         this.deleteMode = false;
+    }
+    
+    onEmployeeSelected(event){
+        this.selectedEmployeeId = event.value;
+        this.scheduleService.getActivitiesFor('employee', event.value).subscribe( data => {
+            this.events = data;
+            this.isLoading = false;
+        });
     }
     
     /**

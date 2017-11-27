@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import pl.politechnika.ikms.domain.schedule.ScheduleActivityEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public interface ScheduleActivityRepository extends JpaRepository<ScheduleActivityEntity, Long> {
@@ -56,4 +57,15 @@ public interface ScheduleActivityRepository extends JpaRepository<ScheduleActivi
             @Param("activityStart")LocalDateTime activityStart,
             @Param("childrenId")Long childrenId,
             @Param("activityId")Long activityId);
+
+
+    @Query("select sa from ScheduleActivityEntity sa " +
+            "join sa.employees em " +
+            "where em.id = :employeeId")
+    List<ScheduleActivityEntity> findAllForEmployee(@Param("employeeId") Long employeeId);
+
+    @Query("select sa from ScheduleActivityEntity sa " +
+            "join sa.employees em " +
+            "where em.id = :employeeId")
+    List<ScheduleActivityEntity> findAllForLoggedEmployee(@Param("employeeId") Long employeeId);
 }

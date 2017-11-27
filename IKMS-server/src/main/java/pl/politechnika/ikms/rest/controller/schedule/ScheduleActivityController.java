@@ -13,9 +13,9 @@ import pl.politechnika.ikms.rest.mapper.schedule.ScheduleActivityEntityMapper;
 import pl.politechnika.ikms.service.schedule.ScheduleActivityService;
 import pl.politechnika.ikms.validators.schedule.ScheduleValidator;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/schedule")
@@ -38,13 +38,16 @@ public class ScheduleActivityController {
         return scheduleActivityService.findAllPaginated(pageable).map(scheduleActivityEntityMapper::convertToDto);
     }
 
-    @GetMapping(value = "/all")
-    public List<ScheduleActivityDto> getAllActivitiesNotPaged(Pageable pageable){
-        List<ScheduleActivityDto> dtos = scheduleActivityService.findAll().stream()
-                .map(scheduleActivityEntityMapper::convertToDto)
-                .collect(Collectors.toList());
+    @GetMapping(value = "/all", params = { "for", "id" })
+    public List<ScheduleActivityDto> getAllActivitiesNotPaged(@RequestParam("for") String forWho, @RequestParam("id") Long id){
+        List<ScheduleActivityDto> allFor = scheduleActivityService.getAllFor(forWho, id);
 
-        return scheduleValidator.validateMany(dtos);
+        return scheduleValidator.validateMany(allFor);
+    }
+
+    @GetMapping(value = "/all/employee")
+    public List<ScheduleActivityDto> getAllActivitiesForLoggedEmployee(HttpServletRequest request){
+        return scheduleActivityService.getAllForLoggedEmployee(request);
     }
 
     @GetMapping(value = "/{activityId}")

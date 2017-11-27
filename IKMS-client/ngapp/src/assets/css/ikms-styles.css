@@ -94,6 +94,28 @@ body {
     text-overflow: ellipsis !important;
 }
 
+.text-right{
+    text-align: right;
+}
+
+.ikms-h3{
+    font-size: 125%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.form-4-str {
+    padding-top: 3.5%;
+}
+
+.form-4-str-sm {
+    padding-top: 2%;
+}
+
+.drp-srt {
+    margin-top: -2px;
+}
+
 span.red{
     color:red !important;
 }

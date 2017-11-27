@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import { TokenUtils } from "../../commons/util/token-utils";
 import {PersonalData} from "../../adminSiteModule/model/personalData/personal-data";
+import {MinimalDto} from "../../adminSiteModule/model/minimal-dto";
 
 @Injectable()
 export class PersonalDataService{
@@ -15,12 +16,16 @@ export class PersonalDataService{
         let currentUser = JSON.parse(TokenUtils.getToken());
         this.token = currentUser && currentUser.token;
         this.headers = TokenUtils.createHeaderWithToken();
-
     }
 
     getPersonalData(personalDataId): Observable<PersonalData>{
         return this.http.get('api/personalData/' + personalDataId, {headers: this.headers})
             .map( res => res.json());
+    }
+    
+    getCurrentUserName(): Observable<MinimalDto>{
+        return this.http.get('api/personalData/myName' , {headers: this.headers})
+        .map( res => res.json());
     }
 
     updatePersonalData(personalData): Observable<PersonalData>{

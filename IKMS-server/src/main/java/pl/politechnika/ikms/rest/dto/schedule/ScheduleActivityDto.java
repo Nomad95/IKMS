@@ -33,6 +33,8 @@ public class ScheduleActivityDto extends AbstractDto{
 
     private String color;
 
+    private String rendering;
+
     private List<String> currentErrors = Lists.newArrayList();
 
     private List<MinimalDto<Long, String>> errors;

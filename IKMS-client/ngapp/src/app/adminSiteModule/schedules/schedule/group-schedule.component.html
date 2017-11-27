@@ -5,12 +5,17 @@
 	<div class="row">
 		<div class="ui-g-12 form-blue" *ngIf="!isLoading">
 			<div class="col-md-9 col-sm-9">
+				<span>Wybierz grupę: </span>
+				<p-dropdown
+						[options]="groups" [autoWidth]="false" (onChange)="onGroupSelected($event)"
+						[(ngModel)]="selectedEmployee" name="employee" placeholder="Wybierz"
+				></p-dropdown>
 			</div>
 			<div class="col-md-3 col-sm-3 text-right">
-				<span class="ikms-h3">Plan zbiorczy</span>
+				<span class="ikms-h3">Plany grup</span>
 			</div>
 		</div>
-		<div class="col-md-12">
+		<div class="col-md-12" *ngIf="selectedGroupId > -1">
 			<div class="content-section implementation text-center" *ngIf="isLoading">
 				<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
 			</div>

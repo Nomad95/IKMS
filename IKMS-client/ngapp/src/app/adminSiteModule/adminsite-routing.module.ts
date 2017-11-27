@@ -16,6 +16,9 @@ import {GroupListManageComponent} from "./management/group/group-list-manage.com
 import {GroupCreateComponent} from "./management/groupCreate/group-create.component";
 import {NotificationComponent} from "../sharedModule/notification/notificiationList/notification-list.component";
 import {CollectiveScheduleComponent} from "./schedules/schedule/collective-schedule.component";
+import {EmployeeScheduleComponent} from "./schedules/schedule/employee-schedule.component";
+import {ChildScheduleComponent} from "./schedules/schedule/child-schedule.component";
+import {GroupScheduleComponent} from "./schedules/schedule/group-schedule.component";
 
 const routes: Routes = [
     {
@@ -68,6 +71,15 @@ const routes: Routes = [
                     },
                     {
                         path: 'schedule/collective', component: CollectiveScheduleComponent
+                    },
+                    {
+                        path: 'schedule/employee', component: EmployeeScheduleComponent
+                    },
+                    {
+                        path: 'schedule/child', component: ChildScheduleComponent
+                    },
+                    {
+                        path: 'schedule/group', component: GroupScheduleComponent
                     },
                     {
                         path: 'notification', component: NotificationComponent

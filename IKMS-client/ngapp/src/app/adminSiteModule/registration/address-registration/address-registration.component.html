@@ -4,7 +4,7 @@
 </div>
 <div class="ui-g-6 ui-sm-12">
 	<div class="ui-g-12">
-		<div class="ui-g-4 ">Ulica:</div>
+		<div class="ui-g-4 form-4-str-sm ">Ulica:</div>
 		<div class="ui-g-8 ">
 			<input type="text" pInputText placeholder="-" class="detail-view-input" maxlength="35" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ0-9\-\. ]*"
 			 [(ngModel)]="address.street" name="street" #street="ngModel">
@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="ui-g-12">
-		<div class="ui-g-4 ">Numer domu:<span class="red">*</span>
+		<div class="ui-g-4 form-4-str-sm ">Numer domu:<span class="red">*</span>
 
 		</div>
 		<div class="ui-g-8 ">
@@ -31,7 +31,7 @@
 	</div>
 
 	<div class="ui-g-12">
-		<div class="ui-g-4 ">Kod pocztowy:</div>
+		<div class="ui-g-4 form-4-str-sm ">Kod pocztowy:</div>
 		<div class="ui-g-8 ">
 			<p-inputMask [(ngModel)]="address.postCode" mask="99-999" name="postCode" #postCode="ngModel"></p-inputMask>
 			<div class="ui-g-12 validation-err" *ngIf="postCode.touched && postCode.errors?.pattern">
@@ -41,7 +41,7 @@
 	</div>
 
 	<div class="ui-g-12">
-		<div class="ui-g-4 ">Powiat:</div>
+		<div class="ui-g-4 form-4-str-sm ">Powiat:</div>
 		<div class="ui-g-8 ">
 			<input type="text" pInputText placeholder="-" class="detail-view-input" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ\-]*" maxlength="35"
 			 [(ngModel)]="address.county" name="county" #county="ngModel" (ngModelChange)="address.county = firstLetterUpperCase(address.county)">
@@ -52,7 +52,7 @@
 	</div>
 
 	<div class="ui-g-12">
-		<div class="ui-g-4 ">Państwo:</div>
+		<div class="ui-g-4 form-4-str-sm ">Państwo:</div>
 		<div class="ui-g-8 ">
 			<input type="text" pInputText placeholder="-" class="detail-view-input" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*" maxlength="35"
 			 [(ngModel)]="address.country" name="country" #country="ngModel" (ngModelChange)="address.country = firstLetterUpperCase(address.country)">
@@ -64,7 +64,7 @@
 </div>
 <div class="ui-g-6 ui-sm-12">
 	<div class="ui-g-12">
-		<div class="ui-g-4 ">Miejscowość:</div>
+		<div class="ui-g-4 form-4-str-sm ">Miejscowość:</div>
 		<div class="ui-g-8 ">
 			<input type="text" pInputText placeholder="-" class="detail-view-input" [(ngModel)]="address.city" maxlength="35" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
 			 name="city" #city="ngModel" (ngModelChange)="address.city = firstLetterUpperCase(address.city)">
@@ -75,7 +75,7 @@
 	</div>
 
 	<div class="ui-g-12">
-		<div class="ui-g-4 ">Numer lokalu:</div>
+		<div class="ui-g-4 form-4-str-sm ">Numer lokalu:</div>
 		<div class="ui-g-8 ">
 			<input type="text" pInputText placeholder="-" class="detail-view-input" pattern="[0-9a-zA-Z]*" [(ngModel)]="address.houseNumber"
 			 name="houseNumber" #houseNumber="ngModel">
@@ -86,7 +86,7 @@
 	</div>
 
 	<div class="ui-g-12">
-		<div class="ui-g-4 ">Gmina:</div>
+		<div class="ui-g-4 form-4-str-sm ">Gmina:</div>
 		<div class="ui-g-8 ">
 			<input type="text" pInputText placeholder="-" class="detail-view-input" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*" maxlength="35"
 			 [(ngModel)]="address.community" name="community" #community="ngModel" (ngModelChange)="address.community = firstLetterUpperCase(address.community)">
@@ -97,7 +97,7 @@
 	</div>
 
 	<div class="ui-g-12">
-		<div class="ui-g-4 ">Województwo:</div>
+		<div class="ui-g-4 form-4-str-sm ">Województwo:</div>
 		<div class="ui-g-8 ">
 			<input type="text" pInputText placeholder="-" class="detail-view-input" pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*" maxlength="35"
 			 [(ngModel)]="address.voivodeship" name="voivodeship" #voivodeship="ngModel" (ngModelChange)="address.voivodeship = firstLetterUpperCase(address.voivodeship)">
@@ -108,8 +108,8 @@
 	</div>
 
 	<div class="ui-g-12">
-		<div class="ui-g-4 ">Rodzaj adresu:</div>
-		<div class="ui-g-8 ">
+		<div class="ui-g-4 form-4-str-sm ">Rodzaj adresu:</div>
+		<div class="ui-g-8 drp-srt">
 			<p-dropdown [options]="addressTypes" [autoWidth]="false" required [(ngModel)]="address.addressType" name="address.addressType"
 			 #addressType></p-dropdown>
 		</div>

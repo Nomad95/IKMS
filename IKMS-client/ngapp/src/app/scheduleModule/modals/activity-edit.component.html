@@ -9,9 +9,9 @@
 
 				<div class="ui-g-12 form-blue">
 
-					<div class="ui-g-6 ui-sm-12">
-						<div class="ui-g-12">
-							<div class="ui-g-4 ">Nazwa zajęć:</div>
+					<div class="ui-g-12 ui-sm-12">
+						<div class="ui-g-6">
+							<div class="ui-g-4 form-4-str ">Nazwa zajęć:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
@@ -27,8 +27,8 @@
 							</div>
 						</div>
 
-						<div class="ui-g-12">
-							<div class="ui-g-4 ">Data rozpoczęcia:</div>
+						<div class="ui-g-6">
+							<div class="ui-g-4 form-4-str ">Data rozpoczęcia:</div>
 							<div class="ui-g-8 ">
 								<p-calendar [dataType]="string" [showTime]="true" hourFormat="24"
 											[monthNavigator]="true" [yearNavigator]="true"
@@ -45,10 +45,13 @@
 							</div>
 						</div>
 
-						<div class="ui-g-12">
-							<div class="ui-g-4 ">Grupa:</div>
+					</div>
+					<div class="ui-g-12 ui-sm-12">
+
+						<div class="ui-g-6">
+							<div class="ui-g-4 form-4-str ">Grupa:</div>
 							<div class="ui-g-8 ">
-								<p-dropdown
+								<p-dropdown pTooltip="Grupa której dotyczą zajęcia" tooltipPosition="top" showDelay="1500"
 										[options]="groupList" [autoWidth]="false"
 										placeholder="Wybierz"
 										[(ngModel)]="activity.group" name="group"
@@ -56,10 +59,10 @@
 							</div>
 						</div>
 
-						<div class="ui-g-12">
-							<div class="ui-g-4 ">Dzieci:</div>
+						<div class="ui-g-6">
+							<div class="ui-g-4 form-4-str ">Dzieci:</div>
 							<div class="ui-g-8 " *ngIf="activity.children">
-								<p-multiSelect
+								<p-multiSelect pTooltip="Dzieci których dotyczą zajęcia" tooltipPosition="top" showDelay="1500"
 										[options]="childrenList" defaultLabel="Wybierz"
 										maxSelectedLabels="1" dataKey="value"
 										selectedItemsLabel="Wybrano {0}"
@@ -68,13 +71,13 @@
 								</p-multiSelect >
 							</div>
 						</div>
-
 					</div>
-					<div class="ui-g-6 ui-sm-12">
-						<div class="ui-g-12">
-							<div class="ui-g-4 ">Sala:</div>
+
+					<div class="ui-g-12 ui-sm-12">
+						<div class="ui-g-6">
+							<div class="ui-g-4 form-4-str ">Sala:</div>
 							<div class="ui-g-8 ">
-								<p-dropdown
+								<p-dropdown pTooltip="Sala w której odbędą się zajęcia" tooltipPosition="top" showDelay="1500"
 										[options]="classroomList" [autoWidth]="false"
 										required placeholder="Wybierz"
 										[(ngModel)]="activity.classroom" name="classroom"
@@ -82,8 +85,8 @@
 							</div>
 						</div>
 
-						<div class="ui-g-12">
-							<div class="ui-g-4 ">Data zakończenia:</div>
+						<div class="ui-g-6">
+							<div class="ui-g-4 form-4-str ">Data zakończenia:</div>
 							<div class="ui-g-8 ">
 								<p-calendar [dataType]="string" [showTime]="true" hourFormat="24"
 											[monthNavigator]="true" [yearNavigator]="true"
@@ -99,11 +102,15 @@
 								</div>
 							</div>
 						</div>
+					</div>
+					<div class="ui-g-12 ui-sm-12">
 
-						<div class="ui-g-12">
-							<div class="ui-g-4 ">Pracownicy:</div>
+						<div class="ui-g-6">
+							<div class="ui-g-4 form-4-str ">Pracownicy:</div>
 							<div class="ui-g-8 ">
 								<p-multiSelect *ngIf="activity.employees"
+											   pTooltip="Pracownicy którzy będą prowadzić zajęcia"
+											   tooltipPosition="top" showDelay="1500"
 									    [options]="employeeList" defaultLabel="Wybierz"
 									    maxSelectedLabels="1" dataKey="value"
 									   	selectedItemsLabel="Wybrano {0}"
@@ -113,10 +120,10 @@
 							</div>
 						</div>
 
-						<div class="ui-g-12">
-							<div class="ui-g-4 ">Komentarz:</div>
+						<div class="ui-g-6">
+							<div class="ui-g-4 form-4-str ">Komentarz:</div>
 							<div class="ui-g-8 ">
-								<textarea
+								<textarea pTooltip="Dodatkowy komentarz informacyjny" tooltipPosition="top" showDelay="1500"
 										pInputTextarea [rows]="3" [cols]="20"
 										[(ngModel)]="activity.comment"
 										placeholder="-" class="detail-view-input long-text"
@@ -125,7 +132,6 @@
 										name="comment" #comment="ngModel"></textarea>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</form>

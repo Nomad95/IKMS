@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "groups")
 @EqualsAndHashCode(callSuper = true)
-@ToString(exclude = {"employee","children"})
+@ToString(exclude = {"employee","children","scheduleActivities"})
 @SequenceGenerator(name="gropus_seq_name",sequenceName="groups_seq", allocationSize = 1)
 public class GroupEntity extends AbstractEntity{
 

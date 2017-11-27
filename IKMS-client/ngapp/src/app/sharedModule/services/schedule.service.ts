@@ -18,8 +18,18 @@ export class ScheduleService{
     }
 
     getActivities(): Observable<ScheduleActivity[]>{
-        return this.http.get('api/schedule/all', {headers: this.headers})
+        return this.http.get('api/schedule/all?for=&id=', {headers: this.headers})
             .map( res => res.json());
+    }
+    
+    getActivitiesFor(forWho, id): Observable<ScheduleActivity[]>{
+        return this.http.get('api/schedule/all?for=' + forWho + '&id=' + id, {headers: this.headers})
+        .map( res => res.json());
+    }
+    
+    getActivitiesForLoggedEmployee(): Observable<ScheduleActivity[]>{
+        return this.http.get('api/schedule/all/employee', {headers: this.headers})
+        .map( res => res.json());
     }
     
     createActivity(activity): Observable<ScheduleActivity>{

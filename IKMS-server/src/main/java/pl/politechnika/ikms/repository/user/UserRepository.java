@@ -12,5 +12,6 @@ public interface UserRepository extends JpaRepository<UserEntity,Long> {
     UserEntity findByUsername(String username);
 
     @Query("SELECT NEW pl.politechnika.ikms.rest.dto.role.RoleDto(u.role.name) from UserEntity u WHERE u.username = :username")
-    RoleDto getRoleByUsername(@Param("username") String username); //TODO: Evict on login
+    RoleDto getRoleByUsername(@Param("username") String username); //TODO: Evict on login?
+
 }

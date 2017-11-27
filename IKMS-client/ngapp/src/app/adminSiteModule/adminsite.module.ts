@@ -24,6 +24,9 @@ import {
     NgbModule, ScheduleModule } from './index';
 import {SchedulesModule} from "../scheduleModule/schedule.module";
 import {CheckboxModule, DataListModule, FieldsetModule} from "primeng/primeng";
+import {EmployeeScheduleComponent} from "./schedules/schedule/employee-schedule.component";
+import {ChildScheduleComponent} from "./schedules/schedule/child-schedule.component";
+import {GroupScheduleComponent} from "./schedules/schedule/group-schedule.component";
 
 
 @NgModule({
@@ -90,7 +93,10 @@ import {CheckboxModule, DataListModule, FieldsetModule} from "primeng/primeng";
         GroupCreateComponent,
         NotificationComponent,
         SendingNotificationComponent,
-        CollectiveScheduleComponent
+        CollectiveScheduleComponent,
+        EmployeeScheduleComponent,
+        ChildScheduleComponent,
+        GroupScheduleComponent
     ],
     providers: [
         AuthGuard,

@@ -5,12 +5,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.politechnika.ikms.domain.person.PersonalDataEntity;
+import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.person.PersonalDataDto;
 import pl.politechnika.ikms.rest.mapper.person.PersonalDataEntityMapper;
 import pl.politechnika.ikms.service.person.PersonalDataService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -47,5 +50,12 @@ public class PersonalDataController {
     @DeleteMapping(value = "/{personalDataId}")
     public void deletePersonalData(@PathVariable Long personalDataId){
         personalDataService.deleteById(personalDataId);
+    }
+
+    @GetMapping(value = "/myName")
+    public ResponseEntity<MinimalDto<Long, String>> getCurrentUserName(HttpServletRequest request){
+        String userName = personalDataService.getCurrentUserName(request);
+        MinimalDto<Long, String> userDto = new MinimalDto<>(-1L, userName);
+        return ResponseEntity.ok(userDto);
     }
 }

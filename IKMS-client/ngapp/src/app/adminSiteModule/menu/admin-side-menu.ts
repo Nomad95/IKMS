@@ -23,12 +23,9 @@ export class AdminSideMenu {
             label: 'Rodzice',
             icon: 'fa-id-card-o',
             items: [
-              {
-                  label: 'Lista rodziców',
-                    routerLink: ['/admin/parent']
-                },
                 {
-                    label: 'Zarządzaj'
+                    label: 'Lista rodziców',
+                    routerLink: ['/admin/parent']
                 }
             ]
         },
@@ -70,7 +67,15 @@ export class AdminSideMenu {
                 },
                 {
                     label: 'Dla pracowników',
-                    routerLink: ['/admin/schedule/list']
+                    routerLink: ['/admin/schedule/employee']
+                },
+                {
+                    label: 'Dla dzieci',
+                    routerLink: ['/admin/schedule/child']
+                },
+                {
+                    label: 'Dla grup',
+                    routerLink: ['/admin/schedule/group']
                 }
             ]
         },
@@ -79,7 +84,7 @@ export class AdminSideMenu {
             icon: 'fa-bell',
             items: [
                 {
-                    label: 'Moje powiadomienia',
+                    label: 'Powiadomienia',
                     routerLink: ['/admin/notification']
                 }
             ]

@@ -13,15 +13,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import pl.politechnika.ikms.domain.user.UserEntity;
+import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.role.RoleDto;
 import pl.politechnika.ikms.security.JwtAuthenticationRequest;
 import pl.politechnika.ikms.security.JwtTokenUtil;
 import pl.politechnika.ikms.security.JwtUser;
+import pl.politechnika.ikms.security.JwtUserFacilities;
 import pl.politechnika.ikms.security.service.JwtAuthenticationResponse;
 import pl.politechnika.ikms.service.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Objects;
 
 @RestController
 @Slf4j
@@ -41,6 +44,9 @@ public class AuthenticationRestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JwtUserFacilities jwtUserFacilities;
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
@@ -90,6 +96,18 @@ public class AuthenticationRestController {
         String token = request.getHeader(tokenHeader);
         UserEntity foundUser = userService.getUserByUsername(jwtTokenUtil.getUsernameFromToken(token));
         return new RoleDto(foundUser.getRole().getName());
+    }
+
+    @GetMapping(value = "/auth/whoami")
+    @ResponseBody
+    public ResponseEntity<MinimalDto<Long, String>> getUsernameFromToken(HttpServletRequest request){
+        String username = jwtUserFacilities.pullTokenAndGetUsername(request);
+        if (Objects.nonNull(username)){
+            MinimalDto<Long, String> usernameDto = new MinimalDto<>(-1L, username);
+            return ResponseEntity.ok(usernameDto);
+        }
+        else
+            return ResponseEntity.notFound().build();
     }
 
 }

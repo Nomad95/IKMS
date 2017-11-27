@@ -15,7 +15,7 @@
 						<div class="ui-g-6 ui-sm-12">
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Choroby:</div>
+							<div class="ui-g-4 form-4-str-sm ">Choroby:</div>
 							<div class="ui-g-8 ">
 									<textarea
 											pInputTextarea [rows]="3" [cols]="20"
@@ -28,7 +28,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Stopień niepełnosprawności:<span class="red">*</span></div>
+							<div class="ui-g-4 form-4-str-sm ">Stopień niepełnosprawności:<span class="red">*</span></div>
 							<div class="ui-g-8 ">
 								<p-dropdown
 										[options]="disabilityLevels" [autoWidth]="false"
@@ -42,7 +42,7 @@
 					<div class="ui-g-6 ui-sm-12">
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Alergie:</div>
+							<div class="ui-g-4 form-4-str-sm ">Alergie:</div>
 							<div class="ui-g-8 ">
 									<textarea
 											pInputTextarea [rows]="3" [cols]="20"
@@ -54,8 +54,8 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Rodzic:<span class="red">*</span></div>
-							<div class="ui-g-8 ">
+							<div class="ui-g-4 form-4-str-sm ">Rodzic:<span class="red">*</span></div>
+							<div class="ui-g-8 drp-srt">
 								<p-dropdown
 										[options]="parents" [autoWidth]="false"
 										required placeholder="Wybierz rodzica"
@@ -74,7 +74,7 @@
 				<div class="ui-g form-blue" *ngIf="!isLoading">
 					<div class="ui-g-6 ui-sm-12">
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Imię:<span class="red">*</span></div>
+							<div class="ui-g-4 form-4-str-sm ">Imię:<span class="red">*</span></div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
@@ -92,7 +92,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Drugie imię:</div>
+							<div class="ui-g-4 form-4-str-sm ">Drugie imię:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
@@ -106,7 +106,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Data urodzenia:<span class="red">*</span></div>
+							<div class="ui-g-4 form-4-str-sm ">Data urodzenia:<span class="red">*</span></div>
 							<div class="ui-g-8 ">
 								<p-calendar [dataType]="string"
 											[monthNavigator]="true" [yearNavigator]="true"
@@ -123,8 +123,8 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Płeć:<span class="red">*</span></div>
-							<div class="ui-g-8 ">
+							<div class="ui-g-4 form-4-str-sm ">Płeć:<span class="red">*</span></div>
+							<div class="ui-g-8 drp-srt">
 								<p-dropdown
 										[options]="genders" [autoWidth]="false"
 										placeholder="-" class="detail-view-input"
@@ -134,7 +134,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Imię ojca:</div>
+							<div class="ui-g-4 form-4-str-sm ">Imię ojca:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
@@ -148,7 +148,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Nazwisko rodowe:</div>
+							<div class="ui-g-4 form-4-str-sm ">Nazwisko rodowe:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
@@ -163,7 +163,7 @@
 					</div>
 					<div class="ui-g-6 ui-sm-12">
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Nazwisko:<span class="red">*</span></div>
+							<div class="ui-g-4 form-4-str-sm ">Nazwisko:<span class="red">*</span></div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
@@ -181,7 +181,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">PESEL:<span class="red">*</span></div>
+							<div class="ui-g-4 form-4-str-sm ">PESEL:<span class="red">*</span></div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
@@ -203,7 +203,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Miejsce urodzenia:<span class="red">*</span></div>
+							<div class="ui-g-4 form-4-str-sm ">Miejsce urodzenia:<span class="red">*</span></div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
@@ -221,7 +221,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Narodowość:<span class="red">*</span></div>
+							<div class="ui-g-4 form-4-str-sm ">Narodowość:<span class="red">*</span></div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
@@ -239,7 +239,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Imię matki:</div>
+							<div class="ui-g-4 form-4-str-sm ">Imię matki:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
@@ -253,7 +253,7 @@
 						</div>
 
 						<div class="ui-g-12">
-							<div class="ui-g-4 ">Nazwisko rodowe matki:</div>
+							<div class="ui-g-4 form-4-str-sm ">Nazwisko rodowe matki:</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText
 									   placeholder="-" class="detail-view-input"
