@@ -13,6 +13,14 @@
     font-weight: 600;
 }
 
+.ikms-red{
+    color: #DC3D3B;
+}
+
+.ikms-green{
+    color: #39c534;
+}
+
 html {
     height: 100%;
 }
@@ -126,6 +134,9 @@ textarea {
 
 .vertical-center{
     vertical-align: -webkit-baseline-middle;
+}
+.hor-center{
+    text-align:center !important;
 }
 
 .italic{

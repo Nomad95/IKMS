@@ -10,6 +10,7 @@ import {ChildrenService} from "./services/children.service";
 import {NotificationService} from "./services/notification.service";
 import {ScheduleService} from "./services/schedule.service";
 import {ClassroomService} from "./services/classroom.service";
+import {UserService} from "./services/user.service";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {ClassroomService} from "./services/classroom.service";
             ChildrenService,
             NotificationService,
             ScheduleService,
-            ClassroomService
+            ClassroomService,
+            UserService
     ],
     exports: [EnumTranslatePipe],
 })

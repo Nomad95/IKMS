@@ -100,14 +100,16 @@ public class AuthenticationRestController {
 
     @GetMapping(value = "/auth/whoami")
     @ResponseBody
-    public ResponseEntity<MinimalDto<Long, String>> getUsernameFromToken(HttpServletRequest request){
-        String username = jwtUserFacilities.pullTokenAndGetUsername(request);
-        if (Objects.nonNull(username)){
-            MinimalDto<Long, String> usernameDto = new MinimalDto<>(-1L, username);
+    public ResponseEntity<MinimalDto<Long, String>> getMinimalUser(HttpServletRequest request){
+        UserEntity user = jwtUserFacilities.findUserByUsernameFromToken(request);
+        if (Objects.nonNull(user)){
+            MinimalDto<Long, String> usernameDto = new MinimalDto<>(user.getId(), user.getUsername());
             return ResponseEntity.ok(usernameDto);
         }
-        else
+        else{
+            log.error("I couldn't find user from token");
             return ResponseEntity.notFound().build();
+        }
     }
 
 }

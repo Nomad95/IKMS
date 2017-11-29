@@ -19,6 +19,7 @@ import {CollectiveScheduleComponent} from "./schedules/schedule/collective-sched
 import {EmployeeScheduleComponent} from "./schedules/schedule/employee-schedule.component";
 import {ChildScheduleComponent} from "./schedules/schedule/child-schedule.component";
 import {GroupScheduleComponent} from "./schedules/schedule/group-schedule.component";
+import {UserListComponent} from "./user/userList/user-list.component";
 
 const routes: Routes = [
     {
@@ -41,6 +42,9 @@ const routes: Routes = [
                     },
                     {
                         path: 'addUser', component: RegistrationComponent
+                    },
+                    {
+                        path: 'user', component: UserListComponent
                     },
                     {
                         path: 'child', component: ChildrenListComponent

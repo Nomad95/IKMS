@@ -8,6 +8,10 @@ export class AdminSideMenu {
                     label: 'Dodaj użytkownika',
                     routerLink: ['/admin/addUser']
                 },
+                {
+                    label: 'Lista użytkowników',
+                    routerLink: ['/admin/user']
+                }
             ]
         },
         {

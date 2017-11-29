@@ -27,6 +27,7 @@ import {CheckboxModule, DataListModule, FieldsetModule} from "primeng/primeng";
 import {EmployeeScheduleComponent} from "./schedules/schedule/employee-schedule.component";
 import {ChildScheduleComponent} from "./schedules/schedule/child-schedule.component";
 import {GroupScheduleComponent} from "./schedules/schedule/group-schedule.component";
+import {UserListComponent} from "./user/userList/user-list.component";
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import {GroupScheduleComponent} from "./schedules/schedule/group-schedule.compon
         CollectiveScheduleComponent,
         EmployeeScheduleComponent,
         ChildScheduleComponent,
-        GroupScheduleComponent
+        GroupScheduleComponent,
+        UserListComponent
     ],
     providers: [
         AuthGuard,

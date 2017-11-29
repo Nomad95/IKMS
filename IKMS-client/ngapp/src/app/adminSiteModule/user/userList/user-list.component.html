@@ -1,0 +1,75 @@
+<p-confirmDialog  width="425"></p-confirmDialog>
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="ui-g-12" *ngIf="!isLoading">
+				<button type="button" pButton  icon="fa-plus" label="Dodaj użytkownika" [routerLink]="['/admin/addUser']"></button>
+			</div>
+		</div>
+	</div>
+	<br/>
+    <div class="row">
+        <div class="col-md-12">
+			<div class="content-section implementation text-center" *ngIf="isLoading">
+				<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+			</div>
+            <div class="content-section implementation" *ngIf="!isLoading">
+                <p-dataTable [value]="users" [rows]="20"
+                             [responsive]="true" >
+                    <p-header>
+						<div class="bold">
+							Użytkownicy
+						</div>
+					</p-header>
+                    <p-column [sortable]="true" field="id" header="Id" [style]="{'width':'50px'}"></p-column>
+                    <p-column [sortable]="true" field="username" header="Nazwa użytkownika">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<span>{{role[col.field] | translateEnum}}</span>
+						</ng-template>
+					</p-column>
+                    <p-column [sortable]="true" field="email" header="Email"></p-column>
+                    <p-column  [style]="{'text-align':'center'}" [sortable]="true" field="enabled"  header="Aktywny">
+						<ng-template let-col let-row="rowData" let-ri="rowIndex" pTemplate="body">
+							<span *ngIf="row.enabled" (click)="switchEnabled(false, row)"><i class="fa fa-circle ikms-green" aria-hidden="true"></i></span>
+							<span *ngIf="!row.enabled" (click)="switchEnabled(true, row)"><i class="fa fa-circle ikms-red" aria-hidden="true"></i></span>
+						</ng-template>
+					</p-column>
+                    <p-column [sortable]="true" field="createdDate" header="Utworzono">
+						<ng-template let-col let-row="rowData" let-ri="rowIndex" pTemplate="body">
+							<span>{{row[col.field] | date:'shortDate'}}</span>
+						</ng-template>
+					</p-column>
+					<p-column [sortable]="true" field="lastLogged" header="Ostatnie logowanie">
+						<ng-template let-col let-row="rowData" let-ri="rowIndex" pTemplate="body">
+							<span>{{row[col.field] | date:'short'}}</span>
+						</ng-template>
+					</p-column>
+					<p-column [sortable]="true" field="role" header="Rola">
+						<ng-template let-col let-row="rowData" let-ri="rowIndex" pTemplate="body">
+							<span>{{row.role.name | translateEnum}}</span>
+						</ng-template>
+					</p-column>
+					<p-column styleClass="col-button" [style]="{'width':'120px', 'text-align':'center'}">
+                        <ng-template pTemplate="header" >
+                        </ng-template>
+                        <ng-template let-usr="rowData" pTemplate="body">
+                            <button type="button" pButton title="Usuń"
+									(click)="delete(empl.id)" icon="fa-trash"></button>
+                        </ng-template>
+                    </p-column>
+                    <ng-template pTemplate="emptymessage">
+                        Brak wyników do wyświetlenia.
+                    </ng-template>
+                </p-dataTable>
+              <p-paginator rows="20" [totalRecords]="currentPageData?.totalElements"
+                           (onPageChange)="loadNewPage($event)" [pageLinkSize]="currentPageData?.totalPages">
+              </p-paginator>
+
+            </div>
+        </div>
+    </div>
+
+</div>

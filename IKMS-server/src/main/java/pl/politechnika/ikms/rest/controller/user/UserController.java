@@ -2,11 +2,11 @@ package pl.politechnika.ikms.rest.controller.user;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
@@ -20,9 +20,9 @@ import pl.politechnika.ikms.rest.mapper.user.UserEntityRegistrationMapper;
 import pl.politechnika.ikms.service.user.UserService;
 
 import javax.validation.Valid;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/user")
@@ -55,6 +55,7 @@ public class UserController {
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent
                     (userRegistrationDto, request.getLocale(), appUrl));
         } catch (Exception me) {
+            log.error("Couldn't create email for user " + createdUser.getUsername() + ". Deleting user...");
             userService.delete(createdUser);
         }}).start();
 
