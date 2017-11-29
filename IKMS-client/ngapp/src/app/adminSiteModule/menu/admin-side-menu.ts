@@ -52,6 +52,14 @@ export class AdminSideMenu {
             icon: 'fa-sliders',
             items: [
                 {
+                    label: 'Sale zajęć',
+                    routerLink: ['/admin/classroom']
+                },
+                {
+                    label: 'Dodaj salę',
+                    routerLink: ['/admin/classroom/new']
+                },
+                {
                     label: 'Grupy',
                     routerLink: ['/admin/group']
                 },

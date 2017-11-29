@@ -40,12 +40,28 @@ export class CommonMessages {
         return [{severity:'error', detail: 'Wystąpił błąd podczas tworzenia grupy'}];
     }
     
+    public static classroomCreatingSuccess(name){
+        return [{severity:'success', detail: 'Dodano salę ' + name}];
+    }
+    
+    public static classroomCreatingError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas tworzenia sali'}];
+    }
+    
     public static groupDeletingError(){
         return [{severity:'error', detail: 'Wystąpił błąd podczas usuwania grupy'}];
     }
     
     public static groupDeletingSuccess(name){
         return [{severity:'success', detail: 'Usunięto grupę ' + name}];
+    }
+    
+    public static classroomDeletingSuccess(name){
+        return [{severity:'success', detail: 'Usunięto salę ' + name}];
+    }
+    
+    public static classroomDeletingError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas usuwania sali'}];
     }
     
     public static editError(){

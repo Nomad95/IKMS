@@ -20,6 +20,8 @@ import {EmployeeScheduleComponent} from "./schedules/schedule/employee-schedule.
 import {ChildScheduleComponent} from "./schedules/schedule/child-schedule.component";
 import {GroupScheduleComponent} from "./schedules/schedule/group-schedule.component";
 import {UserListComponent} from "./user/userList/user-list.component";
+import {ClassroomListComponent} from "./management/classroom/classroom-list.component";
+import {ClassroomCreateComponent} from "./management/classroom/classroom-create.component";
 
 const routes: Routes = [
     {
@@ -60,6 +62,12 @@ const routes: Routes = [
                     },
                     {
                         path: 'parent/detail/:id', component: ParentDetailComponent
+                    },
+                    {
+                        path: 'classroom', component: ClassroomListComponent
+                    },
+                    {
+                        path: 'classroom/new', component: ClassroomCreateComponent
                     },
                     {
                         path: 'group', component: GroupListComponent

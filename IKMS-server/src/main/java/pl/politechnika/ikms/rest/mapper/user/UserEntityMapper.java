@@ -1,6 +1,5 @@
 package pl.politechnika.ikms.rest.mapper.user;
 
-import lombok.Data;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -12,7 +11,6 @@ import pl.politechnika.ikms.rest.dto.user.UserDto;
 import pl.politechnika.ikms.service.user.UserService;
 
 
-@Data
 @Component
 @Slf4j
 public class UserEntityMapper extends AbstractModelMapper<UserEntity,UserDto> {
