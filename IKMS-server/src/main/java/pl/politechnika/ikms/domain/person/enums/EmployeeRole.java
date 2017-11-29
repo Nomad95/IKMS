@@ -1,5 +1,12 @@
 package pl.politechnika.ikms.domain.person.enums;
 
 public enum EmployeeRole {
-    BABYSITTER, SPEECH_TERAPIST, ADMIN
+    TEACHER,            //nauczyciel
+    SPEECH_TERAPIST,    //logopeda
+    ADMIN,
+    PEDAGOGUE,          //pedagog
+    PSYCHOLOGIST,       //psycholog
+    PHYSIOTHERAPIST,    //rehabilitant
+    CATECHIST           //katecheta
+
 }

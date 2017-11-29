@@ -1,6 +1,10 @@
 {
-  "BABYSITTER": "Opiekun",
+  "TEACHER": "Nauczyciel",
   "SPEECH_TERAPIST": "Logopeda",
+  "PEDAGOGUE": "Pedagog",
+  "PSYCHOLOGIST": "Psycholog",
+  "PHYSIOTHERAPIST": "Rehabilitant",
+  "CATECHIST": "Katecheta",
 
   "MAN": "Mężczyzna",
   "WOMAN": "Kobieta",

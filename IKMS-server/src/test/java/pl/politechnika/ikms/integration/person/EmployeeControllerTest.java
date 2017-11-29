@@ -41,7 +41,7 @@ public class EmployeeControllerTest {
 
     private static final String DEFAULT_NIP = "123-231-31-34";
     private static final String UPDATED_NIP = "321-231-99-77";
-    private static final EmployeeRole DEFAULT_ROLE = EmployeeRole.BABYSITTER;
+    private static final EmployeeRole DEFAULT_ROLE = EmployeeRole.TEACHER;
     private static final EmployeeRole UPDATED_ROLE = EmployeeRole.SPEECH_TERAPIST;
 
     @Autowired

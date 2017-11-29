@@ -256,7 +256,7 @@ public class UserEntityControllerTest {
                 delete("/api/user/"+savedUser.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Auth-token",token))
-                .andExpect(status().is(403));
+                .andExpect(status().is(401));
 
     }
 

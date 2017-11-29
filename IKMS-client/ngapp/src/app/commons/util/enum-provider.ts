@@ -10,7 +10,7 @@ export class EnumProvider{
     constructor(){};
 
     static YES_NO = [true,false];
-    static EMPLOYEE_ROLES = ['BABYSITTER','SPEECH_TERAPIST'];
+    static EMPLOYEE_ROLES = ['TEACHER', 'SPEECH_TERAPIST', 'PEDAGOGUE', 'PSYCHOLOGIST', 'PHYSIOTHERAPIST', 'CATECHIST'];
     static GENDERS = ['MAN','WOMAN'];
     static ADDRESS_TYPES = ['CORRESPONDENCE_ADDRESS','ADDRESS','REGISTERED_ADDRESS'];
     static DISABILITY_LEVELS = ['NONE','MILD','MODERATE','CONSIDERABLE'];
