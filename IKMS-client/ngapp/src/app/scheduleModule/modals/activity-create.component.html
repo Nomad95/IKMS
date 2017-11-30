@@ -28,6 +28,20 @@
 						</div>
 
 						<div class="ui-g-6">
+							<div class="ui-g-4 form-4-str ">Rodzaj zajęć:</div>
+							<div class="ui-g-8 ">
+								<p-dropdown pTooltip="Rodzaj zajęć" tooltipPosition="top" showDelay="1500"
+											[options]="classTypes" [autoWidth]="false"
+											placeholder="Wybierz"
+											[(ngModel)]="activity.classesType" name="classesType"
+											#classesType></p-dropdown>
+							</div>
+						</div>
+
+					</div>
+					<div class="ui-g-12 ui-sm-12">
+
+						<div class="ui-g-6">
 							<div class="ui-g-4 form-4-str ">Data rozpoczęcia:</div>
 							<div class="ui-g-8 ">
 								<p-calendar [dataType]="string" [showTime]="true" hourFormat="24"
@@ -35,52 +49,13 @@
 											yearRange="2016:2030" (onSelect)="onDateSelected($event,'start')"
 											required inputStyleClass="detail-view-input"
 											[(ngModel)]="activity.start" [defaultDate]="defaultDate"
-											[maxDate]="maxDate" [stepMinute]="5"
+											[maxDate]="maxDate" stepMinute="5"
 											[locale]="pl"
 											name="start" #start = "ngModel"
 											dateFormat="yy-mm-dd"></p-calendar>
 								<div class="ui-g-12 validation-err" *ngIf="start.errors?.minlength">
 									To pole jest wymagane.
 								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="ui-g-12 ui-sm-12">
-						<div class="ui-g-6">
-							<div class="ui-g-4 form-4-str ">Grupa:</div>
-							<div class="ui-g-8 ">
-								<p-dropdown
-										[options]="groupList" [autoWidth]="false"
-										placeholder="Wybierz"
-										[(ngModel)]="activity.group" name="group"
-										#group></p-dropdown>
-							</div>
-						</div>
-
-						<div class="ui-g-6">
-							<div class="ui-g-4 form-4-str ">Dzieci:</div>
-							<div class="ui-g-8 " *ngIf="activity.children">
-								<p-multiSelect
-										[options]="childrenList" defaultLabel="Wybierz"
-										maxSelectedLabels="1" dataKey="value"
-										selectedItemsLabel="Wybrano {0}"
-										[(ngModel)]="activity.children" name="children"
-										#children>
-								</p-multiSelect >
-							</div>
-						</div>
-					</div>
-
-					<div class="ui-g-12 ui-sm-12">
-						<div class="ui-g-6">
-							<div class="ui-g-4 form-4-str ">Sala:</div>
-							<div class="ui-g-8 ">
-								<p-dropdown
-										[options]="classroomList" [autoWidth]="false"
-										required placeholder="Wybierz"
-										[(ngModel)]="activity.classroom" name="classroom"
-										#classroom></p-dropdown>
 							</div>
 						</div>
 
@@ -92,13 +67,40 @@
 											yearRange="2016:2030" (onSelect)="onDateSelected($event,'end')"
 											required inputStyleClass="detail-view-input"
 											[(ngModel)]="activity.end" [defaultDate]="defaultDate"
-											[minDate]="minDate" [stepMinute]="5"
+											[minDate]="minDate" stepMinute="5"
 											[locale]="pl"
 											name="end" #end = "ngModel"
 											dateFormat="yy-mm-dd"></p-calendar>
 								<div class="ui-g-12 validation-err" *ngIf="end.errors?.minlength">
 									To pole jest wymagane.
 								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="ui-g-12 ui-sm-12">
+						<div class="ui-g-6">
+							<div class="ui-g-4 form-4-str ">Sala:</div>
+							<div class="ui-g-8 ">
+								<p-dropdown pTooltip="Sala w której odbędą się zajęcia" tooltipPosition="top" showDelay="1500"
+											[options]="classroomList" [autoWidth]="false"
+											required placeholder="Wybierz"
+											[(ngModel)]="activity.classroom" name="classroom"
+											#classroom></p-dropdown>
+							</div>
+						</div>
+
+						<div class="ui-g-6">
+							<div class="ui-g-4 form-4-str ">Dzieci:</div>
+							<div class="ui-g-8 " *ngIf="activity.children">
+								<p-multiSelect pTooltip="Dzieci których dotyczą zajęcia" tooltipPosition="top" showDelay="1500"
+											   [options]="childrenList" defaultLabel="Wybierz"
+											   maxSelectedLabels="1" dataKey="value"
+											   selectedItemsLabel="Wybrano {0}"
+											   [(ngModel)]="activity.children" name="children"
+											   #children>
+								</p-multiSelect >
 							</div>
 						</div>
 					</div>
@@ -108,26 +110,46 @@
 							<div class="ui-g-4 form-4-str ">Pracownicy:</div>
 							<div class="ui-g-8 ">
 								<p-multiSelect *ngIf="activity.employees"
-									    [options]="employeeList" defaultLabel="Wybierz"
-									    maxSelectedLabels="1" dataKey="value"
-									   	selectedItemsLabel="Wybrano {0}"
-									    required
-									   	[(ngModel)]="activity.employees" name="employees"
-										#employees></p-multiSelect >
+											   pTooltip="Pracownicy którzy będą prowadzić zajęcia"
+											   tooltipPosition="top" showDelay="1500"
+											   [options]="employeeList" defaultLabel="Wybierz"
+											   maxSelectedLabels="1" dataKey="value"
+											   selectedItemsLabel="Wybrano {0}"
+											   required
+											   [(ngModel)]="activity.employees" name="employees"
+											   #employees></p-multiSelect >
 							</div>
 						</div>
 
 						<div class="ui-g-6">
+							<div class="ui-g-4 form-4-str ">Grupa:</div>
+							<div class="ui-g-8 ">
+								<p-dropdown pTooltip="Grupa której dotyczą zajęcia" tooltipPosition="top" showDelay="1500"
+											[options]="groupList" [autoWidth]="false"
+											placeholder="Wybierz"
+											[(ngModel)]="activity.group" name="group"
+											#group></p-dropdown>
+							</div>
+						</div>
+
+					</div>
+					<div class="ui-g-12 ui-sm-12">
+
+						<div class="ui-g-6">
 							<div class="ui-g-4 form-4-str ">Komentarz:</div>
 							<div class="ui-g-8 ">
-								<textarea
-										pInputTextarea [rows]="3" [cols]="20"
-										[(ngModel)]="activity.comment"
-										placeholder="-" class="detail-view-input long-text"
-										maxlength="255"
-										pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ\-\ \,\.\!]+"
-										name="comment" #comment="ngModel"></textarea>
+								<textarea pTooltip="Dodatkowy komentarz informacyjny" tooltipPosition="top" showDelay="1500"
+										  pInputTextarea [rows]="3" [cols]="20"
+										  [(ngModel)]="activity.comment"
+										  placeholder="-" class="detail-view-input long-text"
+										  maxlength="255"
+										  pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ\-\ \,\.\!]+"
+										  name="comment" #comment="ngModel"></textarea>
 							</div>
+						</div>
+
+						<div class="ui-g-6">
+
 						</div>
 					</div>
 				</div>

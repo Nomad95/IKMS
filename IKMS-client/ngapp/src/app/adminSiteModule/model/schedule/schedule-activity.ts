@@ -10,15 +10,16 @@ export class ScheduleActivity {
     employees: any[];
     children: any[];
     color: any;
+    classesType: string;
     currentErrors: string[]; //list of errors that exist locally
     rendering: string = null;
-    
     
     constructor() {
         this.id = null;
         this.comment = '';
         this.start = '';
         this.end = '';
+        this.classesType = '';
         this.errors = [];
         this.classroom = null;
         this.group = null;
@@ -44,12 +45,17 @@ export class ScheduleActivity {
         scheduleActivity.color = activity.color;
         scheduleActivity.currentErrors = activity.currentErrors;
         scheduleActivity.rendering = activity.rendering;
+        scheduleActivity.classesType = activity.classesType;
         
         return scheduleActivity;
     }
     
     static equals(act1, act2){
         if( act1.title != act2.title){
+            return false;
+        }
+        
+        if( act1.classesType != act2.classesType){
             return false;
         }
     

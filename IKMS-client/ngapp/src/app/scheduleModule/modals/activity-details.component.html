@@ -15,9 +15,9 @@
 						</div>
 					</div>
 					<div class="ui-g-6">
-						<div class="ui-g-4 ">Sala:</div>
+						<div class="ui-g-4 ">Nazwa zajęć:</div>
 						<div class="ui-g-8 ">
-							{{getElement(event.classroom)}}
+							{{event.classesType | translateEnum}}
 						</div>
 					</div>
 				</div>
@@ -74,6 +74,16 @@
 							</span>
 						</div>
 					</div>
+
+					<div class="ui-g-6">
+						<div class="ui-g-4 ">Sala:</div>
+						<div class="ui-g-8 ">
+							{{getElement(event.classroom)}}
+						</div>
+					</div>
+
+				</div>
+				<div class="ui-g-12 ">
 
 					<div class="ui-g-6">
 						<div class="ui-g-4 ">Komentarz:</div>

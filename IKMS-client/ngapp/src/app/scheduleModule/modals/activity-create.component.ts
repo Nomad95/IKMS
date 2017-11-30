@@ -19,6 +19,7 @@ export class ActivityCreateComponent implements OnInit{
         private employeeService: EmployeeService,
         private childrenService: ChildrenService,
         private groupService: GroupService,
+        private enumProvider: EnumProvider,
         private classroomService: ClassroomService){
         
         this.childrenList = [];
@@ -42,13 +43,15 @@ export class ActivityCreateComponent implements OnInit{
     private minDate = null;
     private maxDate = null;
     private pl = Utils.polishLocale;
-
+    private classTypes = EnumProvider.CLASS_TYPES;
+    
     ngOnInit(){
         this.getEmployees();
         this.getChildren();
         this.getGroups();
         this.getClassrooms();
         this.defaultDate.setMinutes(0);
+        this.classTypes = this.enumProvider.translateToDropdown(this.classTypes);
     }
 
     closeModal(){

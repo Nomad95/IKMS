@@ -13,19 +13,39 @@
   "ADDRESS": "Adres zamieszkania",
   "REGISTERED_ADDRESS": "Adres zameldowania",
 
-  "NONE":"Brak",
-  "MILD":"Łagodny",
-  "MODERATE":"Umirakowany",
-  "CONSIDERABLE":"Znaczny",
+  "NONE": "Brak",
+  "MILD": "Łagodny",
+  "MODERATE": "Umirakowany",
+  "CONSIDERABLE": "Znaczny",
 
   "ROLE_ADMIN": "Administrator",
   "ROLE_EMPLOYEE": "Pracownik",
   "ROLE_PARENT": "Rodzic",
   "ROLE_ANONYMOUS": "Niezdefiniowany",
 
-  "true":"Tak",
+  "true": "Tak",
   "false": "Nie",
 
-  "INFORMATION":"Informacyjny",
-  "IMPORTANT":"Ważny"
+  "INFORMATION": "Informacyjny",
+  "IMPORTANT": "Ważny",
+
+  "SOCIAL_SKILLS_TRAINING": "Trening umiejętności społecznych",
+  "SPEECH_THERAPY": "Logopedia",
+  "PSYCHIATRIC_CLASSES": "Zajęcia z psychologiem",
+  "PEDAGOGICAL_CLASSES": "Zajęcia z pedagogiem",
+  "HAND_THERAPY": "Terapia ręki",
+  "SENSORY_INTEGRATION": "Integracja Sensoryczna",
+  "TOMATIS_THERAPY": "Terapia Tomatisa",
+  "CONSULTATIONS": "Konsultacje",
+  "DIAGNOSIS": "Zajęcia diagnozy",
+  "PET_THERAPY": "Dogoterapia",
+  "GENERAL_DEVELOP_ACTIVITIES": "Ogólnorozwojowe",
+  "EARLY_DEVELOP_OPINION": "Zaj. opinii o potrzebie wczesnego wspomagania rozwoju",
+  "SPECIAL_EDUCATION_OPINION": "Zaj. opinii o potrzebie kształcenia specjalnego",
+  "RYTHMICITY": "Rytmika",
+  "CORRECTIVE_GYMNASTICS": "Gimnastyka",
+  "ENGLISH": "Język angielski",
+  "COMPUTER_CLASS": "Zajęcia z komputerem",
+  "RELIGION": "Religia",
+  "SPORTS": "Zajęcia srportowe"
 }

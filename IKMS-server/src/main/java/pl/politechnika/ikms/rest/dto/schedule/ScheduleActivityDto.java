@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import pl.politechnika.ikms.commons.abstracts.AbstractDto;
+import pl.politechnika.ikms.domain.schedule.ClassesType;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 
 import javax.validation.constraints.NotNull;
@@ -30,6 +31,8 @@ public class ScheduleActivityDto extends AbstractDto{
 
     @JsonProperty("end")
     private LocalDateTime activityEnd;
+
+    private ClassesType classesType;
 
     private String color;
 

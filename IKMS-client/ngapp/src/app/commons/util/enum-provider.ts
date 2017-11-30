@@ -22,6 +22,13 @@ export class EnumProvider{
         'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'];
     static MONTH_NAMES_PL = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec',
         'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
+    static CLASS_TYPES = ['SOCIAL_SKILLS_TRAINING', 'SPEECH_THERAPY', 'PSYCHIATRIC_CLASSES',
+        'PEDAGOGICAL_CLASSES', 'HAND_THERAPY', 'SENSORY_INTEGRATION',
+        'TOMATIS_THERAPY', 'CONSULTATIONS', 'DIAGNOSIS',
+        'PET_THERAPY', 'GENERAL_DEVELOP_ACTIVITIES', 'EARLY_DEVELOP_OPINION',
+        'SPECIAL_EDUCATION_OPINION', 'RYTHMICITY', 'CORRECTIVE_GYMNASTICS',
+        'ENGLISH', 'COMPUTER_CLASS', 'RELIGION', 'SPORTS'
+    ];
 
      translateToDropdown(values): any[]{
         let result = [];

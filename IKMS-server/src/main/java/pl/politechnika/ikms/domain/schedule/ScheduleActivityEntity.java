@@ -38,6 +38,10 @@ public class ScheduleActivityEntity extends AbstractEntity{
     @Column(name = "comment")
     private String comment;
 
+    @Column(name = "classes_type")
+    @Enumerated(EnumType.STRING)
+    private ClassesType classesType;
+
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     @JoinColumn(name="activity_id")
     private List<ScheduleActivityError> errors;
