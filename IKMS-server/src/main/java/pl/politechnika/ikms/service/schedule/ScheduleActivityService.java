@@ -12,6 +12,8 @@ public interface ScheduleActivityService extends GenericService<ScheduleActivity
 
     List<String> validateOne(ScheduleActivityDto dto);
 
+    List<ScheduleActivityDto> validateMany(List<ScheduleActivityDto> dto);
+
     List<ScheduleActivityDto> getAllFor(String forWho, Long id);
 
     List<ScheduleActivityDto> getAllForLoggedEmployee(HttpServletRequest request);

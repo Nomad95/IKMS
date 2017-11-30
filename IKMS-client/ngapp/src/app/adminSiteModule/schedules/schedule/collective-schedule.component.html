@@ -27,6 +27,7 @@
 			<div class="ui-g-12" *ngIf="!isLoading">
 				<button type="button" pButton (click)="showCreateModal()" [disabled]="deleteMode" icon="fa-plus" label="Dodaj"></button>
 				<button type="button" *ngIf="!deleteMode" pButton (click)="enterDeleteMode()" icon="fa-times" label="Usuń"></button>
+				<button type="button" pButton (click)="validateSchedule()" icon="fa-calendar-check-o" label="Sprawdź poprawność"></button>
 				<button type="button" *ngIf="deleteMode" pButton (click)="exitDeleteMode()" icon="fa-ban" label="Zakończ usuwanie"></button>
 				<button type="button" pButton (click)="resetChanges()" icon="fa-undo" label="Cofnij zmiany"></button>
 

@@ -77,4 +77,9 @@ public class ScheduleActivityController {
         List<String> result = scheduleActivityService.validateOne(activityDto);
         return ResponseEntity.ok(result);
     }
+
+    @PostMapping(value = "/validate/many")
+    public List<ScheduleActivityDto> validateActivities(@Valid @RequestBody List<ScheduleActivityDto> activityDtos){
+        return scheduleActivityService.validateMany(activityDtos);
+    }
 }

@@ -87,7 +87,16 @@ export class CommonMessages {
     public static scheduleCreatingError(){
         return [{severity:'error', detail: 'Wystąpił błąd podczas edycji'}];
     }
+    
     public static activityDeletingError(){
         return [{severity:'error', detail: 'Nie udało się usunąć zajęcia'}];
+    }
+    
+    public static scheduleValidateError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas sprawdzania poprawności'}];
+    }
+    
+    public static scheduleValidateSuccess(){
+        return [{severity:'success', detail: 'Plan jest poprawny'}];
     }
 }

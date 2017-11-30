@@ -96,6 +96,20 @@ export class GroupScheduleComponent implements OnInit{
         this.deleteMode = false;
     }
     
+    validateSchedule(){
+        this.isUpdating = true;
+        this.scheduleService.validateActivities(this.events)
+        .subscribe( data => {
+            this.events = data;
+            if (!this.scheduleContainsErrors(data))
+                this.msgs = CommonMessages.scheduleValidateSuccess();
+            this.isUpdating = false;
+        }, err => {
+            this.msgs = CommonMessages.scheduleValidateError();
+            this.isUpdating = false;
+        });
+    }
+    
     onGroupSelected(event){
         this.selectedGroupId = event.value;
         this.scheduleService.getActivitiesFor('group', event.value).subscribe( data => {
@@ -132,6 +146,15 @@ export class GroupScheduleComponent implements OnInit{
                 break;
             }
         }
+    }
+    
+    scheduleContainsErrors(events): boolean{
+        for (let i = 0; i < this.events.length; i++) {
+            if (this.events[i].errors.length > 0)
+                return true;
+        }
+        
+        return false;
     }
     
     resetChanges(){

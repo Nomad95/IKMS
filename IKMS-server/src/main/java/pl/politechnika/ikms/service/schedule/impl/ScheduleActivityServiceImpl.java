@@ -67,6 +67,11 @@ public class ScheduleActivityServiceImpl extends AbstractService<ScheduleActivit
     }
 
     @Override
+    public List<ScheduleActivityDto> validateMany(List<ScheduleActivityDto> dto) {
+        return scheduleValidator.validateMany(dto);
+    }
+
+    @Override
     public List<ScheduleActivityDto> getAllFor(String forWho, Long id) {
         List<ScheduleActivityDto> activities = getRepository().findAll().stream()
                 .map(scheduleActivityEntityMapper::convertToDto)

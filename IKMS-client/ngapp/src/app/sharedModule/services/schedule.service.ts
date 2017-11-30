@@ -52,4 +52,9 @@ export class ScheduleService{
         .map( res => res.json());
     }
     
+    validateActivities(activities): Observable<ScheduleActivity[]>{
+        return this.http.post('api/schedule/validate/many', activities, {headers: this.headers})
+        .map( res => res.json());
+    }
+    
 }
