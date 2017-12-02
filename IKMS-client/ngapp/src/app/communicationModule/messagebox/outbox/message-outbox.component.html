@@ -1,0 +1,47 @@
+<p-confirmDialog  width="425"></p-confirmDialog>
+<p-growl [(value)]="msgs"></p-growl>
+<div class="row">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="ui-g-12" *ngIf="!isLoading">
+        <button (click)="deleteSelectedMessages();" type="button" pButton  icon="fa-minus" label="Usuń wybrane"></button>
+        <button type="text" (click)="showDialog()" pButton icon="fa-external-link-square" label="Nowa wiadomość"></button>
+      </div>
+    </div>
+  </div>
+  <br/>
+</div>
+<div class="row">
+  <div class="content-section implementation text-center" *ngIf="isLoading">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+  <table class="table table-hover" *ngIf="!isLoading">
+    <tbody>
+    <tr *ngIf="!sentMessages.length" class="warning no-result">
+      <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+    </tr>
+    <tr *ngFor="let message of sentMessages">
+      <th scope="row">
+        <p-checkbox name="message" [(ngModel)]="message.checked" value="message.id"></p-checkbox>
+      </th>
+      <td>{{message.recipientUsername}}</td>
+      <td>
+       <a [routerLink]="['outbox/details' , message.id ]" style="text-decoration: none; color: black; ">
+         {{message.messageContents}}
+       </a>
+      </td>
+      <td style="text-align: right">{{message.dateOfSend}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <p-paginator (onPageChange)="paginate($event)"
+               [rows]="pageWithMessages.size"
+               [(first)]="first"
+               [totalRecords]="pageWithMessages.totalElements"
+               *ngIf="!isLoading">
+  </p-paginator>
+</div>
+<p-dialog header="" [(visible)]="display" *ngIf="!isLoading">
+  <sending-message></sending-message>
+</p-dialog>
+

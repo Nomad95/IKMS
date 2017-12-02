@@ -33,16 +33,13 @@ public class NotificationController {
     NotificationEntityMapper notificationEntityMapper;
 
 
-
-
     @PostMapping("/user/{recipientUsername}")
     @ResponseStatus(HttpStatus.CREATED)
     public NotificationDto notifyUser(@RequestBody @Valid NotificationDto notificationDto,
                                       @PathVariable("recipientUsername") String recipientUsername,
                                       HttpServletRequest request){
         NotificationEntity notificationEntity = notificationService.
-                sendNotification(notificationEntityMapper.convertToEntity(notificationDto),recipientUsername,
-                        request);
+                sendNotification(notificationEntityMapper.convertToEntity(notificationDto),recipientUsername, request);
         return notificationEntityMapper.convertToDto(notificationEntity);
     }
 

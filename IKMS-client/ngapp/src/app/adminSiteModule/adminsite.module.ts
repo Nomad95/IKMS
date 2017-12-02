@@ -7,8 +7,7 @@ import {
     ChildrenListComponent, ChildrenDetailComponent, ChildrenEditComponent,
     RegistrationComponent, AddressRegistrationComponent, GroupListComponent,
     GroupDetailComponent, GroupEditComponent, GroupListManageComponent,
-    GroupCreateComponent, NotificationComponent,
-    SendingNotificationComponent, CollectiveScheduleComponent } from './index';
+    GroupCreateComponent, CollectiveScheduleComponent } from './index';
 
 import {AuthGuard, LoginService} from './index';
 
@@ -30,6 +29,7 @@ import {GroupScheduleComponent} from "./schedules/schedule/group-schedule.compon
 import {UserListComponent} from "./user/userList/user-list.component";
 import {ClassroomListComponent} from "./management/classroom/classroom-list.component";
 import {ClassroomCreateComponent} from "./management/classroom/classroom-create.component";
+import {CommunicationModule} from "../communicationModule/communication.module";
 
 
 @NgModule({
@@ -66,6 +66,7 @@ import {ClassroomCreateComponent} from "./management/classroom/classroom-create.
         DataListModule,
         FieldsetModule,
         CheckboxModule,
+        CommunicationModule
     ],
     declarations: [
         AdminSiteComponent,

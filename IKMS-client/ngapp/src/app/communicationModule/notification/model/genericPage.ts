@@ -1,7 +1,6 @@
-import {Notification} from "./notification";
 
 export interface GenericPage<T>{
-  content: Array<Notification>;
+  content: Array<T>;
   totalPages: number;
   totalElements: number;
   last: boolean;

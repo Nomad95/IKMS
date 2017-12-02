@@ -1,0 +1,22 @@
+<div class="ikms-body">
+  <p-breadcrumb [model]="breadcrumbsItem"></p-breadcrumb>
+  <div class="ui-g">
+    <div class="ui-g-2">
+      <p-menu [model]="items" autoWidth="false" [style]="{'width':'100%'}" ></p-menu>
+    </div>
+    <div class="ui-g-8 ui-g-nopad">
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <div class="jumbotron">
+            <div *ngIf="type==='inbox'">
+              <message-inbox></message-inbox>
+            </div>
+            <div *ngIf="type==='outbox'">
+              <message-outbox></message-outbox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

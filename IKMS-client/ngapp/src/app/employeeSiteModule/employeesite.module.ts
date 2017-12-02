@@ -34,7 +34,7 @@ import {GroupListComponent} from "./management/group/group-list.component";
 import {GroupListManageComponent} from "./management/group/group-list-manage.component";
 import {GroupDetailComponent} from "./management/group/group-detail.component";
 import {CheckboxModule, DataListModule, PickListModule} from "primeng/primeng";
-import {NotificationComponent} from "../sharedModule/notification/notificiationList/notification-list.component";
+import {CommunicationModule} from "../communicationModule/communication.module";
 
 @NgModule({
     imports: [
@@ -65,7 +65,8 @@ import {NotificationComponent} from "../sharedModule/notification/notificiationL
         DataListModule,
         CheckboxModule,
         NgbModule.forRoot(),
-            SchedulesModule
+        SchedulesModule,
+        CommunicationModule
     ],
     declarations: [
         EmployeeSiteComponent,
@@ -86,7 +87,6 @@ import {NotificationComponent} from "../sharedModule/notification/notificiationL
         GroupListComponent,
         GroupListManageComponent,
         GroupDetailComponent,
-        NotificationComponent
     ],
     providers: [
         AuthGuard,

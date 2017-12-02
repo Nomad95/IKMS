@@ -1,11 +1,12 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
-import {NotificationService} from "../../services/notification.service";
 import {ActivatedRoute, Data, Router} from "@angular/router";
 import {Notification} from "../model/notification";
 import {ConfirmationService, MenuItem, Message} from "primeng/primeng";
 import {GenericPage} from "../model/genericPage";
 import {BreadMaker} from "../../../commons/util/bread-maker";
 import {ErrorHandler} from "../../../commons/util/error-handler";
+import {NotificationService} from "../../../sharedModule/services/notification.service";
+import {DateUtils} from "../../../commons/util/date-utils";
 
 @Component({
   selector: 'notification',
@@ -55,12 +56,12 @@ export class NotificationComponent implements OnInit, OnDestroy {
           if(date.toDateString() === new Date(Date.now()).toDateString()){
             note.dateOfSend = new Date(note.dateOfSend).toLocaleTimeString();
           } else {
-            note.dateOfSend = new Date(note.dateOfSend).toUTCString();
+            note.dateOfSend = DateUtils.formatDateTime(note.dateOfSend);
           }
           this.notifications.push(note);
         }
         this.countMyUnreadNotifications();
-        this.first = (this.pageWithNotifications.number)*10;
+        this.first = (this.pageWithNotifications.number)*this.pageWithNotifications.size;
         this.isLoading = false;
       }, err => {
         this.isLoading = false;
@@ -118,6 +119,5 @@ export class NotificationComponent implements OnInit, OnDestroy {
   paginate(event) {
     this.getMyNotificationsByPage(event.page);
   }
-
 
 }

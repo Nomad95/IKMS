@@ -1,0 +1,68 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+  <div class="row">
+    <div class="col-md-12" >
+      <h3>Nowe powiadomienie</h3>
+      <hr>
+      <form novalidate
+            #notificationForm="ngForm">
+        <div class="content-section implementation form-blue">
+          <div class="ui-g">
+            <div class="ui-g-6 ui-sm-12">
+              <div class="ui-g-12">
+                <div class="ui-g-4 ">Do <span class="red">*</span></div>
+                <div class="ui-g-8 ">
+                  <input type="text" pInputText
+                         class="detail-view-input"
+                         required maxlength="100"
+                         [(ngModel)]="recipientUsername"
+                         name="recipient" #recipient = "ngModel" >
+                  <div class="ui-g-12 validation-err" *ngIf="recipient.touched && recipient.errors?.required">
+                    Pole nie może być puste
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g-12">
+                <div class="ui-g-4">Priorytet</div>
+                <div class="ui-inputgroup ng-invalid ui-g-8">
+                  <p-dropdown
+                    [options]="priorityOptions" [autoWidth]="false"
+                    placeholder="-" class="detail-view-input"
+                    [(ngModel)]="notification.priority"
+                    name="priorityLevel" #priorityLevel = "ngModel"></p-dropdown>
+                </div>
+              </div>
+              <div class="ui-g-12">
+                <div class="ui-g-4 ">Treść <span class="red">*</span></div>
+                <div class="ui-g-8 ">
+                  <textarea rows="5"
+                            cols="50"
+                            pInputTextarea
+                            autoResize="autoResize"
+                            required maxlength="100"
+                            [(ngModel)]="notification.content"
+                            name="content"
+                            #content = "ngModel"
+                            style="background-color: #dddddd">
+                  </textarea>
+                  <div class="ui-g-12 validation-err" *ngIf="content.touched && content.errors?.required">
+                    Pole nie może być puste
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="ui-g-12">
+          <button type="button" pButton icon="fa-check" [disabled]="notificationForm.invalid"
+                  (click)="sendNotification(notification)" label="Wyślij"></button>
+          <button type="button" pButton icon="fa-close"
+                  (click)="clearForm()" label="Wyczyść"></button>
+        </div>
+        <br/>
+      </form>
+      <br/>
+    </div>
+  </div>
+</div>

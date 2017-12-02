@@ -1,7 +1,7 @@
-import {NotificationService} from "../../services/notification.service";
+import {NotificationService} from "../../../sharedModule/services/notification.service";
 import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {EnumProvider} from "../../../commons/util/enum-provider";
-import {NewNotification} from "../model/newNotification";
+import {NewNotification} from "../model/new-notification";
 import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 
@@ -16,7 +16,7 @@ export class SendingNotificationComponent implements OnInit{
   private priorityOptions = EnumProvider.PRIORITY;
   private msgs: Message[] = [];
 
-  @Input() recipientNick;
+  @Input() recipientUsername;
   @ViewChild('notificationForm') form;
 
   constructor(private notificationService: NotificationService,
@@ -30,7 +30,7 @@ export class SendingNotificationComponent implements OnInit{
 
   sendNotification(notification: NewNotification):void{
     this.notificationService
-      .sendNotification(notification,this.recipientNick )
+      .sendNotification(notification,this.recipientUsername )
       .subscribe( newNothification => {
         this.notification;
       }, error2 => {

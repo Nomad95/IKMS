@@ -1,11 +1,9 @@
-
-
 import {Injectable} from "@angular/core";
 import {Headers, Http} from "@angular/http";
 import {TokenUtils} from "../../commons/util/token-utils";
 import {Observable} from "rxjs/Observable";
-import {Notification} from "../notification/model/notification";
-import {NewNotification} from "../notification/model/newNotification";
+import {Notification} from "../../communicationModule/notification/model/notification";
+import {NewNotification} from "../../communicationModule/notification/model/new-notification";
 
 @Injectable()
 export class NotificationService {
@@ -13,6 +11,7 @@ export class NotificationService {
   public username: string;
   private headers: Headers;
   private url: string;
+  private unreadNotificationAmount: number;
 
   constructor(private http: Http) {
     let currentUser = JSON.parse(TokenUtils.getToken());
@@ -43,6 +42,15 @@ export class NotificationService {
     this.url = "/api/notification/myNotifications/quantity/unread";
     return this.http.get(this.url,{headers :this.headers})
       .map(res => res.json());
+  }
+
+  setAmountOfUnreadNotification(amount):void{
+    this.unreadNotificationAmount = +amount;
+  }
+
+  getAmountOfUnreadMessage():number{
+
+    return this.unreadNotificationAmount;
   }
 
 }

@@ -19,6 +19,22 @@
 			</div>
 
 			<div class="collapse navbar-collapse" id="navbar-collapse">
+        <li>
+          <a class="brand-text" [routerLink]="['notification']">
+            <i class="fa fa-bell fa-2x fa-sidebar">
+                <span class="badge badge-danger" *ngIf="notificationService.getAmountOfUnreadMessage() > 0">
+                  {{notificationService.getAmountOfUnreadMessage()}}
+                </span>
+            </i>
+          </a>
+        </li>
+        <li>
+          <a class="brand-text" [routerLink]="['messagebox']">
+            <i class="fa fa-envelope fa-2x fa-sidebar">
+              <span class="badge badge-danger" *ngIf="messageService.getAmountOfUnreadMessage() > 0">{{messageService.getAmountOfUnreadMessage()}}</span>
+            </i>
+          </a>
+        </li>
 				<ul class="nav navbar-nav navbar-right" style="height: 100%">
 					<li ngbDropdown class="dropdown">
 						<a class="dropdown-toggle brand-text" data-toggle="dropdown" id="dropdown"

@@ -11,6 +11,10 @@ import { TabViewModule } from "../../../node_modules/primeng/components/tabview/
 import { CodeHighlighterModule } from '../../../node_modules/primeng/components/codehighlighter/codehighlighter';
 import { MegaMenuModule } from '../../../node_modules/primeng/components/megamenu/megamenu';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {SharedModule} from "../sharedModule/shared-module.module";
+import {CommunicationModule} from "../communicationModule/communication.module";
+import {AuthGuard} from "../commons/guards/auth-guard";
+import {LoginService} from "../loginModule/service/login.service";
 
 
 @NgModule({
@@ -23,11 +27,17 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
         TabViewModule,
         CodeHighlighterModule,
         MegaMenuModule,
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        SharedModule,
+        CommunicationModule
     ],
     declarations: [
         ParentSiteComponent,
         ParentSidebar
+    ],
+    providers: [
+        AuthGuard,
+        LoginService
     ]
 })
 export class ParentSiteModule {

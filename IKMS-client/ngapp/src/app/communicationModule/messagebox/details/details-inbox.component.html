@@ -1,0 +1,23 @@
+<p-confirmDialog  width="300"></p-confirmDialog>
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+  <div class="content-section implementation text-center" *ngIf="isLoading">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+  <div class="message-details-content" *ngIf="!isLoading">
+    <h2>Szczegóły wiadomości</h2>
+    <br>
+    <p> Od: {{message.senderUsername}} </p>
+    <p> Wysłana:  {{message.dateOfSend }} </p>
+    <hr>
+    {{message.title}}
+    <hr>
+    <div id="message-contents">{{message.messageContents}}</div>
+  </div>
+  <br>
+  <br>
+  <button type="text" (click)="showDialog()" pButton icon="fa-external-link-square" label="Odpowiedz"></button>
+</div>
+<p-dialog header="Title" [(visible)]="display" *ngIf="!isLoading">
+  <sending-message [recipientUsername]="message.senderUsername"></sending-message>
+</p-dialog>

@@ -10,6 +10,7 @@ import {ChildrenService} from "./services/children.service";
 import {NotificationService} from "./services/notification.service";
 import {ScheduleService} from "./services/schedule.service";
 import {ClassroomService} from "./services/classroom.service";
+import {MessageService} from "./services/message.service";
 import {UserService} from "./services/user.service";
 
 
@@ -27,9 +28,10 @@ import {UserService} from "./services/user.service";
             EmployeeService,
             AddressService,
             ChildrenService,
-            NotificationService,
             ScheduleService,
             ClassroomService,
+            MessageService,
+            NotificationService,
             UserService
     ],
     exports: [EnumTranslatePipe],

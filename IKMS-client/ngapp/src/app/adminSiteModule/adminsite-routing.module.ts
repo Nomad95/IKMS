@@ -14,7 +14,7 @@ import {GroupListComponent} from "./management/group/group-list.component";
 import {GroupDetailComponent} from "./management/group/group-detail.component";
 import {GroupListManageComponent} from "./management/group/group-list-manage.component";
 import {GroupCreateComponent} from "./management/groupCreate/group-create.component";
-import {NotificationComponent} from "../sharedModule/notification/notificiationList/notification-list.component";
+import {NotificationComponent} from "../communicationModule/notification/notificiationList/notification-list.component";
 import {CollectiveScheduleComponent} from "./schedules/schedule/collective-schedule.component";
 import {EmployeeScheduleComponent} from "./schedules/schedule/employee-schedule.component";
 import {ChildScheduleComponent} from "./schedules/schedule/child-schedule.component";
@@ -22,6 +22,11 @@ import {GroupScheduleComponent} from "./schedules/schedule/group-schedule.compon
 import {UserListComponent} from "./user/userList/user-list.component";
 import {ClassroomListComponent} from "./management/classroom/classroom-list.component";
 import {ClassroomCreateComponent} from "./management/classroom/classroom-create.component";
+import {MessageInboxComponent} from "../communicationModule/messagebox/inbox/message-inbox.component";
+import {MessageOutboxComponent} from "../communicationModule/messagebox/outbox/message-outbox.component";
+import {MessageBoxComponent} from "../communicationModule/messagebox/messagebox.component";
+import {DetailsInboxComponent} from "../communicationModule/messagebox/details/details-inbox.component";
+import {DetailsOutboxComponent} from "../communicationModule/messagebox/details/details-outbox.component";
 
 const routes: Routes = [
     {
@@ -95,6 +100,18 @@ const routes: Routes = [
                     },
                     {
                         path: 'notification', component: NotificationComponent
+                    },
+                    {
+                        path: 'messagebox', component: MessageBoxComponent
+                    },
+                    {
+                        path: 'messagebox/:type', component: MessageBoxComponent
+                    },
+                    {
+                        path: 'messagebox/inbox/details/:id', component: DetailsInboxComponent
+                    },
+                    {
+                        path: 'messagebox/outbox/details/:id', component: DetailsOutboxComponent
                     }
                 ]
             }
