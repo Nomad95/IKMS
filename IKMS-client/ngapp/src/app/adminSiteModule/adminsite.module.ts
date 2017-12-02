@@ -95,8 +95,6 @@ import {CommunicationModule} from "../communicationModule/communication.module";
         GroupListManageComponent,
         GroupCreateComponent,
         GroupCreateComponent,
-        NotificationComponent,
-        SendingNotificationComponent,
         CollectiveScheduleComponent,
         EmployeeScheduleComponent,
         ChildScheduleComponent,

@@ -44,6 +44,12 @@ export class NotificationService {
       .map(res => res.json());
   }
 
+  readNotificiation(idNotification){
+    this.url = '/api/notification/myNotifications/'+idNotification+'/read';
+    return this.http.put(this.url, JSON.parse(idNotification),  {headers :this.headers})
+      .map(res => res.text() ? res.json() : res)
+  }
+
   setAmountOfUnreadNotification(amount):void{
     this.unreadNotificationAmount = +amount;
   }

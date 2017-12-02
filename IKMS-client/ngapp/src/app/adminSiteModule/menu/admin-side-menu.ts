@@ -90,16 +90,6 @@ export class AdminSideMenu {
                     routerLink: ['/admin/schedule/group']
                 }
             ]
-        },
-        {
-            label: 'Powiadomienia',
-            icon: 'fa-bell',
-            items: [
-                {
-                    label: 'Powiadomienia',
-                    routerLink: ['/admin/notification']
-                }
-            ]
         }
     ]
 }

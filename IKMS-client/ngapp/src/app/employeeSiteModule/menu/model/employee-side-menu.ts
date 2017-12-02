@@ -60,16 +60,6 @@ export class EmployeeSideMenu {
                     routerLink: ['/employee/schedule/group']
                 }
             ]
-        },
-        {
-            label: 'Powiadomienia',
-            icon: 'fa-bell',
-            items: [
-                {
-                    label: 'Powiadomienia',
-                    routerLink: ['/employee/notification']
-                }
-            ]
         }
     ]
 }

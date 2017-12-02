@@ -73,11 +73,6 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
                 findNotificationEntityByRecipientOrderByDateOfSendDesc(me,
                         pageable));
 
-        myNotifications.get().forEach(notification -> {
-            if (!notification.getWasRead())
-                this.setNotificationToRead(notification.getId());
-        });
-
         return myNotifications
                 .orElseThrow(() -> new EntityNotFoundException("Użytkownik o loginie " + me.getUsername() + " nie ma żadnych powiadomień"));
     }

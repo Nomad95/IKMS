@@ -14,7 +14,6 @@ import {ParentListComponent} from "./parent/parentList/parent-list.component";
 import {GroupListComponent} from "./management/group/group-list.component";
 import {GroupDetailComponent} from "./management/group/group-detail.component";
 import {GroupListManageComponent} from "./management/group/group-list-manage.component";
-import {NotificationComponent} from "../sharedModule/notification/notificiationList/notification-list.component";
 import {NotificationComponent} from "../communicationModule/notification/notificiationList/notification-list.component";
 import {MessageBoxComponent} from "../communicationModule/messagebox/messagebox.component";
 import {DetailsInboxComponent} from "../communicationModule/messagebox/details/details-inbox.component";

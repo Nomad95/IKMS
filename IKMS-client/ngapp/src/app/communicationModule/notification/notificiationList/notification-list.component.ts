@@ -18,7 +18,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   private isLoading: boolean = true;
   private pageWithNotifications: GenericPage<Notification>;
   private notifications: Array<Notification>;
-  private notificationsToDelete;
+  private notificationsToDeleteOrRead;
   private currentPage: number;
   private sub:any;
   private countUnreadNotifications = {
@@ -86,8 +86,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   getSelectedOptions() {
-    this.notificationsToDelete = [];
-    this.notificationsToDelete= this.notifications
+    this.notificationsToDeleteOrRead = [];
+    this.notificationsToDeleteOrRead= this.notifications
       .filter(opt => opt.checked)
       .map(opt => opt.id);
   }
@@ -95,8 +95,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
   deleteSelectedNotificatins():void{
     this.getSelectedOptions();
 
-    var countNotifications =  this.notificationsToDelete.length;
-    for(let notification of this.notificationsToDelete){
+    var countNotifications =  this.notificationsToDeleteOrRead.length;
+    for(let notification of this.notificationsToDeleteOrRead){
       if(countNotifications == 1)
         this.notificationService
           .deleteNotification(notification)
@@ -107,6 +107,29 @@ export class NotificationComponent implements OnInit, OnDestroy {
         this.notificationService
           .deleteNotification(notification)
           .subscribe();
+      countNotifications--;
+    }
+    this.reloadPage();
+  }
+
+  readSelectedNotificatins():void{
+    this.getSelectedOptions();
+
+    var countNotifications =  this.notificationsToDeleteOrRead.length;
+    for(let notification of this.notificationsToDeleteOrRead){
+      if(countNotifications == 1){
+        console.log("Usuwam: "+ notification);
+        this.notificationService
+          .readNotificiation(notification)
+          .subscribe(()=> {
+            this.countMyUnreadNotifications();
+          });
+      }
+      else{
+        this.notificationService
+          .readNotificiation(notification)
+          .subscribe();
+      }
       countNotifications--;
     }
     this.reloadPage();

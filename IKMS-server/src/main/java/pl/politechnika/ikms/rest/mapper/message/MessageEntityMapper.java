@@ -37,7 +37,9 @@ public class MessageEntityMapper extends AbstractModelMapper<MessageEntity, Mess
         messageDto.setDateOfSend(messageEntity.getDateOfSend());
         messageDto.setId(messageEntity.getId());
         messageDto.setMessageContents(messageEntity.getMessageContents());
+        if(messageEntity.getRecipient() != null)
         messageDto.setRecipient(userEntityMapper.convertToDto(userRepository.findOne(messageEntity.getRecipient().getId())));
+        if(messageEntity.getSender() != null)
         messageDto.setSender(userEntityMapper.convertToDto(userRepository.findOne(messageEntity.getSender().getId())));
         messageDto.setRecipientUsername(messageEntity.getRecipientUsername());
         messageDto.setSenderUsername(messageEntity.getSenderUsername());
