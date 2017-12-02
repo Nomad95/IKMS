@@ -19,7 +19,7 @@ export class EmployeeService{
     }
 
     getEmployeeGeneralDetails(size, page): Observable<Page>{
-        return this.http.get('api/employee/general?page=' + page + '&size=' + size, {headers: this.headers})
+        return this.http.get('api/employee/general?page=' + page + '&size=' + size + '&sort=id', {headers: this.headers})
             .map( res => res.json());
     }
     

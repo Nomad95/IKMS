@@ -1,0 +1,103 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
+	<div class="row">
+		<div class="col-md-12">
+			<p-tabView *ngIf="isLoading" class="text-center">
+				<p-tabPanel>
+					<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+				</p-tabPanel>
+			</p-tabView>
+			<p-tabView *ngIf="!isLoading">
+				<p-tabPanel header="Grupa">
+					<p-panel>
+						<p-header>
+							<div class="ui-helper-clearfix" >
+								<span class="form-blue vertical-center italic">{{group?.name}}</span>
+							</div>
+						</p-header>
+						<div class="ui-g form-blue">
+							<div class="ui-g-6 ui-sm-12">
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Id Grupy:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText
+											   placeholder="-" class="detail-view-input"
+											   [value]="group?.id"
+											   name="id" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Nazwa Grupy:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText [value]="group?.name"
+											   placeholder="-" class="detail-view-input long-text"
+											   name="name" readonly >
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Opiekun grupy:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText [value]="group?.employee.value"
+											   placeholder="-" class="detail-view-input long-text"
+											   name="employee" readonly >
+									</div>
+								</div>
+
+							</div>
+							<div class="ui-g-6 ui-sm-12">
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Aktywna:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText value=""
+											   placeholder="-" class="detail-view-input"
+											   [value]="group?.active | translateEnum"
+											   name="active" readonly>
+									</div>
+								</div>
+
+								<div class="ui-g-12">
+									<div class="ui-g-4 ">Liczebność:</div>
+									<div class="ui-g-8 ">
+										<input type="text" pInputText value=""
+											   placeholder="-" class="detail-view-input long-text"
+											   [value]="group?.groupSize"
+											   name="groupSize" readonly>
+									</div>
+								</div>
+							</div>
+						</div>
+					</p-panel>
+				</p-tabPanel>
+				<p-tabPanel header="Lista dzieci">
+					<br />
+						<p-dataTable [value]="children" [rows]="30"
+									 [responsive]="true" >
+							<p-column [sortable]="true" field="id" header="Id" [style]="{'width':'50px'}"></p-column>
+							<p-column [sortable]="true" field="name" header="Imię"></p-column>
+							<p-column [sortable]="true" field="surname" header="Nazwisko"></p-column>
+							<p-column styleClass="col-button" [style]="{'width':'80px', 'text-align':'center'}">
+								<ng-template pTemplate="header" >
+								</ng-template>
+								<ng-template let-child="rowData" pTemplate="body">
+									<button type="button" pButton
+											(click)="navigateToChildDetails(child)"
+											icon="fa-search"></button>
+								</ng-template>
+							</p-column>
+							<ng-template pTemplate="emptymessage">
+								Grupa jest pusta.
+							</ng-template>
+						</p-dataTable>
+				</p-tabPanel>
+			</p-tabView>
+		</div>
+	</div>
+
+</div>
+
+

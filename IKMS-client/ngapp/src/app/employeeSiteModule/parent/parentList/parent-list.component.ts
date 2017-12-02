@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Page } from "../../../commons/model/page";
 import { Router } from "@angular/router";
-import {ParentGeneral} from "../../menu/model/parent/parent-general";
+import {ParentGeneral} from "../../model/parent/parent-general";
 import {ParentService} from "../../../sharedModule/services/parent.service";
 import {ConfirmationService, MenuItem, Message} from "primeng/primeng";
 import {CommonMessages} from "../../../commons/util/common-messages";
@@ -50,27 +50,7 @@ export class ParentListComponent implements OnInit{
         });
     }
     
-    navigateToUserList(){
-        this.router.navigate(['/admin/user']);
-    }
-    
     navigateToParentDetails(parentId, personalDataId) {
-        this.router.navigate(['/admin/parent/detail', parentId], {queryParams: {personalDataId: personalDataId}});
-    }
-    
-    delete(parentId) {
-        this.confirmationService.confirm({
-            message: 'Czy napewno chcesz usunąć tego rodzica? Wszystkie związane z nim dane, zostaną usunięte.',
-            header: 'Potwierdzenie usunięcia',
-            accept: () => {
-                this.parentService.deleteParent(parentId)
-                .subscribe(data => {
-                    this.loadParents(this.size, this.page);
-                    this.msgs = [];
-                }, err => this.msgs = CommonMessages.employeeDeletingError());
-            },
-            reject: () => {
-            }
-        });
+        this.router.navigate(['/employee/parent/detail', parentId], {queryParams: {personalDataId: personalDataId}});
     }
 }

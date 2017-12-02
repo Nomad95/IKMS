@@ -3,13 +3,6 @@
 <div class="ikms-body">
 	<p-breadcrumb [model]="items"></p-breadcrumb>
 	<hr class="small-hr"/>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="ui-g-12" *ngIf="!isLoading">
-				<button type="button" pButton  icon="fa-plus" label="Dodaj pracownika" [routerLink]="['/admin/addUser']"></button>
-			</div>
-		</div>
-	</div>
 	<br/>
     <div class="row">
         <div class="col-md-12">
@@ -32,17 +25,11 @@
 					</p-column>
                     <p-column [sortable]="true" field="name" header="Imię"></p-column>
                     <p-column [sortable]="true" field="surname" header="Nazwisko"></p-column>
-                    <p-column [sortable]="true" field="nip" header="NIP"></p-column>
-                    <p-column styleClass="col-button" [style]="{'width':'120px', 'text-align':'center'}">
+                    <p-column styleClass="col-button" [style]="{'width':'40px', 'text-align':'center'}">
                         <ng-template pTemplate="header" >
                         </ng-template>
                         <ng-template let-empl="rowData" pTemplate="body">
-                            <button type="button" pButton (click)="navigateToUserList()" icon="fa-user" title="Użytkownik"></button>
-                            <button type="button" pButton title="Podgląd"
-                                    (click)="navigateToEmployeeDetails(empl.id, empl.personalData.id)"
-                                    icon="fa-search"></button>
-                            <button type="button" pButton title="Usuń"
-									(click)="delete(empl.id)" icon="fa-trash"></button>
+                            <button type="button" pButton (click)="sendMessage()" icon="fa-envelope" title="Wiadomość"></button>
                         </ng-template>
                     </p-column>
                     <ng-template pTemplate="emptymessage">

@@ -8,6 +8,13 @@ import {GroupScheduleComponent} from "./schedules/schedule/group-schedule.compon
 import {ChildScheduleComponent} from "./schedules/schedule/child-schedule.component";
 import {CollectiveScheduleComponent} from "./schedules/schedule/collective-schedule.component";
 import {EmployeeScheduleComponent} from "./schedules/schedule/employee-schedule.component";
+import {EmployeeListComponent} from "./employee/employeeList/employee-list.component";
+import {ParentDetailComponent} from "./parent/parentDetails/parent-detail.component";
+import {ParentListComponent} from "./parent/parentList/parent-list.component";
+import {GroupListComponent} from "./management/group/group-list.component";
+import {GroupDetailComponent} from "./management/group/group-detail.component";
+import {GroupListManageComponent} from "./management/group/group-list-manage.component";
+import {NotificationComponent} from "../sharedModule/notification/notificiationList/notification-list.component";
 
 const routes: Routes = [
     {
@@ -26,7 +33,25 @@ const routes: Routes = [
                         path: 'child', component: ChildrenListComponent
                     },
                     {
-                        path: 'child/:id', component: ChildrenDetailComponent
+                        path: 'child/detail/:id', component: ChildrenDetailComponent
+                    },
+                    {
+                        path: 'employee', component: EmployeeListComponent
+                    },
+                    {
+                        path: 'parent', component: ParentListComponent
+                    },
+                    {
+                        path: 'parent/detail/:id', component: ParentDetailComponent
+                    },
+                    {
+                        path: 'group', component: GroupListComponent
+                    },
+                    {
+                        path: 'group/detail/:id', component: GroupDetailComponent
+                    },
+                    {
+                        path: 'group/manage/childList/:groupId', component: GroupListManageComponent
                     },
                     {
                         path: 'schedule/collective', component: CollectiveScheduleComponent
@@ -39,6 +64,9 @@ const routes: Routes = [
                     },
                     {
                         path: 'schedule/group', component: GroupScheduleComponent
+                    },
+                    {
+                        path: 'notification', component: NotificationComponent
                     }
                 ]
             }

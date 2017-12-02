@@ -27,6 +27,14 @@ import {GroupScheduleComponent} from "./schedules/schedule/group-schedule.compon
 import {ChildScheduleComponent} from "./schedules/schedule/child-schedule.component";
 import {EmployeeScheduleComponent} from "./schedules/schedule/employee-schedule.component";
 import {CollectiveScheduleComponent} from "./schedules/schedule/collective-schedule.component";
+import {EmployeeListComponent} from "./employee/employeeList/employee-list.component";
+import {ParentListComponent} from "./parent/parentList/parent-list.component";
+import {ParentDetailComponent} from "./parent/parentDetails/parent-detail.component";
+import {GroupListComponent} from "./management/group/group-list.component";
+import {GroupListManageComponent} from "./management/group/group-list-manage.component";
+import {GroupDetailComponent} from "./management/group/group-detail.component";
+import {CheckboxModule, DataListModule, PickListModule} from "primeng/primeng";
+import {NotificationComponent} from "../sharedModule/notification/notificiationList/notification-list.component";
 
 @NgModule({
     imports: [
@@ -53,6 +61,9 @@ import {CollectiveScheduleComponent} from "./schedules/schedule/collective-sched
         BreadcrumbModule,
         TooltipModule,
         FormsModule,
+        PickListModule,
+        DataListModule,
+        CheckboxModule,
         NgbModule.forRoot(),
             SchedulesModule
     ],
@@ -68,7 +79,14 @@ import {CollectiveScheduleComponent} from "./schedules/schedule/collective-sched
         CollectiveScheduleComponent,
         EmployeeScheduleComponent,
         ChildScheduleComponent,
-        GroupScheduleComponent
+        GroupScheduleComponent,
+        EmployeeListComponent,
+        ParentListComponent,
+        ParentDetailComponent,
+        GroupListComponent,
+        GroupListManageComponent,
+        GroupDetailComponent,
+        NotificationComponent
     ],
     providers: [
         AuthGuard,

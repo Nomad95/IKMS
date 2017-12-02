@@ -1,18 +1,22 @@
 export class EmployeeSideMenu {
     static items = [
         {
-            label: 'File',
-            icon: 'fa-file-o',
+            label: 'Pracownicy',
+            icon: 'fa-address-card',
             items: [{
-                label: 'New',
-                icon: 'fa-plus',
-                items: [
-                    {label: 'Project'},
-                    {label: 'Other'},
-                ]
-                },
-                    {label: 'Open'},
-                    {label: 'Quit'}
+                label: 'Lista pracowników',
+                routerLink: ['/employee/employee']
+            }
+            ]
+        },
+        {
+            label: 'Rodzice',
+            icon: 'fa-id-card-o',
+            items: [
+                {
+                    label: 'Lista rodziców',
+                    routerLink: ['/employee/parent']
+                }
             ]
         },
         {
@@ -22,6 +26,16 @@ export class EmployeeSideMenu {
                 {
                     label: 'Lista dzieci',
                     routerLink: ['/employee/child']
+                }
+            ]
+        },
+        {
+            label: 'Zarządzanie',
+            icon: 'fa-sliders',
+            items: [
+                {
+                    label: 'Grupy',
+                    routerLink: ['/employee/group']
                 }
             ]
         },
@@ -44,6 +58,16 @@ export class EmployeeSideMenu {
                 {
                     label: 'Dla grup',
                     routerLink: ['/employee/schedule/group']
+                }
+            ]
+        },
+        {
+            label: 'Powiadomienia',
+            icon: 'fa-bell',
+            items: [
+                {
+                    label: 'Powiadomienia',
+                    routerLink: ['/employee/notification']
                 }
             ]
         }

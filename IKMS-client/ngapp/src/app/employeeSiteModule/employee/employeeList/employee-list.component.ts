@@ -4,7 +4,6 @@ import { EmployeeGeneral } from "../../model/employee/employee-general";
 import { Page } from "../../../commons/model/page";
 import { Router } from "@angular/router";
 import {ConfirmationService, MenuItem, Message} from "primeng/primeng";
-import {CommonMessages} from "../../../commons/util/common-messages";
 import {ErrorHandler} from "../../../commons/util/error-handler";
 import {BreadMaker} from "../../../commons/util/bread-maker";
 
@@ -47,29 +46,6 @@ export class EmployeeListComponent implements OnInit{
         }, err => {
             this.msgs = ErrorHandler.handleGenericServerError(err);
             this.isLoading = false;
-        });
-    }
-  
-    navigateToEmployeeDetails(employeeId, personalDataId){
-      this.router.navigate(['/admin/employee/detail', employeeId], { queryParams: {personalDataId: personalDataId}});
-    }
-    
-    navigateToUserList(){
-        this.router.navigate(['/admin/user']);
-    }
-    
-    delete(employeeId){
-        this.confirmationService.confirm({
-            message: 'Czy napewno chcesz usunąć tego pracownika? Wszystkie związane z nim dane, zostaną usunięte.',
-            header: 'Potwierdzenie usunięcia',
-            accept: () => {
-                this.employeeService.deleteEmployee(employeeId)
-                    .subscribe( data =>{
-                        this.loadEmployees(this.size,this.page);
-                        this.msgs = [];
-                    }, err => this.msgs = CommonMessages.employeeDeletingError());
-            },
-            reject: () => {}
         });
     }
 }
