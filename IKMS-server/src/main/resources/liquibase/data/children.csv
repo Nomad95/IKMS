@@ -2,3 +2,18 @@ id,personal_data_id,parent_id,diseases,allergies,disability_level,group_id
 1,8,1,,,NONE,null
 2,9,2,Opryszczka,Banany Pleśń,NONE,null
 3,10,3,,,NONE,null
+4,21,4,,,NONE,null
+5,22,4,,,NONE,null
+6,23,4,,,NONE,null
+7,24,5,,,NONE,null
+8,25,5,,,NONE,null
+9,26,6,,,NONE,null
+10,27,6,,,NONE,null
+11,28,7,,,NONE,null
+12,29,7,,,NONE,null
+13,30,8,,,NONE,null
+14,31,8,,,NONE,null
+15,32,9,,,NONE,null
+16,33,10,,,NONE,null
+17,34,11,,,NONE,null
+18,35,12,,,NONE,null

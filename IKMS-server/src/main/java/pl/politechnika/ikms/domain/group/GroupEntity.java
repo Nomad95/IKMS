@@ -42,6 +42,6 @@ public class GroupEntity extends AbstractEntity{
     @JoinColumn(name = "employee_id")
     private EmployeeEntity employee;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
     private List<ScheduleActivityEntity> scheduleActivities;
 }

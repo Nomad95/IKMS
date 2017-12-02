@@ -33,7 +33,7 @@
 
         <createSequence
                 sequenceName="parents_seq"
-                startValue="4"
+                startValue="13"
                 incrementBy="1"/>
 
         <loadData

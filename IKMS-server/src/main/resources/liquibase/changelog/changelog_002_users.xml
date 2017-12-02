@@ -49,7 +49,7 @@
 
         <createSequence
                 sequenceName="users_seq"
-                startValue="9"
+                startValue="21"
                 incrementBy="1"/>
 
         <loadData

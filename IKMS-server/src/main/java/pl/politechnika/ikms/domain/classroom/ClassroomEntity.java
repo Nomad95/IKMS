@@ -28,7 +28,7 @@ public class ClassroomEntity extends AbstractEntity{
     @Column(name = "available")
     private boolean available;
 
-    @OneToMany(mappedBy = "classroom")
+    @OneToMany(mappedBy = "classroom", cascade = CascadeType.REMOVE)
     private List<ScheduleActivityEntity> scheduleActivities;
 }
 

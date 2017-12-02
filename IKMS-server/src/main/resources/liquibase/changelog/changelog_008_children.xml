@@ -70,7 +70,7 @@
 
         <createSequence
                 sequenceName="children_seq"
-                startValue="4"
+                startValue="19"
                 incrementBy="1"/>
 
         <loadData

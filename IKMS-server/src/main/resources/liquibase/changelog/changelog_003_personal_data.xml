@@ -75,7 +75,7 @@
 
         <createSequence
                 sequenceName="personal_data_seq"
-                startValue="11"
+                startValue="37"
                 incrementBy="1"/>
 
         <loadData

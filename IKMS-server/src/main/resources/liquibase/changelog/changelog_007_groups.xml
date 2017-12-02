@@ -42,7 +42,7 @@
 
         <createSequence
                 sequenceName="groups_seq"
-                startValue="1"
+                startValue="5"
                 incrementBy="1"/>
 
     </changeSet>

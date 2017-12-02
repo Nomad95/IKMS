@@ -1,0 +1,5 @@
+id,name,created_date,active,employee_id
+1,Motylki,2017-11-15,true,1
+2,Skrzaty,2017-11-15,true,2
+3,Smerfy,2017-11-15,true,3
+4,Króliczki,2017-11-15,true,4

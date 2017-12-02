@@ -7,3 +7,14 @@ id,username,password,email,enabled,role,created_date,last_logged
 6,employee3,$2a$06$joXlrRoYoOyXJ0YyZEJs7uHhM4EIpfWT7A0F8kwT6HJMwW/4.Y6Xu,employee3@localhost,true,2,2017-09-13,2017-09-13
 7,user2,$2a$06$D/uiPmYFMEhbg2izOc.5/uINpPeNcV75qn2mSnS2XK6epz8hIG9Iq,user2@localhost,true,3,2017-09-13,2017-09-13
 8,user3,$2a$06$tNAm8V3Q1jKTdfkkFHSH1u0CYvsVg8cpzAK3lLpZvAipSPOUXsugG,user3@localhost,true,3,2017-09-13,2017-09-13
+9,user4,$2a$06$kKAXosMEpKtKZXkPO5IKIOk2UktMgCpAQvBCoQ./dzrgCVU8bupx2,user4@localhost,true,3,2017-09-13,2017-09-13
+10,user5,$2a$06$kKAXosMEpKtKZXkPO5IKIOk2UktMgCpAQvBCoQ./dzrgCVU8bupx2,user5@localhost,true,3,2017-09-13,2017-09-13
+11,user6,$2a$06$kKAXosMEpKtKZXkPO5IKIOk2UktMgCpAQvBCoQ./dzrgCVU8bupx2,user6@localhost,true,3,2017-09-13,2017-09-13
+12,user7,$2a$06$kKAXosMEpKtKZXkPO5IKIOk2UktMgCpAQvBCoQ./dzrgCVU8bupx2,user7@localhost,true,3,2017-09-13,2017-09-13
+13,user8,$2a$06$kKAXosMEpKtKZXkPO5IKIOk2UktMgCpAQvBCoQ./dzrgCVU8bupx2,user8@localhost,true,3,2017-09-13,2017-09-13
+14,user9,$2a$06$kKAXosMEpKtKZXkPO5IKIOk2UktMgCpAQvBCoQ./dzrgCVU8bupx2,user9@localhost,true,3,2017-09-13,2017-09-13
+15,user10,$2a$06$kKAXosMEpKtKZXkPO5IKIOk2UktMgCpAQvBCoQ./dzrgCVU8bupx2,user10@localhost,true,3,2017-09-13,2017-09-13
+16,user11,$2a$06$kKAXosMEpKtKZXkPO5IKIOk2UktMgCpAQvBCoQ./dzrgCVU8bupx2,user11@localhost,true,3,2017-09-13,2017-09-13
+17,user12,$2a$06$kKAXosMEpKtKZXkPO5IKIOk2UktMgCpAQvBCoQ./dzrgCVU8bupx2,user12@localhost,true,3,2017-09-13,2017-09-13
+18,employee4,$2a$06$90EU96T.hkND.Kkf54DuVO9S6L7nGrwHH3osMbh.9KFgDaHeOPxXi,employee4@localhost,true,2,2017-09-13,2017-09-13
+19,employee5,$2a$06$90EU96T.hkND.Kkf54DuVO9S6L7nGrwHH3osMbh.9KFgDaHeOPxXi,employee5@localhost,true,2,2017-09-13,2017-09-13

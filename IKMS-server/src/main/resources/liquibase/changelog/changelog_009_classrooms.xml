@@ -24,13 +24,8 @@
 
         <createSequence
                 sequenceName="classrooms_seq"
-                startValue="1"
+                startValue="5"
                 incrementBy="1"/>
-
-        <!--<loadData
-                tableName="children"
-                file="liquibase/data/children.csv"
-        />-->
 
     </changeSet>
 
