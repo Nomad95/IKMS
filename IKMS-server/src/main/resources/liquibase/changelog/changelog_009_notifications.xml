@@ -28,9 +28,6 @@
             <column name="sender" type="varchar(40)">
                 <constraints nullable="true"/>
             </column>
-            <column name="sender_id" type="bigint">
-                <constraints nullable="true"/>
-            </column>
         </createTable>
 
         <addPrimaryKey
@@ -53,13 +50,6 @@
                 sequenceName="notifications_seq"
                 startValue="4"
                 incrementBy="1"/>
-        <loadData
-                tableName="notifications"
-                file="liquibase/data/notifications.csv"
-        />
-
-
-
     </changeSet>
 
 </databaseChangeLog>

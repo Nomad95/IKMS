@@ -1,0 +1,21 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Boruch" id="changelog_019_add_notify_msg_data">
+        <loadData
+                tableName="notifications"
+                file="liquibase/data/notifications.csv"
+        />
+
+        <loadData
+                tableName="messages"
+                file="liquibase/data/messages.csv"
+        />
+
+    </changeSet>
+
+</databaseChangeLog>
