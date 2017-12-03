@@ -8,6 +8,8 @@ import pl.politechnika.ikms.domain.notification.NotificationEntity;
 import pl.politechnika.ikms.repository.notification.NotificationRepository;
 import pl.politechnika.ikms.rest.dto.notification.NotificationDto;
 
+import static java.util.Objects.nonNull;
+
 @Component
 public class NotificationEntityMapper extends AbstractModelMapper<NotificationEntity, NotificationDto> {
 
@@ -21,6 +23,9 @@ public class NotificationEntityMapper extends AbstractModelMapper<NotificationEn
     @Override
     public NotificationDto convertToDto(NotificationEntity notificationEntity) {
          NotificationDto notificationDto = modelMapper.map(notificationEntity, NotificationDto.class);
+         if(nonNull(notificationEntity.getRecipient())){
+             notificationDto.setSenderId(notificationEntity.getSenderId());
+         }
 
         return notificationDto;
     }
@@ -28,6 +33,9 @@ public class NotificationEntityMapper extends AbstractModelMapper<NotificationEn
     @Override
     public NotificationEntity convertToEntity(NotificationDto notificationDto) {
         NotificationEntity notificationEntity = modelMapper.map(notificationDto, NotificationEntity.class);
+        if(nonNull(notificationDto.getSenderId())){
+            notificationEntity.setSenderId(notificationDto.getSenderId());
+        }
 
         return notificationEntity;
     }

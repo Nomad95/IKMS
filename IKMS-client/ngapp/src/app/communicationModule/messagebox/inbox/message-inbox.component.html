@@ -23,7 +23,7 @@
       <th scope="row">
         <p-checkbox name="message" [(ngModel)]="message.checked" value="message.id"></p-checkbox>
       </th>
-      <td>{{message.senderUsername}}</td>
+      <td>{{message.senderFullName}}</td>
       <td>
         <a [routerLink]="['inbox/details' , message.id ]" style="text-decoration: none; color: black; ">
           {{message.messageContents}}

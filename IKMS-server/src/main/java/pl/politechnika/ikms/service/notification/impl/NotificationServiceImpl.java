@@ -55,13 +55,18 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
                         .findNameAndSurNameSeparatedByComma(jwtUserFacilities.pullTokenAndGetUsername(request))
                         .replace(",", " "));
 
-        Optional<UserEntity> foundUser = Optional.ofNullable(userRepository.findByUsername(recipientUsername));
-        notification.setRecipient(foundUser
+        Optional<UserEntity> sender = Optional.ofNullable(jwtUserFacilities.findUserByUsernameFromToken(request));
+        Optional<UserEntity> recipient = Optional.ofNullable(userRepository.findByUsername(recipientUsername));
+
+        notification.setRecipient(recipient
                 .orElseThrow(() -> new EntityNotFoundException("Nie znaleziono odbiorcy o loginie: " + recipientUsername)));
         notification.setDateOfSend(LocalDateTime.now());
         notification.setWasRead(false);
         notification.setSenderFullName(senderFullName
                 .orElseThrow(() -> new EntityNotFoundException("Nie znaleziono adresata o loginie: " + senderFullName)));
+        notification.setSenderId(sender
+                .orElseThrow(() -> new EntityNotFoundException("Nie znaleziono odbiorcy o loginie z tokena "))
+                .getId());
 
         return super.create(notification);
     }

@@ -33,4 +33,6 @@ public class NotificationDto extends AbstractDto {
 
     private String senderFullName;
 
+    private Long senderId;
+
 }

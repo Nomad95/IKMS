@@ -12,6 +12,7 @@ import pl.politechnika.ikms.domain.message.MessageEntity;
 import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 import pl.politechnika.ikms.repository.message.MessageRepository;
+import pl.politechnika.ikms.repository.person.PersonalDataRepository;
 import pl.politechnika.ikms.repository.user.UserRepository;
 import pl.politechnika.ikms.security.JwtUserFacilities;
 import pl.politechnika.ikms.service.message.MessageService;
@@ -37,6 +38,9 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private PersonalDataRepository personalDataRepository;
+
     public MessageServiceImpl(MessageRepository repository) {
         super(repository);
     }
@@ -48,6 +52,16 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
                 .orElseThrow(()-> new EntityNotFoundException("Błąd podczas pobierania twojego username z tokena "));
         UserEntity recipient = Optional.ofNullable(userRepository.findByUsername(recipientUsername))
                 .orElseThrow(()-> new EntityNotFoundException("Nie ma użytkownika o nazwie "+ recipientUsername));
+        String recipientFullName =
+                Optional.ofNullable(personalDataRepository
+                        .findNameAndSurNameSeparatedByComma(recipientUsername)
+                        .replace(",", " "))
+                        .orElseThrow(() -> new EntityNotFoundException("Nie znaleziono odbiorcy o loginie: " + recipientUsername));
+        String senderFullName =
+                Optional.ofNullable(personalDataRepository
+                        .findNameAndSurNameSeparatedByComma(jwtUserFacilities.pullTokenAndGetUsername(request))
+                        .replace(",", " "))
+                        .orElseThrow(() -> new EntityNotFoundException("Nie znaleziono odbiorcy o loginie z tokena"));
 
         messageEntity.setSender(sender);
         messageEntity.setRecipient(recipient);
@@ -55,6 +69,8 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
         messageEntity.setWasRead(false);
         messageEntity.setRecipientUsername(recipient.getUsername());
         messageEntity.setSenderUsername(sender.getUsername());
+        messageEntity.setRecipientFullName(recipientFullName);
+        messageEntity.setSenderFullName(senderFullName);
 
         getRepository().save(messageEntity);
 

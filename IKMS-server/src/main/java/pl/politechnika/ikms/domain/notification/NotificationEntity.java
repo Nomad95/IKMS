@@ -56,5 +56,8 @@ public class NotificationEntity extends AbstractEntity {
     @Column(name = "sender")
     private String senderFullName;
 
+    @Column(name = "sender_id")
+    private Long senderId;
+
 
 }

@@ -11,6 +11,8 @@ export class MessageInternal{
   checked: boolean;
   recipientUsername:string;
   senderUsername:string;
+  recipientFullName:string;
+  senderFullName:string;
 
 
   constructor() {
@@ -24,5 +26,7 @@ export class MessageInternal{
     this.checked = false;
     this.recipientUsername = '';
     this.senderUsername = '';
+    this.recipientFullName = '';
+    this.senderFullName = '';
   }
 }

@@ -45,6 +45,8 @@ public class MessageEntityMapper extends AbstractModelMapper<MessageEntity, Mess
         messageDto.setSenderUsername(messageEntity.getSenderUsername());
         messageDto.setTitle(messageEntity.getTitle());
         messageDto.setWasRead(messageEntity.getWasRead());
+        messageDto.setRecipientFullName(messageEntity.getRecipientFullName());
+        messageDto.setSenderFullName(messageEntity.getSenderFullName());
 
         return messageDto;
     }
@@ -63,6 +65,8 @@ public class MessageEntityMapper extends AbstractModelMapper<MessageEntity, Mess
         messageEntity.setSenderUsername(messageDto.getSenderUsername());
         messageEntity.setTitle(messageDto.getTitle());
         messageEntity.setWasRead(messageDto.getWasRead());
+        messageEntity.setRecipientFullName(messageDto.getRecipientFullName());
+        messageEntity.setSenderFullName(messageDto.getSenderFullName());
 
         return messageEntity;
     }

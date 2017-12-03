@@ -62,4 +62,11 @@ public class MessageEntity extends AbstractEntity{
     @NotNull
     private String senderUsername;
 
+    @Column(name = "recipient_full_name")
+    @NotNull
+    private String recipientFullName;
+
+    @Column(name = "sender_full_name")
+    @NotNull
+    private String senderFullName;
 }

@@ -19,5 +19,4 @@ public interface PersonalDataRepository extends JpaRepository<PersonalDataEntity
             "join pd.user us " +
             "where us.id = :userId")
     String findCurrentUserName(@Param("userId") Long userId);
-
 }

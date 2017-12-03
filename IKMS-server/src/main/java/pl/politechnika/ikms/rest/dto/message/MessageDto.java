@@ -39,4 +39,8 @@ public class MessageDto extends AbstractDto{
 
         private String senderUsername;
 
+        private String recipientFullName;
+
+        private String senderFullName;
+
 }

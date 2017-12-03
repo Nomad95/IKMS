@@ -34,6 +34,12 @@
             <column name="sender_username" type="varchar(40)">
                 <constraints nullable="true"/>
             </column>
+            <column name="recipient_full_name" type="varchar(60)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="sender_full_name" type="varchar(60)">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
 
         <addPrimaryKey
