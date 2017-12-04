@@ -6,6 +6,7 @@ import pl.politechnika.ikms.commons.abstracts.GenericService;
 import pl.politechnika.ikms.domain.message.MessageEntity;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public interface MessageService extends GenericService<MessageEntity>{
 
@@ -24,4 +25,8 @@ public interface MessageService extends GenericService<MessageEntity>{
     void deleteMessageFromSent(Long idMessage, HttpServletRequest request);
 
     int countNumberOfUnreadMessages(HttpServletRequest request);
+
+    List<MessageEntity> findListAllNewestOfMyReceivedMessage(Long lastRecievedMessageId, HttpServletRequest request);
+
+    List<MessageEntity> findListAllNewestOfMySentMessage(Long lastRecievedMessageId, HttpServletRequest request);
 }

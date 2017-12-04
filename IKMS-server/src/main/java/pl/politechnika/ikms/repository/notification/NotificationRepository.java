@@ -24,4 +24,10 @@ public interface NotificationRepository extends JpaRepository<NotificationEntity
             "where u.username = :username AND n.was_read = :was_read", nativeQuery = true)
     Long countByRecipient_UsernameAndWasRead(@Param("username") String username,
                                              @Param("was_read") Boolean wasRead);
+
+    @Query(value = "select * from notifications n " +
+            "join users u ON u.id = n.recipient_id " +
+            "where n.id > :last_notification_id AND u.username = :username ", nativeQuery = true)
+    List<NotificationEntity> findNewestNotificiationForMobile(@Param("last_notification_id") Long lastNotficationId,
+                                                              @Param("username") String username);
 }

@@ -20,6 +20,7 @@ import pl.politechnika.ikms.service.message.MessageService;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -171,6 +172,32 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
         return count;
     }
 
+    @Override
+    public List<MessageEntity> findListAllNewestOfMyReceivedMessage(Long lastRecievedMessageId, HttpServletRequest request) {
+        String myUsername = jwtUserFacilities.pullTokenAndGetUsername(request);
+
+        List<MessageEntity> listNewestRecievedMessages = Optional.ofNullable(getRepository()
+                .findNewestRecievedMassagesForMobile(lastRecievedMessageId, myUsername))
+                .orElseThrow(()-> new EntityNotFoundException("Błąd podczas pobierania odebranych wiadomości użytkownika o nazwie "
+                        + myUsername));
+
+        return listNewestRecievedMessages;
+    }
+
+    @Override
+    public List<MessageEntity> findListAllNewestOfMySentMessage(Long lastSentMessageId, HttpServletRequest request) {
+        String myUsername = jwtUserFacilities.pullTokenAndGetUsername(request);
+
+        List<MessageEntity> listNewestSentMessages = Optional.ofNullable(getRepository()
+                .findNewestRecievedMassagesForMobile(lastSentMessageId, myUsername))
+                .orElseThrow(()-> new EntityNotFoundException("Błąd podczas pobierania wysłanych wiadomości użytkownika o nazwie "
+                        + myUsername));
+
+        return listNewestSentMessages;
+    }
+
+
+
 
     public void updateSenderColumn(JdbcTemplate jdbcTemplate, String senderUsername, Long idUser) {
         jdbcTemplate.update(
@@ -188,4 +215,6 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
         jdbcTemplate.update(
                 "update messages set was_read = TRUE where id = ?", idUser);
     }
+
+
 }

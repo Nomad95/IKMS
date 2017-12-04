@@ -131,12 +131,22 @@ public class NotificationServiceImpl extends AbstractService<NotificationEntity,
 
         return getRepository().countByRecipient_UsernameAndWasRead(me.getUsername(), false);
     }
-
-    @Transactional
+    
     @Override
     public void setNotificationToRead(Long idNotification) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.update(
                 "update notifications set was_read = TRUE where id = ?", idNotification);
+    }
+
+    @Override
+    public List<NotificationEntity> findNewestNotificationForMobile(Long lastNotificationId, HttpServletRequest request) {
+        String myUsername = jwtUserFacilities.pullTokenAndGetUsername(request);
+
+        List<NotificationEntity> newestNotificationForMobile =
+                Optional.ofNullable(getRepository().findNewestNotificiationForMobile(lastNotificationId, myUsername))
+                        .orElseThrow(() -> new EntityNotFoundException("Brak nowych wiadomości"));
+
+        return newestNotificationForMobile;
     }
 }

@@ -13,6 +13,9 @@ import pl.politechnika.ikms.service.message.MessageService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/message")
@@ -82,7 +85,31 @@ public class MessageController {
 
     }
 
+    @GetMapping("/myMessages/received/mobile/newest/{lastNotificationId}")
+    public List<MessageDto> getMyNewestRecievedMessagesForMobile(@PathVariable("lastNotificationId") Long lastNotificationId,
+                                                             HttpServletRequest request){
+        List<MessageEntity> newestNotificationForMobile = messageService.findListAllNewestOfMyReceivedMessage(lastNotificationId, request);
+        List<MessageDto> newestMessagesDto = new ArrayList<>();
+        newestNotificationForMobile
+                .stream()
+                .map(message -> newestMessagesDto.add(messageEntityMapper.convertToDto(message)))
+                .collect(Collectors.toList());
 
+        return newestMessagesDto;
+    }
+
+    @GetMapping("/myMessages/sent/mobile/newest/{lastNotificationId}")
+    public List<MessageDto> getMyNewestSentMessagesForMobile(@PathVariable("lastNotificationId") Long lastNotificationId,
+                                                                 HttpServletRequest request){
+        List<MessageEntity> newestNotificationForMobile = messageService.findListAllNewestOfMySentMessage(lastNotificationId, request);
+        List<MessageDto> newestMessagesDto = new ArrayList<>();
+        newestNotificationForMobile
+                .stream()
+                .map(message -> newestMessagesDto.add(messageEntityMapper.convertToDto(message)))
+                .collect(Collectors.toList());
+
+        return newestMessagesDto;
+    }
 
 
 

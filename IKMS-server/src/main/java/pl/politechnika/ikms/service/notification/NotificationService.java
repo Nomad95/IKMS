@@ -23,5 +23,7 @@ public interface NotificationService extends GenericService<NotificationEntity> 
     Long countNumberOfMyUnreadNotifications(HttpServletRequest request);
 
     void setNotificationToRead(Long idNotification);
+
+    List<NotificationEntity> findNewestNotificationForMobile(Long lastNotificationId, HttpServletRequest request);
 }
 

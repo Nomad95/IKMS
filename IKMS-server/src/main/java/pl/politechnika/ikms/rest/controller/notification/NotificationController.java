@@ -2,22 +2,19 @@ package pl.politechnika.ikms.rest.controller.notification;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.politechnika.ikms.domain.notification.NotificationEntity;
-import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.rest.dto.notification.NotificationDto;
 import pl.politechnika.ikms.rest.mapper.notification.NotificationEntityMapper;
-import pl.politechnika.ikms.security.JwtTokenUtil;
-import pl.politechnika.ikms.security.JwtUserFacilities;
 import pl.politechnika.ikms.service.notification.NotificationService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -97,4 +94,16 @@ public class NotificationController {
         notificationService.setNotificationToRead(notificationId);
     }
 
+    @GetMapping("/mobile/newest/{lastNotificationId}")
+    public List<NotificationDto> getMyNewestNotificationForMobile(@PathVariable("lastNotificationId") Long lastNotificationId,
+                                                                                                      HttpServletRequest request){
+        List<NotificationEntity> newestNotificationForMobile = notificationService.findNewestNotificationForMobile(lastNotificationId, request);
+        List<NotificationDto> newestNotificationDto = new ArrayList<>();
+        newestNotificationForMobile
+                .stream()
+                .map(notification -> newestNotificationDto.add(notificationEntityMapper.convertToDto(notification)))
+                .collect(Collectors.toList());
+
+        return newestNotificationDto;
+    }
 }
