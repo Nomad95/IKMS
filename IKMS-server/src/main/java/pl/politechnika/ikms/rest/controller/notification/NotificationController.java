@@ -9,6 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.politechnika.ikms.domain.notification.NotificationEntity;
 import pl.politechnika.ikms.rest.dto.notification.NotificationDto;
+import pl.politechnika.ikms.rest.dto.notification.NotificationsGroupedBySender;
+import pl.politechnika.ikms.rest.dto.notification.SenderDto;
 import pl.politechnika.ikms.rest.mapper.notification.NotificationEntityMapper;
 import pl.politechnika.ikms.service.notification.NotificationService;
 
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @RestController
@@ -34,9 +37,9 @@ public class NotificationController {
     @ResponseStatus(HttpStatus.CREATED)
     public NotificationDto notifyUser(@RequestBody @Valid NotificationDto notificationDto,
                                       @PathVariable("recipientUsername") String recipientUsername,
-                                      HttpServletRequest request){
+                                      HttpServletRequest request) {
         NotificationEntity notificationEntity = notificationService.
-                sendNotification(notificationEntityMapper.convertToEntity(notificationDto),recipientUsername, request);
+                sendNotification(notificationEntityMapper.convertToEntity(notificationDto), recipientUsername, request);
         return notificationEntityMapper.convertToDto(notificationEntity);
     }
 
@@ -48,10 +51,23 @@ public class NotificationController {
     }
 
     @GetMapping("/myAllNotifications")
-    public List<NotificationDto> getMyNotification(HttpServletRequest request) {
+    public List<NotificationsGroupedBySender> getMyNotification(HttpServletRequest request) {
         List<NotificationEntity> myNotifications = notificationService.findMyNotificationByUser(request);
+        List<NotificationDto> notificationDtos = myNotifications.stream().map(notificationEntityMapper::convertToDto).collect(Collectors.toList());
 
-        return myNotifications.stream().map(notificationEntityMapper::convertToDto).collect(Collectors.toList());
+        return notificationDtos.stream()
+                .collect(Collectors.groupingBy(e -> new SenderDto(e.getSenderId(), e.getSenderFullName()), Collectors.toList()))
+                .entrySet().stream()
+                .map(e -> new NotificationsGroupedBySender(
+                        e.getKey().getSenderId(),
+                        e.getKey().getSenderFullName(),
+                        e.getValue().stream()
+                                .map(notificationEntityMapper::convertFromNotificationDtoToNotificationWithoutSenderDto)
+                                .collect(Collectors.toList()),
+                        (int) e.getValue().stream()
+                                .filter(e1 -> e1.getWasRead().equals(Boolean.FALSE))
+                                .count()))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{notificationId}")

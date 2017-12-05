@@ -7,6 +7,7 @@ import pl.politechnika.ikms.commons.abstracts.AbstractModelMapper;
 import pl.politechnika.ikms.domain.notification.NotificationEntity;
 import pl.politechnika.ikms.repository.notification.NotificationRepository;
 import pl.politechnika.ikms.rest.dto.notification.NotificationDto;
+import pl.politechnika.ikms.rest.dto.notification.NotificationWithoutSenderDto;
 
 import static java.util.Objects.nonNull;
 
@@ -38,5 +39,11 @@ public class NotificationEntityMapper extends AbstractModelMapper<NotificationEn
         }
 
         return notificationEntity;
+    }
+
+    public NotificationWithoutSenderDto convertFromNotificationDtoToNotificationWithoutSenderDto(NotificationDto notificationDto) {
+        NotificationWithoutSenderDto notificationWithoutSenderDto = modelMapper.map(notificationDto, NotificationWithoutSenderDto.class);
+
+        return notificationWithoutSenderDto;
     }
 }
