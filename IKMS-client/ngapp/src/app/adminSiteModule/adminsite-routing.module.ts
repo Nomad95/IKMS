@@ -27,6 +27,7 @@ import {MessageOutboxComponent} from "../communicationModule/messagebox/outbox/m
 import {MessageBoxComponent} from "../communicationModule/messagebox/messagebox.component";
 import {DetailsInboxComponent} from "../communicationModule/messagebox/details/details-inbox.component";
 import {DetailsOutboxComponent} from "../communicationModule/messagebox/details/details-outbox.component";
+import {DidacticMaterialsComponent} from "./files/materials/didactic-materials.component";
 
 const routes: Routes = [
     {
@@ -112,6 +113,9 @@ const routes: Routes = [
                     },
                     {
                         path: 'messagebox/outbox/details/:id', component: DetailsOutboxComponent
+                    },
+                    {
+                        path: 'files/didactic', component: DidacticMaterialsComponent
                     }
                 ]
             }

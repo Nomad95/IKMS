@@ -17,6 +17,18 @@
     color: #DC3D3B;
 }
 
+.ui-tree{
+    width: 100%;
+}
+
+.width-full{
+    width: 100%;
+}
+
+.small-indent{
+    padding-left: 5px;
+}
+
 .ikms-green{
     color: #39c534;
 }
@@ -65,6 +77,10 @@ body {
 
 .ui-chkbox {
     padding-bottom: 2px;
+}
+
+.ui-chkbox-box {
+    border: 1px solid #999999 !important;
 }
 
 .ui-sortable-column:hover{
@@ -137,6 +153,22 @@ textarea {
 }
 .hor-center{
     text-align:center !important;
+}
+
+
+
+.small-padding-top {
+    padding-top: 1.5%;
+}
+
+.tree-c-border {
+    border-left: 1px solid #D5D5D5;
+}
+
+.ui-tree {
+    border: none;
+    background: #ffffff;
+    color: #42486d;
 }
 
 .italic{

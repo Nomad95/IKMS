@@ -24,5 +24,6 @@
     <include file="liquibase/changelog/changelog_017_add_sender_id.xml"/>
     <include file="liquibase/changelog/changelog_018_add_full_name_msg.xml"/>
     <include file="liquibase/changelog/changelog_019_add_notify_msg_data.xml"/>
+    <include file="liquibase/changelog/changelog_017_temp_files.xml"/>
 
 </databaseChangeLog>

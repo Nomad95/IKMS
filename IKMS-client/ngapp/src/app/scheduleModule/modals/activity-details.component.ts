@@ -27,6 +27,8 @@ export class ActivityDetailsComponent {
      * displays date on screen
      */
     getDate(date){
+        if (date == null)
+            return date;
         if (typeof date === "string"){
             return date;
         } else return date._i;

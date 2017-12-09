@@ -22,7 +22,7 @@ import {
     SharedModule, PickListModule, MenubarModule,
     NgbModule, ScheduleModule } from './index';
 import {SchedulesModule} from "../scheduleModule/schedule.module";
-import {CheckboxModule, DataListModule, FieldsetModule} from "primeng/primeng";
+import {CheckboxModule, DataListModule, FieldsetModule, FileUploadModule, TreeModule} from "primeng/primeng";
 import {EmployeeScheduleComponent} from "./schedules/schedule/employee-schedule.component";
 import {ChildScheduleComponent} from "./schedules/schedule/child-schedule.component";
 import {GroupScheduleComponent} from "./schedules/schedule/group-schedule.component";
@@ -30,6 +30,8 @@ import {UserListComponent} from "./user/userList/user-list.component";
 import {ClassroomListComponent} from "./management/classroom/classroom-list.component";
 import {ClassroomCreateComponent} from "./management/classroom/classroom-create.component";
 import {CommunicationModule} from "../communicationModule/communication.module";
+import {DidacticMaterialsComponent} from "./files/materials/didactic-materials.component";
+import {AddFileComponent} from "./files/materials/add-file.component";
 
 
 @NgModule({
@@ -66,7 +68,9 @@ import {CommunicationModule} from "../communicationModule/communication.module";
         DataListModule,
         FieldsetModule,
         CheckboxModule,
-        CommunicationModule
+        CommunicationModule,
+        TreeModule,
+        FileUploadModule
     ],
     declarations: [
         AdminSiteComponent,
@@ -101,7 +105,9 @@ import {CommunicationModule} from "../communicationModule/communication.module";
         GroupScheduleComponent,
         UserListComponent,
         ClassroomListComponent,
-        ClassroomCreateComponent
+        ClassroomCreateComponent,
+        DidacticMaterialsComponent,
+        AddFileComponent
     ],
     providers: [
         AuthGuard,

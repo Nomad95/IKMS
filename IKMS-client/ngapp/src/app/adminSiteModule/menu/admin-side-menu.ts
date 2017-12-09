@@ -90,6 +90,16 @@ export class AdminSideMenu {
                     routerLink: ['/admin/schedule/group']
                 }
             ]
+        },
+        {
+            label: 'Pliki',
+            icon: 'fa-file-o',
+            items: [
+                {
+                    label: 'Materiały dydaktyczne',
+                    routerLink: ['/admin/files/didactic']
+                }
+            ]
         }
     ]
 }

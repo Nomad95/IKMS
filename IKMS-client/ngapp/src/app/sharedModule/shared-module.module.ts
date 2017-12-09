@@ -12,6 +12,7 @@ import {ScheduleService} from "./services/schedule.service";
 import {ClassroomService} from "./services/classroom.service";
 import {MessageService} from "./services/message.service";
 import {UserService} from "./services/user.service";
+import {FileUploadService} from "./services/file-upload.service";
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {UserService} from "./services/user.service";
             ClassroomService,
             MessageService,
             NotificationService,
-            UserService
+            UserService,
+            FileUploadService
     ],
     exports: [EnumTranslatePipe],
 })

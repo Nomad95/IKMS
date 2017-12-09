@@ -17,7 +17,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Data
 @Entity
 @Table(name = "users")
-@EqualsAndHashCode(callSuper = false, exclude = "addresses")
+@EqualsAndHashCode(callSuper = false)
 @ToString(exclude = {"password","addresses"})
 @SequenceGenerator(name="users_seq_name",sequenceName="users_seq", allocationSize=1, initialValue = 5)
 public class UserEntity extends AbstractEntity{

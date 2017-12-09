@@ -1,0 +1,96 @@
+<p-confirmDialog  width="425"></p-confirmDialog>
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
+	<br/>
+	<div class="row" *ngIf="isLoading">
+		<div class="content-section implementation text-center">
+			<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<button type="button" pButton icon="fa-upload" (click)="showAddFileModal()" label="Dodaj plik"></button>
+		</div>
+	</div>
+	<br/>
+	<div class="row col-c-wrap" *ngIf="!isLoading">
+        <div class="col-md-6">
+			<p-tree [value]="nodes" selectionMode="single" [(selection)]="selectedNode" ></p-tree>
+        </div>
+
+		<div class="col-md-6 form-blue tree-c-border" *ngIf="selectedNode">
+			<div class="col-md-3" *ngIf="!selectedNode.isFolder">
+				<i class="fa fa-file-image-o fa-3x"></i>
+			</div>
+			<div class="col-md-3" *ngIf="selectedNode.isFolder">
+				<i class="fa fa-folder-o fa-3x"></i>
+			</div>
+			<div class="col-md-9 small-padding-top">
+				<span class="ikms-h3">{{selectedNode.label}}</span>
+			</div>
+			<div class="col-md-12 small-indent small-padding-top">
+				<div class="ui-g-4 ">Nazwa</div>
+				<div class="ui-g-8 ">
+					{{selectedNode.label}}
+				</div>
+				<div class="ui-g-4 ">Wielkość</div>
+				<div class="ui-g-8 ">
+					25Kb
+				</div>
+				<div class="ui-g-4 ">Data wstawienia</div>
+				<div class="ui-g-8 ">
+					01-12-2017
+				</div>
+				<div class="ui-g-4 ">Opis</div>
+				<div class="ui-g-8 ">
+					Kolorowanka - kwiatki
+				</div>
+			</div>
+			<div class="col-md-12 small-indent small-padding-top">
+				<button type="button" pButton icon="fa-download" (click)="onGetFile()" label="Pobierz plik"></button>
+			</div>
+		</div>
+    </div>
+	<hr/>
+	<div class="row">
+		<div class="row">
+			<div class="col-md-12 form-blue">
+				<div class="col-md-4">
+					<span class="ikms-h3">Uprawnienia</span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 form-blue small-padding-top">
+				<div class="col-md-3">
+					Grupy:<br/>
+					<p-checkbox name="rememberMe1" binary="true" label="Motylki" inputId="re"></p-checkbox><br/>
+					<p-checkbox name="rememberMe1" binary="true" label="Smerfy" inputId="re"></p-checkbox><br/>
+					<p-checkbox name="rememberMe" binary="true" label="Skrzaty" inputId="re2"></p-checkbox>
+				</div>
+				<div class="col-md-3">
+					Pracownicy:<br/>
+					<p-checkbox name="rememberMe1" binary="true" label="Joanna Zawadzka" inputId="re"></p-checkbox><br/>
+					<p-checkbox name="rememberMe1" binary="true" label="Andrzej Sarnacki" inputId="re"></p-checkbox><br/>
+					<p-checkbox name="rememberMe" binary="true" label="Elżbieta Kawka" inputId="re2"></p-checkbox><br/>
+					<p-checkbox name="rememberMe1" binary="true" label="Kamila Matuszewska" inputId="re"></p-checkbox><br/>
+				</div>
+				<div class="col-md-3">
+					Rodzice:<br/>
+					<p-checkbox name="rememberMe1" binary="true" label="Katarzyna Popek" inputId="re"></p-checkbox><br/>
+					<p-checkbox name="rememberMe1" binary="true" label="Ola Ziółko" inputId="re"></p-checkbox><br/>
+					<p-checkbox name="rememberMe" binary="true" label="Joanna Zielińska" inputId="re2"></p-checkbox><br/>
+					<p-checkbox name="rememberMe1" binary="true" label="Magdalena Miłoszewska" inputId="re"></p-checkbox><br/>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<add-file
+				 (eventSave)="handleActivityCreation($event)"
+				 [isVisible]="displayFileAddModal"
+				 (eventClose)="handleModalClose($event)"></add-file>

@@ -30,7 +30,7 @@
 						<div class="ui-g-6">
 							<div class="ui-g-4 form-4-str ">Rodzaj zajęć:</div>
 							<div class="ui-g-8 ">
-								<p-dropdown pTooltip="Rodzaj zajęć" tooltipPosition="top" showDelay="1500"
+								<p-dropdown
 											[options]="classTypes" [autoWidth]="false"
 											placeholder="Wybierz"
 											[(ngModel)]="activity.classesType" name="classesType"
@@ -83,7 +83,7 @@
 						<div class="ui-g-6">
 							<div class="ui-g-4 form-4-str ">Sala:</div>
 							<div class="ui-g-8 ">
-								<p-dropdown pTooltip="Sala w której odbędą się zajęcia" tooltipPosition="top" showDelay="1500"
+								<p-dropdown
 											[options]="classroomList" [autoWidth]="false"
 											required placeholder="Wybierz"
 											[(ngModel)]="activity.classroom" name="classroom"
@@ -94,7 +94,7 @@
 						<div class="ui-g-6">
 							<div class="ui-g-4 form-4-str ">Dzieci:</div>
 							<div class="ui-g-8 " *ngIf="activity.children">
-								<p-multiSelect pTooltip="Dzieci których dotyczą zajęcia" tooltipPosition="top" showDelay="1500"
+								<p-multiSelect
 											   [options]="childrenList" defaultLabel="Wybierz"
 											   maxSelectedLabels="1" dataKey="value"
 											   selectedItemsLabel="Wybrano {0}"
@@ -110,7 +110,6 @@
 							<div class="ui-g-4 form-4-str ">Pracownicy:</div>
 							<div class="ui-g-8 ">
 								<p-multiSelect *ngIf="activity.employees"
-											   pTooltip="Pracownicy którzy będą prowadzić zajęcia"
 											   tooltipPosition="top" showDelay="1500"
 											   [options]="employeeList" defaultLabel="Wybierz"
 											   maxSelectedLabels="1" dataKey="value"
@@ -124,7 +123,7 @@
 						<div class="ui-g-6">
 							<div class="ui-g-4 form-4-str ">Grupa:</div>
 							<div class="ui-g-8 ">
-								<p-dropdown pTooltip="Grupa której dotyczą zajęcia" tooltipPosition="top" showDelay="1500"
+								<p-dropdown
 											[options]="groupList" [autoWidth]="false"
 											placeholder="Wybierz"
 											[(ngModel)]="activity.group" name="group"
@@ -138,7 +137,7 @@
 						<div class="ui-g-6">
 							<div class="ui-g-4 form-4-str ">Komentarz:</div>
 							<div class="ui-g-8 ">
-								<textarea pTooltip="Dodatkowy komentarz informacyjny" tooltipPosition="top" showDelay="1500"
+								<textarea
 										  pInputTextarea [rows]="3" [cols]="20"
 										  [(ngModel)]="activity.comment"
 										  placeholder="-" class="detail-view-input long-text"

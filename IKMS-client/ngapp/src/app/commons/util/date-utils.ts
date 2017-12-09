@@ -63,7 +63,7 @@ export class DateUtils {
         var myRegexp = /:(.*)/;
         var match = myRegexp.exec(dateTime);
         
-        if(match.length == 2 ){
+        if(match && match.length == 2 ){
             return dateTime + ':00';
         } else return dateTime;
     }
@@ -72,6 +72,8 @@ export class DateUtils {
      * ale fajna funkcja
      */
     static substractSeconds(dateTime): any{
+        if (dateTime == null)
+            return dateTime;
         if(typeof dateTime === 'string'){
             return dateTime.substr(0, dateTime.lastIndexOf(":"));
         }
@@ -88,11 +90,13 @@ export class DateUtils {
     }
     
     static ISODateToServerLocalDateTime(dateTime){
-        return dateTime.replace('T',' ');
+        if (dateTime){
+            return dateTime.replace('T',' ');
+        } else return dateTime;
     }
     
     static objectToDate(obj){
-        if (typeof obj === "object"){
+        if (obj != null && typeof obj === "object"){
             return obj._i;
         } else {
             return obj;
