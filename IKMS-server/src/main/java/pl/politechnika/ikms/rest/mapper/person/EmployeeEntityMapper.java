@@ -12,6 +12,7 @@ import pl.politechnika.ikms.repository.person.PersonalDataRepository;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.person.EmployeeDto;
 import pl.politechnika.ikms.rest.dto.person.EmployeeGeneralDetailDto;
+import pl.politechnika.ikms.rest.dto.person.PhoneNumberDto;
 
 @Component
 public class EmployeeEntityMapper extends AbstractModelMapper<EmployeeEntity,EmployeeDto> {
@@ -53,5 +54,14 @@ public class EmployeeEntityMapper extends AbstractModelMapper<EmployeeEntity,Emp
         employeeGeneralDetailDto.setUser(new MinimalDto<>(userEntity.getId(),userEntity.getUsername()));
 
         return employeeGeneralDetailDto;
+    }
+
+    public PhoneNumberDto convertToPhoneNumber(EmployeeEntity employee){
+        PhoneNumberDto phoneNumberDto = new PhoneNumberDto();
+        phoneNumberDto.setFullName(employee.getPersonalData().getName() + " " + employee.getPersonalData().getSurname());
+        phoneNumberDto.setPhoneNumber(employee.getPersonalData().getContactNumber());
+        phoneNumberDto.setUserId(employee.getPersonalData().getUser().getId());
+
+        return phoneNumberDto;
     }
 }

@@ -5,11 +5,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.politechnika.ikms.domain.person.EmployeeEntity;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.person.EmployeeDto;
 import pl.politechnika.ikms.rest.dto.person.EmployeeGeneralDetailDto;
+import pl.politechnika.ikms.rest.dto.person.PhoneNumberDto;
 import pl.politechnika.ikms.rest.mapper.person.EmployeeEntityMapper;
 import pl.politechnika.ikms.service.person.EmployeeService;
 
@@ -61,6 +63,12 @@ public class EmployeeController {
     @GetMapping(value = "/minimal")
     public List<MinimalDto<Long, String>> getEmployeesMinimal(){
         return employeeService.getEmployeesMinimal();
+    }
+
+    @GetMapping(value = "/phoneNumbers")
+    @Transactional
+    public List<PhoneNumberDto> getEmployeesPhoneNumbers(){
+        return employeeService.getEmployeesPhoneNumbers();
     }
 
 }
