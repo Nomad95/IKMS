@@ -100,6 +100,34 @@ export class AdminSideMenu {
                     routerLink: ['/admin/files/didactic']
                 }
             ]
+        },
+        {
+            label: 'Dzienniki',
+            icon: 'fa-book',
+            items: [
+                {
+                    label: 'Dzienniki zajęć',
+                    routerLink: ['/admin/diaries/activity']
+                },
+                {
+                    label: 'Dzienniki prywatne',
+                    routerLink: ['/admin/diaries/activity']
+                },
+                {
+                    label: 'Dzienniki WWR',
+                    routerLink: ['/admin/diaries/activity']
+                }
+            ]
+        },
+        {
+            label: 'Faktury',
+            icon: 'fa-money',
+            items: [
+                {
+                    label: 'Materiały dydaktyczne',
+                    routerLink: ['/admin/files/didactic']
+                }
+            ]
         }
     ]
 }

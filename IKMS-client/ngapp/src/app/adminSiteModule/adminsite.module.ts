@@ -32,6 +32,7 @@ import {ClassroomCreateComponent} from "./management/classroom/classroom-create.
 import {CommunicationModule} from "../communicationModule/communication.module";
 import {DidacticMaterialsComponent} from "./files/materials/didactic-materials.component";
 import {AddFileComponent} from "./files/materials/add-file.component";
+import {ActivityDiaryComponent} from "./diary/activityDiary/activity-dairy.component";
 
 
 @NgModule({
@@ -107,7 +108,8 @@ import {AddFileComponent} from "./files/materials/add-file.component";
         ClassroomListComponent,
         ClassroomCreateComponent,
         DidacticMaterialsComponent,
-        AddFileComponent
+        AddFileComponent,
+        ActivityDiaryComponent
     ],
     providers: [
         AuthGuard,

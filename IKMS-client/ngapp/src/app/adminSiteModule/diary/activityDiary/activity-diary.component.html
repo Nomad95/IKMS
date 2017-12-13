@@ -1,0 +1,192 @@
+<p-confirmDialog  width="425"></p-confirmDialog>
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="ui-g-12 form-blue">
+				<div class="col-md-9 col-sm-9">
+					<span>Wybierz grupę: </span>
+					<p-dropdown
+							[options]="groups" [autoWidth]="false" (onChange)="onEmployeeSelected($event)"
+							name="employee" placeholder="Wybierz"
+					></p-dropdown>
+					<br/>
+					<span>Wybierz miesiąc: </span>
+					<p-dropdown
+							[options]="mies" [autoWidth]="false" (onChange)="onEmployeeSelected($event)"
+							name="employee" placeholder="Wybierz"
+					></p-dropdown>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+    <div class="row">
+		<div class="col-md-12">
+            <div class="content-section implementation" >
+                <p-dataTable [value]="data" [rows]="20"
+                             [responsive]="true" >
+                    <p-header>
+						<div class="bold">
+							Listopad 2017
+						</div>
+					</p-header>
+                    <p-column  field="name" header="Imię i nazwisko" [style]="{'width':'100px'}"></p-column>
+                    <p-column  field="employeeRole" header="Śr 01">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Cz 02">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Pi 03">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="So 04">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Nd 05">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Po 06">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Wt 07">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Śr 08">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Cz 09">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Pi 10">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="So 11">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Nd 12">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Po 13">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Wt 14">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Śr 15">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Cz 16">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Pi 17">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="So 18">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Nd 19">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Po 20">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Wt 21">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Śr 22">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Cz 23">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Pi 24">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="So 25">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Nd 26">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Po 27">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Wt 28">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Śr 29">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+					<p-column  field="employeeRole" header="Cz 30">
+						<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-checkbox name="message"  value="true"></p-checkbox>
+						</ng-template>
+					</p-column>
+
+                    <ng-template pTemplate="emptymessage">
+                        Brak wyników do wyświetlenia.
+                    </ng-template>
+                </p-dataTable>
+              <p-paginator rows="20" [totalRecords]="currentPageData?.totalElements"
+                           (onPageChange)="loadNewPage($event)" [pageLinkSize]="currentPageData?.totalPages">
+              </p-paginator>
+
+            </div>
+		</div>
+    </div>
+
+</div>
