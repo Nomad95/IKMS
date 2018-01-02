@@ -15,7 +15,7 @@ import {ParentService} from "../../../sharedModule/services/parent.service";
 import {CommonMessages} from "../../../commons/util/common-messages";
 
 @Component({
-  selector: 'add-file',
+  selector: 'add-file-employee',
   templateUrl: './add-file.component.html',
   providers: [EnumProvider]
 })
@@ -90,7 +90,7 @@ export class AddFileComponent implements OnInit{
             formData.append('selectedParents', JSON.stringify(this.selectedParents));
             formData.append('selectedGroups', JSON.stringify(this.selectedGroups));
             formData.append('selectedEmployees', JSON.stringify(this.selectedEmployees));
-            this.uploadService.uploadDidacticMaterial(formData)
+            this.uploadService.uploadDidacticMaterialByEmployee(formData)
                 .subscribe( data => {
                     this.msgs = CommonMessages.fileUploadSuccess();
                 }, err => {
@@ -100,7 +100,6 @@ export class AddFileComponent implements OnInit{
             this.closeModal();
         }
         this.clearForm();
-        this.clearFile(event);
     }
     
     clearFile(event){

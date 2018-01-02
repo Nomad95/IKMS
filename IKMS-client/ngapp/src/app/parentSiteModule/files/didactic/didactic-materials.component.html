@@ -10,9 +10,6 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12" *ngIf="!isLoading">
-			<button type="button" pButton icon="fa-upload" (click)="showAddFileModal()" label="Dodaj plik"></button>
-		</div>
 		<div class="col-md-6 form-blue" *ngIf="noData">
 			<p>Brak udostępnionych danych</p>
 		</div>
@@ -57,41 +54,5 @@
 		</div>
     </div>
 	<hr/>
-	<div class="row" *ngIf="selectedNode && !selectedNode.folder">
-		<div class="row">
-			<div class="col-md-12 form-blue">
-				<div class="col-md-4">
-					<span class="ikms-h3">Uprawnienia</span>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12 form-blue small-padding-top">
-				<div class="col-md-3" >
-					Grupy:<br/>
-					<span *ngFor="let group of selectedNode.data?.sharedGroups">
-						<p-checkbox disabled="true" name="group.value" binary="true" [label]="group.value" inputId="group.id" [(ngModel)]="trueCheckbox"></p-checkbox><br/>
-					</span>
-				</div>
-				<div class="col-md-3">
-					Pracownicy:<br/>
-					<span *ngFor="let employee of selectedNode.data?.sharedEmployees">
-						<p-checkbox disabled="true" name="employee.value" binary="true" [label]="employee.value" inputId="employee.id" [(ngModel)]="trueCheckbox"></p-checkbox><br/>
-					</span>
-				</div>
-				<div class="col-md-3">
-					Rodzice:<br/>
-					<span *ngFor="let parent of selectedNode.data?.sharedParents">
-						<p-checkbox disabled="true" name="parent.value" binary="true" [label]="parent.value" inputId="parent.id" [(ngModel)]="trueCheckbox"></p-checkbox><br/>
-					</span>
-				</div>
-			</div>
-		</div>
-	</div>
 
 </div>
-
-<add-file
-				 (eventSave)="handleOnModalSuccess($event)"
-				 [isVisible]="displayFileAddModal"
-				 (eventClose)="handleModalClose($event)"></add-file>

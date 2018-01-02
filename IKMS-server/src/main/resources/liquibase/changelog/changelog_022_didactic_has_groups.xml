@@ -1,0 +1,47 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Kopec" id="changelog_022_didactic_has_groups">
+        <createTable tableName="didactic_has_groups">
+            <column name="didactic_material_id" type="bigint" >
+                <constraints nullable="false" />
+            </column>
+            <column name="group_id" type="bigint" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="didactic_material_id, group_id"
+                constraintName="pk_didac_has_grp"
+                tableName="didactic_has_groups"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="didactic_material_id"
+                baseTableName="didactic_has_groups"
+                constraintName="fk_didactic_didactic"
+                referencedColumnNames="id"
+                referencedTableName="didactic_materials"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="group_id"
+                baseTableName="didactic_has_groups"
+                constraintName="fk_didactic_groups"
+                referencedColumnNames="id"
+                referencedTableName="groups"/>
+
+        <createIndex tableName="didactic_has_groups" indexName="idx_fk_did_did2">
+            <column name="didactic_material_id"></column>
+        </createIndex>
+
+        <createIndex tableName="didactic_has_groups" indexName="idx_fk_did_grp">
+            <column name="group_id"></column>
+        </createIndex>
+
+    </changeSet>
+
+</databaseChangeLog>

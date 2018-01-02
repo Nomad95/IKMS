@@ -8,6 +8,7 @@ import pl.politechnika.ikms.domain.person.EmployeeEntity;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
@@ -22,4 +23,16 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
             "join pd.user u " +
             "where u.id = :userId")
     MinimalDto<Long, String> getEmployeeMinimalByUserId(@Param("userId") Long userId);
+
+    @Query("select e.id " +
+            "from EmployeeEntity e " +
+            "join e.personalData pd " +
+            "join pd.user u " +
+            "where u.id = :userId")
+    Long getEmployeeIdByUserId(@Param("userId") Long userId);
+
+    @Query("SELECT e FROM EmployeeEntity e " +
+            "JOIN e.personalData pd " +
+            "WHERE pd.user.id = :userId")
+    Optional<EmployeeEntity> getByUserId(@Param("userId") Long userId);
 }

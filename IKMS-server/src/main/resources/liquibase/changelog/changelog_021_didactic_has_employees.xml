@@ -1,0 +1,47 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Kopec" id="changelog_021_didactic_has_employees">
+        <createTable tableName="didactic_has_employees">
+            <column name="didactic_material_id" type="bigint" >
+                <constraints nullable="false" />
+            </column>
+            <column name="employee_id" type="bigint" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="didactic_material_id, employee_id"
+                constraintName="pk_didac_has_empl"
+                tableName="didactic_has_employees"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="didactic_material_id"
+                baseTableName="didactic_has_employees"
+                constraintName="fk_didactic_didactic"
+                referencedColumnNames="id"
+                referencedTableName="didactic_materials"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="employee_id"
+                baseTableName="didactic_has_employees"
+                constraintName="fk_didactic_employees"
+                referencedColumnNames="id"
+                referencedTableName="employees"/>
+
+        <createIndex tableName="didactic_has_employees" indexName="idx_fk_did_did1">
+            <column name="didactic_material_id"></column>
+        </createIndex>
+
+        <createIndex tableName="didactic_has_employees" indexName="idx_fk_did_empl">
+            <column name="employee_id"></column>
+        </createIndex>
+
+    </changeSet>
+
+</databaseChangeLog>

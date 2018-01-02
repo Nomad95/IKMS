@@ -1,29 +1,35 @@
 export class ParentSideMenu {
     static items = [
         {
-            label: 'File',
-            icon: 'fa-file-o',
+            label: 'Pracownicy',
+            icon: 'fa-address-card',
             items: [{
-                label: 'New',
-                icon: 'fa-plus',
-                items: [
-                    {label: 'Project'},
-                    {label: 'Other'},
-                ]
-                },
-                    {label: 'Open'},
-                    {label: 'Quit'}
+                label: 'Lista pracowników',
+                routerLink: ['/parent/employee']
+            }
             ]
         },
         {
-            label: 'Item1',
+            label: 'Plany',
+            icon: 'fa-calendar',
+            items: [
+                {
+                    label: 'Dla dzieci',
+                    routerLink: ['/parent/schedule/child']
+                },
+                {
+                    label: 'Dla grup',
+                    routerLink: ['/parent/schedule/group']
+                }
+            ]
+        },
+        {
+            label: 'Pliki',
             icon: 'fa-file-o',
             items: [
                 {
-                    label: 'siemka1'
-                },
-                {
-                    label: 'siemka2'
+                    label: 'Materiały dydaktyczne',
+                    routerLink: ['/parent/files/didactic']
                 }
             ]
         },

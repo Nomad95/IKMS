@@ -27,7 +27,6 @@ public class EmployeeEntityMapper extends AbstractModelMapper<EmployeeEntity,Emp
 
     @Override
     public EmployeeDto convertToDto(EmployeeEntity employeeEntity) {
-        System.out.println(employeeEntity);
         EmployeeDto employeeDto = modelMapper.map(employeeEntity, EmployeeDto.class);
         employeeDto.setPersonalData(new MinimalDto<>(
                 employeeEntity.getPersonalData().getId(),

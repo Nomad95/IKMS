@@ -38,6 +38,15 @@ export class Utils {
         return result;
     }
     
+    static idListToMinimal(values): any[]{
+        let result = [];
+        
+        for (let id of values){
+            result.push({id: id, value: ''});
+        }
+        return result;
+    }
+    
     static deleteActivitiesUnwantedFields(activityList){
         for( let i=0; i< activityList.length; i++ ){
             activityList[i] = ScheduleActivity.fromPrimengEvent(activityList[i]);

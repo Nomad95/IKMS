@@ -60,6 +60,16 @@ export class EmployeeSideMenu {
                     routerLink: ['/employee/schedule/group']
                 }
             ]
+        },
+        {
+            label: 'Pliki',
+            icon: 'fa-file-o',
+            items: [
+                {
+                    label: 'Materiały dydaktyczne',
+                    routerLink: ['/employee/files/didactic']
+                }
+            ]
         }
     ]
 }

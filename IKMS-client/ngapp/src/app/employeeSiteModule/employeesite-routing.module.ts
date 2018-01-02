@@ -18,6 +18,7 @@ import {NotificationComponent} from "../communicationModule/notification/notific
 import {MessageBoxComponent} from "../communicationModule/messagebox/messagebox.component";
 import {DetailsInboxComponent} from "../communicationModule/messagebox/details/details-inbox.component";
 import {DetailsOutboxComponent} from "../communicationModule/messagebox/details/details-outbox.component";
+import {DidacticMaterialsComponent} from "./file/didactic/didactic-materials.component";
 
 const routes: Routes = [
     {
@@ -82,6 +83,9 @@ const routes: Routes = [
                     },
                     {
                         path: 'messagebox/outbox/details/:id', component: DetailsOutboxComponent
+                    },
+                    {
+                        path: 'files/didactic', component: DidacticMaterialsComponent
                     }
                 ]
             }

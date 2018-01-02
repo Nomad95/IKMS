@@ -7,6 +7,7 @@ import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
 import pl.politechnika.ikms.domain.group.GroupEntity;
 import pl.politechnika.ikms.domain.person.enums.EmployeeRole;
 import pl.politechnika.ikms.domain.schedule.ScheduleActivityEntity;
+import pl.politechnika.ikms.domain.upload.DidacticMaterialFileEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 @Data
 @Table(name = "employees")
 @EqualsAndHashCode(callSuper = true, exclude = "personalData")
-@ToString(exclude = "groupEntity")
+@ToString(exclude = {"groupEntity", "sharedFiles"})
 @SequenceGenerator(name="employees_seq_name",sequenceName="employees_seq", allocationSize = 1)
 public class EmployeeEntity extends AbstractEntity {
 
@@ -40,4 +41,7 @@ public class EmployeeEntity extends AbstractEntity {
 
     @ManyToMany(mappedBy = "employees")
     private List<ScheduleActivityEntity> activities;
+
+    @ManyToMany(mappedBy = "sharedEmployees")
+    private List<DidacticMaterialFileEntity> sharedFiles;
 }

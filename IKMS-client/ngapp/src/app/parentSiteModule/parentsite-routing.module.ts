@@ -6,40 +6,44 @@ import {NotificationComponent} from "../communicationModule/notification/notific
 import {MessageBoxComponent} from "../communicationModule/messagebox/messagebox.component";
 import {DetailsInboxComponent} from "../communicationModule/messagebox/details/details-inbox.component";
 import {DetailsOutboxComponent} from "../communicationModule/messagebox/details/details-outbox.component";
+import {DidacticMaterialsComponent} from "./files/didactic/didactic-materials.component";
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ParentSiteComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: 'ROLE_PARENT'
-    },
-    children: [
-      {
+    {
         path: '',
-        canActivateChild: [AuthGuard],
+        component: ParentSiteComponent,
+        canActivate: [AuthGuard],
+        data: {
+            role: 'ROLE_PARENT'
+        },
         children: [
-          {
-            path: 'notification', component: NotificationComponent
-          },
-          {
-            path: 'messagebox', component: MessageBoxComponent
-          },
-          {
-            path: 'messagebox/:type', component: MessageBoxComponent
-          },
-          {
-            path: 'messagebox/inbox/details/:id', component: DetailsInboxComponent
-          },
-          {
-            path: 'messagebox/outbox/details/:id', component: DetailsOutboxComponent
-          }
+            {
+                path: '',
+                canActivateChild: [AuthGuard],
+                children: [
+                    {
+                        path: 'notification', component: NotificationComponent
+                    },
+                    {
+                        path: 'messagebox', component: MessageBoxComponent
+                    },
+                    {
+                        path: 'messagebox/:type', component: MessageBoxComponent
+                    },
+                    {
+                        path: 'messagebox/inbox/details/:id', component: DetailsInboxComponent
+                    },
+                    {
+                        path: 'messagebox/outbox/details/:id', component: DetailsOutboxComponent
+                    },
+                    {
+                        path: 'files/didactic', component: DidacticMaterialsComponent
+                    },
+                ]
+            }
+        
         ]
-      }
-
-    ]
-  }
+    }
 ];
 
 @NgModule({

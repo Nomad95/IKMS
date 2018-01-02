@@ -4,14 +4,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import pl.politechnika.ikms.commons.abstracts.AbstractEntity;
+import pl.politechnika.ikms.domain.upload.DidacticMaterialFileEntity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = true, exclude = "personalData")
 @Table(name = "parents")
-@ToString(exclude = "personalData")
+@ToString(exclude = {"personalData", "sharedFiles"})
 @SequenceGenerator(name="parents_seq_name",sequenceName="parents_seq", allocationSize = 1)
 public class ParentEntity extends AbstractEntity {
 
@@ -24,4 +26,6 @@ public class ParentEntity extends AbstractEntity {
     @JoinColumn(name = "personal_data_id", nullable = false)
     private PersonalDataEntity personalData;
 
+    @ManyToMany(mappedBy = "sharedParents")
+    private List<DidacticMaterialFileEntity> sharedFiles;
 }

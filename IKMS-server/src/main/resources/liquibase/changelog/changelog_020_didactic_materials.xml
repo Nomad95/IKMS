@@ -1,0 +1,54 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Kopec" id="changelog_020_didactic_materials">
+        <createTable tableName="didactic_materials">
+            <column name="id" type="bigint" >
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="filename" type="varchar(100)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="folder" type="varchar(50)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="subfolder" type="varchar(50)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="size" type="varchar(20)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="extension" type="varchar(5)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="icon" type="varchar(20)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="description" type="varchar(255)" >
+                <constraints nullable="true" />
+            </column>
+            <column name="content" type="blob" >
+                <constraints nullable="false" />
+            </column>
+            <column name="date_of_upload" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="id"
+                constraintName="pk_didactic_materials"
+                tableName="didactic_materials"/>
+
+        <createSequence
+                sequenceName="didactic_materials_seq"
+                startValue="1"
+                incrementBy="1"/>
+
+    </changeSet>
+
+</databaseChangeLog>

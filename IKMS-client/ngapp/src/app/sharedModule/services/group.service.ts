@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map'
 import { TokenUtils } from "../../commons/util/token-utils";
 import {Group} from "../../adminSiteModule/model/group/group";
 import {Page} from "../../commons/model/page";
+import {MinimalDto} from "../../adminSiteModule/model/minimal-dto";
 
 @Injectable()
 export class GroupService{
@@ -44,7 +45,7 @@ export class GroupService{
         .map( res => res.json());
     }
     
-    getGroupsMinimal(): Observable<Group>{
+    getGroupsMinimal(): Observable<MinimalDto[]>{
         return this.http.get('api/group/minimal/all', {headers: this.headers})
         .map( res => res.json());
     }

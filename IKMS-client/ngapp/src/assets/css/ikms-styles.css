@@ -155,6 +155,17 @@ textarea {
     text-align:center !important;
 }
 
+.ui-fileupload-buttonbar {
+    vertical-align: bottom !important;
+}
+
+.ui-fileupload {
+    vertical-align: bottom !important;
+}
+
+.ui-fileupload-content {
+    vertical-align: bottom !important;
+}
 
 
 .small-padding-top {

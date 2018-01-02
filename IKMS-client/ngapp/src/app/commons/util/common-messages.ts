@@ -99,4 +99,21 @@ export class CommonMessages {
     public static scheduleValidateSuccess(){
         return [{severity:'success', detail: 'Plan jest poprawny'}];
     }
+    
+    public static downloadFileError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas pobierania pliku'}];
+    }
+    
+    public static getFilesError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas pobierania drzewa plików'}];
+    }
+    
+    public static fileUploadError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas wstawiania pliku'}];
+    }
+    
+    public static fileUploadSuccess(){
+        return [{severity:'success', detail: 'Plik wysłano poprawnie'}];
+    }
+    
 }

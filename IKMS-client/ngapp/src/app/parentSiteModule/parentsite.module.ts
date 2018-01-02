@@ -15,6 +15,16 @@ import {SharedModule} from "../sharedModule/shared-module.module";
 import {CommunicationModule} from "../communicationModule/communication.module";
 import {AuthGuard} from "../commons/guards/auth-guard";
 import {LoginService} from "../loginModule/service/login.service";
+import {
+    BreadcrumbModule,
+    CalendarModule, CheckboxModule, ConfirmDialogModule, DataListModule,
+    DataTableModule, DialogModule, DropdownModule, GrowlModule, InputTextareaModule, InputTextModule, MenubarModule,
+    MessagesModule,
+    PaginatorModule, PanelModule, PickListModule, ScheduleModule, TooltipModule, TreeModule
+} from "primeng/primeng";
+import {FormsModule} from "@angular/forms";
+import {SchedulesModule} from "../scheduleModule/schedule.module";
+import {DidacticMaterialsComponent} from "./files/didactic/didactic-materials.component";
 
 
 @NgModule({
@@ -29,11 +39,34 @@ import {LoginService} from "../loginModule/service/login.service";
         MegaMenuModule,
         NgbModule.forRoot(),
         SharedModule,
-        CommunicationModule
+        CommunicationModule,
+    
+        FormsModule,
+        DataTableModule,
+        MessagesModule,
+        InputTextModule,
+        DropdownModule,
+        PaginatorModule,
+        DialogModule,
+        PanelModule,
+        CalendarModule,
+        ConfirmDialogModule,
+        GrowlModule,
+        BreadcrumbModule,
+        TooltipModule,
+        InputTextareaModule,
+        PickListModule,
+        MenubarModule,
+        ScheduleModule,
+        SchedulesModule,
+        DataListModule,
+        CheckboxModule,
+        TreeModule,
     ],
     declarations: [
         ParentSiteComponent,
-        ParentSidebar
+        ParentSidebar,
+        DidacticMaterialsComponent
     ],
     providers: [
         AuthGuard,

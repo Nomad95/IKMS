@@ -17,24 +17,37 @@ export class FileUploadService {
     }
     
     uploadDidacticMaterial(file){
-        let headers = new Headers();
-        let xhr = new XMLHttpRequest();
-        
-        xhr.open('POST', '/api/upload', true);
-        xhr.setRequestHeader('Auth-token', this.token);
-        xhr.setRequestHeader('enctype', 'multipart/form-data');
-        xhr.send(file);
-        
-       /* headers.append('Content-Type', 'multipart/form-data');
-        headers.append('Accept', 'application/json');
-        headers.append('Auth-token', this.token);*/
-        
-        /*return this.http.post('api/upload', file, {headers: headers})
-        .map( res => res.json());*/
+        return Observable.fromPromise(new Promise((resolve, reject) => {
+            let headers = new Headers();
+            let xhr = new XMLHttpRequest();
+    
+            xhr.open('POST', '/api/upload', true);
+            xhr.setRequestHeader('Auth-token', this.token);
+            xhr.setRequestHeader('role', 'ADMIN');
+            xhr.setRequestHeader('enctype', 'multipart/form-data');
+            xhr.send(file);
+        }));
     }
     
-    getDidacticMaterial(): Observable<any>{
-        return this.http.get('/api/upload', {headers: this.headers})
+    uploadDidacticMaterialByEmployee(file){
+        return Observable.fromPromise(new Promise((resolve, reject) => {
+            let headers = new Headers();
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/upload', true);
+            xhr.setRequestHeader('Auth-token', this.token);
+            xhr.setRequestHeader('role', 'EMPLOYEE');
+            xhr.setRequestHeader('enctype', 'multipart/form-data');
+            xhr.send(file);
+        }));
+    }
+    
+    getDidacticMaterial(materialId): Observable<any>{
+        return this.http.get('/api/upload/' + materialId, {headers: this.headers})
             .map( res => res.json());
+    }
+    
+    getFileTree(): Observable<any>{
+        return this.http.get('/api/upload/tree', {headers: this.headers})
+        .map( res => res.json());
     }
 }

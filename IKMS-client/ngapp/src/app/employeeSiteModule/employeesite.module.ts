@@ -33,8 +33,10 @@ import {ParentDetailComponent} from "./parent/parentDetails/parent-detail.compon
 import {GroupListComponent} from "./management/group/group-list.component";
 import {GroupListManageComponent} from "./management/group/group-list-manage.component";
 import {GroupDetailComponent} from "./management/group/group-detail.component";
-import {CheckboxModule, DataListModule, PickListModule} from "primeng/primeng";
+import {CheckboxModule, DataListModule, FileUploadModule, PickListModule, TreeModule} from "primeng/primeng";
 import {CommunicationModule} from "../communicationModule/communication.module";
+import {DidacticMaterialsComponent} from "./file/didactic/didactic-materials.component";
+import {AddFileComponent} from "./file/didactic/add-file.component";
 
 @NgModule({
     imports: [
@@ -66,7 +68,9 @@ import {CommunicationModule} from "../communicationModule/communication.module";
         CheckboxModule,
         NgbModule.forRoot(),
         SchedulesModule,
-        CommunicationModule
+        CommunicationModule,
+        TreeModule,
+        FileUploadModule
     ],
     declarations: [
         EmployeeSiteComponent,
@@ -87,6 +91,8 @@ import {CommunicationModule} from "../communicationModule/communication.module";
         GroupListComponent,
         GroupListManageComponent,
         GroupDetailComponent,
+        DidacticMaterialsComponent,
+        AddFileComponent
     ],
     providers: [
         AuthGuard,
