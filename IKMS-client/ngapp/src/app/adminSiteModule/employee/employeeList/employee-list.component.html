@@ -33,12 +33,13 @@
                     <p-column [sortable]="true" field="name" header="Imię"></p-column>
                     <p-column [sortable]="true" field="surname" header="Nazwisko"></p-column>
                     <p-column [sortable]="true" field="nip" header="NIP"></p-column>
-                    <p-column styleClass="col-button" [style]="{'width':'120px', 'text-align':'center'}">
+                    <p-column styleClass="col-button" [style]="{'width':'150px', 'text-align':'center'}">
                         <ng-template pTemplate="header" >
                         </ng-template>
                         <ng-template let-empl="rowData" pTemplate="body">
                             <button type="button" pButton (click)="navigateToUserList()" icon="fa-user" title="Użytkownik"></button>
-                            <button type="button" pButton title="Podgląd"
+							<button type="button" pButton (click)="showMessageBox(empl.user.value)" icon="fa-envelope" title="Wiadomość"></button>
+							<button type="button" pButton title="Podgląd"
                                     (click)="navigateToEmployeeDetails(empl.id, empl.personalData.id)"
                                     icon="fa-search"></button>
                             <button type="button" pButton title="Usuń"
@@ -58,3 +59,6 @@
     </div>
 
 </div>
+<p-dialog header="Wyślij wiadomość" [resizable]="false" [draggable]="false" [(visible)]="displayMessage" *ngIf="!isLoading" [width]="1000" modal="modal">
+	<sending-message [recipientUsername]="recipientUsername"></sending-message>
+</p-dialog>

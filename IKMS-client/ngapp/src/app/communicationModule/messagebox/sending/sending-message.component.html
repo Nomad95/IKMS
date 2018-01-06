@@ -1,73 +1,75 @@
 <p-growl [(value)]="msgs"></p-growl>
-<div class="ikms-body">
-  <div class="row">
-    <div class="col-md-12" >
-      <h3>Nowa wiadomość</h3>
-      <hr>
-      <form novalidate
-            #messageForm="ngForm">
-        <div class="content-section implementation form-blue">
-          <div class="ui-g">
-            <div class="ui-g-6 ui-sm-12">
-              <div class="ui-g-12">
-                <div class="ui-g-4 ">Do <span class="red">*</span></div>
-                <div class="ui-g-8 ">
-                  <input type="text" pInputText
-                         class="detail-view-input"
-                         required maxlength="100"
-                         [(ngModel)]="recipientUsername"
-                         name="recipient" #recipient = "ngModel" >
-                  <div class="ui-g-12 validation-err" *ngIf="recipient.touched && recipient.errors?.required">
-                    Pole nie może być puste
-                  </div>
-                </div>
-              </div>
-              <div class="ui-g-12">
-                <div class="ui-g-4 ">Temat <span class="red">*</span></div>
-                <div class="ui-g-8k ">
-                  <input type="text" pInputText
-                         class="detail-view-input"
-                         required maxlength="100"
-                         [(ngModel)]="message.title"
-                         name="title" #title = "ngModel" >
-                  <div class="ui-g-12 validation-err" *ngIf="title.touched && title.errors?.required">
-                    Pole nie może być puste
-                  </div>
-                </div>
-              </div>
-              <div class="ui-g-12">
-                <div class="ui-g-4 ">Treść <span class="red">*</span></div>
-                <div class="ui-g-8 ">
-                  <textarea rows="10"
-                            cols="90"
-                            pInputTextarea
-                            autoResize="autoResize"
-                            [(ngModel)]="message.messageContents"
-                            name="content"
-                            #content = "ngModel"
-                            style="background-color: #dddddd;">
-                  </textarea>
-                  <div class="ui-g-12 validation-err" *ngIf="content.touched && content.errors?.required">
-                    Pole nie może być puste
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br/>
-        <div class="ui-g-12">
-          <button type="button" pButton icon="fa-check" [disabled]="messageForm.invalid"
-                  (click)="sendMessage(message)" label="Wyślij"></button>
-          <button type="button" pButton icon="fa-close"
-                  (click)="clearForm()" label="Wyczyść"></button>
-        </div>
-        <br/>
-      </form>
-      <br/>
-      <div class="content-section implementation text-center" *ngIf="isLoading">
-        <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-      </div>
-    </div>
-  </div>
+<div >
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Nowa wiadomość</h3>
+			<hr>
+			<form novalidate
+				  #messageForm="ngForm">
+				<div class="content-section implementation form-blue">
+					<div class="ui-g">
+						<div class="ui-g-6 ui-sm-12">
+							<div class="ui-g-12">
+								<div class="ui-g-4 ">Do <span class="red">*</span></div>
+								<div class="ui-g-8 ">
+									<input type="text" pInputText
+										   class="detail-view-input"
+										   required maxlength="100"
+										   [(ngModel)]="recipientUsername"
+										   name="recipient" #recipient="ngModel">
+									<div class="ui-g-12 validation-err"
+										 *ngIf="recipient.touched && recipient.errors?.required">
+										Pole nie może być puste
+									</div>
+								</div>
+							</div>
+							<div class="ui-g-12">
+								<div class="ui-g-4 ">Temat <span class="red">*</span></div>
+								<div class="ui-g-8 ">
+									<input type="text" pInputText
+										   class="detail-view-input"
+										   required maxlength="100"
+										   [(ngModel)]="message.title"
+										   name="title" #title="ngModel">
+									<div class="ui-g-12 validation-err" *ngIf="title.touched && title.errors?.required">
+										Pole nie może być puste
+									</div>
+								</div>
+							</div>
+							<div class="ui-g-12">
+								<div class="ui-g-4 ">Treść <span class="red">*</span></div>
+								<div class="ui-g-8 ">
+								  <textarea rows="10"
+											cols="80"
+											pInputTextarea
+											autoResize="autoResize"
+											[(ngModel)]="message.messageContents"
+											name="content"
+											#content="ngModel"
+											style="background-color: #dddddd;">
+								  </textarea>
+									<div class="ui-g-12 validation-err"
+										 *ngIf="content.touched && content.errors?.required">
+										Pole nie może być puste
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br/>
+				<div class="ui-g-12">
+					<button type="button" pButton icon="fa-check" [disabled]="messageForm.invalid"
+							(click)="sendMessage(message)" label="Wyślij"></button>
+					<button type="button" pButton icon="fa-close"
+							(click)="clearForm()" label="Wyczyść"></button>
+				</div>
+				<br/>
+			</form>
+			<br/>
+			<div class="content-section implementation text-center" *ngIf="isLoading">
+				<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
 </div>

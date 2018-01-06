@@ -60,8 +60,7 @@ export class ChildrenListComponent implements OnInit{
     navigateToParentDetails(parentId){
         this.isNavigating = true;
         this.parentService.getParent(parentId).subscribe( data => {
-            console.log("not implemented yet");//todo
-            this.router.navigate(['/admin/parent', parentId], { queryParams: {personalDataId: data.personalData.id}});
+            this.router.navigate(['/employee/parent/detail', parentId], { queryParams: {personalDataId: data.personalData.id}});
             this.isNavigating = false;
         }, err => {
             this.msgs = ErrorHandler.handleGenericServerError(err);

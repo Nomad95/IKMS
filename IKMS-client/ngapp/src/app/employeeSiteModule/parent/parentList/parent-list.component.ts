@@ -26,6 +26,9 @@ export class ParentListComponent implements OnInit{
     private msgs: Message[] = [];
     private isLoading: boolean = true;
     private items: MenuItem[];
+    private recipientUsername = '';
+    private displayMessage = false;
+    private displayNotification = false;
     
     ngOnInit() {
         this.loadParents(this.size, this.page);
@@ -52,5 +55,15 @@ export class ParentListComponent implements OnInit{
     
     navigateToParentDetails(parentId, personalDataId) {
         this.router.navigate(['/employee/parent/detail', parentId], {queryParams: {personalDataId: personalDataId}});
+    }
+    
+    showMessageBox(username){
+        this.recipientUsername = username;
+        this.displayMessage = true;
+    }
+    
+    showNotificationBox(username){
+        this.recipientUsername = username;
+        this.displayNotification = true;
     }
 }

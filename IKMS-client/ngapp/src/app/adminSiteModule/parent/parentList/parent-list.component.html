@@ -28,12 +28,16 @@
 					<p-column [sortable]="true" field="id" header="Id" [style]="{'width':'50px'}"></p-column>
 					<p-column [sortable]="true" field="name" header="Imię"></p-column>
 					<p-column [sortable]="true" field="surname" header="Nazwisko"></p-column>
-					<p-column styleClass="col-button" [style]="{'width':'120px', 'text-align':'center'}">
+					<p-column styleClass="col-button" [style]="{'width':'180px', 'text-align':'center'}">
 						<ng-template pTemplate="header">
 						</ng-template>
 						<ng-template let-parent="rowData" pTemplate="body">
 							<button type="button" pButton (click)="navigateToUserList()" icon="fa-user"
 									title="Użytkownik"></button>
+							<button type="button" pButton (click)="showNotificationBox(parent.user.value)" icon="fa-bell"
+									title="Powiadomienie"></button>
+							<button type="button" pButton (click)="showMessageBox(parent.user.value)" icon="fa-envelope"
+									title="Wiadomość"></button>
 							<button type="button" pButton title="Podgląd"
 									(click)="navigateToParentDetails(parent.id, parent.personalData.id)"
 									icon="fa-search"></button>
@@ -54,3 +58,9 @@
 	</div>
 
 </div>
+<p-dialog header="Wyślij wiadomość" [resizable]="false" [draggable]="false" [(visible)]="displayMessage" *ngIf="!isLoading" [width]="1000" modal="modal">
+	<sending-message [recipientUsername]="recipientUsername"></sending-message>
+</p-dialog>
+<p-dialog header="Wyślij powiadomienie" [resizable]="false" [draggable]="false" [(visible)]="displayNotification" [width]="1000" modal="modal" *ngIf="!isLoading">
+	<sending-notification></sending-notification>
+</p-dialog>

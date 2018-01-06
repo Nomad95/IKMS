@@ -83,7 +83,10 @@ import {SendingMessageComponent} from "./messagebox/sending/sending-message.comp
   providers: [
 
   ],
-  exports: [],
+  exports: [
+      SendingMessageComponent,
+      SendingNotificationComponent
+  ],
 })
 export class CommunicationModule {
 }

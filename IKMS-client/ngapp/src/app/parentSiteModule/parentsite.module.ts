@@ -25,6 +25,7 @@ import {
 import {FormsModule} from "@angular/forms";
 import {SchedulesModule} from "../scheduleModule/schedule.module";
 import {DidacticMaterialsComponent} from "./files/didactic/didactic-materials.component";
+import {EmployeeListComponent} from "./employee/employeeList/employee-list.component";
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import {DidacticMaterialsComponent} from "./files/didactic/didactic-materials.co
     declarations: [
         ParentSiteComponent,
         ParentSidebar,
-        DidacticMaterialsComponent
+        DidacticMaterialsComponent,
+        EmployeeListComponent
     ],
     providers: [
         AuthGuard,

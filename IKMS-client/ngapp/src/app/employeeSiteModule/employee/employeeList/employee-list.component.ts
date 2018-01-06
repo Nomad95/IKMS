@@ -25,6 +25,8 @@ export class EmployeeListComponent implements OnInit{
     private msgs: Message[] = [];
     private isLoading: boolean = true;
     private items: MenuItem[];
+    private recipientUsername = '';
+    private displayMessage = false;
     
     ngOnInit(){
         this.loadEmployees(this.size,this.page);
@@ -47,5 +49,10 @@ export class EmployeeListComponent implements OnInit{
             this.msgs = ErrorHandler.handleGenericServerError(err);
             this.isLoading = false;
         });
+    }
+    
+    showMessageBox(username){
+        this.recipientUsername = username;
+        this.displayMessage = true;
     }
 }

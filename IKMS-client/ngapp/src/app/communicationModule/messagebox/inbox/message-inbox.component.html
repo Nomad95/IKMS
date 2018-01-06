@@ -40,6 +40,6 @@
                *ngIf="!isLoading">
   </p-paginator>
 </div>
-<p-dialog header="" [(visible)]="display" *ngIf="!isLoading">
+<p-dialog header="Wyślij wiadomość" [resizable]="false" [draggable]="false" [(visible)]="display" *ngIf="!isLoading">
   <sending-message></sending-message>
 </p-dialog>

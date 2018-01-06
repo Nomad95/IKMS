@@ -7,6 +7,7 @@ import {MessageBoxComponent} from "../communicationModule/messagebox/messagebox.
 import {DetailsInboxComponent} from "../communicationModule/messagebox/details/details-inbox.component";
 import {DetailsOutboxComponent} from "../communicationModule/messagebox/details/details-outbox.component";
 import {DidacticMaterialsComponent} from "./files/didactic/didactic-materials.component";
+import {EmployeeListComponent} from "./employee/employeeList/employee-list.component";
 
 const routes: Routes = [
     {
@@ -39,6 +40,9 @@ const routes: Routes = [
                     {
                         path: 'files/didactic', component: DidacticMaterialsComponent
                     },
+                    {
+                        path: 'employee', component: EmployeeListComponent
+                    }
                 ]
             }
         

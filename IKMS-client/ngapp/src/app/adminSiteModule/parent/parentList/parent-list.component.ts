@@ -25,6 +25,9 @@ export class ParentListComponent implements OnInit{
     private currentPageData: Page;
     private msgs: Message[] = [];
     private isLoading: boolean = true;
+    private displayMessage: boolean = false;
+    private displayNotification: boolean = false;
+    private recipientUsername = '';
     private items: MenuItem[];
     
     ngOnInit() {
@@ -72,5 +75,15 @@ export class ParentListComponent implements OnInit{
             reject: () => {
             }
         });
+    }
+    
+    showMessageBox(username){
+        this.recipientUsername = username;
+        this.displayMessage = true;
+    }
+    
+    showNotificationBox(username){
+        this.recipientUsername = username;
+        this.displayNotification = true;
     }
 }

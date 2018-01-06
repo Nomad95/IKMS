@@ -116,4 +116,19 @@ export class CommonMessages {
         return [{severity:'success', detail: 'Plik wysłano poprawnie'}];
     }
     
+    public static messageSendingError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas wysyłania wiadomości - sprawdź adresata'}];
+    }
+    
+    public static messageSendingSuccess(){
+        return [{severity:'success', detail: 'Wiadomość została wysłana'}];
+    }
+    
+    public static notificationSendingError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas wysyłania powiadomienia - sprawdź adresata'}];
+    }
+    
+    public static notificationSendingSuccess(){
+        return [{severity:'success', detail: 'Powiadomienie zostało wysłane'}];
+    }
 }
