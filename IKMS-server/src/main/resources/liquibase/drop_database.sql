@@ -9,12 +9,17 @@ drop table children;
 drop table addresses;
 drop table schedule_activities;
 drop table classrooms;
+drop table didactic_materials
 drop table groups;
 drop table employees;
 drop table parents;
 drop table personal_data;
 drop table users;
 drop table roles;
+drop table register
+drop table register_entry
+drop table presence
+
 
 drop sequence notifications_seq;
 drop sequence messages_seq;
@@ -29,3 +34,6 @@ drop sequence groups_seq;
 drop sequence schedule_activities_seq;
 drop sequence classrooms_seq;
 drop sequence activities_err_seq;
+drop sequence register_seq
+drop sequence register_entry_seq
+drop sequence presence_seq

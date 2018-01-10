@@ -1,0 +1,68 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Boruch" id="changelog_025_register_entry">
+        <createTable tableName="register_entry">
+            <column name="id" type="bigint" />
+            <column name="description" type="varchar" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="register_id" type="bigint" >
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="id"
+                constraintName="pk_register_entry"
+                tableName="register_entry"/>
+        <addForeignKeyConstraint
+                baseColumnNames="child_id"
+                baseTableName="register_entry"
+                constraintName="fk_child"
+                referencedColumnNames="id"
+                referencedTableName="child"/>
+        <addForeignKeyConstraint
+                baseColumnNames="employee_id"
+                baseTableName="register_entry"
+                constraintName="fk_employee"
+                referencedColumnNames="id"
+                referencedTableName="employees"/>
+        <addForeignKeyConstraint
+                baseColumnNames="register_id"
+                baseTableName="register_entry"
+                constraintName="fk_register_of_entry"
+                referencedColumnNames="id"
+                referencedTableName="register"/>
+
+        <createIndex tableName="register_entry" indexName="idx_fk_entry_child">
+            <column name="child_id"></column>
+        </createIndex>
+        <createIndex tableName="register_entry" indexName="idx_fk_entry_employee">
+            <column name="employee_id"></column>
+        </createIndex>
+        <createIndex tableName="register_entry" indexName="idx_fk_register_of_entry">
+            <column name="register_id"/>
+        </createIndex>
+
+        <createSequence
+                sequenceName="register_entry_seq"
+                startValue="1"
+                incrementBy="1"/>
+
+        <!--<loadData-->
+                <!--tableName="roles"-->
+                <!--file="liquibase/data/roles.csv"-->
+                <!--/>-->
+
+
+    </changeSet>
+
+</databaseChangeLog>
