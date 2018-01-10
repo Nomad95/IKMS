@@ -39,15 +39,12 @@
 							<div class="ui-g-12">
 								<div class="ui-g-4 ">Treść <span class="red">*</span></div>
 								<div class="ui-g-8 ">
-								  <textarea rows="10"
-											cols="80"
-											pInputTextarea
-											autoResize="autoResize"
+									<textarea
+											pInputTextarea [rows]="10" [cols]="80"
 											[(ngModel)]="message.messageContents"
-											name="content"
-											#content="ngModel"
-											style="background-color: #dddddd;">
-								  </textarea>
+											placeholder="-" class="detail-view-input long-text"
+											pattern="[a-zA-Z1-9ęóąśłżźćńĘÓĄŚŁŻŹĆŃ\-\ \,\:]*"
+											name="content" #content="ngModel"></textarea>
 									<div class="ui-g-12 validation-err"
 										 *ngIf="content.touched && content.errors?.required">
 										Pole nie może być puste

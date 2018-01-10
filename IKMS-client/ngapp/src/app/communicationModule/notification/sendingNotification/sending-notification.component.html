@@ -1,5 +1,5 @@
 <p-growl [(value)]="msgs"></p-growl>
-<div >
+<div>
 	<div class="row">
 		<div class="col-md-12">
 			<h3>Nowe powiadomienie</h3>
@@ -36,16 +36,12 @@
 							<div class="ui-g-12">
 								<div class="ui-g-4 ">Treść <span class="red">*</span></div>
 								<div class="ui-g-8 ">
-                  <textarea rows="5"
-							cols="50"
-							pInputTextarea
-							autoResize="autoResize"
-							required maxlength="100"
-							[(ngModel)]="notification.content"
-							name="content"
-							#content="ngModel"
-							style="background-color: #dddddd">
-                  </textarea>
+								  <textarea
+										  pInputTextarea [rows]="10" [cols]="80"
+										  [(ngModel)]="notification.content"
+										  placeholder="-" class="detail-view-input long-text"
+										  pattern="[a-zA-Z1-9ęóąśłżźćńĘÓĄŚŁŻŹĆŃ\-\ \,\:]*"
+										  name="content" #content="ngModel"></textarea>
 									<div class="ui-g-12 validation-err"
 										 *ngIf="content.touched && content.errors?.required">
 										Pole nie może być puste

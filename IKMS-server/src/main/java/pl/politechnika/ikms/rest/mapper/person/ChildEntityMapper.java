@@ -31,11 +31,20 @@ public class ChildEntityMapper extends AbstractModelMapper<ChildEntity,ChildDto>
     @Override
     public ChildDto convertToDto(ChildEntity childEntity) {
         ChildDto childDto = modelMapper.map(childEntity, ChildDto.class);
-        childDto.setPersonalData(new MinimalDto<>(childEntity.getPersonalData().getId(),childEntity.getPersonalData().getPesel()));
-        childDto.setParent(new MinimalDto<>(childEntity.getParent().getId(),""));
 
-        if(Objects.nonNull(childEntity.getGroup()))
-            childDto.setGroup(new MinimalDto<>(childEntity.getGroup().getId(),childEntity.getGroup().getName()));
+        if (Objects.nonNull(childEntity.getGroup())) {
+            childDto.setGroup(new MinimalDto<>(childEntity.getGroup().getId(), childEntity.getGroup().getName()));
+        }
+
+        if (Objects.nonNull(childEntity.getParent())) {
+            childDto.setParent(new MinimalDto<>(childEntity.getParent().getId(),
+                    childEntity.getParent().getPersonalData().getName() + " " + childEntity.getParent().getPersonalData().getSurname()));
+            childDto.setParentUsername(childEntity.getParent().getPersonalData().getUser().getUsername());
+        }
+
+        if (Objects.nonNull(childEntity.getPersonalData())) {
+            childDto.setPersonalData(new MinimalDto<>(childEntity.getPersonalData().getId(), childEntity.getPersonalData().getName() + " " + childEntity.getPersonalData().getSurname() ));
+        }
 
         return childDto;
     }

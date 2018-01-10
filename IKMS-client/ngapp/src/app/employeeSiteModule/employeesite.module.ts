@@ -33,10 +33,15 @@ import {ParentDetailComponent} from "./parent/parentDetails/parent-detail.compon
 import {GroupListComponent} from "./management/group/group-list.component";
 import {GroupListManageComponent} from "./management/group/group-list-manage.component";
 import {GroupDetailComponent} from "./management/group/group-detail.component";
-import {CheckboxModule, DataListModule, FileUploadModule, PickListModule, TreeModule} from "primeng/primeng";
+import {
+    CheckboxModule, DataListModule, FileUploadModule, PickListModule, ScheduleModule,
+    TreeModule
+} from "primeng/primeng";
 import {CommunicationModule} from "../communicationModule/communication.module";
 import {DidacticMaterialsComponent} from "./file/didactic/didactic-materials.component";
 import {AddFileComponent} from "./file/didactic/add-file.component";
+import {MainDiaryScreen} from "./diary/main-diary-screen.component";
+import {DiaryModule} from "../diaryModule/diary.module";
 
 @NgModule({
     imports: [
@@ -70,7 +75,9 @@ import {AddFileComponent} from "./file/didactic/add-file.component";
         SchedulesModule,
         CommunicationModule,
         TreeModule,
-        FileUploadModule
+        FileUploadModule,
+        ScheduleModule,
+        DiaryModule
     ],
     declarations: [
         EmployeeSiteComponent,
@@ -92,7 +99,8 @@ import {AddFileComponent} from "./file/didactic/add-file.component";
         GroupListManageComponent,
         GroupDetailComponent,
         DidacticMaterialsComponent,
-        AddFileComponent
+        AddFileComponent,
+        MainDiaryScreen
     ],
     providers: [
         AuthGuard,

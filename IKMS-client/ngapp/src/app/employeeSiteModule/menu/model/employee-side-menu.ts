@@ -70,6 +70,16 @@ export class EmployeeSideMenu {
                     routerLink: ['/employee/files/didactic']
                 }
             ]
-        }
+        },
+        {
+            label: 'Dzienniki',
+            icon: 'fa-book',
+            items: [
+                {
+                    label: 'Dzienniki zajęć',
+                    routerLink: ['/employee/diary']
+                }
+            ]
+        },
     ]
 }

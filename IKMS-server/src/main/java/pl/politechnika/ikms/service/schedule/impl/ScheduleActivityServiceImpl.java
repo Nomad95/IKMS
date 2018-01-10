@@ -1,28 +1,38 @@
 package pl.politechnika.ikms.service.schedule.impl;
 
+import com.google.common.collect.Sets;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.politechnika.ikms.commons.abstracts.AbstractService;
+import pl.politechnika.ikms.domain.person.ChildEntity;
 import pl.politechnika.ikms.domain.schedule.ScheduleActivityEntity;
 import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 import pl.politechnika.ikms.repository.person.EmployeeRepository;
 import pl.politechnika.ikms.repository.schedule.ScheduleActivityRepository;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
+import pl.politechnika.ikms.rest.dto.person.ChildDto;
+import pl.politechnika.ikms.rest.dto.schedule.ScheduleActivityDiaryDto;
 import pl.politechnika.ikms.rest.dto.schedule.ScheduleActivityDto;
+import pl.politechnika.ikms.rest.mapper.person.ChildEntityMapper;
 import pl.politechnika.ikms.rest.mapper.schedule.ScheduleActivityEntityMapper;
 import pl.politechnika.ikms.security.JwtUserFacilities;
 import pl.politechnika.ikms.service.schedule.ScheduleActivityService;
 import pl.politechnika.ikms.validators.schedule.ScheduleValidator;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class ScheduleActivityServiceImpl extends AbstractService<ScheduleActivityEntity, ScheduleActivityRepository>
         implements ScheduleActivityService {
 
@@ -31,18 +41,20 @@ public class ScheduleActivityServiceImpl extends AbstractService<ScheduleActivit
     private final @NonNull ScheduleActivityEntityMapper scheduleActivityEntityMapper;
     private final @NonNull JwtUserFacilities jwtUserFacilities;
     private final @NonNull EmployeeRepository employeeRepository;
+    private final @NonNull ChildEntityMapper childEntityMapper;
 
 
     @Autowired
     public ScheduleActivityServiceImpl(
-            ScheduleActivityRepository repository,
-            ScheduleValidator scheduleValidator,
-            ScheduleActivityEntityMapper scheduleActivityEntityMapper, JwtUserFacilities jwtUserFacilities, EmployeeRepository employeeRepository) {
+            ScheduleActivityRepository repository, ScheduleValidator scheduleValidator,
+            ScheduleActivityEntityMapper scheduleActivityEntityMapper, JwtUserFacilities jwtUserFacilities,
+            EmployeeRepository employeeRepository, ChildEntityMapper childEntityMapper) {
         super(repository, ScheduleActivityEntity.class);
         this.scheduleValidator = scheduleValidator;
         this.scheduleActivityEntityMapper = scheduleActivityEntityMapper;
         this.jwtUserFacilities = jwtUserFacilities;
         this.employeeRepository = employeeRepository;
+        this.childEntityMapper = childEntityMapper;
     }
 
     @Override
@@ -117,6 +129,20 @@ public class ScheduleActivityServiceImpl extends AbstractService<ScheduleActivit
     }
 
     @Override
+    public List<ScheduleActivityEntity> getAllByDayForEmployee(Long id, LocalDate day) {
+        LocalDateTime beginning = day.atStartOfDay();
+        LocalDateTime end = day.atTime(23, 59);
+        return getRepository().findAllForEmployeeAndDay(id, beginning, end);
+    }
+
+    @Override
+    public List<ScheduleActivityEntity> getAllByDay(LocalDate day) {
+        LocalDateTime beginning = day.atStartOfDay();
+        LocalDateTime end = day.atTime(23, 59);
+        return getRepository().findAllByDay(beginning, end);
+    }
+
+    @Override
     public List<ScheduleActivityDto> getAllForLoggedEmployee(HttpServletRequest request) {
         String username = jwtUserFacilities.pullTokenAndGetUsername(request);
         UserEntity userEntity = Optional.of(jwtUserFacilities.findUserByUsernameFromToken(request))
@@ -124,5 +150,23 @@ public class ScheduleActivityServiceImpl extends AbstractService<ScheduleActivit
         MinimalDto<Long, String> employee = employeeRepository.getEmployeeMinimalByUserId(userEntity.getId());
 
         return getAllFor("employee", employee.getId());
+    }
+
+    @Override
+    public ScheduleActivityDiaryDto getActivityDetails(Long activityId) {
+        ScheduleActivityEntity activityEntity = getRepository().getOne(activityId);
+        HashSet<ChildEntity> children = Sets.newHashSet();
+        List<ChildEntity> activityChildren = activityEntity.getChildren();
+        List<ChildEntity> groupChildren = activityEntity.getGroup().getChildren();
+
+        children.addAll(activityChildren);
+        children.addAll(groupChildren);
+
+        ScheduleActivityDiaryDto scheduleActivityDiaryDto = new ScheduleActivityDiaryDto();
+        scheduleActivityDiaryDto.setScheduleActivityDto(scheduleActivityEntityMapper.convertToDto(activityEntity));
+        List<ChildDto> childrenDto = children.stream().map(childEntityMapper::convertToDto).collect(Collectors.toList());
+        scheduleActivityDiaryDto.setChildren(childrenDto);
+
+        return scheduleActivityDiaryDto;
     }
 }

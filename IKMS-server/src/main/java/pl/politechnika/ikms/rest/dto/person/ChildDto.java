@@ -31,4 +31,6 @@ public class ChildDto extends AbstractDto {
     private DisabilityLevel disabilityLevel;
 
     private MinimalDto<Long, String> group;
+
+    private String parentUsername;
 }

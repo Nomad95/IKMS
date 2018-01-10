@@ -31,7 +31,6 @@ export class SendingMessageComponent implements OnInit {
         this.messageService
         .sendMessage(message, this.recipientUsername)
         .subscribe(newMessage => {
-            this.message;
             this.isLoading = false;
             this.clearForm();
             this.msgs = CommonMessages.messageSendingSuccess();

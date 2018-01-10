@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import { TokenUtils } from "../../commons/util/token-utils";
 import {ScheduleActivity} from "../../adminSiteModule/model/schedule/schedule-activity";
+import {ScheduleActivityDiaryDetail} from "../../adminSiteModule/model/schedule/schedule-activity-diary-detail";
 
 @Injectable()
 export class ScheduleService{
@@ -29,6 +30,16 @@ export class ScheduleService{
     
     getActivitiesForLoggedEmployee(): Observable<ScheduleActivity[]>{
         return this.http.get('api/schedule/all/employee', {headers: this.headers})
+        .map( res => res.json());
+    }
+    
+    getActivity(activityId): Observable<ScheduleActivity>{
+        return this.http.get('api/schedule/' + activityId, {headers: this.headers})
+        .map( res => res.json());
+    }
+    
+    getActivityDiaryDetails(activityId): Observable<ScheduleActivityDiaryDetail>{
+        return this.http.get('api/schedule/diary/' + activityId, {headers: this.headers})
         .map( res => res.json());
     }
     

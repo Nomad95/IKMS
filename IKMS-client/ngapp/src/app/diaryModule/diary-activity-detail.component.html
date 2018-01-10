@@ -1,0 +1,106 @@
+<p-confirmDialog  width="425"></p-confirmDialog>
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
+	<br/>
+	<div class="row">
+		<div class="ui-g-12" *ngIf="!isLoading">
+			<div class="col-md-9 col-sm-9">
+				<button type="button" pButton  icon="fa-chevron-left" label="Powrót" [routerLink]="['/employee/diary']"></button>
+			</div>
+		</div>
+	</div>
+	<div class="row" *ngIf="isLoading">
+		<div class="content-section implementation text-center">
+			<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 form-blue" *ngIf="!isLoading" >
+			<div class="ui-g-12">
+				<span class="ikms-h3">Informacje o zajęciach:</span>
+			</div>
+			<div class="ui-g-4 ">Nazwa zajęć:</div>
+			<div class="ui-g-8 ">
+				{{scheduleActivityDetails.scheduleActivityDto.title}}
+			</div>
+			<div class="ui-g-4 ">Rodzaj zajęć:</div>
+			<div class="ui-g-8 ">
+				{{scheduleActivityDetails.scheduleActivityDto.classesType | translateEnum}}
+			</div>
+			<div class="ui-g-4 ">Rozpoczęcie:</div>
+			<div class="ui-g-8 " >
+				{{scheduleActivityDetails.scheduleActivityDto.start}}
+			</div>
+			<div class="ui-g-4 ">Zakończenie:</div>
+			<div class="ui-g-8 " >
+				{{scheduleActivityDetails.scheduleActivityDto.end}}
+			</div>
+			<div class="ui-g-4 ">Komentarz:</div>
+			<div class="ui-g-8 " >
+				{{scheduleActivityDetails.scheduleActivityDto.comment}}
+			</div>
+		</div>
+		<div class="col-md-6 form-blue" *ngIf="noData">
+			<p>Brak udostępnionych danych</p>
+		</div>
+		<div class="col-md-6 form-blue tree-c-border" *ngIf="selectedChild">
+			<div class="ui-g-12">
+				<span class="ikms-h3">Informacje o dziecku:</span>
+			</div>
+			<div class="ui-g-4 ">Imię i nazwisko:</div>
+			<div class="ui-g-8 ">
+				{{selectedChild.personalData.value}}
+			</div>
+			<div class="ui-g-4 ">Rodzic:</div>
+			<div class="ui-g-8 ">
+				{{selectedChild.parent.value}}
+			</div>
+			<div class="ui-g-4 ">Grupa przedszkolna:</div>
+			<div class="ui-g-8 ">
+				{{selectedChild.group?.value}}
+			</div>
+			<div class="ui-g-4 ">Poziom niepełnosprawości:</div>
+			<div class="ui-g-8 ">
+				{{selectedChild.disabilityLevel | translateEnum}}
+			</div>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-md-12">
+			<p-dataTable [value]="scheduleActivityDetails?.children"
+						 [responsive]="true" selectionMode="single"  [(selection)]="selectedChild" >
+				<p-header>
+					<div class="bold">
+						Lista dzieci
+					</div>
+				</p-header>
+				<p-column  field="personalData.value" header="Imię i nazwisko" [sortable]="true"></p-column>
+				<p-column  field="employeeRole" header="Obecność" [style]="{'width':'100px', 'text-align':'center' }">
+					<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+						<p-checkbox name="message"  value="true"></p-checkbox>
+					</ng-template>
+				</p-column>
+				<p-column  header="Akcje" [style]="{'width':'120px', 'text-align':'center' }">
+					<ng-template let-col let-child="rowData" let-ri="rowIndex" pTemplate="body">
+						<button type="button" pButton (click)="showRegistry(child.parentUsername)" icon="fa-edit" title="Wpis do dziennika"></button>
+						<button type="button" pButton (click)="showMessageBox(child.parentUsername)" icon="fa-envelope" title="Wiadomość do rodzica"></button>
+						<button type="button" pButton (click)="showNotificationBox(child.parentUsername)" icon="fa-bell" title="Powiadom rodzica"></button>
+					</ng-template>
+				</p-column>
+			</p-dataTable>
+		</div>
+	</div>
+
+</div>
+
+<p-dialog header="Wyślij wiadomość" [resizable]="false" [draggable]="false" [(visible)]="displayMessage" *ngIf="!isLoading" [width]="1000" modal="modal">
+	<sending-message [recipientUsername]="recipientUsername"></sending-message>
+</p-dialog>
+<p-dialog header="Wyślij powiadomienie" [resizable]="false" [draggable]="false" [(visible)]="displayNotification" [width]="1000" modal="modal" *ngIf="!isLoading">
+	<sending-notification [recipientUsername]="recipientUsername"></sending-notification>
+</p-dialog>
+<diary-registry-modal [isVisible]="displayRegistry" (eventSave)="handleOnModalSuccess($event)"
+					  (eventClose)="handleModalClose($event)"> </diary-registry-modal>

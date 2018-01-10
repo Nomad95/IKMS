@@ -61,6 +61,17 @@ public interface ScheduleActivityRepository extends JpaRepository<ScheduleActivi
 
     @Query("select sa from ScheduleActivityEntity sa " +
             "join sa.employees em " +
+            "where em.id = :employeeId " +
+            "and sa.activityStart between :beginning and :end")
+    List<ScheduleActivityEntity> findAllForEmployeeAndDay(@Param("employeeId") Long employeeId, @Param("beginning") LocalDateTime beginning, @Param("end") LocalDateTime end);
+
+    @Query("select sa from ScheduleActivityEntity sa " +
+            "join sa.employees em " +
+            "where sa.activityStart between :beginning and :end")
+    List<ScheduleActivityEntity> findAllByDay(@Param("beginning") LocalDateTime beginning, @Param("end") LocalDateTime end);
+
+    @Query("select sa from ScheduleActivityEntity sa " +
+            "join sa.employees em " +
             "where em.id = :employeeId")
     List<ScheduleActivityEntity> findAllForEmployee(@Param("employeeId") Long employeeId);
 

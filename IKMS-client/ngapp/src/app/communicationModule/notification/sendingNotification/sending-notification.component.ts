@@ -4,6 +4,7 @@ import {EnumProvider} from "../../../commons/util/enum-provider";
 import {NewNotification} from "../model/new-notification";
 import {Message} from "primeng/primeng";
 import {ErrorHandler} from "../../../commons/util/error-handler";
+import {CommonMessages} from "../../../commons/util/common-messages";
 
 @Component({
     selector: 'sending-notification',
@@ -32,9 +33,9 @@ export class SendingNotificationComponent implements OnInit {
         this.notificationService
         .sendNotification(notification, this.recipientUsername)
         .subscribe(newNothification => {
-            this.notification;
+            this.msgs = CommonMessages.notificationSendingSuccess();
         }, error2 => {
-            this.msgs = ErrorHandler.handleGenericServerError(error2);
+            this.msgs = CommonMessages.notificationSendingError();
         })
     }
     

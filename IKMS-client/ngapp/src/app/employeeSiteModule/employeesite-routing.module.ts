@@ -19,6 +19,9 @@ import {MessageBoxComponent} from "../communicationModule/messagebox/messagebox.
 import {DetailsInboxComponent} from "../communicationModule/messagebox/details/details-inbox.component";
 import {DetailsOutboxComponent} from "../communicationModule/messagebox/details/details-outbox.component";
 import {DidacticMaterialsComponent} from "./file/didactic/didactic-materials.component";
+import {MainDiaryScreen} from "./diary/main-diary-screen.component";
+import {DiaryActivityDetailComponent} from "../diaryModule/diary-activity-detail.component";
+import {DiaryPreviewComponent} from "../diaryModule/diary-preview.component";
 
 const routes: Routes = [
     {
@@ -86,6 +89,15 @@ const routes: Routes = [
                     },
                     {
                         path: 'files/didactic', component: DidacticMaterialsComponent
+                    },
+                    {
+                        path: 'diary', component: MainDiaryScreen
+                    },
+                    {
+                        path: 'diary/preview', component: DiaryPreviewComponent
+                    },
+                    {
+                        path: 'diary/activity/:activityId', component: DiaryActivityDetailComponent
                     }
                 ]
             }

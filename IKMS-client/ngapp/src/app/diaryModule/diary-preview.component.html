@@ -1,0 +1,131 @@
+<p-confirmDialog  width="425"></p-confirmDialog>
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
+	<br/>
+	<div class="row">
+		<div class="ui-g-12" *ngIf="!isLoading">
+			<div class="col-md-5">
+				<button type="button" pButton  icon="fa-chevron-left" label="Powrót" [routerLink]="['/employee/diary']"></button>
+			</div>
+			<div class="col-md-7 form-blue text-right">
+				<span class="ikms-h3">Przegląd dziennika zajęć edukacyjnych</span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="content-section implementation text-center" *ngIf="isLoading">
+			<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+		</div>
+	</div>
+	<hr/>
+	<div class="row" *ngIf="!isLoading">
+		<div class="col-md-5 form-blue">
+			<div class="col-md-12 form-4-str" >
+				<div class="col-md-4 no-left-padd">Dziecko:</div>
+				<div class="col-md-8 ">
+					<p-dropdown
+							[options]="children" [autoWidth]="false" (onChange)="onChildSelected($event)"
+							[(ngModel)]="diaryPreviewDto.child" name="children" placeholder = "Wybierz"
+							filter="true"
+					></p-dropdown>
+				</div>
+			</div>
+
+			<div class="col-md-12 form-4-str-sm">
+				<div class="col-md-4 no-left-padd">Data rozpoczęcia:</div>
+				<div class="col-md-8 ">
+					<p-calendar [dataType]="string" [showTime]="true" hourFormat="24"
+								[monthNavigator]="true" [yearNavigator]="true"
+								yearRange="2016:2030" (onSelect)="onDateSelected($event,'start')"
+								required inputStyleClass="detail-view-input"
+								[(ngModel)]="diaryPreviewDto.dateFrom" [defaultDate]="defaultDate"
+								[maxDate]="maxDate" stepMinute="5"
+								[locale]="pl"
+								name="dateFrom" #dateFrom = "ngModel"
+								dateFormat="yy-mm-dd"></p-calendar>
+					<div class="ui-g-12 validation-err" *ngIf="dateFrom.errors?.minlength">
+						To pole jest wymagane.
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12 form-4-str-sm">
+				<div class="col-md-4 no-left-padd">Data zakończenia:</div>
+				<div class="col-md-8 ">
+					<p-calendar [dataType]="string" [showTime]="true" hourFormat="24"
+								[monthNavigator]="true" [yearNavigator]="true"
+								yearRange="2016:2030" (onSelect)="onDateSelected($event,'end')"
+								required inputStyleClass="detail-view-input"
+								[(ngModel)]="diaryPreviewDto.dateTo" [defaultDate]="defaultDate"
+								[minDate]="minDate" stepMinute="5"
+								[locale]="pl"
+								name="dateTo" #dateTo = "ngModel"
+								dateFormat="yy-mm-dd"></p-calendar>
+					<div class="ui-g-12 validation-err" *ngIf="dateTo.errors?.minlength">
+						To pole jest wymagane.
+					</div>
+				</div>
+			</div>
+
+		<!--<div class="col-md-6 form-blue tree-c-border" *ngIf="selectedChild">
+			<div class="ui-g-12">
+				<span class="ikms-h3">Informacje o dziecku:</span>
+			</div>
+			<div class="ui-g-4 ">Imię i nazwisko:</div>
+			<div class="ui-g-8 ">
+				{{selectedChild.personalData.value}}
+			</div>
+			<div class="ui-g-4 ">Rodzic:</div>
+			<div class="ui-g-8 ">
+				{{selectedChild.parent.value}}
+			</div>
+			<div class="ui-g-4 ">Grupa przedszkolna:</div>
+			<div class="ui-g-8 ">
+				{{selectedChild.group?.value}}
+			</div>
+			<div class="ui-g-4 ">Poziom niepełnosprawości:</div>
+			<div class="ui-g-8 ">
+				{{selectedChild.disabilityLevel | translateEnum}}
+			</div>
+		</div>-->
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-md-12">
+			<p-dataTable [value]="registries"
+						 [responsive]="true" selectionMode="single"  [(selection)]="selectedChild" >
+				<p-header>
+					<div class="bold">
+						Lista Obecności
+					</div>
+				</p-header>
+				<p-column  field="personalData.value" header="Imię i nazwisko" [sortable]="true"></p-column>
+				<p-column  field="employeeRole" header="Obecność" [style]="{'width':'100px', 'text-align':'center' }">
+					<ng-template let-col let-role="rowData" let-ri="rowIndex" pTemplate="body">
+						<p-checkbox name="message"  value="true"></p-checkbox>
+					</ng-template>
+				</p-column>
+				<p-column  header="Akcje" [style]="{'width':'120px', 'text-align':'center' }">
+					<ng-template let-col let-child="rowData" let-ri="rowIndex" pTemplate="body">
+						<button type="button" pButton (click)="showRegistry(child.parentUsername)" icon="fa-edit" title="Wpis do dziennika"></button>
+						<button type="button" pButton (click)="showMessageBox(child.parentUsername)" icon="fa-envelope" title="Wiadomość do rodzica"></button>
+						<button type="button" pButton (click)="showNotificationBox(child.parentUsername)" icon="fa-bell" title="Powiadom rodzica"></button>
+					</ng-template>
+				</p-column>
+			</p-dataTable>
+		</div>
+	</div>
+
+</div>
+
+<p-dialog header="Wyślij wiadomość" [resizable]="false" [draggable]="false" [(visible)]="displayMessage" *ngIf="!isLoading" [width]="1000" modal="modal">
+	<sending-message [recipientUsername]="recipientUsername"></sending-message>
+</p-dialog>
+<p-dialog header="Wyślij powiadomienie" [resizable]="false" [draggable]="false" [(visible)]="displayNotification" [width]="1000" modal="modal" *ngIf="!isLoading">
+	<sending-notification [recipientUsername]="recipientUsername"></sending-notification>
+</p-dialog>
+<diary-registry-modal [isVisible]="displayRegistry" (eventSave)="handleOnModalSuccess($event)"
+					  (eventClose)="handleModalClose($event)"> </diary-registry-modal>

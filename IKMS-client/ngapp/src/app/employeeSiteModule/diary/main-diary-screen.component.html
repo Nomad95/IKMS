@@ -1,0 +1,48 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ikms-body">
+	<p-breadcrumb [model]="items"></p-breadcrumb>
+	<hr class="small-hr"/>
+	<div class="row">
+		<div class="ui-g-12" *ngIf="!isLoading">
+			<div class="col-md-9 col-sm-9">
+				<button type="button" pButton  icon="fa-book" label="Przeglądaj dziennik" [routerLink]="['/employee/diary/preview']"></button>
+			</div>
+			<div class="col-md-3 col-sm-3 text-right form-blue">
+				<span class="ikms-h3">Dzienniki</span>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="content-section implementation text-center" *ngIf="isLoading">
+				<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+	<hr class="small-hr"/>
+	<div class="row">
+		<div class="col-md-12" *ngIf="!isLoading">
+			<div class="ui-g-12">
+				<p-schedule
+						[events]="events"
+						[editable]="editMode"
+						[defaultView]="configuration.defaultView"
+						[header]="configuration.headerConfig"
+						[allDaySlot]="configuration.allDaySlot"
+						[weekends]="configuration.weekends"
+						[minTime]="configuration.minTime"
+						[maxTime]="configuration.maxTime"
+						[height]="configuration.height"
+						[options]="configuration.options"
+						[nowIndicator]="configuration.nowIndicator"
+						[defaultDate]="configuration.defaultDate"
+						[timeFormat]="configuration.timeFormat"
+						(onEventClick)="handleEventClick($event)"
+						#schedule>
+				</p-schedule>
+			</div>
+		</div>
+	</div>
+	<br />
+
+</div>
+
+

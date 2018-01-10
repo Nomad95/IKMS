@@ -3,6 +3,7 @@ export class Child{
     id: number;
     personalData: any;
     parent: any;
+    group: any;
     diseases: string;//todo: stub
     allergies: string;//todo: stub
     disabilityLevel: string;
@@ -14,6 +15,7 @@ export class Child{
         this.diseases = '';
         this.allergies = '';
         this.disabilityLevel = '';
+        this.group = {};
     }
     
 }

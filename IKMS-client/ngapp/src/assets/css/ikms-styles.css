@@ -128,12 +128,22 @@ body {
     padding-bottom: 5px;
 }
 
+.ikms-h2{
+    font-size: 150%;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
 .form-4-str {
     padding-top: 3.5%;
 }
 
 .form-4-str-sm {
     padding-top: 2%;
+}
+
+.no-left-padd {
+    padding-left: 0px;
 }
 
 .drp-srt {
@@ -328,6 +338,10 @@ textarea {
 
 .navbar-toggle {
     margin-top: 8px;
+}
+
+margin-top-ikms {
+    margin-top: 10px;
 }
 
 /* usuwa niepotrzebne i przydkie podkreslenie tekstu */
