@@ -29,6 +29,8 @@
     <include file="liquibase/changelog/changelog_021_didactic_has_employees.xml"/>
     <include file="liquibase/changelog/changelog_022_didactic_has_groups.xml"/>
     <include file="liquibase/changelog/changelog_023_didactic_has_parents.xml"/>
-
+    <include file="liquibase/changelog/changelog_024_register.xml"/>
+    <include file="liquibase/changelog/changelog_025_register_entry.xml"/>
+    <include file="liquibase/changelog/changelog_026_presence.xml"/>
 
 </databaseChangeLog>

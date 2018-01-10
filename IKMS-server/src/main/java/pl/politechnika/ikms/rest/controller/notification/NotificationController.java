@@ -54,7 +54,6 @@ public class NotificationController {
     public List<NotificationsGroupedBySender> getMyNotification(HttpServletRequest request) {
         List<NotificationEntity> myNotifications = notificationService.findMyNotificationByUser(request);
         List<NotificationDto> notificationDtos = myNotifications.stream().map(notificationEntityMapper::convertToDto).collect(Collectors.toList());
-
         return notificationDtos.stream()
                 .collect(Collectors.groupingBy(e -> new SenderDto(e.getSenderId(), e.getSenderFullName()), Collectors.toList()))
                 .entrySet().stream()
