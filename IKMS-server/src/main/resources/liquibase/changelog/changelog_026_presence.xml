@@ -1,0 +1,74 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Boruch" id="changelog_026_presence">
+        <createTable tableName="presence">
+            <column name="id" type="bigint" />
+            <column name="was_present" type="boolean" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="checking_time" type="timestamp">
+                <!--<constraints nullable="false"/>-->
+            </column>
+            <column name="child_id" type="bigint" >
+                <constraints nullable="true" />
+            </column>
+            <column name="checking_person_id" type="bigint" >
+                <constraints nullable="true" />
+            </column>
+            <column name="register_id" type="bigint" >
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                columnNames="id"
+                constraintName="pk_presence"
+                tableName="presence"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="child_id"
+                baseTableName="presence"
+                constraintName="fk_child"
+                referencedColumnNames="id"
+                referencedTableName="children"/>
+        <addForeignKeyConstraint
+                baseColumnNames="checking_person_id"
+                baseTableName="presence"
+                constraintName="fk_employee"
+                referencedColumnNames="id"
+                referencedTableName="employees"/>
+        <addForeignKeyConstraint
+                baseColumnNames="register_id"
+                baseTableName="presence"
+                constraintName="fk_register_presence"
+                referencedColumnNames="id"
+                referencedTableName="register"/>
+
+        <createIndex tableName="presence" indexName="idx_fk_presence_child">
+            <column name="child_id"/>
+        </createIndex>
+        <createIndex tableName="presence" indexName="idx_fk_presence_employee">
+            <column name="checking_person_id"/>
+        </createIndex>
+        <createIndex tableName="presence" indexName="idx_fk_register_presence">
+            <column name="register_id"/>
+        </createIndex>
+
+        <createSequence
+                sequenceName="presence_seq"
+                startValue="1"
+                incrementBy="1"/>
+
+        <!--<loadData-->
+                <!--tableName="roles"-->
+                <!--file="liquibase/data/roles.csv"-->
+                <!--/>-->
+
+    </changeSet>
+
+</databaseChangeLog>
