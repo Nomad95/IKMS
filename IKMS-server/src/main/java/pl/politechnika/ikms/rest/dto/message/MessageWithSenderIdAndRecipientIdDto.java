@@ -22,10 +22,18 @@ public class MessageWithSenderIdAndRecipientIdDto extends AbstractDto{
 
         private Long senderId;
 
-        @NotNull
-        private String title;
+        private String senderUsername;
+
+        private String senderFullName;
 
         private Long recipientId;
+
+        private String recipientUsername;
+
+        private String recipientFullName;
+
+        @NotNull
+        private String title;
 
         private LocalDateTime dateOfSend;
 
@@ -33,16 +41,4 @@ public class MessageWithSenderIdAndRecipientIdDto extends AbstractDto{
         private String messageContent;
 
         private Boolean wasRead;
-
-        private String recipientUsername;
-
-        private String senderUsername;
-
-        private String recipientFullName;
-
-        private String senderFullName;
-
-        //TODO: tylko odebrane
-        private int numberOfUnread;
-
 }

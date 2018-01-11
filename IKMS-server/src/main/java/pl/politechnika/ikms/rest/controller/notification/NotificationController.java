@@ -105,21 +105,37 @@ public class NotificationController {
         return "{\"count\": \" " + count + "\"}";
     }
 
-    @PutMapping("/myNotifications/{notificationId}/read")
+    @PutMapping("/myNotifications/read/{notificationId}")
     public void readNotification(@PathVariable("notificationId") Long notificationId) {
         notificationService.setNotificationToRead(notificationId);
     }
 
     @GetMapping("/mobile/newest/{lastNotificationId}")
-    public List<NotificationDto> getMyNewestNotificationForMobile(@PathVariable("lastNotificationId") Long lastNotificationId,
-                                                                                                      HttpServletRequest request){
-        List<NotificationEntity> newestNotificationForMobile = notificationService.findNewestNotificationForMobile(lastNotificationId, request);
-        List<NotificationDto> newestNotificationDto = new ArrayList<>();
-        newestNotificationForMobile
-                .stream()
-                .map(notification -> newestNotificationDto.add(notificationEntityMapper.convertToDto(notification)))
+    public List<NotificationsGroupedBySender> getMyNewestNotificationForMobile
+            (@PathVariable("lastNotificationId") Long lastNotificationId, HttpServletRequest request){
+        List<NotificationEntity> newestNotificationForMobile =
+                notificationService.findNewestNotificationForMobile(lastNotificationId, request);
+
+        List<NotificationDto> notificationDtos = newestNotificationForMobile
+                .stream().map(notificationEntityMapper::convertToDto)
                 .collect(Collectors.toList());
 
-        return newestNotificationDto;
+        return notificationDtos.stream()
+                .collect(Collectors.groupingBy(e ->
+                        new SenderDto(e.getSenderId(), e.getSenderFullName())
+                        , Collectors.toList()))
+                .entrySet().stream()
+                .map(e -> 
+                        new NotificationsGroupedBySender(
+                                e.getKey().getSenderId(), 
+                                e.getKey().getSenderFullName(), 
+                                e.getValue().stream()
+                                        .map(notificationEntityMapper
+                                        ::convertFromNotificationDtoToNotificationWithoutSenderDto)
+                                        .collect(Collectors.toList()), 
+                                (int) e.getValue().stream()
+                                        .filter(e1 -> e1.getWasRead().equals(Boolean.FALSE))
+                                        .count()))
+                .collect(Collectors.toList());
     }
 }
