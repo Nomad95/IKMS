@@ -189,7 +189,7 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
         String myUsername = jwtUserFacilities.pullTokenAndGetUsername(request);
 
         List<MessageEntity> listNewestSentMessages = Optional.ofNullable(getRepository()
-                .findNewestRecievedMassagesForMobile(lastSentMessageId, myUsername))
+                .findNewestSentMassagesForMobile(lastSentMessageId, myUsername))
                 .orElseThrow(()-> new EntityNotFoundException("Błąd podczas pobierania wysłanych wiadomości użytkownika o nazwie "
                         + myUsername));
 

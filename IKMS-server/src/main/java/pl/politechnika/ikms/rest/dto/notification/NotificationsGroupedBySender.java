@@ -8,12 +8,12 @@ import java.util.List;
 @AllArgsConstructor
 public class NotificationsGroupedBySender {
 
-        private Long senderId;
+    private Long senderId;
 
-        private String senderFullName;
+    private String senderFullName;
 
-        private List<NotificationWithoutSenderDto> notifications;
+    private List<NotificationWithoutSenderDto> notifications;
 
-        private int numberOfUnread;
+    private int numberOfUnread;
 
 }

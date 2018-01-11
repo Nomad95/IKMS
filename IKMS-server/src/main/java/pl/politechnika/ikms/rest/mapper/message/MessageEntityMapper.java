@@ -8,16 +8,19 @@ import pl.politechnika.ikms.commons.abstracts.AbstractModelMapper;
 import pl.politechnika.ikms.domain.message.MessageEntity;
 import pl.politechnika.ikms.repository.user.UserRepository;
 import pl.politechnika.ikms.rest.dto.message.MessageDto;
+import pl.politechnika.ikms.rest.dto.message.MessageWithSenderIdAndRecipientIdDto;
 import pl.politechnika.ikms.rest.mapper.user.UserEntityMapper;
 
 @Component
 public class MessageEntityMapper extends AbstractModelMapper<MessageEntity, MessageDto> {
 
     @Autowired
-    private final @NonNull UserRepository userRepository;
+    private final @NonNull
+    UserRepository userRepository;
 
     @Autowired
-    private final @NonNull UserEntityMapper userEntityMapper;
+    private final @NonNull
+    UserEntityMapper userEntityMapper;
 
     public MessageEntityMapper(ModelMapper modelMapper,
                                UserRepository userRepository,
@@ -51,16 +54,33 @@ public class MessageEntityMapper extends AbstractModelMapper<MessageEntity, Mess
         return messageDto;
     }
 
+
+    public MessageWithSenderIdAndRecipientIdDto convertToMessageWithSenderIdAndRecipientIdDto(final MessageEntity messageEntity) {
+        return MessageWithSenderIdAndRecipientIdDto.builder()
+                .dateOfSend(messageEntity.getDateOfSend())
+                .id(messageEntity.getId())
+                .messageContent(messageEntity.getMessageContents())
+                .recipientId(messageEntity.getRecipient().getId())
+                .senderId(messageEntity.getSender().getId())
+                .recipientUsername(messageEntity.getRecipientUsername())
+                .senderUsername(messageEntity.getSenderUsername())
+                .title(messageEntity.getTitle())
+                .wasRead(messageEntity.getWasRead())
+                .recipientFullName(messageEntity.getRecipientFullName())
+                .senderFullName(messageEntity.getSenderFullName()).build();
+
+    }
+
     @Override
     public MessageEntity convertToEntity(MessageDto messageDto) {
         MessageEntity messageEntity = new MessageEntity();
         messageEntity.setDateOfSend(messageDto.getDateOfSend());
         messageEntity.setId(messageDto.getId());
         messageEntity.setMessageContents(messageDto.getMessageContents());
-        if(messageDto.getRecipient() != null)
-        messageEntity.setRecipient(userRepository.findOne(messageDto.getRecipient().getId()));
-        if(messageDto.getSender() != null)
-        messageEntity.setSender(userRepository.findOne(messageDto.getSender().getId()));
+        if (messageDto.getRecipient() != null)
+            messageEntity.setRecipient(userRepository.findOne(messageDto.getRecipient().getId()));
+        if (messageDto.getSender() != null)
+            messageEntity.setSender(userRepository.findOne(messageDto.getSender().getId()));
         messageEntity.setRecipientUsername(messageDto.getRecipientUsername());
         messageEntity.setSenderUsername(messageDto.getSenderUsername());
         messageEntity.setTitle(messageDto.getTitle());
