@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.politechnika.ikms.domain.person.PersonalDataEntity;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.person.PersonalDataDto;
 import pl.politechnika.ikms.rest.mapper.person.PersonalDataEntityMapper;
@@ -21,30 +20,27 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class PersonalDataController {
 
-    private final @NonNull PersonalDataEntityMapper personalDataEntityMapper;
     private final @NonNull PersonalDataService personalDataService;
 
     @GetMapping(value = "/{personalDataId}")
     public PersonalDataDto getOnePersonalData(@PathVariable Long personalDataId){
-        return personalDataEntityMapper.convertToDto(personalDataService.findOne(personalDataId));
+        return personalDataService.findOne(personalDataId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PersonalDataDto createPersonalData(@Valid @RequestBody PersonalDataDto personalDataDto){
-        PersonalDataEntity personalDataEntity = personalDataService.create(personalDataEntityMapper.convertToEntity(personalDataDto));
-        return personalDataEntityMapper.convertToDto(personalDataEntity);
+        return personalDataService.create(personalDataDto);
     }
 
     @GetMapping
     public Page<PersonalDataDto> getAllPersonalData(Pageable pageable){
-        return personalDataService.findAllPaginated(pageable).map(personalDataEntityMapper::convertToDto);
+        return personalDataService.findAllPaginated(pageable);
     }
 
     @PutMapping
     public PersonalDataDto updatePersonalData(@Valid @RequestBody PersonalDataDto personalDataDto){
-        PersonalDataEntity personalDataEntity = personalDataService.update(personalDataEntityMapper.convertToEntity(personalDataDto));
-        return personalDataEntityMapper.convertToDto(personalDataEntity);
+        return personalDataService.update(personalDataDto);
     }
 
     @DeleteMapping(value = "/{personalDataId}")

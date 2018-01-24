@@ -1,6 +1,5 @@
 package pl.politechnika.ikms.service.person.impl;
 
-import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -10,6 +9,7 @@ import pl.politechnika.ikms.commons.abstracts.AbstractService;
 import pl.politechnika.ikms.domain.person.EmployeeEntity;
 import pl.politechnika.ikms.repository.person.EmployeeRepository;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
+import pl.politechnika.ikms.rest.dto.person.EmployeeDto;
 import pl.politechnika.ikms.rest.dto.person.EmployeeGeneralDetailDto;
 import pl.politechnika.ikms.rest.dto.person.PhoneNumberDto;
 import pl.politechnika.ikms.rest.mapper.person.EmployeeEntityMapper;
@@ -20,18 +20,15 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class EmployeeServiceImpl extends AbstractService<EmployeeEntity,EmployeeRepository> implements EmployeeService {
+public class EmployeeServiceImpl extends AbstractService<EmployeeEntity, EmployeeDto, EmployeeRepository, EmployeeEntityMapper> implements EmployeeService {
 
-    private final @NonNull EmployeeEntityMapper employeeEntityMapper;
-
-    public EmployeeServiceImpl(EmployeeRepository repository, EmployeeEntityMapper employeeEntityMapper) {
-        super(repository, EmployeeEntity.class);
-        this.employeeEntityMapper = employeeEntityMapper;
+    public EmployeeServiceImpl(EmployeeRepository repository, EmployeeEntityMapper converter) {
+        super(repository, converter, EmployeeEntity.class);
     }
 
     @Override
     public Page<EmployeeGeneralDetailDto> getEmployeesGeneralDetails(Pageable pageable) {
-        Page<EmployeeEntity> employees = findAllPaginated(pageable);
+        Page<EmployeeEntity> employees = getRepository().findAll(pageable);
         return employees.map(e -> EmployeeEntityMapper.convertToGeneralDetail(e, e.getPersonalData(),e.getPersonalData().getUser()));
     }
 
@@ -44,7 +41,7 @@ public class EmployeeServiceImpl extends AbstractService<EmployeeEntity,Employee
     public List<PhoneNumberDto> getEmployeesPhoneNumbers() {
         return getRepository().findAll().stream()
                 .filter( employee -> (!StringUtils.isEmpty(employee.getPersonalData().getContactNumber())))
-                .map(employeeEntityMapper::convertToPhoneNumber)
+                .map(getConverter()::convertToPhoneNumber)
                 .collect(Collectors.toList());
     }
 }

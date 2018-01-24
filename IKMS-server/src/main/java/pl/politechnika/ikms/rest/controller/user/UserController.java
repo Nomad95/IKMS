@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import pl.politechnika.ikms.commons.util.RandomString;
 import pl.politechnika.ikms.commons.util.mail.event.OnRegistrationCompleteEvent;
-import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.rest.dto.user.UserDto;
 import pl.politechnika.ikms.rest.dto.user.UserRegistrationDto;
 import pl.politechnika.ikms.rest.mapper.user.UserEntityMapper;
@@ -35,38 +34,34 @@ public class UserController {
 
     @GetMapping(value = "/{userId}")
     public UserDto getUser(@PathVariable Long userId){
-        return userEntityMapper.convertToDto(userService.findOne(userId));
+        return userService.findOne(userId);
     }
 
     @GetMapping
     public Page<UserDto> getUsers(Pageable pageable){
-        Page<UserEntity> allPaginated = userService.findAllPaginated(pageable);
-        return allPaginated.map(userEntityMapper::convertToDto);
+        return userService.findAllPaginated(pageable);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)//TODO: creation depends on provided role?
     public UserDto createUser(@Valid @RequestBody UserRegistrationDto userRegistrationDto, WebRequest request){
         userRegistrationDto.setPassword(new RandomString(8, ThreadLocalRandom.current()).nextString());
-        UserEntity user = userEntityRegistrationMapper.convertToEntity(userRegistrationDto);
-        UserEntity createdUser = userService.create(user);
+        UserDto userDto = userService.create(userRegistrationDto);
         new Thread(()-> {try {
             String appUrl = request.getContextPath();
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent
                     (userRegistrationDto, request.getLocale(), appUrl));
         } catch (Exception me) {
-            log.error("Couldn't create email for user " + createdUser.getUsername() + ". Deleting user...");
-            userService.delete(createdUser);
+            log.error("Couldn't create email for user " + userDto.getUsername() + ". Deleting user...");
+            userService.delete(userDto);
         }}).start();
 
-        return userEntityMapper.convertToDto(createdUser);
+        return userDto;
     }
 
     @PutMapping
     public UserDto updateUser(@Valid @RequestBody UserDto userDto){
-        UserEntity user = userEntityMapper.convertToEntity(userDto);
-        UserEntity updatedUser = userService.update(user);
-        return userEntityMapper.convertToDto(updatedUser);
+        return userService.update(userDto);
     }
 
     @DeleteMapping(value = "/{userId}")

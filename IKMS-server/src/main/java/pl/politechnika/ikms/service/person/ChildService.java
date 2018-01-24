@@ -3,13 +3,13 @@ package pl.politechnika.ikms.service.person;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pl.politechnika.ikms.commons.abstracts.GenericService;
-import pl.politechnika.ikms.domain.person.ChildEntity;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
+import pl.politechnika.ikms.rest.dto.person.ChildDto;
 import pl.politechnika.ikms.rest.dto.person.ChildGeneralDetailDto;
 
 import java.util.List;
 
-public interface ChildService extends GenericService<ChildEntity> {
+public interface ChildService extends GenericService<ChildDto> {
 
     Page<ChildGeneralDetailDto> getChildGeneralDetail(Pageable pageable);
 

@@ -13,4 +13,9 @@ public class PhoneNumberDto extends AbstractDto{
     private String fullName;
 
     private String phoneNumber;
+
+    @Override
+    public Long getId() {
+        return null;
+    }
 }

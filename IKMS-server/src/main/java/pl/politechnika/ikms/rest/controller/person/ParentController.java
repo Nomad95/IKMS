@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.politechnika.ikms.domain.person.ParentEntity;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.person.ParentDto;
 import pl.politechnika.ikms.rest.dto.person.ParentGeneralDetailDto;
@@ -22,29 +21,26 @@ import java.util.List;
 public class ParentController {
 
     private final @NonNull ParentService parentService;
-    private final @NonNull ParentEntityMapper parentEntityMapper;
 
     @GetMapping(value = "/{parentId}")
     public ParentDto getOneParent(@PathVariable Long parentId){
-        return parentEntityMapper.convertToDto(parentService.findOne(parentId));
+        return parentService.findOne(parentId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ParentDto createParent(@Valid @RequestBody ParentDto parentDto){
-        ParentEntity parentEntity = parentService.create(parentEntityMapper.convertToEntity(parentDto));
-        return parentEntityMapper.convertToDto(parentEntity);
+        return parentService.create(parentDto);
     }
 
     @GetMapping
     public Page<ParentDto> getAllParents(Pageable pageable){
-        return parentService.findAllPaginated(pageable).map(parentEntityMapper::convertToDto);
+        return parentService.findAllPaginated(pageable);
     }
 
     @PutMapping
     public ParentDto updateParent(@Valid @RequestBody ParentDto parentDto){
-        ParentEntity parentEntity = parentService.update(parentEntityMapper.convertToEntity(parentDto));
-        return parentEntityMapper.convertToDto(parentEntity);
+        return parentService.update(parentDto);
     }
 
     @DeleteMapping(value = "/{parentId}")

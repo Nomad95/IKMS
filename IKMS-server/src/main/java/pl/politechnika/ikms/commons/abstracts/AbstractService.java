@@ -8,64 +8,74 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Extend all service impl classes with this abstract - provides standard crud operations
- * @param <T> Entity
+ * @param <ENTITY> Entity
  * @param <R> Repository
  */
 @RequiredArgsConstructor
 @AllArgsConstructor
-public abstract class AbstractService<T extends AbstractEntity, R extends JpaRepository<T,Long>> implements GenericService<T> {
+public abstract class AbstractService<ENTITY extends AbstractEntity, DTO extends AbstractDto,
+        R extends JpaRepository<ENTITY, Long>, C extends AbstractModelMapper<ENTITY, DTO>>
+        implements GenericService<DTO> {
 
     private final R repository;
-    private Class<T> clazz;
+    private final C converter;
+    private Class<ENTITY> clazz;
 
     @Override
-    public T findOne(Long id) {
-        return repository.findOne(id);
+    public DTO findOne(Long id) {
+        return converter.convertToDto(repository.findOne(id));
     }
 
     @Override
-    public List<T> findAll() {
-        return repository.findAll();
+    public List<DTO> findAll() {
+        return repository.findAll().stream().map(converter::convertToDto).collect(Collectors.toList());
     }
 
     @Override
-    public Page<T> findAllPaginated(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<DTO> findAllPaginated(Pageable pageable) {
+        return repository.findAll(pageable).map(converter::convertToDto);
     }
 
     @Override
-    public T create(T entity) {
-        return repository.save(entity);
+    public DTO create(DTO dto) {
+        ENTITY savedEntity = repository.save(converter.convertToEntity(dto));
+        return converter.convertToDto(savedEntity);
     }
 
     @Override
-    public T update(T entity) {
-        T found = repository.findOne(entity.getId());
-        if (found == null) throw new EntityNotFoundException(
-                "Nie znaleziono obiektu " + clazz.getSimpleName() + " o identyfikatorze " + entity.getId());
-        return repository.save(entity);
+    public DTO update(DTO dto) {
+        ENTITY found = repository.findOne(dto.getId());
+        if (Objects.isNull(found)) throw new EntityNotFoundException(
+                "Nie znaleziono obiektu " + clazz.getSimpleName() + " o identyfikatorze " + dto.getId());
+        return converter.convertToDto(repository.save(found));
     }
 
     @Override
     public void deleteById(Long id) {
-        T one = repository.findOne(id);
-        if (one == null) throw new EntityNotFoundException(
+        ENTITY found = repository.findOne(id);
+        if (Objects.isNull(found)) throw new EntityNotFoundException(
                 "Nie znaleziono obiektu " + clazz.getSimpleName() + " o identyfikatorze " + id);
         repository.delete(id);
     }
 
     @Override
-    public void delete(T entity) {
-        T one = repository.findOne(entity.getId());
-        if (one == null) throw new EntityNotFoundException(
-                "Nie znaleziono obiektu " + clazz.getSimpleName() + " o identyfikatorze " + entity.getId());
-        repository.delete(entity);
+    public void delete(DTO dto) {
+        ENTITY found = repository.findOne(dto.getId());
+        if (Objects.isNull(found)) throw new EntityNotFoundException(
+                "Nie znaleziono obiektu " + clazz.getSimpleName() + " o identyfikatorze " + dto.getId());
+        repository.delete(found);
     }
 
-    public R getRepository(){
+    public R getRepository() {
         return this.repository;
+    }
+
+    public C getConverter() {
+        return this.converter;
     }
 }

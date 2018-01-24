@@ -5,7 +5,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import pl.politechnika.ikms.commons.abstracts.AbstractModelMapper;
 import pl.politechnika.ikms.domain.schedule.ScheduleActivityEntity;
-import pl.politechnika.ikms.domain.schedule.ScheduleActivityError;
 import pl.politechnika.ikms.repository.classroom.ClassroomRepository;
 import pl.politechnika.ikms.repository.group.GroupRepository;
 import pl.politechnika.ikms.repository.person.ChildRepository;
@@ -136,8 +135,8 @@ public class ScheduleActivityEntityMapper extends AbstractModelMapper<ScheduleAc
             ScheduleActivityErrorDto errorDto = new ScheduleActivityErrorDto();
             errorDto.setMessage(err.getValue());
             errorDto.setActivity( new MinimalDto<>(scheduleActivityDto.getId(),""));
-            ScheduleActivityError errEntity = errorService.create(errorMapper.convertToEntity(errorDto));
-            return errEntity.getId();
+            ScheduleActivityErrorDto errDto = errorService.create(errorDto);
+            return errDto.getId();
         }
     }
 }

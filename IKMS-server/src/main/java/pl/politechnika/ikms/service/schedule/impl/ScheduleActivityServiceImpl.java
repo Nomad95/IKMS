@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class ScheduleActivityServiceImpl extends AbstractService<ScheduleActivityEntity, ScheduleActivityRepository>
+public class ScheduleActivityServiceImpl extends AbstractService<ScheduleActivityEntity, ScheduleActivityDto, ScheduleActivityRepository, ScheduleActivityEntityMapper>
         implements ScheduleActivityService {
 
     public static final String BACKGROUND = "background";
@@ -48,8 +48,8 @@ public class ScheduleActivityServiceImpl extends AbstractService<ScheduleActivit
     public ScheduleActivityServiceImpl(
             ScheduleActivityRepository repository, ScheduleValidator scheduleValidator,
             ScheduleActivityEntityMapper scheduleActivityEntityMapper, JwtUserFacilities jwtUserFacilities,
-            EmployeeRepository employeeRepository, ChildEntityMapper childEntityMapper) {
-        super(repository, ScheduleActivityEntity.class);
+            EmployeeRepository employeeRepository, ChildEntityMapper childEntityMapper, ScheduleActivityEntityMapper converter) {
+        super(repository, converter, ScheduleActivityEntity.class);
         this.scheduleValidator = scheduleValidator;
         this.scheduleActivityEntityMapper = scheduleActivityEntityMapper;
         this.jwtUserFacilities = jwtUserFacilities;
@@ -129,17 +129,20 @@ public class ScheduleActivityServiceImpl extends AbstractService<ScheduleActivit
     }
 
     @Override
-    public List<ScheduleActivityEntity> getAllByDayForEmployee(Long id, LocalDate day) {
+    public List<ScheduleActivityDto> getAllByDayForEmployee(Long id, LocalDate day) {
         LocalDateTime beginning = day.atStartOfDay();
         LocalDateTime end = day.atTime(23, 59);
-        return getRepository().findAllForEmployeeAndDay(id, beginning, end);
+        List<ScheduleActivityEntity> allForEmployeeAndDay = getRepository()
+                .findAllForEmployeeAndDay(id, beginning, end);
+        return allForEmployeeAndDay.stream().map(getConverter()::convertToDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<ScheduleActivityEntity> getAllByDay(LocalDate day) {
+    public List<ScheduleActivityDto> getAllByDay(LocalDate day) {
         LocalDateTime beginning = day.atStartOfDay();
         LocalDateTime end = day.atTime(23, 59);
-        return getRepository().findAllByDay(beginning, end);
+        List<ScheduleActivityEntity> allByDay = getRepository().findAllByDay(beginning, end);
+        return allByDay.stream().map(getConverter()::convertToDto).collect(Collectors.toList());
     }
 
     @Override

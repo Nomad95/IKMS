@@ -9,4 +9,9 @@ import pl.politechnika.ikms.commons.abstracts.AbstractDto;
 public class RoleDto extends AbstractDto {
 
     private String role;
+
+    @Override
+    public Long getId() {
+        return null;
+    }
 }

@@ -7,38 +7,32 @@ import pl.politechnika.ikms.commons.abstracts.AbstractService;
 import pl.politechnika.ikms.domain.person.ChildEntity;
 import pl.politechnika.ikms.repository.person.ChildRepository;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
+import pl.politechnika.ikms.rest.dto.person.ChildDto;
 import pl.politechnika.ikms.rest.dto.person.ChildGeneralDetailDto;
 import pl.politechnika.ikms.rest.mapper.person.ChildEntityMapper;
 import pl.politechnika.ikms.service.person.ChildService;
 
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ChildServiceImpl extends AbstractService<ChildEntity,ChildRepository> implements ChildService {
+public class ChildServiceImpl extends AbstractService<ChildEntity, ChildDto, ChildRepository, ChildEntityMapper> implements ChildService {
 
-    private final @NotNull ChildEntityMapper childEntityMapper;
-
-    public ChildServiceImpl(ChildRepository repository, ChildEntityMapper childEntityMapper) {
-        super(repository, ChildEntity.class);
-        this.childEntityMapper = childEntityMapper;
+    public ChildServiceImpl(ChildRepository repository, ChildEntityMapper converter) {
+        super(repository, converter, ChildEntity.class);
     }
 
     @Override
     public Page<ChildGeneralDetailDto> getChildGeneralDetail(Pageable pageable) {
-        Page<ChildEntity> childrens = findAllPaginated(pageable);
-        return childrens.map(childEntityMapper::convertToGeneralDetail);
+        return getRepository().findAll(pageable).map(getConverter()::convertToGeneralDetail);
     }
 
     @Override
     public List<ChildGeneralDetailDto> getGeneralDto(List<Long> childrenIds) {
         List<ChildEntity> dtos = getRepository().getGeneralDto(childrenIds);
-        ArrayList<ChildGeneralDetailDto> generalDtos = dtos.stream()
-                .map(childEntityMapper::convertToGeneralDetail)
-                .collect(Collectors.toCollection(ArrayList::new));
-        return generalDtos;
+        return dtos.stream()
+                .map(getConverter()::convertToGeneralDetail)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -6,19 +6,19 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-public interface GenericService<T extends AbstractEntity> {
+public interface GenericService<DTO extends AbstractDto> {
 
-    T findOne(final Long id);
+    DTO findOne(final Long id);
 
-    List<T> findAll();
+    List<DTO> findAll();
 
-    Page<T> findAllPaginated(Pageable pageable);
+    Page<DTO> findAllPaginated(Pageable pageable);
 
-    T create(T entity);
+    DTO create(DTO dto);
 
-    T update(T entity);
+    DTO update(DTO dto);
 
     void deleteById(final Long id);
 
-    void delete(final T entity);
+    void delete(final DTO dto);
 }

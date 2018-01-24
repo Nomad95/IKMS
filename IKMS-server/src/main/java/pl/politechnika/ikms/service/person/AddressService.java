@@ -1,13 +1,13 @@
 package pl.politechnika.ikms.service.person;
 
 import pl.politechnika.ikms.commons.abstracts.GenericService;
-import pl.politechnika.ikms.domain.person.AddressEntity;
+import pl.politechnika.ikms.rest.dto.person.AddressDto;
 
 import java.util.List;
 
-public interface AddressService extends GenericService<AddressEntity>{
+public interface AddressService extends GenericService<AddressDto>{
 
-    List<AddressEntity> findByPersonalDataId(Long id);
+    List<AddressDto> findByPersonalDataId(Long id);
 
-    List<AddressEntity> findByParentId(Long id);
+    List<AddressDto> findByParentId(Long id);
 }

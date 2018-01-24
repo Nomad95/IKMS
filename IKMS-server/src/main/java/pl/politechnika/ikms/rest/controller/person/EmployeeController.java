@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import pl.politechnika.ikms.domain.person.EmployeeEntity;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.person.EmployeeDto;
 import pl.politechnika.ikms.rest.dto.person.EmployeeGeneralDetailDto;
@@ -24,30 +23,27 @@ import java.util.List;
 public class EmployeeController {
 
     private final @NonNull EmployeeService employeeService;
-    private final @NonNull EmployeeEntityMapper employeeEntityMapper;
 
     @GetMapping(value = "/{employeeId}")
     @ResponseBody
     public EmployeeDto getOneEmployee(@PathVariable Long employeeId){
-        return employeeEntityMapper.convertToDto(employeeService.findOne(employeeId));
+        return employeeService.findOne(employeeId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public EmployeeDto createEmployee(@Valid @RequestBody EmployeeDto employeeDto){
-        EmployeeEntity employeeEntity = employeeService.create(employeeEntityMapper.convertToEntity(employeeDto));
-        return employeeEntityMapper.convertToDto(employeeEntity);
+        return employeeService.create(employeeDto);
     }
 
     @GetMapping
     public Page<EmployeeDto> getAllEmployees(Pageable pageable){
-       return employeeService.findAllPaginated(pageable).map(employeeEntityMapper::convertToDto);
+       return employeeService.findAllPaginated(pageable);
     }
 
     @PutMapping
     public EmployeeDto updateEmployee(@Valid @RequestBody EmployeeDto employeeDto){
-        EmployeeEntity updatedEntity = employeeService.update(employeeEntityMapper.convertToEntity(employeeDto));
-        return employeeEntityMapper.convertToDto(updatedEntity);
+        return employeeService.update(employeeDto);
     }
 
     @DeleteMapping(value = "/{employeeId}")

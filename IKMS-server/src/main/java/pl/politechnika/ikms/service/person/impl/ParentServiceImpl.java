@@ -8,6 +8,7 @@ import pl.politechnika.ikms.commons.abstracts.AbstractService;
 import pl.politechnika.ikms.domain.person.ParentEntity;
 import pl.politechnika.ikms.repository.person.ParentRepository;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
+import pl.politechnika.ikms.rest.dto.person.ParentDto;
 import pl.politechnika.ikms.rest.dto.person.ParentGeneralDetailDto;
 import pl.politechnika.ikms.rest.mapper.person.ParentEntityMapper;
 import pl.politechnika.ikms.service.person.ParentService;
@@ -16,16 +17,18 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ParentServiceImpl extends AbstractService<ParentEntity,ParentRepository> implements ParentService {
+public class ParentServiceImpl extends AbstractService<ParentEntity, ParentDto, ParentRepository, ParentEntityMapper>
+        implements ParentService {
 
-    public ParentServiceImpl(ParentRepository repository) {
-        super(repository, ParentEntity.class);
+    public ParentServiceImpl(ParentRepository repository, ParentEntityMapper converter) {
+        super(repository, converter, ParentEntity.class);
     }
 
     @Override
     public Page<ParentGeneralDetailDto> getParentGeneralDetails(Pageable pageable) {
-        Page<ParentEntity> parents = findAllPaginated(pageable);
-        return parents.map(e -> ParentEntityMapper.convertToGeneralDetail(e, e.getPersonalData(),e.getPersonalData().getUser()));
+        Page<ParentEntity> parents = getRepository().findAll(pageable);
+        return parents.map(e -> ParentEntityMapper
+                .convertToGeneralDetail(e, e.getPersonalData(), e.getPersonalData().getUser()));
     }
 
     @Override

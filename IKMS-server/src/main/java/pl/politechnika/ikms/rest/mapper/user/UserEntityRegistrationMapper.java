@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -52,4 +51,5 @@ public class UserEntityRegistrationMapper extends AbstractModelMapper<UserEntity
         entity.setEnabled(true);
         return entity;
     }
+
 }

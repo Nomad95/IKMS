@@ -26,4 +26,8 @@ public class FileFormDataDto extends AbstractDto {
 
     private String selectedParents;
 
+    @Override
+    public Long getId() {
+        return null;
+    }
 }

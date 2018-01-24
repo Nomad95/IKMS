@@ -4,19 +4,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pl.politechnika.ikms.commons.abstracts.GenericService;
 import pl.politechnika.ikms.domain.notification.NotificationEntity;
+import pl.politechnika.ikms.rest.dto.notification.NotificationDto;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public interface NotificationService extends GenericService<NotificationEntity> {
+public interface NotificationService extends GenericService<NotificationDto> {
 
-    NotificationEntity sendNotification(NotificationEntity notificationEntity, String recipient_username, HttpServletRequest request);
+    NotificationDto sendNotification(NotificationEntity notificationEntity, String recipient_username, HttpServletRequest request);
 
-    Page<NotificationEntity> findMyNotificationByPage(HttpServletRequest request, Pageable pageable);
+    Page<NotificationDto> findMyNotificationByPage(HttpServletRequest request, Pageable pageable);
 
-    List<NotificationEntity> findMyNotificationByUser(HttpServletRequest request);
+    List<NotificationDto> findMyNotificationByUser(HttpServletRequest request);
 
-    NotificationEntity findMyNotificationById(Long notificationId, HttpServletRequest request);
+    NotificationDto findMyNotificationById(Long notificationId, HttpServletRequest request);
 
     void deleteMyNotification(Long notificationId, HttpServletRequest request);
 
@@ -24,6 +25,6 @@ public interface NotificationService extends GenericService<NotificationEntity> 
 
     void setNotificationToRead(Long idNotification);
 
-    List<NotificationEntity> findNewestNotificationForMobile(Long lastNotificationId, HttpServletRequest request);
+    List<NotificationDto> findNewestNotificationForMobile(Long lastNotificationId, HttpServletRequest request);
 }
 

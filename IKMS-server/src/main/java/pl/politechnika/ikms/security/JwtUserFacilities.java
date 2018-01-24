@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 import pl.politechnika.ikms.repository.user.UserRepository;
-import pl.politechnika.ikms.service.user.UserService;
-import pl.politechnika.ikms.service.user.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
@@ -25,12 +23,9 @@ public class JwtUserFacilities {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired(required = false)
-    private UserService userService = new UserServiceImpl(userRepository);
-
     public UserEntity findUserByUsernameFromToken(HttpServletRequest request) {
 
-        UserEntity userEntity = Optional.ofNullable(userService.getUserByUsername(pullTokenAndGetUsername(request)))
+        UserEntity userEntity = Optional.ofNullable(userRepository.findByUsername(pullTokenAndGetUsername(request)))
                 .orElseThrow(()-> new EntityNotFoundException("Nie znaleziono użytkownika z username "+
                         pullTokenAndGetUsername(request)));
         return userEntity;

@@ -11,34 +11,39 @@ import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 import pl.politechnika.ikms.repository.group.GroupRepository;
 import pl.politechnika.ikms.repository.person.ChildRepository;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
+import pl.politechnika.ikms.rest.dto.group.GroupDto;
+import pl.politechnika.ikms.rest.mapper.group.GroupEntityMapper;
 import pl.politechnika.ikms.service.group.GroupService;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
-public class GroupServiceImpl extends AbstractService<GroupEntity, GroupRepository> implements GroupService{
+public class GroupServiceImpl extends AbstractService<GroupEntity, GroupDto, GroupRepository, GroupEntityMapper> implements GroupService{
 
     private final @NonNull ChildRepository childRepository;
 
-    public GroupServiceImpl(GroupRepository repository, ChildRepository childRepository) {
-        super(repository,GroupEntity.class);
+    public GroupServiceImpl(GroupRepository repository, ChildRepository childRepository, GroupEntityMapper groupEntityMapper) {
+        super(repository, groupEntityMapper, GroupEntity.class);
         this.childRepository = childRepository;
     }
 
     @Override
     @Transactional
-    public GroupEntity update(GroupEntity entity) {
-        GroupEntity foundEntity = getRepository().findOne(entity.getId());
-        if (foundEntity == null) throw new EntityNotFoundException(
-                "Nie znaleziono obiektu " + GroupEntity.class.getSimpleName() + " o identyfikatorze " + entity.getId());
+    public GroupDto update(GroupDto dto) {
+        GroupEntity foundEntity = getRepository().findOne(dto.getId());
+        if (Objects.isNull(foundEntity)) throw new EntityNotFoundException(
+                "Nie znaleziono obiektu " + GroupEntity.class.getSimpleName() + " o identyfikatorze " + dto.getId());
+
+        GroupEntity groupToUpdate = getConverter().convertToEntity(dto);
 
         List<ChildEntity> children = foundEntity.getChildren();
-        children.removeAll(entity.getChildren());
+        children.removeAll(groupToUpdate.getChildren());
         children.forEach(c->c.setGroup(null));
         childRepository.save(children);
 
-        return getRepository().save(entity);
+        return getConverter().convertToDto(getRepository().save(groupToUpdate));
     }
 
     @Override

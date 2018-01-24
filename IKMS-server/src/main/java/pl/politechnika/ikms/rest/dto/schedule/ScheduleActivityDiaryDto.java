@@ -14,4 +14,9 @@ public class ScheduleActivityDiaryDto extends AbstractDto {
     private ScheduleActivityDto scheduleActivityDto;
 
     List<ChildDto> children;
+
+    @Override
+    public Long getId() {
+        return null;
+    }
 }

@@ -20,7 +20,9 @@ import pl.politechnika.ikms.repository.group.GroupRepository;
 import pl.politechnika.ikms.repository.person.EmployeeRepository;
 import pl.politechnika.ikms.repository.person.ParentRepository;
 import pl.politechnika.ikms.repository.upload.DidacticMaterialFileRepository;
+import pl.politechnika.ikms.rest.dto.upload.DidacticMaterialFileDto;
 import pl.politechnika.ikms.rest.dto.upload.FileFormDataDto;
+import pl.politechnika.ikms.rest.mapper.upload.DidacticMaterialFileMapper;
 import pl.politechnika.ikms.security.JwtUserFacilities;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,18 +34,26 @@ import java.util.Optional;
 @Service
 @Slf4j
 @Transactional
-public class UploadServiceImpl extends AbstractService<DidacticMaterialFileEntity, DidacticMaterialFileRepository> implements UploadService {
+public class UploadServiceImpl extends
+        AbstractService<DidacticMaterialFileEntity, DidacticMaterialFileDto, DidacticMaterialFileRepository, DidacticMaterialFileMapper>
+        implements UploadService {
 
-    private final @NonNull FileTreeBuilder fileTreeBuilder;
-    private final @NonNull EmployeeRepository employeeRepository;
-    private final @NonNull GroupRepository groupRepository;
-    private final @NonNull ParentRepository parentRepository;
-    private final @NonNull JwtUserFacilities jwtUserFacilities;
+    private final @NonNull
+    FileTreeBuilder fileTreeBuilder;
+    private final @NonNull
+    EmployeeRepository employeeRepository;
+    private final @NonNull
+    GroupRepository groupRepository;
+    private final @NonNull
+    ParentRepository parentRepository;
+    private final @NonNull
+    JwtUserFacilities jwtUserFacilities;
 
 
-
-    public UploadServiceImpl(DidacticMaterialFileRepository repository, FileTreeBuilder fileTreeBuilder, EmployeeRepository employeeRepository, GroupRepository groupRepository, ParentRepository parentRepository, JwtUserFacilities jwtUserFacilities) {
-        super(repository, DidacticMaterialFileEntity.class);
+    public UploadServiceImpl(DidacticMaterialFileRepository repository, FileTreeBuilder fileTreeBuilder,
+            EmployeeRepository employeeRepository, GroupRepository groupRepository, ParentRepository parentRepository,
+            JwtUserFacilities jwtUserFacilities, DidacticMaterialFileMapper converter) {
+        super(repository, converter, DidacticMaterialFileEntity.class);
         this.fileTreeBuilder = fileTreeBuilder;
         this.employeeRepository = employeeRepository;
         this.groupRepository = groupRepository;
@@ -52,7 +62,8 @@ public class UploadServiceImpl extends AbstractService<DidacticMaterialFileEntit
     }
 
     @Override
-    public boolean uploadFile(MultipartFile file, FileFormDataDto formDataDto, String role, HttpServletRequest httpRequest) {
+    public boolean uploadFile(MultipartFile file, FileFormDataDto formDataDto, String role,
+            HttpServletRequest httpRequest) {
         log.debug("uploading file with form data: {}", formDataDto);
 
         try {
@@ -112,10 +123,10 @@ public class UploadServiceImpl extends AbstractService<DidacticMaterialFileEntit
     }
 
     @Override
-    public DidacticMaterialFileEntity getFile(Long materialId) {
+    public DidacticMaterialFileDto getFile(Long materialId) {
         DidacticMaterialFileEntity file = getRepository().getOne(materialId);
         file.getContent();
-        return file;
+        return getConverter().convertToDto(file);
     }
 
     @Override
@@ -145,7 +156,7 @@ public class UploadServiceImpl extends AbstractService<DidacticMaterialFileEntit
         return result;
     }
 
-    private String getIconByExtension(String filename){
+    private String getIconByExtension(String filename) {
         String fileExtension = getFileExtension(filename.toLowerCase());
         if (StringUtils.isEmpty(fileExtension)) {
             return "fa-file-o";
@@ -153,7 +164,8 @@ public class UploadServiceImpl extends AbstractService<DidacticMaterialFileEntit
         if ("doc".equals(fileExtension) || "odt".equals(fileExtension)) {
             return "fa-file-word-o";
         }
-        if ("png".equals(fileExtension) || "jpg".equals(fileExtension) || "jpeg".equals(fileExtension) || "bmp".equals(fileExtension)) {
+        if ("png".equals(fileExtension) || "jpg".equals(fileExtension) || "jpeg".equals(fileExtension) || "bmp"
+                .equals(fileExtension)) {
             return "fa-file-image-o";
         }
         if ("zip".equals(fileExtension) || "rar".equals(fileExtension)) {
@@ -168,7 +180,8 @@ public class UploadServiceImpl extends AbstractService<DidacticMaterialFileEntit
         if ("xlsx".equals(fileExtension) || "xls".equals(fileExtension) || "csv".equals(fileExtension)) {
             return "fa-file-excel-o";
         }
-        if ("avi".equals(fileExtension) || "wmv".equals(fileExtension) || "mp4".equals(fileExtension) || "mpeg".equals(fileExtension)) {
+        if ("avi".equals(fileExtension) || "wmv".equals(fileExtension) || "mp4".equals(fileExtension) || "mpeg"
+                .equals(fileExtension)) {
             return "fa-file-video-o";
         }
 
@@ -176,8 +189,8 @@ public class UploadServiceImpl extends AbstractService<DidacticMaterialFileEntit
     }
 
     private static String getFileExtension(String fileName) {
-        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-            return fileName.substring(fileName.lastIndexOf(".")+1);
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            return fileName.substring(fileName.lastIndexOf(".") + 1);
         else return null;
     }
 }

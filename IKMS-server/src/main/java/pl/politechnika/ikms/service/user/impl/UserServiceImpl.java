@@ -9,22 +9,39 @@ import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 import pl.politechnika.ikms.repository.user.UserRepository;
 import pl.politechnika.ikms.rest.dto.role.RoleDto;
+import pl.politechnika.ikms.rest.dto.user.UserDto;
+import pl.politechnika.ikms.rest.dto.user.UserRegistrationDto;
+import pl.politechnika.ikms.rest.mapper.user.UserEntityMapper;
+import pl.politechnika.ikms.rest.mapper.user.UserEntityRegistrationMapper;
 import pl.politechnika.ikms.service.user.UserService;
 
 import java.util.Optional;
 
 @Service
 @Transactional
-public class UserServiceImpl extends AbstractService<UserEntity,UserRepository> implements UserService {
+public class UserServiceImpl extends AbstractService<UserEntity, UserDto, UserRepository, UserEntityMapper>
+        implements UserService {
 
-    public UserServiceImpl(UserRepository repository) {
-        super(repository, UserEntity.class);
+    private final UserEntityRegistrationMapper userEntityRegistrationMapper;
+
+    public UserServiceImpl(UserRepository repository, UserEntityMapper converter,
+            UserEntityRegistrationMapper userEntityRegistrationMapper) {
+        super(repository, converter, UserEntity.class);
+        this.userEntityRegistrationMapper = userEntityRegistrationMapper;
     }
 
     @Override
-    public UserEntity getUserByUsername(String username) {
+    public UserDto getUserByUsername(String username) {
         Optional<UserEntity> user = Optional.ofNullable(getRepository().findByUsername(username));
-        return user.orElseThrow(()-> new EntityNotFoundException("Nie znaleziono użytkownika o loginie: "+username));
+        UserEntity userEntity = user
+                .orElseThrow(() -> new EntityNotFoundException("Nie znaleziono użytkownika o loginie: " + username));
+        return getConverter().convertToDto(userEntity);
+    }
+
+    public UserDto create(UserRegistrationDto dto) {
+        UserEntity userEntity = userEntityRegistrationMapper.convertToEntity(dto);
+        UserEntity savedEntity = getRepository().save(userEntity);
+        return getConverter().convertToDto(savedEntity);
     }
 
     @Override

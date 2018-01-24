@@ -8,10 +8,8 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.politechnika.ikms.domain.fileTree.FileTreeNode;
-import pl.politechnika.ikms.domain.upload.DidacticMaterialFileEntity;
 import pl.politechnika.ikms.rest.dto.upload.DidacticMaterialFileDto;
 import pl.politechnika.ikms.rest.dto.upload.FileFormDataDto;
-import pl.politechnika.ikms.rest.mapper.upload.DidacticMaterialFileMapper;
 import pl.politechnika.ikms.service.upload.UploadService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +25,6 @@ public class UploadController {
     public static final String ROLE = "role";
 
     private final UploadService uploadService;
-    private final DidacticMaterialFileMapper fileConverter;
 
     @PostMapping
     public ResponseEntity uploadFile(@RequestParam("file") MultipartFile file, FileFormDataDto formDataDto,
@@ -46,8 +43,7 @@ public class UploadController {
 
     @GetMapping("/{materialId}")
     public DidacticMaterialFileDto downloadFile(@PathVariable("materialId") Long materialId) throws IOException {
-        DidacticMaterialFileEntity file = uploadService.getFile(materialId);
-        return fileConverter.convertToDto(file);
+        return uploadService.getFile(materialId);
     }
 
     @GetMapping(value = "/tree")

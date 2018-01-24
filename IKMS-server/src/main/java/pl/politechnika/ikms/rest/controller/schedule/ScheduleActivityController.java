@@ -9,10 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pl.politechnika.ikms.domain.schedule.ScheduleActivityEntity;
 import pl.politechnika.ikms.rest.dto.schedule.ScheduleActivityDiaryDto;
 import pl.politechnika.ikms.rest.dto.schedule.ScheduleActivityDto;
-import pl.politechnika.ikms.rest.mapper.schedule.ScheduleActivityEntityMapper;
 import pl.politechnika.ikms.service.schedule.ScheduleActivityService;
 import pl.politechnika.ikms.validators.schedule.ScheduleValidator;
 
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/schedule")
@@ -28,19 +25,17 @@ import java.util.stream.Collectors;
 public class ScheduleActivityController {
 
     private final @NonNull ScheduleActivityService scheduleActivityService;
-    private final @NonNull ScheduleActivityEntityMapper scheduleActivityEntityMapper;
     private final @NonNull ScheduleValidator scheduleValidator;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ScheduleActivityDto createActivity(@Valid @RequestBody ScheduleActivityDto activityDto){
-        ScheduleActivityEntity addressEntity = scheduleActivityService.create(scheduleActivityEntityMapper.convertToEntity(activityDto));
-        return scheduleActivityEntityMapper.convertToDto(addressEntity);
+        return scheduleActivityService.create(activityDto);
     }
 
     @GetMapping
     public Page<ScheduleActivityDto> getAllActivities(Pageable pageable){
-        return scheduleActivityService.findAllPaginated(pageable).map(scheduleActivityEntityMapper::convertToDto);
+        return scheduleActivityService.findAllPaginated(pageable);
     }
 
     @GetMapping(value = "/all", params = { "for", "id" })
@@ -52,18 +47,14 @@ public class ScheduleActivityController {
 
     @GetMapping(value = "/diary/employee", params = { "id", "day"})
     public List<ScheduleActivityDto> getDiaryActivitiesByDay(@RequestParam("id") Long id, @RequestParam("day") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate day){
-        List<ScheduleActivityEntity> activities = scheduleActivityService.getAllByDayForEmployee(id, day);
-        List<ScheduleActivityDto> dtos = activities.stream().map(scheduleActivityEntityMapper::convertToDto).collect(Collectors.toList());
-
+        List<ScheduleActivityDto> dtos = scheduleActivityService.getAllByDayForEmployee(id, day);
         return scheduleValidator.validateMany(dtos);
     }
 
     @GetMapping(value = "/diary/admin", params = {"day"})
     @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
     public List<ScheduleActivityDto> getDiaryAllActivitiesByDayForAdmin(@RequestParam("day") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate day){
-        List<ScheduleActivityEntity> activities = scheduleActivityService.getAllByDay(day);
-        List<ScheduleActivityDto> dtos = activities.stream().map(scheduleActivityEntityMapper::convertToDto).collect(Collectors.toList());
-
+        List<ScheduleActivityDto> dtos = scheduleActivityService.getAllByDay(day);
         return scheduleValidator.validateMany(dtos);
     }
 
@@ -74,13 +65,12 @@ public class ScheduleActivityController {
 
     @GetMapping(value = "/{activityId}")
     public ScheduleActivityDto getOneActivity(@PathVariable Long activityId){
-        return scheduleActivityEntityMapper.convertToDto(scheduleActivityService.findOne(activityId));
+        return scheduleActivityService.findOne(activityId);
     }
 
     @PutMapping
     public ScheduleActivityDto updateActivity(@Valid @RequestBody ScheduleActivityDto activityDto){
-        ScheduleActivityEntity addressEntity = scheduleActivityService.update(scheduleActivityEntityMapper.convertToEntity(activityDto));
-        return scheduleActivityEntityMapper.convertToDto(addressEntity);
+        return scheduleActivityService.update(activityDto);
     }
 
     @DeleteMapping(value = "/{activityId}")

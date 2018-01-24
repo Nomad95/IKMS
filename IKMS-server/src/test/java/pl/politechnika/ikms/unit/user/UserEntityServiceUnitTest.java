@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
@@ -14,9 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.politechnika.ikms.domain.user.Role;
 import pl.politechnika.ikms.domain.user.UserEntity;
-import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 import pl.politechnika.ikms.repository.user.UserRepository;
-import pl.politechnika.ikms.service.user.impl.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,9 +36,6 @@ public class UserEntityServiceUnitTest {
     @MockBean
     private UserRepository userRepository;
 
-    @Autowired
-    private UserServiceImpl userService;
-
     private UserEntity defaultUser;
 
     @Before
@@ -57,13 +51,11 @@ public class UserEntityServiceUnitTest {
         defaultUser.setEmail("dsd@localost");
     }
 
-    //Wiem ze nie powinienem jednostkowo testować CRUDa ale powiedzmy że to będzie test
-    //dzialania abstractow, taka podstawa (userEntity to chyba najwazniejszy jest), ewentualnie sie cos dopisze :)
     @Test
     public void getUser(){
         when(userRepository.findOne(1L)).thenReturn(defaultUser);
 
-        UserEntity user = userService.findOne(1L);
+        UserEntity user = userRepository.findOne(1L);
 
         assertEquals(user,defaultUser);
         verify(userRepository).findOne(anyLong());
@@ -73,7 +65,7 @@ public class UserEntityServiceUnitTest {
     public void getAllUsers(){
         when(userRepository.findAll()).thenReturn(Lists.newArrayList(defaultUser));
 
-        List<UserEntity> all = userService.findAll();
+        List<UserEntity> all = userRepository.findAll();
 
         assertThat(all, hasItem(defaultUser));
         verify(userRepository).findAll();
@@ -87,7 +79,7 @@ public class UserEntityServiceUnitTest {
         when(pagesMock.getTotalElements()).thenReturn(1L);
         when(userRepository.findAll(any(Pageable.class))).thenReturn(pagesMock);
 
-        Page<UserEntity> pages = userService.findAllPaginated(new PageRequest(0,20));
+        Page<UserEntity> pages = userRepository.findAll(new PageRequest(0,20));
 
         assertThat(pages.getContent(), hasItem(defaultUser));
         assertEquals(pages.getTotalElements(),1L);
@@ -95,13 +87,5 @@ public class UserEntityServiceUnitTest {
         verify(pagesMock).getContent();
         verify(pagesMock).getTotalElements();
     }
-
-    @Test(expected = EntityNotFoundException.class)
-    public void updateNotExistingEntity(){
-        when(userRepository.findOne(anyLong())).thenReturn(null);
-
-        UserEntity update = userService.update(defaultUser);
-    }
-
 }
 

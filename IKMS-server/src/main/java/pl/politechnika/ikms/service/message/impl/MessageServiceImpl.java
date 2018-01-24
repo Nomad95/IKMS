@@ -14,6 +14,10 @@ import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 import pl.politechnika.ikms.repository.message.MessageRepository;
 import pl.politechnika.ikms.repository.person.PersonalDataRepository;
 import pl.politechnika.ikms.repository.user.UserRepository;
+import pl.politechnika.ikms.rest.dto.message.MessageDto;
+import pl.politechnika.ikms.rest.dto.message.MessageWithSenderIdAndRecipientIdDto;
+import pl.politechnika.ikms.rest.mapper.message.MessageEntityMapper;
+import pl.politechnika.ikms.rest.mapper.user.UserEntityMapper;
 import pl.politechnika.ikms.security.JwtUserFacilities;
 import pl.politechnika.ikms.service.message.MessageService;
 
@@ -22,12 +26,13 @@ import javax.sql.DataSource;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service
 @Transactional
-public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRepository> implements MessageService {
+public class MessageServiceImpl extends AbstractService<MessageEntity, MessageDto, MessageRepository, MessageEntityMapper> implements MessageService {
 
     @Autowired
     private JwtUserFacilities jwtUserFacilities;
@@ -42,13 +47,29 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
     @Autowired
     private PersonalDataRepository personalDataRepository;
 
-    public MessageServiceImpl(MessageRepository repository) {
-        super(repository);
+    @Autowired
+    private UserEntityMapper userEntityMapper;
+
+
+    public MessageServiceImpl(MessageRepository repository, MessageEntityMapper converter) {
+        super(repository, converter, MessageEntity.class);
     }
 
     @Override
-    public MessageEntity sendMessage(MessageEntity messageEntity, HttpServletRequest request, String recipientUsername) {
+    public MessageDto sendMessage(MessageDto messageDto, HttpServletRequest request, String recipientUsername) {
+        MessageEntity savedMessage = processMessage(messageDto, request, recipientUsername);
 
+        return getConverter().convertToDto(savedMessage);
+    }
+
+    @Override
+    public MessageWithSenderIdAndRecipientIdDto sendMessageWithSenderAndRecipientDto(MessageDto messageDto,
+            HttpServletRequest request, String recipientUsername) {
+        MessageEntity savedMessage = processMessage(messageDto, request, recipientUsername);
+        return getConverter().convertToMessageWithSenderIdAndRecipientIdDto(savedMessage);
+    }
+
+    private MessageEntity processMessage(MessageDto messageDto, HttpServletRequest request, String recipientUsername) {
         UserEntity sender = Optional.ofNullable(jwtUserFacilities.findUserByUsernameFromToken(request))
                 .orElseThrow(()-> new EntityNotFoundException("Błąd podczas pobierania twojego username z tokena "));
         UserEntity recipient = Optional.ofNullable(userRepository.findByUsername(recipientUsername))
@@ -64,22 +85,20 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
                         .replace(",", " "))
                         .orElseThrow(() -> new EntityNotFoundException("Nie znaleziono odbiorcy o loginie z tokena"));
 
-        messageEntity.setSender(sender);
-        messageEntity.setRecipient(recipient);
-        messageEntity.setDateOfSend(LocalDateTime.now());
-        messageEntity.setWasRead(false);
-        messageEntity.setRecipientUsername(recipient.getUsername());
-        messageEntity.setSenderUsername(sender.getUsername());
-        messageEntity.setRecipientFullName(recipientFullName);
-        messageEntity.setSenderFullName(senderFullName);
+        messageDto.setSender(userEntityMapper.convertToDto(sender));
+        messageDto.setRecipient(userEntityMapper.convertToDto(recipient));
+        messageDto.setDateOfSend(LocalDateTime.now());
+        messageDto.setWasRead(false);
+        messageDto.setRecipientUsername(recipient.getUsername());
+        messageDto.setSenderUsername(sender.getUsername());
+        messageDto.setRecipientFullName(recipientFullName);
+        messageDto.setSenderFullName(senderFullName);
 
-        getRepository().save(messageEntity);
-
-        return messageEntity;
+        return getRepository().save(getConverter().convertToEntity(messageDto));
     }
 
     @Override
-    public Page<MessageEntity> findAllOfMyReceivedMessage(Pageable pageable, HttpServletRequest request) {
+    public Page<MessageDto> findAllOfMyReceivedMessage(Pageable pageable, HttpServletRequest request) {
         UserEntity recipient = Optional.ofNullable(jwtUserFacilities.findUserByUsernameFromToken(request))
                 .orElseThrow(()-> new EntityNotFoundException("Błąd podczas pobierania twojego username z tokena "));
 
@@ -88,11 +107,11 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
                 .orElseThrow(()-> new EntityNotFoundException("Błąd podczas pobierania wiadomości użytkownika o nazwie "
                         + recipient.getUsername()));
 
-        return myMessagesToReceived;
+        return myMessagesToReceived.map(getConverter()::convertToDto);
     }
 
     @Override
-    public MessageEntity findReceivedMessageById(Long idMessage, HttpServletRequest request) {
+    public MessageDto findReceivedMessageById(Long idMessage, HttpServletRequest request) {
         MessageEntity message = Optional.ofNullable(getRepository().findOne(idMessage))
                 .orElseThrow(()-> new EntityNotFoundException("Wiadomość o id " + idMessage + " nie istnieje"));
 
@@ -102,11 +121,11 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
             message.setWasRead(true);
         }
 
-        return message;
+        return getConverter().convertToDto(message);
     }
 
     @Override
-    public Page<MessageEntity> findAllOfMySentMessage(Pageable pageable, HttpServletRequest request) {
+    public Page<MessageDto> findAllOfMySentMessage(Pageable pageable, HttpServletRequest request) {
         UserEntity sender = Optional.ofNullable(jwtUserFacilities.findUserByUsernameFromToken(request))
                 .orElseThrow(()-> new EntityNotFoundException("Błąd podczas pobierania username z tokena"));
 
@@ -115,15 +134,15 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
                 .orElseThrow(()-> new EntityNotFoundException("Błąd podczas pobierania wiadomości użytkownika o nazwie "
                         + sender.getUsername()));
 
-        return mySentMessage;
+        return mySentMessage.map(getConverter()::convertToDto);
     }
 
     @Override
-    public MessageEntity findSentMessageById(Long idMessage, HttpServletRequest request) {
+    public MessageDto findSentMessageById(Long idMessage, HttpServletRequest request) {
         MessageEntity message = Optional.ofNullable(getRepository().findOne(idMessage))
                 .orElseThrow(()-> new EntityNotFoundException("Wiadomość o id " + idMessage + " nie istnieje"));
 
-        return message;
+        return getConverter().convertToDto(message);
     }
 
     @Override
@@ -173,7 +192,7 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
     }
 
     @Override
-    public List<MessageEntity> findListAllNewestOfMyReceivedMessage(Long lastRecievedMessageId, HttpServletRequest request) {
+    public List<MessageDto> findListAllNewestOfMyReceivedMessage(Long lastRecievedMessageId, HttpServletRequest request) {
         String myUsername = jwtUserFacilities.pullTokenAndGetUsername(request);
 
         List<MessageEntity> listNewestRecievedMessages = Optional.ofNullable(getRepository()
@@ -181,11 +200,11 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
                 .orElseThrow(()-> new EntityNotFoundException("Błąd podczas pobierania odebranych wiadomości użytkownika o nazwie "
                         + myUsername));
 
-        return listNewestRecievedMessages;
+        return listNewestRecievedMessages.stream().map(getConverter()::convertToDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<MessageEntity> findListAllNewestOfMySentMessage(Long lastSentMessageId, HttpServletRequest request) {
+    public List<MessageDto> findListAllNewestOfMySentMessage(Long lastSentMessageId, HttpServletRequest request) {
         String myUsername = jwtUserFacilities.pullTokenAndGetUsername(request);
 
         List<MessageEntity> listNewestSentMessages = Optional.ofNullable(getRepository()
@@ -193,7 +212,7 @@ public class MessageServiceImpl extends AbstractService<MessageEntity, MessageRe
                 .orElseThrow(()-> new EntityNotFoundException("Błąd podczas pobierania wysłanych wiadomości użytkownika o nazwie "
                         + myUsername));
 
-        return listNewestSentMessages;
+        return listNewestSentMessages.stream().map(getConverter()::convertToDto).collect(Collectors.toList());
     }
 
 

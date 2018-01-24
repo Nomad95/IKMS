@@ -6,15 +6,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.politechnika.ikms.domain.message.MessageEntity;
 import pl.politechnika.ikms.rest.dto.message.MessageDto;
 import pl.politechnika.ikms.rest.dto.message.MessageWithSenderIdAndRecipientIdDto;
-import pl.politechnika.ikms.rest.mapper.message.MessageEntityMapper;
 import pl.politechnika.ikms.service.message.MessageService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,68 +23,51 @@ public class MessageController {
     private final @NonNull
     MessageService messageService;
 
-    private final @NonNull
-    MessageEntityMapper messageEntityMapper;
-
     @PostMapping("/user/{recipientUsername}")
     @ResponseStatus(HttpStatus.CREATED)
     public MessageDto sendMessageToUser(@RequestBody @Valid MessageDto messageDto,
-                                        HttpServletRequest request,
-                                        @PathVariable("recipientUsername") String recipientUsername) {
-        MessageEntity messageToSend = messageService
-                .sendMessage(messageEntityMapper.convertToEntity(messageDto), request, recipientUsername);
+            HttpServletRequest request, @PathVariable("recipientUsername") String recipientUsername) {
 
-        return messageEntityMapper.convertToDto(messageToSend);
+        return messageService.sendMessage(messageDto, request, recipientUsername);
     }
 
     @PostMapping("/mobile/user/{recipientUsername}")
     @ResponseStatus(HttpStatus.CREATED)
     public MessageWithSenderIdAndRecipientIdDto sendMessageToUserMobile(@RequestBody @Valid MessageDto messageDto,
-                                                                  HttpServletRequest request,
-                                                                  @PathVariable("recipientUsername") String recipientUsername) {
-        MessageEntity messageToSend = messageService
-                .sendMessage(messageEntityMapper.convertToEntity(messageDto), request, recipientUsername);
+            HttpServletRequest request, @PathVariable("recipientUsername") String recipientUsername) {
 
-        return messageEntityMapper.convertToMessageWithSenderIdAndRecipientIdDto(messageToSend);
+        return messageService.sendMessageWithSenderAndRecipientDto(messageDto, request, recipientUsername);
     }
 
     @GetMapping("/myMessages/received")
     public Page<MessageDto> getAllOfMyReceivedMessage(Pageable pageable, HttpServletRequest request) {
-        Page<MessageEntity> myReceivedMessages = messageService.findAllOfMyReceivedMessage(pageable, request);
-
-        return myReceivedMessages.map(messageEntityMapper::convertToDto);
+        return messageService.findAllOfMyReceivedMessage(pageable, request);
     }
 
     @GetMapping(value = "/myMessages/received/{idMessage}")
     public MessageDto getReceivedMessageById(@PathVariable("idMessage") Long idMessage, HttpServletRequest request) {
-        MessageEntity message = messageService.findReceivedMessageById(idMessage, request);
-
-        return messageEntityMapper.convertToDto(message);
+        return messageService.findReceivedMessageById(idMessage, request);
     }
 
     @GetMapping(value = "/myMessages/sent")
     public Page<MessageDto> getAllOfMySentMessage(Pageable pageable, HttpServletRequest request) {
-        Page<MessageEntity> mySentMessages = messageService.findAllOfMySentMessage(pageable, request);
-
-        return mySentMessages.map(messageEntityMapper::convertToDto);
+        return messageService.findAllOfMySentMessage(pageable, request);
     }
 
     @GetMapping(value = "/myMessages/sent/{idMessage}")
     public MessageDto getSentMessageById(@PathVariable("idMessage") Long idMessage, HttpServletRequest request) {
-        MessageEntity message = messageService.findSentMessageById(idMessage, request);
-
-        return messageEntityMapper.convertToDto(message);
+        return messageService.findSentMessageById(idMessage, request);
     }
 
     @DeleteMapping(value = "myMessages/received/{idMessage}")
     public void deleteMessageFromReceived(@PathVariable("idMessage") Long idMessage,
-                                          HttpServletRequest request) {
+            HttpServletRequest request) {
         messageService.deleteMessageFromReceived(idMessage, request);
     }
 
     @DeleteMapping(value = "myMessages/sent/{idMessage}")
     public void deleteMessageFromSent(@PathVariable("idMessage") Long idMessage,
-                                      HttpServletRequest request) {
+            HttpServletRequest request) {
         messageService.deleteMessageFromSent(idMessage, request);
     }
 
@@ -100,14 +80,11 @@ public class MessageController {
     }
 
     @GetMapping("/myMessages/received/mobile/newest/{lastMessageId}")
-    public List<MessageWithSenderIdAndRecipientIdDto> getMyNewestRecievedMessagesForMobile(@PathVariable("lastMessageId") Long lastMessageId,
-                                                                                           HttpServletRequest request) {
-        List<MessageEntity> newestNotificationForMobile = messageService.findListAllNewestOfMyReceivedMessage(lastMessageId, request);
-        List<MessageDto> newestMessagesDto = new ArrayList<>();
-        newestNotificationForMobile
-                .stream()
-                .map(message -> newestMessagesDto.add(messageEntityMapper.convertToDto(message)))
-                .collect(Collectors.toList());
+    public List<MessageWithSenderIdAndRecipientIdDto> getMyNewestRecievedMessagesForMobile(
+            @PathVariable("lastMessageId") Long lastMessageId,
+            HttpServletRequest request) {
+        List<MessageDto> newestMessagesDto = messageService
+                .findListAllNewestOfMyReceivedMessage(lastMessageId, request);
 
         return newestMessagesDto.stream()
                 .map(message -> MessageWithSenderIdAndRecipientIdDto.builder()
@@ -126,14 +103,11 @@ public class MessageController {
     }
 
     @GetMapping("/myMessages/sent/mobile/newest/{lastMessageId}")
-    public List<MessageWithSenderIdAndRecipientIdDto> getMyNewestSentMessagesForMobile(@PathVariable("lastMessageId") Long lastMessageId,
-                                                                                       HttpServletRequest request) {
-        List<MessageEntity> newestNotificationForMobile = messageService.findListAllNewestOfMySentMessage(lastMessageId, request);
-        List<MessageDto> newestMessagesDto = new ArrayList<>();
-        newestNotificationForMobile
-                .stream()
-                .map(message -> newestMessagesDto.add(messageEntityMapper.convertToDto(message)))
-                .collect(Collectors.toList());
+    public List<MessageWithSenderIdAndRecipientIdDto> getMyNewestSentMessagesForMobile(
+            @PathVariable("lastMessageId") Long lastMessageId,
+            HttpServletRequest request) {
+        List<MessageDto> newestMessagesDto =  messageService
+                .findListAllNewestOfMySentMessage(lastMessageId, request);
 
         return newestMessagesDto.stream()
                 .map(message -> MessageWithSenderIdAndRecipientIdDto.builder()

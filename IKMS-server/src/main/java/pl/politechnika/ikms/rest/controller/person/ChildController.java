@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.politechnika.ikms.domain.person.ChildEntity;
 import pl.politechnika.ikms.rest.dto.MinimalDto;
 import pl.politechnika.ikms.rest.dto.person.ChildDto;
 import pl.politechnika.ikms.rest.dto.person.ChildGeneralDetailDto;
@@ -22,29 +21,26 @@ import java.util.List;
 public class ChildController {
 
     private final @NonNull ChildService childService;
-    private final @NonNull ChildEntityMapper childEntityMapper;
 
     @GetMapping(value = "/{childId}")
     public ChildDto getOneChild(@PathVariable Long childId){
-        return childEntityMapper.convertToDto(childService.findOne(childId));
+        return childService.findOne(childId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ChildDto createChild(@Valid @RequestBody ChildDto ChildDto){
-        ChildEntity ChildEntity = childService.create(childEntityMapper.convertToEntity(ChildDto));
-        return childEntityMapper.convertToDto(ChildEntity);
+    public ChildDto createChild(@Valid @RequestBody ChildDto childDto){
+        return childService.create(childDto);
     }
 
     @GetMapping
     public Page<ChildDto> getAllChildes(Pageable pageable){
-        return childService.findAllPaginated(pageable).map(childEntityMapper::convertToDto);
+        return childService.findAllPaginated(pageable);
     }
 
     @PutMapping
-    public ChildDto updateChild(@Valid @RequestBody ChildDto ChildDto){
-        ChildEntity ChildEntity = childService.update(childEntityMapper.convertToEntity(ChildDto));
-        return childEntityMapper.convertToDto(ChildEntity);
+    public ChildDto updateChild(@Valid @RequestBody ChildDto childDto){
+        return childService.update(childDto);
     }
 
     @DeleteMapping(value = "/{childId}")

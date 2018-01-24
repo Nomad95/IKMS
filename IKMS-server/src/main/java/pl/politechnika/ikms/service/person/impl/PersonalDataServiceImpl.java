@@ -8,6 +8,8 @@ import pl.politechnika.ikms.domain.person.PersonalDataEntity;
 import pl.politechnika.ikms.domain.user.UserEntity;
 import pl.politechnika.ikms.exceptions.EntityNotFoundException;
 import pl.politechnika.ikms.repository.person.PersonalDataRepository;
+import pl.politechnika.ikms.rest.dto.person.PersonalDataDto;
+import pl.politechnika.ikms.rest.mapper.person.PersonalDataEntityMapper;
 import pl.politechnika.ikms.security.JwtUserFacilities;
 import pl.politechnika.ikms.service.person.PersonalDataService;
 
@@ -15,14 +17,15 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 @Service
-public class PersonalDataServiceImpl extends AbstractService<PersonalDataEntity, PersonalDataRepository> implements PersonalDataService{
+public class PersonalDataServiceImpl
+        extends AbstractService<PersonalDataEntity, PersonalDataDto, PersonalDataRepository, PersonalDataEntityMapper>
+        implements PersonalDataService {
 
-    private final @NonNull JwtUserFacilities jwtUserFacilities;
+    private final @NonNull
+    JwtUserFacilities jwtUserFacilities;
 
-    public PersonalDataServiceImpl(
-            PersonalDataRepository repository,
-            JwtUserFacilities jwtUserFacilities) {
-        super(repository, PersonalDataEntity.class);
+    public PersonalDataServiceImpl(PersonalDataRepository repository, JwtUserFacilities jwtUserFacilities, PersonalDataEntityMapper converter) {
+        super(repository, converter, PersonalDataEntity.class);
         this.jwtUserFacilities = jwtUserFacilities;
     }
 
@@ -31,7 +34,8 @@ public class PersonalDataServiceImpl extends AbstractService<PersonalDataEntity,
     public String getCurrentUserName(HttpServletRequest request) {
         UserEntity user = jwtUserFacilities.findUserByUsernameFromToken(request);
         if (!Objects.nonNull(user))
-            throw new EntityNotFoundException("Nie znaleziono usera " + jwtUserFacilities.pullTokenAndGetUsername(request));
+            throw new EntityNotFoundException("Nie znaleziono usera " + jwtUserFacilities
+                    .pullTokenAndGetUsername(request));
         return getRepository().findCurrentUserName(user.getId());
     }
 }
