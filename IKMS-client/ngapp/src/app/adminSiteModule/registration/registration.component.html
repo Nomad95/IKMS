@@ -16,7 +16,7 @@
 							</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="Imię" class="detail-view-input" maxlength="25" required pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
-								 [(ngModel)]="personalData.name" (ngModelChange)="personalData.name = firstLetterUpperCaseAndGenerateUsername(personalData.name)"
+								 [(ngModel)]="personalData.name"
 								 name="personalData.name" #name="ngModel">
 								<div class="ui-g-12 validation-err" *ngIf="name.errors?.pattern">
 									Pole nie może zawierać znaków specjalnych
@@ -45,7 +45,7 @@
 							</div>
 							<div class="ui-g-8 ">
 								<input type="text" pInputText placeholder="Nazwisko" class="detail-view-input" maxlength="35" required pattern="[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]*"
-								 [(ngModel)]="personalData.surname" (ngModelChange)="personalData.surname = firstLetterUpperCaseAndGenerateUsername(personalData.surname); onChange();"
+								 [(ngModel)]="personalData.surname"
 								 name="personalData.surname" #surname="ngModel">
 								<div class="ui-g-12 validation-err" *ngIf="surname.errors?.pattern">
 									Pole nie może zawierać znaków specjalnych
@@ -199,14 +199,6 @@
 								<div class="ui-g-12 validation-err" *ngIf="mothersMaidenName.errors?.pattern">
 									Pole nie może zawierać cyfr.
 								</div>
-							</div>
-						</div>
-
-						<div class="ui-g-12">
-							<div class="ui-g-4 form-4-str-sm ">Nazwa użytkownika:</div>
-							<div class="ui-g-8 ">
-								<input type="text" pInputText placeholder="username" class="detail-view-input" [(ngModel)]="user.username" disabled name="user.username"
-								 #username="ngModel">
 							</div>
 						</div>
 

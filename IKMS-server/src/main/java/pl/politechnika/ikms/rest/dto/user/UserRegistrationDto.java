@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 @EqualsAndHashCode(callSuper = false)
 public class UserRegistrationDto extends AbstractDto{
 
-    @NotNull
     @Size(max = 30, min = 5)
     private String username;
 

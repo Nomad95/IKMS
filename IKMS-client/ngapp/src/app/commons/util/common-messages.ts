@@ -131,4 +131,12 @@ export class CommonMessages {
     public static notificationSendingSuccess(){
         return [{severity:'success', detail: 'Powiadomienie zostało wysłane'}];
     }
+    
+    public static userCreationError(){
+        return [{severity:'error', detail: 'Wystąpił błąd podczas tworzenia użytkownika'}];
+    }
+    
+    public static userCreationSuccess(){
+        return [{severity:'success', detail: 'Użytkownik został stworzony poprawnie'}];
+    }
 }

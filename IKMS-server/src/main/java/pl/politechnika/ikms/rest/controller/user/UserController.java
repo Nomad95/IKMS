@@ -10,16 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
-import pl.politechnika.ikms.commons.util.RandomString;
-import pl.politechnika.ikms.commons.util.mail.event.OnRegistrationCompleteEvent;
+import pl.politechnika.ikms.rest.dto.user.RegistrationDto;
 import pl.politechnika.ikms.rest.dto.user.UserDto;
-import pl.politechnika.ikms.rest.dto.user.UserRegistrationDto;
 import pl.politechnika.ikms.rest.mapper.user.UserEntityMapper;
 import pl.politechnika.ikms.rest.mapper.user.UserEntityRegistrationMapper;
 import pl.politechnika.ikms.service.user.UserService;
 
 import javax.validation.Valid;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Slf4j
 @RestController
@@ -44,19 +41,18 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)//TODO: creation depends on provided role?
-    public UserDto createUser(@Valid @RequestBody UserRegistrationDto userRegistrationDto, WebRequest request){
-        userRegistrationDto.setPassword(new RandomString(8, ThreadLocalRandom.current()).nextString());
-        UserDto userDto = userService.create(userRegistrationDto);
-        new Thread(()-> {try {
+    public UserDto createUser(@RequestBody RegistrationDto registrationDto, WebRequest request){
+        /*UserDto userDto = userService.create(registrationDto);
+        new Thread(()-> {try { //todo: spring async
             String appUrl = request.getContextPath();
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent
                     (userRegistrationDto, request.getLocale(), appUrl));
         } catch (Exception me) {
             log.error("Couldn't create email for user " + userDto.getUsername() + ". Deleting user...");
             userService.delete(userDto);
-        }}).start();
+        }}).start();*/
 
-        return userDto;
+        return userService.create(registrationDto);
     }
 
     @PutMapping
